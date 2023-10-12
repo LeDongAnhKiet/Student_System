@@ -31,6 +31,6 @@ public class Course {
     private String note;
 
     @OneToMany(mappedBy = "course")
-    private Set<CourseDatum> courseData = new LinkedHashSet<>();
+    private Set<CourseData> courseData = new LinkedHashSet<>();
 
 }

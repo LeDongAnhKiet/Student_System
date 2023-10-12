@@ -5,17 +5,14 @@ import com.hd.student.exception.ResourceNotFoundException;
 import com.hd.student.payload.request.SemesterDetailRequest;
 import com.hd.student.payload.response.ApiResponse;
 import com.hd.student.payload.response.SemesterDetailsResponse;
-import com.hd.student.payload.response.SemesterUserResponse;
-import com.hd.student.repository.CourseDatumRepository;
+import com.hd.student.repository.CourseDataRepository;
 import com.hd.student.repository.SemesterDetailRepository;
 import com.hd.student.repository.SemesterUserRepository;
 import com.hd.student.service.SemesterDetailService;
-import com.hd.student.service.SemesterUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +28,7 @@ public class SemesterDetailServiceImpl implements SemesterDetailService {
     @Autowired
     private SemesterUserRepository semesterUserRepository;
     @Autowired
-    private CourseDatumRepository courseDatumRepository;
+    private CourseDataRepository courseDataRepository;
 
     @Override
     public List<SemesterDetailsResponse> getDetails(int id){
@@ -49,10 +46,10 @@ public class SemesterDetailServiceImpl implements SemesterDetailService {
         );
         try {
             for (int id : rq.getCourseDataId()) {
-                CourseDatum courseDatum = courseDatumRepository.findById(id).orElse(null);
+                CourseData courseData = courseDataRepository.findById(id).orElse(null);
                 SemesterDetail sd = new SemesterDetail();
 
-                sd.setCourseData(courseDatum);
+                sd.setCourseData(courseData);
                 sd.setSemesterUser(semesterUser);
                 sd.setIsPassed(true);
                 sd.setScore(null);

@@ -13,24 +13,18 @@ import com.hd.student.payload.response.TransactionPaymentResponse;
 import com.hd.student.repository.OnlineServiceRepository;
 import com.hd.student.repository.PaymentRepository;
 import com.hd.student.service.PaymentService;
-import com.hd.student.utils.TwillioUtils;
-import com.hd.student.utils.VNPayUtil;
+import com.hd.student.utils.TwilioUtils;
 import jakarta.servlet.ServletException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -48,7 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private TwillioUtils twillioUtils;
+    private TwilioUtils twilioUtils;
 
 
     @Override
@@ -110,7 +104,7 @@ public class PaymentServiceImpl implements PaymentService {
         String paymentMessage = "Bạn đã thanh toán " + rp.getStatus() + "\n" +
                 "Ngày thực hiện thanh toán: " + rp.getDate() + "\n" + "Số tiền: " +
                 rp.getAmount();
-        this.twillioUtils.sendSMS(paymentMessage);
+        this.twilioUtils.sendSMS(paymentMessage);
         return rp;
 
     }

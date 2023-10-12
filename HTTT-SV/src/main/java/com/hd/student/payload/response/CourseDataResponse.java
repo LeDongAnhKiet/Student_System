@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseDatumResponse {
+public class CourseDataResponse {
     private Integer id;
     private LocalDate startDate;
     private LocalDate endDate;

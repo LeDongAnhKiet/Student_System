@@ -24,7 +24,7 @@ public class SemesterDetail {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_data_id")
-    private CourseDatum courseData;
+    private CourseData courseData;
 
     @Column(name = "score")
     private Double score;

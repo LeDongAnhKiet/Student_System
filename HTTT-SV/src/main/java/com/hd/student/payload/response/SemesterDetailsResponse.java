@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -18,5 +17,5 @@ public class SemesterDetailsResponse {
 
     private Boolean isPassed;
 
-    private Set<CourseDatumResponse> courseData;
+    private Set<CourseDataResponse> courseData;
 }
