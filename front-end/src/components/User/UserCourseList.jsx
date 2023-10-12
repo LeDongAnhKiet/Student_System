@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Table } from 'reactstrap';
 import Header from '../../app/Header';
-import CourseService from "../../services/Admin/CourseService";
+import UserService from "../../services/UserService";
 
 class UserCourseList extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class UserCourseList extends Component {
     }
 
     componentDidMount() {
-        CourseService.getCourse().then(res => {
+        UserService.getCourse().then(res => {
             this.setState({courses: res.data});
         });
     }

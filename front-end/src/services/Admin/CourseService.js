@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const COURSE_API_ADMIN_URL = 'http://localhost:8080/admin/course';
-const LECTURE_API_ADMIN_URL = 'http://localhost:8080/admin/lecture';
+const COURSE_API_ADMIN_URL = 'http://localhost:8080/api/admin/course';
+const LECTURE_API_ADMIN_URL = 'http://localhost:8080/api/admin/lecture';
 
 class CourseService {
     getCourse() { return axios.get(COURSE_API_ADMIN_URL + '/getall'); }

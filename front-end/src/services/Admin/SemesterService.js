@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SEMESTER_API_ADMIN_URL = 'http://localhost:8080/admin/semester';
+const SEMESTER_API_ADMIN_URL = 'http://localhost:8080/api/admin/semester';
 
 class SemesterService {
     getSemester() { return axios.get(SEMESTER_API_ADMIN_URL + '/getAll'); }

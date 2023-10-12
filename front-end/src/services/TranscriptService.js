@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const TRANSCRIPT_API_BASE_URL = 'http://localhost:8080/user/service/transcript/{serviceId}';
+const TRANSCRIPT_API_BASE_URL = 'http://localhost:8080/api/user/service/transcript/{serviceId}';
 
 class TranscriptService {
     getTranscript(transcriptId) { return axios.get(TRANSCRIPT_API_BASE_URL + '/' + transcriptId); }

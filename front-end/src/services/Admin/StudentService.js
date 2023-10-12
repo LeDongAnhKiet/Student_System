@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const STUDENT_API_ADMIN_URL = 'http://localhost:8080/admin/student';
-const DEPARTMENT_API_ADMIN_URL = 'http://localhost:8080/admin/department';
+const STUDENT_API_ADMIN_URL = 'http://localhost:8080/api/admin/student';
+const DEPARTMENT_API_ADMIN_URL = 'http://localhost:8080/api/admin/department';
 
 class StudentService {
     getStudent() { return axios.get(STUDENT_API_ADMIN_URL); }
