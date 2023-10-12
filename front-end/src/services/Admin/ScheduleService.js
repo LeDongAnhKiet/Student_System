@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const ROOM_API_ADMIN_URL = 'http://localhost:8080/api/admin/room';
-const SCHEDULE_API_ADMIN_URL = 'http://localhost:8080/api/admin/schedule-info';
+const ROOM_API_ADMIN_URL = 'http://localhost:8080/admin/room';
+const SCHEDULE_API_ADMIN_URL = 'http://localhost:8080/admin/schedule-info';
 
 class ScheduleService {
     getRoom() { return axios.get(ROOM_API_ADMIN_URL + '/get'); }

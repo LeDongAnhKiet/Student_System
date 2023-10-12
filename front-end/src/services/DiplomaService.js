@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DIPLOMA_API_BASE_URL = 'http://localhost:8080/api/user/service/diploma';
+const DIPLOMA_API_BASE_URL = 'http://localhost:8080/user/service/diploma';
 
 class DiplomaService {
     getDiploma(diplomaId) { return axios.get(DIPLOMA_API_BASE_URL + '/' + diplomaId); }

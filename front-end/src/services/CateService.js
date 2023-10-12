@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const CATE_API_BASE_URL = 'http://localhost:8080/api/user/service-cate';
-const CATE_API_MOD_URL = 'http://localhost:8080/api/mod/service-cate';
+const CATE_API_BASE_URL = 'http://localhost:8080/user/service-cate';
+const CATE_API_MOD_URL = 'http://localhost:8080/mod/service-cate';
 
 class CateService {
     getCate() { return axios.get(CATE_API_BASE_URL); }

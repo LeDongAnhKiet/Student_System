@@ -34,7 +34,7 @@ function UpdateStudCertificate(props) {
         };
 
         StudCertificateService.updateStudCertificate(studCertificate, id).then((res) => {
-            nav(`/api/user/service/stud-cert/${id}`);
+            nav(`/user/service/stud-cert/${id}`);
         });
     };
 
@@ -48,7 +48,7 @@ function UpdateStudCertificate(props) {
 
     const changeContentHandler = (e) => { setContent(e.target.value); }
 
-    const cancel = () => { nav(`/api/user/service/studCertificate/${id}`); }
+    const cancel = () => { nav(`/user/service/studCertificate/${id}`); }
 
     const getTitle = () => {
         if (id === '_add') return <h3 className="text-center">Thêm chứng nhận</h3>;

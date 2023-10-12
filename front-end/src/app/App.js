@@ -25,39 +25,39 @@ const App = () => {
         <AuthProvider>
             <div className="container">
                 <Routes>
-                    <Route path="/" element={<Navigate to="/api/auth/signin" />} />
+                    <Route path="/" element={<Navigate to="/auth/signin" />} />
 
-                    <Route path="/api/auth/signin" element={<Signin />} />
+                    <Route path="/auth/signin" element={<Signin />} />
 
-                    <Route path="/api/home" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
 
-                    <Route path="/api/user/info" element={<UserList />} />
+                    <Route path="/user/info" element={<UserList />} />
 
-                    <Route path="/api/user/service-cate" element={<CateList />} />
+                    <Route path="/user/service-cate" element={<CateList />} />
 
-                    <Route path="/api/user/service-cate/:id" element={<CateList />} />
+                    <Route path="/user/service-cate/:id" element={<CateList />} />
 
-                    <Route path="/api/user/service/transcript/:id" element={<TranscriptList />} />
+                    <Route path="/user/service/transcript/:id" element={<TranscriptList />} />
 
-                    <Route path="/api/user/service/transcript/add" element={<AddTranscript />} />
+                    <Route path="/user/service/transcript/add" element={<AddTranscript />} />
 
-                    <Route path="/api/user/service/diploma/:id" element={<DiplomaList />} />
+                    <Route path="/user/service/diploma/:id" element={<DiplomaList />} />
 
-                    <Route path="/api/user/service/diploma/update/:id" element={<UpdateDiploma />} />
+                    <Route path="/user/service/diploma/update/:id" element={<UpdateDiploma />} />
 
-                    <Route path="/api/user/service/diploma/add" element={<AddDiploma />} />
+                    <Route path="/user/service/diploma/add" element={<AddDiploma />} />
 
-                    <Route path="/api/user/service/stud-cert/:id" element={<StudCertificateList />} />
+                    <Route path="/user/service/stud-cert/:id" element={<StudCertificateList />} />
 
-                    <Route path="/api/user/service/stud-cert/update/:id" element={<UpdateStudCertificate />} />
+                    <Route path="/user/service/stud-cert/update/:id" element={<UpdateStudCertificate />} />
 
-                    <Route path="/api/user/service/stud-cert/add" element={<AddStudCertificate />} />
+                    <Route path="/user/service/stud-cert/add" element={<AddStudCertificate />} />
 
-                    <Route path="/api/user/service/unlock-stud/:id" element={<UnlockStudList />} />
+                    <Route path="/user/service/unlock-stud/:id" element={<UnlockStudList />} />
 
-                    <Route path="/api/user/service/unlock-stud/add" element={<AddUnlockStud />} />
+                    <Route path="/user/service/unlock-stud/add" element={<AddUnlockStud />} />
 
-                    <Route path="/api/user/semester" element={<UserSemesterList />} />
+                    <Route path="/user/semester" element={<UserSemesterList />} />
 
                     <Route path="/semester/:id/course" element={<UserCourseList />} />
 

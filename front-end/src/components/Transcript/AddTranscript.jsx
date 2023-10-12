@@ -38,11 +38,11 @@ function AddTranscript(props) {
 
         if (id === '_add') {
             TranscriptService.addTranscript(transcript).then((res) => {
-                nav('/api/user/service/transcript/add');
+                nav('/user/service/transcript/add');
             });
         } else {
             TranscriptService.updateTranscript(transcript, id).then((res) => {
-                nav(`/api/user/service/transcript/update/${id}`);
+                nav(`/user/service/transcript/update/${id}`);
             });
         }
     };
@@ -59,7 +59,7 @@ function AddTranscript(props) {
 
     const changeSealedHandler = (e) => { setIsSealed(e.target.value); }
 
-    const cancel = () => { nav(`/api/user/service/transcript/${id}`); }
+    const cancel = () => { nav(`/user/service/transcript/${id}`); }
 
     const setTitle = () => {
         if (id === '_add')

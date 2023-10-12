@@ -36,7 +36,7 @@ function UpdateDiploma(props) {
         };
 
         DiplomaService.updateDiploma(diploma, id).then((res) => {
-            nav(`/api/user/service/diploma/${id}`);
+            nav(`/user/service/diploma/${id}`);
         });
     };
 
@@ -60,7 +60,7 @@ function UpdateDiploma(props) {
         setDiplomaCode(event.target.value);
     };
 
-    const cancel = () => { nav(`/api/user/service/diploma/${id}`); }
+    const cancel = () => { nav(`/user/service/diploma/${id}`); }
 
     const getTitle = () => {
         if (id === '_add') return <h3 className="text-center">Thêm bằng cấp</h3>;

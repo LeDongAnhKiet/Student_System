@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         const checkAuth = async () => {
             try {
                 // Thực hiện kiểm tra xác thực ở đây và cập nhật state user
-                const response = await fetch('/api/user/info');
+                const response = await fetch('/user/info');
                 if (response.ok) {
                     const userData = await response.json();
                     setUser(userData);
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const signin = async (userData) => {
         try {
             // Thực hiện đăng nhập và cập nhật state user
-            const response = await fetch('/api/auth/signin', {
+            const response = await fetch('/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     const signout = async () => {
         try {
             // Thực hiện đăng xuất và cập nhật state user
-            await fetch('/api/auth/signout', {
+            await fetch('/auth/signout', {
                 method: 'POST',
             });
             setUser(null);

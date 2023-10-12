@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const STUD_CERTIFICATE_API_BASE_URL = 'http://localhost:8080/api/user/service/stud-certificate/{serviceId}';
+const STUD_CERTIFICATE_API_BASE_URL = 'http://localhost:8080/user/service/stud-certificate/{serviceId}';
 
 class StudCertificateService {
     getStudCertificate(studCertificateId) { return axios.get(STUD_CERTIFICATE_API_BASE_URL + '/' + studCertificateId); }

@@ -37,11 +37,11 @@ function AddCourseData(props) {
 
         if (id === '_add') {
             DiplomaService.addDiploma(diploma).then((res) => {
-                nav('/api/user/service/diploma/add');
+                nav('/user/service/diploma/add');
             });
         } else {
             DiplomaService.updateDiploma(diploma, id).then((res) => {
-                nav(`/api/user/service/diploma/update/${id}`);
+                nav(`/user/service/diploma/update/${id}`);
             });
         }
     };
@@ -56,7 +56,7 @@ function AddCourseData(props) {
 
     const changeCodeHandler = (e) => { setDiplomaCode(e.target.value); }
     
-    const cancel = () => { nav(`/api/user/service/diploma/${id}`); }
+    const cancel = () => { nav(`/user/service/diploma/${id}`); }
 
     const setTitle = () => {
         if (id === '_add')

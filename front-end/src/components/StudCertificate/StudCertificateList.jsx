@@ -14,11 +14,11 @@ function StudCertificateList() {
         });
     }, []);
 
-    const addStudCertificate = () => { nav('/api/user/service/stud-cert/add'); };
+    const addStudCertificate = () => { nav('/user/service/stud-cert/add'); };
 
-    const getStudCertificate = (id) => { nav(`/api/user/service/stud-cert/${id}`); }
+    const getStudCertificate = (id) => { nav(`/user/service/stud-cert/${id}`); }
 
-    const updateStudCertificate = (id) => { nav(`/api/user/service/stud-cert/update/${id}`); }
+    const updateStudCertificate = (id) => { nav(`/user/service/stud-cert/update/${id}`); }
 
     return (
         <div>

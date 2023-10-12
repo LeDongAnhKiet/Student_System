@@ -14,11 +14,11 @@ function UnlockStudList() {
         });
     }, []);
 
-    const addUnlockStud = () => { nav('/api/user/service/unlock-stud/add'); };
+    const addUnlockStud = () => { nav('/user/service/unlock-stud/add'); };
 
-    const getUnlockStud = (id) => { nav(`/api/user/service/unlock-stud/${id}`); }
+    const getUnlockStud = (id) => { nav(`/user/service/unlock-stud/${id}`); }
 
-    const updateUnlockStud = (id) => { nav(`/api/user/service/unlock-stud/update/${id}`); }
+    const updateUnlockStud = (id) => { nav(`/user/service/unlock-stud/update/${id}`); }
 
     return (
         <div>

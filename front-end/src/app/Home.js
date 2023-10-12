@@ -36,7 +36,7 @@ const Home = () => {
                             <>
                                 <h2>Xin chào, {user.fullName}</h2>
                                 <Button className="btn btn-success">
-                                    <Link to="/api/admin">Admin</Link>
+                                    <Link to="/admin">Admin</Link>
                                 </Button>
                                 <br />
                                 <Button className="btn btn-success" onClick={signout()}>

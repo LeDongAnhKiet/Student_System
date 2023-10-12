@@ -35,11 +35,11 @@ function AddStudCertificate(props) {
 
         if (id === '_add') {
             StudCertificateService.addStudCertificate(studCertificate).then((res) => {
-                nav('/api/user/service/stud-cert/add');
+                nav('/user/service/stud-cert/add');
             });
         } else {
             StudCertificateService.updateStudCertificate(studCertificate, id).then((res) => {
-                nav(`/api/user/service/stud-cert/update/${id}`);
+                nav(`/user/service/stud-cert/update/${id}`);
             });
         }
     };
@@ -54,7 +54,7 @@ function AddStudCertificate(props) {
 
     const changeContentHandler = (e) => { setContent(e.target.value); }
 
-    const cancel = () => { nav(`/api/user/service/stud-cert/${id}`); }
+    const cancel = () => { nav(`/user/service/stud-cert/${id}`); }
 
     const setTitle = () => {
         if (id === '_add')

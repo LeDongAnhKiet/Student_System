@@ -32,7 +32,7 @@ function Signin() {
                 email: email,
                 password: password,
             };
-            fetch('/api/auth/signin', {
+            fetch('/auth/signin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(requestBody),
@@ -42,7 +42,7 @@ function Signin() {
                     if (data.email) {
                         setError('');
                         setSuccess('Đăng nhập thành công');
-                        nav('/api/home');
+                        nav('/home');
                     } else {
                         setError('Sai tài khoản hoặc mật khẩu.');
                         setSuccess('');

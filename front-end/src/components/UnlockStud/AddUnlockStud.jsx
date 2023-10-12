@@ -26,11 +26,11 @@ function AddUnlockStud(props) {
 
         if (id === '_add') {
             UnlockStudService.addUnlockStud(unlockStud).then((res) => {
-                nav('/api/user/service/unlock-stud/add');
+                nav('/user/service/unlock-stud/add');
             });
         } else {
             UnlockStudService.updateUnlockStud(unlockStud, id).then((res) => {
-                nav(`/api/user/service/unlock-stud/update/${id}`);
+                nav(`/user/service/unlock-stud/update/${id}`);
             });
         }
     };
@@ -39,7 +39,7 @@ function AddUnlockStud(props) {
 
     const changeContentHandler = (e) => { setContent(e.target.value); }
 
-    const cancel = () => { nav(`/api/user/service/unlock-stud/${id}`); }
+    const cancel = () => { nav(`/user/service/unlock-stud/${id}`); }
 
     const setTitle = () => {
         if (id === '_add')

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const COURSE_API_ADMIN_URL = 'http://localhost:8080/api/admin/course-data';
+const COURSE_API_ADMIN_URL = 'http://localhost:8080/admin/course-data';
 
 class CourseService {
     getCourse() { return axios.get(COURSE_API_ADMIN_URL + '/getAll'); }

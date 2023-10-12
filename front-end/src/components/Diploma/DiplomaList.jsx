@@ -14,11 +14,11 @@ function DiplomaList() {
         });
     }, []);
 
-    const addDiploma = () => { nav('/api/user/service/diploma/add'); };
+    const addDiploma = () => { nav('/user/service/diploma/add'); };
 
-    const getDiploma = (id) => { nav(`/api/user/service/diploma/${id}`); }
+    const getDiploma = (id) => { nav(`/user/service/diploma/${id}`); }
 
-    const updateDiploma = (id) => { nav(`/api/user/service/diploma/update/${id}`); }
+    const updateDiploma = (id) => { nav(`/user/service/diploma/update/${id}`); }
 
     return (
         <div>

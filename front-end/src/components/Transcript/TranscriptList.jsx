@@ -14,11 +14,11 @@ function TranscriptList() {
         });
     }, []);
 
-    const addTranscript = () => { nav('/api/user/service/transcript/add'); };
+    const addTranscript = () => { nav('/user/service/transcript/add'); };
 
-    const getTranscript = (id) => { nav(`/api/user/service/transcript/${id}`); }
+    const getTranscript = (id) => { nav(`/user/service/transcript/${id}`); }
 
-    const updateTranscript = (id) => { nav(`/api/user/service/transcript/update/${id}`); }
+    const updateTranscript = (id) => { nav(`/user/service/transcript/update/${id}`); }
 
     return (
         <div>
