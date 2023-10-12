@@ -15,6 +15,10 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP DATABASE IF EXISTS `student_sys_db`;
+CREATE DATABASE `student_sys_db`;
+USE `student_sys_db`;
+
 --
 -- Table structure for table `course`
 --
@@ -37,7 +41,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'Lập trình Java',4,NULL),(2,'Kiểm thử phần mềm',3,NULL),(3,'Khai phá dữ liệu',3,NULL),(4,'Cơ sở dữ liệu phân tán',3,NULL),(5,'Luyện phát âm',3,NULL),(6,'Nghe - Nói 1',3,NULL),(7,'Triết học Mác - Lênin',3,NULL),(22,'Tiếng việt thực hành',12,'user');
+INSERT INTO `course` VALUES (1,'Lập trình Java',4,NULL),(2,'Kiểm thử phần mềm',3,NULL),(3,'Khai phá dữ liệu',3,NULL),(4,'Cơ sở dữ liệu phân tán',3,NULL),(5,'Luyện phát âm',3,NULL),(6,'Nghe - Nói 1',3,NULL),(7,'	Triết học Mác - Lênin',3,NULL),(8,'	Nguyên lý kế toán',3,NULL),(9,'	Marketing căn bản',3,NULL),(10,'Kinh tế vi mô',3,NULL),(11,'Kinh tế vĩ mô',3,NULL),(12,'Kinh tế phát triển',3,NULL),(13,'Thanh toán quôc tế',3,NULL),(14,'Xác suất thống kê',3,NULL),(15,'Đại số tuyến tính',3,NULL),(16,'Giải tích',3,NULL),(17,'Kinh tế chính trị Mác - Lênin',2,NULL),(18,'Chủ nghĩa xã hội khoa học',2,NULL),(19,'Lịch sử Đảng Cộng sản Việt Nam',2,NULL),(20,'Tư tưởng Hồ Chí Minh',2,NULL),(21,'Hệ thống hoạch định nguồn lực doanh nghiệp',3,NULL),(22,'Logic học',3,NULL),(23,'Quản trị học',3,NULL),(24,'Quản trị dự án',3,NULL),(25,'Khởi nghiệp',3,NULL),(26,'Pháp luật đại cương',3,NULL),(27,'Ứng dụng web',3,NULL),(28,'Cấu trúc dữ liệu và thuật giải',4,NULL),(29,'Hệ điều hành',3,NULL),(30,'Lập trình giao diện',3,NULL),(31,'Phân tích thiết kế hệ thống',4,NULL),(32,'Lập trình cơ sở dữ liệu',3,NULL),(33,'Đồ án ngành',4,NULL),(34,'Quản trị hệ cơ sở dữ liệu',3,NULL),(35,'Quản trị mạng',3,NULL),(36,'Tiếng việt thực hành',12,'user'),(37,'Tiếng Nhật 1',3,NULL),(38,'Phát triển hệ thống thông tin quản lý',3,NULL),(39,'Con người và môi trường',3,NULL),(40,'Cơ sở ngôn ngữ học',3,NULL),(41,'Nghe - Nói 2',3,NULL),(42,'Nghe - Nói 3',3,NULL),(43,'Nghe - Nói 4',3,NULL),(44,'Nghe - Nói 5',3,NULL),(45,'Nghe - Nói 6',3,NULL),(46,'Đọc - Viết 1',3,NULL),(47,'Đọc - Viết 2',3,NULL),(48,'Đọc - Viết 3',3,NULL),(49,'Đọc - Viết 4',3,NULL),(50,'Tiếng Nhật 2',3,NULL),(51,'Tiếng Nhật 3',3,NULL),(52,'Tiếng Nhật 4',3,NULL),(53,'Tiếng Nhật 5',3,NULL),(54,'Phương pháp nghiên cứu khoa học',3,NULL),(55,'Tin học đại cương',3,NULL),(56,'Phân tích dữ liệu',3,NULL),(57,'Luật kinh doanh',3,NULL),(58,'Lập kế hoạch kinh doanh',3,NULL),(59,'Giao tiếp trong kinh doanh',3,NULL),(60,'Tâm lý học đại cương',3,NULL);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +98,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'Công nghệ thông tin',NULL),(2,'Ngôn ngữ anh',NULL),(3,'Kinh tế - Quản lý công',NULL);
+INSERT INTO `department` VALUES (1,'Công nghệ thông tin',NULL), (2,'Ngoại ngữ',NULL), (3,'Kinh tế - Quản lý công',NULL), (4,'Đào tạo sau đại học','Chương trình cao học thạc sĩ, tiến sĩ, nghiên cứu sinh'), (5,'Tài chính - ngân hàng',NULL), (6,'Khoa học cơ bản',NULL),(7,'Đào tạo đặc biệt','Chương trình chất lượng cao, liên kết quốc tế'), (8,'Kế toán kiểm toán',NULL), (9,'Ngoại ngữ',NULL), (13,'Quản trị kinh doanh',NULL), (14,'Xã - Công - Đông - Tâm','Gồm Xã hội học, Công tác xã hội, Đông Nam Á học, Tâm lý học');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,6 +130,7 @@ CREATE TABLE `diploma_copy` (
 
 LOCK TABLES `diploma_copy` WRITE;
 /*!40000 ALTER TABLE `diploma_copy` DISABLE KEYS */;
+INSERT INTO `diploma_copy` VALUES (1,3,'0903182308','195712049@gmail.com',2023,'abc',1),(3,3,'0903182308','195712049@gmail.com',2023,'abc',3),(4,3,'0903182308','195712049@gmail.com',2023,'abc',8),(5,3,'0903182308','195712049@gmail.com',2021,'abc',9),(6,3,'0903182308','195712049@gmail.com',2021,'abc',11),(7,3,'0903182308','195712049@gmail.com',2021,'abc',18),(8,5,'0903201183',NULL,2023,'203',19),(9,3,'0903182308','195712049@gmail.com',2021,'333',20),(12,10,'0903182308','195712049@gmail.com',2021,'abc',21),(13,10,'0903182308','195712049@gmail.com',2021,'abc',26);
 /*!40000 ALTER TABLE `diploma_copy` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +155,7 @@ CREATE TABLE `lecture` (
 
 LOCK TABLES `lecture` WRITE;
 /*!40000 ALTER TABLE `lecture` DISABLE KEYS */;
-INSERT INTO `lecture` VALUES (1,'Nguyễn Văn Bảy','11'),(2,'Phạm Chí Công','12'),(3,'Nguyễn Tiến Đạt','13'),(4,'Dương Hữu Thành','14'),(5,'Minh Khuê','15');
+INSERT INTO `lecture` VALUES (1,'Nguyễn Văn Bảy','11'),(2,'Phạm Chí Công','12'),(3,'Nguyễn Tiến Đạt','13'),(4,'Dương Hữu Thành','14'),(5,'Phan Trần Minh Khuê','15'),(6,'Nguyễn Thị Mai Trang','20'),(7,'Nguyễn Thị Phương Trang','18'),(8,'Võ Thị Hồng Tuyết','23');
 /*!40000 ALTER TABLE `lecture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +183,7 @@ CREATE TABLE `major` (
 
 LOCK TABLES `major` WRITE;
 /*!40000 ALTER TABLE `major` DISABLE KEYS */;
-INSERT INTO `major` VALUES (1,1,'645455','Công nghệ thông tin'),(2,1,'645456','Khoa Học máy tính');
+INSERT INTO `major` VALUES (1,1,'645455','Công nghệ thông tin'),(2,1,'645456','Khoa học máy tính'),(3,1,'645457','Hệ thống thông tin quản lý'), (4,4,'645458','Quản trị kinh doanh'),(5,4,'645459','Kinh tế học'), (6,4,'645460','Tài chính - ngân hàng'), (7,4,'645461','Kỹ thuật xây dựng'), (8,4,'645462','Lý luận và phương pháp dạy học bộ môn tiếng Anh'),(9,4,'645463','Kế toán'), (10,4,'645464','Luật kinh tế'),(11,4,'645465','Quản lý xây dựng'), (12,4,'645466','Xã hội học'),(13,4,'645467','Công nghệ sinh học'), (14,4,'645468','Khoa học máy tính'),(15,4,'645469','Ngôn ngữ Trung Quốc'),(16,2,'645470','Ngôn ngữ Anh'),(17,2,'645471','Ngôn ngữ Trung Quốc'), (18,2,'645472','Ngôn ngữ Hàn Quốc'),(19,2,'645473','Ngôn ngữ Nhật'),(20,3,'645474','Kinh tế'),(21,3,'645475','Quản lý công'), (22,5,'645476','Tài chính - ngân hàng'),(23,6,'645477','Khoa học dữ liệu');
 /*!40000 ALTER TABLE `major` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,6 +425,7 @@ CREATE TABLE `stud_certification` (
 
 LOCK TABLES `stud_certification` WRITE;
 /*!40000 ALTER TABLE `stud_certification` DISABLE KEYS */;
+
 /*!40000 ALTER TABLE `stud_certification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,7 +549,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'ADMIN','ADMIN@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','ADMIN','','2001-12-01','Nam','090',NULL),(2,'MODERATOR','MODERATOR@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','MODERATOR','','2001-12-21','Nam','090',NULL),(3,'Hoang Duong','nhoxduong356@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','USER',NULL,'2001-12-21','Nam','090',NULL);
+INSERT INTO `user` VALUES (1,'ADMIN','ADMIN@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','ADMIN','','2001-12-01','Nam','090',NULL),(2,'MODERATOR','MODERATOR@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','MODERATOR','','2001-12-21','Nam','090',NULL),(3,'Hoang Duong','nhoxduong356@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','USER',NULL,'2001-12-21','Nam','090',NULL),(4,'Le Dong Anh Kiet','ledonganhkiet1909@gmail.com','$2a$10$qKveXpAB3RVXDqGIcGY4vOMw8ojqWUO2WBC1v9WHXYCQiETyoFWdK','USER','','2002-09-19','Nam','093',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -556,4 +562,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-10  5:53:20
+-- Dump completed on 2023-10-11 9:27:02
