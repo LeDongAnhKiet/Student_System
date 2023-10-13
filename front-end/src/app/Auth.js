@@ -1,67 +1,45 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import AuthService, {auth, endpoints} from "../services/AuthService";
+import cookie from "react-cookies";
+import {UserContext} from "./App";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
+export const useAuth = () => { return useContext(AuthContext); }
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-
-    // Kiểm tra cookie hoặc xác thực ở đây và cập nhật state user
-    useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                // Thực hiện kiểm tra xác thực ở đây và cập nhật state user
-                const response = await fetch('/user/info');
-                if (response.ok) {
-                    const userData = await response.json();
-                    setUser(userData);
-                }
-            } catch (error) {
-                console.error('Lỗi xác thực:', error);
-            }
-        };
-
-        checkAuth().then();
-    }, []);
+    const [user, setUser] = useContext(UserContext);
 
     const signin = async (userData) => {
-        try {
-            // Thực hiện đăng nhập và cập nhật state user
-            const response = await fetch('/auth/signin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData),
-            });
-
-            if (response.status === 200) {
-                const user = await response.json();
-                setUser(user);
-            }
-        } catch (error) {
-            console.error('Lỗi đăng nhập:', error);
-        }
-    };
+        // Thực hiện đăng nhập và cập nhật state user
+        let res = await AuthService.post(endpoints['signin'], {userData});
+        cookie.save('token', res.data);
+        let {data} = await auth.get(endpoints['user']);
+        cookie.save('user', data);
+        setUser(data);
+        setUser({
+            'type': 'signin',
+            'payload': data
+        });
+        sessionStorage.setItem('user', JSON.stringify(data));
+    }
 
     const signout = async () => {
         try {
             // Thực hiện đăng xuất và cập nhật state user
-            await fetch('/auth/signout', {
+            await AuthService.post(endpoints['signout'], {
                 method: 'POST',
             });
             setUser(null);
         } catch (error) {
-            console.error('Lỗi đăng xuất:', error);
+            console.error('Lỗi đăng xuất: ', error);
         }
-    };
+        sessionStorage.removeItem('user');
+    }
 
     return (
         <AuthContext.Provider value={{ user, signin, signout }}>
             {children}
         </AuthContext.Provider>
-    );
-};
+    )
+}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/TranscriptService";
 import {useNavigate} from "react-router-dom";
 
-function AddTranscript(props) {
+function UpdateTranscript(props) {
     const [id, setId] = useState(props.match.params.id);
     const [language, setLanguage] = useState('');
     const [phoneContact, setPhoneContact] = useState('');
@@ -112,4 +112,4 @@ function AddTranscript(props) {
     )
 }
 
-export default AddTranscript;
+export default UpdateTranscript;

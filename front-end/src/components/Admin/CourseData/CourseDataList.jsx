@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import Header from '../../app/Header';
-import DiplomaService from "../../services/DiplomaService";
+import DiplomaService from "../../../services/DiplomaService";
 import {useNavigate} from "react-router-dom";
 
 function CourseDataList() {
@@ -22,7 +21,6 @@ function CourseDataList() {
 
     return (
         <div>
-            <Header />
             <Container fluid>
                 <h3 className ="App">Cấp bằng tốt nghiệp</h3>
                 <div className="row">

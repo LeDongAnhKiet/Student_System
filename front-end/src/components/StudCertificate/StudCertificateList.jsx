@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import Header from '../../app/Header';
 import StudCertificateService from "../../services/StudCertificateService";
 import {useNavigate} from "react-router-dom";
 
@@ -22,7 +21,6 @@ function StudCertificateList() {
 
     return (
         <div>
-            <Header />
             <Container fluid>
                 <h3 className ="App">Chứng nhận sinh viên</h3>
                 <div className="row">

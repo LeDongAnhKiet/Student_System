@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Container, Table } from 'reactstrap';
-import Header from '../../app/Header';
 import UserService from "../../services/UserService";
 
 class UserCourseList extends Component {
@@ -20,7 +19,6 @@ class UserCourseList extends Component {
     render() {
         return (
             <div>
-                <Header />
                 <Container fluid>
                     <h3 className ="App">Thời khóa biểu</h3>
                     <div className="row">

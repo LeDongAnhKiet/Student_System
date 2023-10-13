@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import Header from '../../app/Header';
 import {useNavigate} from "react-router-dom";
 import TranscriptService from "../../services/TranscriptService";
 
@@ -22,7 +21,6 @@ function TranscriptList() {
 
     return (
         <div>
-            <Header />
             <Container fluid>
                 <h3 className ="App">Bảng điểm sinh viên</h3>
                 <div className="row">

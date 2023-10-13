@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DiplomaService from '../../services/DiplomaService';
+import DiplomaService from '../../../services/DiplomaService';
 import { useNavigate } from 'react-router-dom';
 
 function UpdateCourseData(props) {

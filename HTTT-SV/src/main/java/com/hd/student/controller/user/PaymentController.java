@@ -24,7 +24,6 @@ import java.text.ParseException;
 @CrossOrigin
 public class PaymentController {
 
-
     @Autowired
     private PaymentService paymentService;
 
@@ -39,7 +38,6 @@ public class PaymentController {
 
     }
 
-
     @GetMapping("/payment-status")
     public ResponseEntity<?> getPaymentInfo(
             Authentication auth,
@@ -50,6 +48,7 @@ public class PaymentController {
             @RequestParam(value = "vnp_TransactionStatus", required = false) String success) throws ParseException {
         return ResponseEntity.ok(this.paymentService.getStatusAfterPay(amount, title, date, success, IdRef));
     }
+
     @GetMapping("/get/{onlineServiceId}")
     public ResponseEntity<?> getPaymentInfor(Authentication auth, @PathVariable int onlineServiceId){
         String username = auth.getName();

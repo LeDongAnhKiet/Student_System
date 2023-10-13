@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'reactstrap';
-import Header from '../../app/Header';
 import CateService from '../../services/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -24,7 +23,6 @@ function CateList() {
 
     return (
         <div>
-            <Header />
             <Container fluid>
                 <h3 className="App">Đăng ký dịch vụ</h3>
                 <div className="row">

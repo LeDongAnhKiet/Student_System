@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import Header from '../../app/Header';
 import {useNavigate} from "react-router-dom";
 import UserService from "../../services/UserService";
 
@@ -19,7 +18,6 @@ function SemesterList() {
 
     return (
         <div>
-            <Header />
             <Container fluid>
                 <h3 className ="App">Xem thời khóa biểu</h3>
                 <div className="row">

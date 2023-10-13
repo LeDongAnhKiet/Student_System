@@ -44,7 +44,7 @@ public class UserServiceController {
     private ModelMapper modelMapper;
 
 
-    //Lay danh sach thogn tin cua service da dang ky
+    //Lay danh sach thong tin cua service da dang ky
     @GetMapping("/my-request")
     public ResponseEntity<?> getMyOnlineService(Authentication auth){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();

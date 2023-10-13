@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import UnlockStudService from "../../services/UnlockStudService";
 import {useNavigate} from "react-router-dom";
 
-function AddUnlockStud(props) {
+function UpdateUnlockStud(props) {
     const [id, setId] = useState(props.match.params.id);
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
@@ -23,7 +23,6 @@ function AddUnlockStud(props) {
             image,
             content,
         };
-
             UnlockStudService.updateUnlockStud(unlockStud, id).then((res) => {
                 nav(`/user/service/unlock-stud/${id}`);
         })
@@ -41,7 +40,6 @@ function AddUnlockStud(props) {
         else
             return <h3 className="text-center">Chỉnh sửa khóa</h3>
     }
-
     return (
         <div>
             <br></br>
@@ -71,4 +69,4 @@ function AddUnlockStud(props) {
     )
 }
 
-export default AddUnlockStud;
+export default UpdateUnlockStud;

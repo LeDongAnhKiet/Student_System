@@ -1,5 +1,4 @@
 import {Button, Container} from "reactstrap";
-import Header from "./Header";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from './Auth';
@@ -26,7 +25,7 @@ const Home = () => {
 
     return (
         <div>
-            <Header/>
+
             <Container fluid>
                 {loading ? (
                     <p className="display-6 m-2">Loading...</p>
@@ -45,7 +44,7 @@ const Home = () => {
                             </>
                         ) : (
                             <>
-                                <h3>Vui lòng đăng nhập!</h3>
+                                <h3 className="m-2">Vui lòng đăng nhập!</h3>
                                 <Button className="my-2 bg-primary" onClick={signin()}>
                                     Đăng nhập
                                 </Button>

@@ -1,81 +1,73 @@
-import React from 'react';
+import React, {createContext, useEffect, useReducer, useState} from 'react';
 import '../styles/App.css';
 import Home from './Home';
-import {Navigate, Route, Routes} from 'react-router-dom';
-import UserList from "../components/User/UserList";
-import UserSemesterList from "../components/User/UserSemesterList";
-import CateList from "../components/User/CateList";
-import UserCourseList from "../components/User/UserCourseList";
-import TranscriptList from "../components/Transcript/TranscriptList";
-import DiplomaList from "../components/Diploma/DiplomaList";
+import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import Signin from "./Signin";
-import AddDiploma from "../components/Diploma/AddDiploma";
-import UnlockStudList from "../components/UnlockStud/UnlockStudList";
-import AddTranscript from "../components/Transcript/AddTranscript";
-import StudCertificateList from "../components/StudCertificate/StudCertificateList";
-import AddStudCertificate from "../components/StudCertificate/AddStudCertificate";
-import AddUnlockStud from "../components/UnlockStud/AddUnlockStud";
-import Footer from "./Footer";
-import UpdateDiploma from "../components/Diploma/UpdateDiploma";
-import UpdateStudCertificate from "../components/StudCertificate/UpdateStudCertificate";
 import {AuthProvider} from "./Auth";
+import Reducer from "./Reducer";
+import cookie from "react-cookies";
+import Header from "./Header";
+import Footer from "./Footer";
+import * as Comp from '../components';
+import Signout from "./Signout";
 
+export const UserContext = createContext();
 const App = () => {
+    const [user, setUser] = useReducer(Reducer,cookie.load('user') || null);
+    const loc = useLocation();
+    const [isSignin, setIsSign] = useState(false);
+
+    useEffect(() => {
+        setIsSign(loc.pathname === '/auth/guest/signin');
+    }, [loc.pathname]);
+
     return (
+        <UserContext.Provider value={[user, setUser]}>
         <AuthProvider>
             <div className="container">
+                {!isSignin && <Header />}
                 <Routes>
-                    <Route path="/" element={<Navigate to="/auth/signin" />} />
-
-                    <Route path="/auth/signin" element={<Signin />} />
-
+                    <Route path="/" element={<Navigate to="/auth/guest/signin" />} />
+                    <Route path="/auth/guest/signin" element={<Signin />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/auth/guest/signout" element={<Signout />} />
 
-                    <Route path="/user/info" element={<UserList />} />
+                    <Route path="/user/info" element={<Comp.UserList />} />
+                    <Route path="/user/service-cate" element={<Comp.CateList />} />
+                    <Route path="/user/service-cate/:id" element={<Comp.CateList />} />
+                    <Route path="/user/semester" element={<Comp.UserSemesterList />} />
+                    <Route path="user/semester/:id/course" element={<Comp.UserCourseList />} />
 
-                    <Route path="/user/service-cate" element={<CateList />} />
+                    <Route path="/user/service/transcript/:id" element={<Comp.TranscriptList />} />
+                    <Route path="/user/service/transcript/add" element={<Comp.AddTranscript />} />
+                    <Route path="/user/service/transcript/update/:id" element={<Comp.UpdateTranscript />} />
 
-                    <Route path="/user/service-cate/:id" element={<CateList />} />
+                    <Route path="/user/service/diploma/:id" element={<Comp.DiplomaList />} />
+                    <Route path="/user/service/diploma/update/:id" element={<Comp.UpdateDiploma />} />
+                    <Route path="/user/service/diploma/add" element={<Comp.AddDiploma />} />
 
-                    <Route path="/user/service/transcript/:id" element={<TranscriptList />} />
+                    <Route path="/user/service/stud-cert/:id" element={<Comp.StudCertificateList />} />
+                    <Route path="/user/service/stud-cert/update/:id" element={<Comp.UpdateStudCertificate />} />
+                    <Route path="/user/service/stud-cert/add" element={<Comp.AddStudCertificate />} />
 
-                    <Route path="/user/service/transcript/add" element={<AddTranscript />} />
+                    <Route path="/user/service/unlock-stud/:id" element={<Comp.UnlockStudList />} />
+                    <Route path="/user/service/unlock-stud/add" element={<Comp.AddUnlockStud />} />
+                    <Route path="/user/service/unlock-stud/update:id" element={<Comp.UpdateUnlockStud />} />
 
-                    <Route path="/user/service/diploma/:id" element={<DiplomaList />} />
+                    <Route path="/admin/student" element={<Comp.StudentList />} />
+                    <Route path="/admin/student/:id" element={<Comp.StudentList />} />
+                    <Route path="/admin/department" element={<Comp.DepartmentList />} />
+                    <Route path="/admin/departmen/:id" element={<Comp.DepartmentList />} />
 
-                    <Route path="/user/service/diploma/update/:id" element={<UpdateDiploma />} />
-
-                    <Route path="/user/service/diploma/add" element={<AddDiploma />} />
-
-                    <Route path="/user/service/stud-cert/:id" element={<StudCertificateList />} />
-
-                    <Route path="/user/service/stud-cert/update/:id" element={<UpdateStudCertificate />} />
-
-                    <Route path="/user/service/stud-cert/add" element={<AddStudCertificate />} />
-
-                    <Route path="/user/service/unlock-stud/:id" element={<UnlockStudList />} />
-
-                    <Route path="/user/service/unlock-stud/add" element={<AddUnlockStud />} />
-
-                    <Route path="/user/semester" element={<UserSemesterList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
-
-                    <Route path="/semester/:id/course" element={<UserCourseList />} />
+                    <Route path="/admin/course-data/getall" element={<Comp.CourseDataList />} />
+                    <Route path="/admin/course-data/add" element={<Comp.AddCourseData />} />
+                    <Route path="/admin/course-data/update/:id" element={<Comp.UpdateCourseData />} />
+                    <Route path="/admin/course-data/delete/:id" element={<Comp.DeleteCourseData />} />
                 </Routes>
                 <Footer />
             </div>
         </AuthProvider>
+        </UserContext.Provider>
     );
 }
 
