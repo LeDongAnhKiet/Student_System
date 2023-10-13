@@ -38,14 +38,14 @@ const Home = () => {
                                     <Link to="/admin">Admin</Link>
                                 </Button>
                                 <br />
-                                <Button className="btn btn-success" onClick={signout()}>
+                                <Button className="btn btn-success" onClick={() => signout()}>
                                     Đăng xuất
                                 </Button>
                             </>
                         ) : (
                             <>
                                 <h3 className="m-2">Vui lòng đăng nhập!</h3>
-                                <Button className="my-2 bg-primary" onClick={signin()}>
+                                <Button className="my-2 bg-primary" onClick={() => nav(-1)}>
                                     Đăng nhập
                                 </Button>
                             </>
