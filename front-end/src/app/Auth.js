@@ -12,7 +12,10 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (userData) => {
         // Thực hiện đăng nhập và cập nhật state user
-        let res = await AuthService.post(endpoints['signin'], {userData});
+        let res = await AuthService.post(endpoints['signin'], {
+            email: userData.email,
+            password: userData.password
+        });
         cookie.save('token', res.data);
         let {data} = await auth.get(endpoints['user']);
         cookie.save('user', data);

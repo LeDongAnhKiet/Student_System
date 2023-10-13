@@ -23,6 +23,5 @@ export { default as StudentList } from './Admin/Student/StudentList';
 export { default as DepartmentList } from './Admin/Student/DepartmentList';
 
 export { default as AddCourseData } from './Admin/CourseData/AddCourseData';
-export { default as DeleteCourseData } from './Admin/CourseData/DeleteCourseData';
 export { default as UpdateCourseData } from './Admin/CourseData/UpdateCourseData';
 export { default as CourseDataList } from './Admin/CourseData/CourseDataList';

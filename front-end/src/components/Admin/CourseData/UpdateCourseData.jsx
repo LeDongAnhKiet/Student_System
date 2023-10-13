@@ -1,115 +1,96 @@
 import React, { useState, useEffect } from 'react';
-import DiplomaService from '../../../services/DiplomaService';
 import { useNavigate } from 'react-router-dom';
+import CourseDataService from "../../../services/Admin/CourseDataService";
 
 function UpdateCourseData(props) {
     const [id, setId] = useState(props.match.params.id);
-    const [copy, setCopy] = useState(0);
-    const [phoneContact, setPhoneContact] = useState('');
-    const [email, setEmail] = useState('');
-    const [diplomaYear, setDiplomaYear] = useState(1970);
-    const [diplomaCode, setDiplomaCode] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [courseId, setCourseId] = useState(1970);
+    const [lectureId, setLectureId] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
         if (id !== '_add')
-            DiplomaService.getDiploma(id).then((res) => {
-                let diploma = res.data;
-                // Set cac gia tri cho diploma
-                setCopy(diploma.copy);
-                setPhoneContact(diploma.phoneContact);
-                setEmail(diploma.email);
-                setDiplomaYear(diploma.diplomaYear);
-                setDiplomaCode(diploma.diplomaCode);
-            });
+            CourseDataService.getCourse(id).then((res) => {
+                let courseData = res.data;
+                setStartDate(courseData.startDate);
+                setEndDate(courseData.endDate);
+                setCourseId(courseData.courseId);
+                setLectureId(courseData.lectureId);
+            })
     }, [id]);
 
-    const updateDiploma = (e) => {
+    const updateCourseData = (e) => {
         e.preventDefault();
         // tao doi tuong tu cac gia tri
-        const diploma = {
-            copy,
-            phoneContact,
-            email,
-            diplomaYear,
-            diplomaCode,
+        const courseData = {
+            startDate,
+            endDate,
+            courseId,
+            lectureId,
         };
 
-        DiplomaService.updateDiploma(diploma, id).then((res) => {
-            nav(`/user/service/diploma/${id}`);
+        CourseDataService.updateCourse(courseData, id).then(() => {
+            nav(`/admin/course-data/update/${id}`);
         });
     };
 
-    const changeCopyHandler = (event) => {
-        setCopy(event.target.value);
-    };
+    const changeStartDateHandler = (e) => { setStartDate(e.target.value); }
 
-    const changePhoneHandler = (event) => {
-        setPhoneContact(event.target.value);
-    };
+    const changeEndDateHandler = (e) => { setEndDate(e.target.value); }
 
-    const changeEmailHandler = (event) => {
-        setEmail(event.target.value);
-    };
+    const changeCourseHandler = (e) => { setCourseId(e.target.value); }
 
-    const changeYearHandler = (event) => {
-        setDiplomaYear(event.target.value);
-    };
+    const changeLectureHandler = (e) => { setLectureId(e.target.value); }
 
-    const changeCodeHandler = (event) => {
-        setDiplomaCode(event.target.value);
-    };
-
-    const cancel = () => { nav(`/user/service/diploma/${id}`); }
+    const cancel = () => { nav(`/user/service/course-data/getall`); }
 
     const getTitle = () => {
-        if (id === '_add') return <h3 className="text-center">Thêm bằng cấp</h3>;
-        else return <h3 className="text-center">Chỉnh sửa bằng cấp</h3>;
+        if (id === '_add')
+            return <h3 className="App">Thêm môn học</h3>
+        else
+            return <h3 className="App">Chỉnh sửa môn học</h3>
     };
 
     return (
         <div>
             <br></br>
-            <div className="container">
-                <div className="row">
-                    <div className="card col-md-6 offset-md-5">
+            <div className = "container">
+                <div className = "row">
+                    <div className = "card col-md-6 offset-md-5">
                         { getTitle }
-                        <div className="card-body">
+                        <div className = "card-body">
                             <form>
-                                <div className="form-group">
-                                    <label>Số lượng bản sao: </label>
-                                    <input placeholder="Copy" name="copy" className="form-control"
-                                           value={copy} onChange={changeCopyHandler} />
+                                <div className = "form-group">
+                                    <label>Ngày bắt đầu: </label>
+                                    <input name="startDate" className="form-control" min="2023-01-01" max="2023-12-31"
+                                           type="date" value={startDate} onChange={changeStartDateHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Số điện thoại: </label>
-                                    <input placeholder="Phone Contact" name="phoneContact" className="form-control"
-                                        value={phoneContact} onChange={changePhoneHandler} />
+                                <div className = "form-group">
+                                    <label>Ngày kết thúc: </label>
+                                    <input name="endDate" className="form-control" min="2023-01-01" max="2023-12-31"
+                                           type="date" value={endDate} onChange={changeEndDateHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Email: </label>
-                                    <input placeholder="Email Address" name="email" className="form-control"
-                                        value={email} onChange={changeEmailHandler} />
+                                <div className = "form-group">
+                                    <label>Mã môn: </label>
+                                    <input placeholder="Mã môn..." name="course" className="form-control"
+                                           value={courseId} onChange={changeCourseHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Năm tốt nghiệp: </label>
-                                    <input placeholder="Year" name="year" className="form-control"
-                                        value={diplomaYear} onChange={changeYearHandler} />
+                                <div className = "form-group">
+                                    <label>Mã giảng viên: </label>
+                                    <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
+                                           value={lectureId} onChange={changeLectureHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Mã bằng: </label>
-                                    <input placeholder="Code" name="code" className="form-control"
-                                        value={diplomaCode} onChange={changeCodeHandler} />
-                                </div>
-                                <button className="btn btn-primary m-1" onClick={updateDiploma} >Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel} >Hủy</button>
+                                <button className="btn btn-primary m-1" onClick={updateCourseData}>Lưu</button>
+                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default UpdateCourseData;

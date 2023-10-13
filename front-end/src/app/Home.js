@@ -44,7 +44,7 @@ const Home = () => {
                             </>
                         ) : (
                             <>
-                                <h3 className="m-2">Vui lòng đăng nhập!</h3>
+                                <h3>Vui lòng đăng nhập!</h3>
                                 <Button className="my-2 bg-primary" onClick={() => nav(-1)}>
                                     Đăng nhập
                                 </Button>

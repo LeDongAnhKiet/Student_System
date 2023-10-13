@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import logo from './ou.png';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {AuthContext} from "./Auth";
+import {useAuth} from "./Auth";
 import {UserContext} from "./App";
 
 function Signin() {
@@ -11,7 +11,7 @@ function Signin() {
     const [error, setError] = useState('');
 
     // Sử dụng AuthContext để xác định kiểu dữ liệu của useAuth
-    const { signin } = useContext(AuthContext);
+    const { signin } = useAuth();
     const nav = useNavigate();
     const [q] = useSearchParams();
 

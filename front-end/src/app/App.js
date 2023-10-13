@@ -73,7 +73,7 @@ class App extends Component {
                         <Route path="/admin/course-data/getall" element={<Comp.CourseDataList />} />
                         <Route path="/admin/course-data/add" element={<Comp.AddCourseData />} />
                         <Route path="/admin/course-data/update/:id" element={<Comp.UpdateCourseData />} />
-                        <Route path="/admin/course-data/delete/:id" element={<Comp.DeleteCourseData />} />
+                        <Route path="/admin/course-data/delete/:id" element={<Comp.CourseDataList />} />
                     </Routes>
                     <Footer />
                 </div>
