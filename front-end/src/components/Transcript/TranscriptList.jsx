@@ -42,7 +42,7 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
-                                <td>{transcript.isSealed}</td>
+                                <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
                                 <td>
                                     <button className="btn-success btn m-1"
                                             onClick={updateTranscript}>Sửa bảng điểm

@@ -51,19 +51,32 @@ const App = () => {
                         <Route path="/user/service/unlock-stud/add" element={<Comp.AddUnlockStud />} />
                         <Route path="/user/service/unlock-stud/update/:id" element={<Comp.UpdateUnlockStud />} />
 
-                        <Route path="/semester/:id/course" element={<Comp.UserCourseList />} />
-                        <Route path="/semester/:id/course" element={<Comp.UserCourseList />} />
-                        <Route path="/semester/:id/course" element={<Comp.UserCourseList />} />
-                        <Route path="/semester/:id/course" element={<Comp.UserCourseList />} />
-
                         <Route path="/admin/student" element={<Comp.StudentList />} />
                         <Route path="/admin/student/:id" element={<Comp.StudentList />} />
                         <Route path="/admin/department" element={<Comp.DepartmentList />} />
                         <Route path="/admin/department/:id" element={<Comp.DepartmentList />} />
 
-                        <Route path="/admin/course-data/getall" element={<Comp.UnlockStudList />} />
-                        <Route path="/admin/course-data/add" element={<Comp.AddUnlockStud />} />
-                        <Route path="/admin/course-data/update/:id" element={<Comp.UpdateUnlockStud />} />
+                        <Route path="/admin/course-data/getall" element={<Comp.CourseDataList />} />
+                        <Route path="/admin/course-data/add" element={<Comp.AddCourseData />} />
+                        <Route path="/admin/course-data/update/:id" element={<Comp.UpdateCourseData />} />
+
+                        <Route path="/admin/semester/getavailable" element={<Comp.SemesterList />} />
+                        <Route path="/admin/semester/get/:id" element={<Comp.SemesterList />} />
+                        <Route path="/admin/semester/add" element={<Comp.AddSemester />} />
+                        <Route path="/admin/semester/update/:id" element={<Comp.UpdateSemester />} />
+
+                        <Route path="/admin/schedule-info/getall" element={<Comp.ScheduleList />} />
+                        <Route path="/admin/schedule-info/add" element={<Comp.AddSchedule />} />
+                        <Route path="/admin/schedule-info/update/:id" element={<Comp.UpdateSchedule />} />
+
+                        <Route path="/admin/room/get" element={<Comp.RoomList />} />
+                        <Route path="/admin/room/add" element={<Comp.AddRoom />} />
+                        <Route path="/admin/room/update/:id" element={<Comp.UpdateRoom />} />
+
+                        <Route path="/admin/course/getall" element={<Comp.CourseList />} />
+                        <Route path="/admin/course/get/:id" element={<Comp.CourseList />} />
+                        <Route path="/admin/course/add" element={<Comp.AddCourse />} />
+                        <Route path="/admin/course/update/:id" element={<Comp.UpdateCourse />} />
                     </Routes>
                     <Footer />
                 </div>

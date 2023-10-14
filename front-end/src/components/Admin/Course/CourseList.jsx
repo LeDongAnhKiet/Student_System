@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import CourseService from "../../../services/Admin/CourseService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function CourseList() {
     const [courses, setCourses] = useState([]);
     const nav = useNavigate();
+    const { id } = useParams();
 
     useEffect(() => {
-        CourseService.getCourse().then((res) => {
+        if (id)
+            CourseService.getCourseById().then((res) => {
+                setCourses(res.data);
+            });
+        else CourseService.getCourse().then((res) => {
             setCourses(res.data);
         });
     }, []);

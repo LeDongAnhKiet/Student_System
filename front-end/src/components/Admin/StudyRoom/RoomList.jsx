@@ -1,39 +1,52 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import DepartmentService from "../../../services/Admin/StudentService";
+import ScheduleService from "../../../services/Admin/ScheduleService";
 import {useNavigate} from "react-router-dom";
 
 function RoomList() {
-    const [departments, setDepartments] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        DepartmentService.getDepartment().then((res) => {
-            setDepartments(res.data);
+        ScheduleService.getRoom().then((res) => {
+            setRooms(res.data);
         });
     }, []);
+
+    const addRoom = () => { nav('/admin/room/add'); }
+
+    const deleteRoom = (id) => {
+        ScheduleService.deleteRoom(id).then(() => {
+            setRooms(rooms.filter(room => room.id !== id));
+        })
+    }
+
+    const updateRoom = (id) => { nav(`/admin/room/update/${id}`); }
 
     return (
         <div>
             <Container fluid>
-                <h3 className ="App">Danh sách các khoa</h3>
+                <h3 className ="App">Danh sách các phòng học</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center align-middle"><tr>
-                            <th>Tên khoa</th>
-                            <th>Các ngành</th>
-                            <th>Ghi chú</th>
+                            <th>Phòng học</th>
+                            <th>Tình trạng</th>
+                            <th>Thao tác</th>
                         </tr></thead>
                         <tbody>
-                        { departments.map( department => (
-                            <tr key={department.id}>
-                                <td>{department.departmentName}</td>
-                                <td>{department.description}</td>
-                                <td>{department.majors.map(major => (
-                                    <tr key={major.id}>
-                                        <td>{major.majorName}</td>
-                                    </tr>
-                                ))}</td>
+                        { rooms.map( room => (
+                            <tr key={room.id}>
+                                <td>{room.studyRoomName}</td>
+                                <td>{room.isAvailable ? 'Trống' : 'Đầy'}</td>
+                                <td className="btn-group">
+                                    <button className="btn-success btn m-1"
+                                            onClick={() => {updateRoom(room.id)}}>Chỉnh sửa
+                                    </button>
+                                    <button className="btn-success btn m-1"
+                                            onClick={() => {deleteRoom(room.id)}}>Xóa
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                         </tbody>
@@ -41,7 +54,7 @@ function RoomList() {
                 </div>
                 <div className="col-3 float-end row">
                     <button className="btn-primary btn m-1"
-                            onClick={() => {nav(-1)}}>Quay lại
+                            onClick={addRoom}>Thêm
                     </button>
                 </div>
             </Container>
