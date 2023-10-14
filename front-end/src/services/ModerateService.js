@@ -6,6 +6,7 @@ class ModerateService {
     addCate(ServiceCate) { return axios.post(CATE_API_MODERATOR_URL + '/service-cate/add', ServiceCate) }
     updateCate(ServiceCate, id) { return axios.put(CATE_API_MODERATOR_URL + '/service-cate/update/' + id, ServiceCate) }
     changeCate(id) { return axios.put(CATE_API_MODERATOR_URL + '/service-cate/change/' + id) }
+
     getRequest() { return axios.get(CATE_API_MODERATOR_URL + '/get-request') }
     getRequestById(id) { return axios.get(CATE_API_MODERATOR_URL + '/get-request/' + id) }
     acceptRequest(id) { return axios.put(CATE_API_MODERATOR_URL + '/service/' + id + '/accept') }

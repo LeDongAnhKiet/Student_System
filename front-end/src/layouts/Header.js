@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -50,9 +50,6 @@ const Header = () => {
                     </NavItem>
                     <NavItem>
                         <NavLink className='App-link nav-link' href="/user/info">Thông tin tài khoản</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink className='App-link nav-link' href="/user/signout">Đăng xuất</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
