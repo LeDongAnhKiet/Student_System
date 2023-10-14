@@ -1,56 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CourseDataService from "../../../services/Admin/CourseDataService";
+import SemesterService from "../../../services/Admin/SemesterService";
 
 function UpdateSemester(props) {
     const [id, setId] = useState(props.match.params.id);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [courseId, setCourseId] = useState(1970);
-    const [lectureId, setLectureId] = useState('');
+    const [semesterName, setSemesterName] = useState('');
+    const [note, setNote] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
         if (id !== '_add')
-            CourseDataService.getCourse(id).then((res) => {
-                let courseData = res.data;
-                setStartDate(courseData.startDate);
-                setEndDate(courseData.endDate);
-                setCourseId(courseData.courseId);
-                setLectureId(courseData.lectureId);
+            SemesterService.getSemesterById(id).then((res) => {
+                let semester = res.data;
+                setSemesterName(semester.semesterName);
+                setNote(semester.note);
             })
     }, [id]);
 
-    const updateCourseData = (e) => {
+    const updateSemester = (e) => {
         e.preventDefault();
         // tao doi tuong tu cac gia tri
-        const courseData = {
-            startDate,
-            endDate,
-            courseId,
-            lectureId,
+        const semester = {
+            semesterName,
+            note,
         };
 
-        CourseDataService.updateCourse(courseData, id).then(() => {
-            nav(`/admin/course-data/update/${id}`);
+        SemesterService.updateSemester(semester, id).then(() => {
+            nav(`/admin/semester/update/${id}`);
         });
     };
 
-    const changeStartDateHandler = (e) => { setStartDate(e.target.value); }
+    const changeSemesterNameHandler = (e) => { setSemesterName(e.target.value); }
 
-    const changeEndDateHandler = (e) => { setEndDate(e.target.value); }
+    const changeNoteHandler = (e) => { setNote(e.target.value); }
 
-    const changeCourseHandler = (e) => { setCourseId(e.target.value); }
-
-    const changeLectureHandler = (e) => { setLectureId(e.target.value); }
-
-    const cancel = () => { nav(`/user/service/course-data/getall`); }
+    const cancel = () => { nav(`/user/service/semester/getavailable`); }
 
     const getTitle = () => {
         if (id === '_add')
-            return <h3 className="App">Thêm môn học</h3>
+            return <h3 className="App">Thêm học kỳ</h3>
         else
-            return <h3 className="App">Chỉnh sửa môn học</h3>
+            return <h3 className="App">Chỉnh sửa học kỳ</h3>
     };
 
     return (
@@ -63,26 +53,16 @@ function UpdateSemester(props) {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Ngày bắt đầu: </label>
-                                    <input name="startDate" className="form-control" min="2023-01-01" max="2023-12-31"
-                                           type="date" value={startDate} onChange={changeStartDateHandler}/>
+                                    <label>Tên học kỳ: </label>
+                                    <input placeholder="học kỳ... khóa..." name="name" className="form-control"
+                                           value={semesterName} onChange={changeSemesterNameHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Ngày kết thúc: </label>
-                                    <input name="endDate" className="form-control" min="2023-01-01" max="2023-12-31"
-                                           type="date" value={endDate} onChange={changeEndDateHandler}/>
+                                    <label>Ghi chú: </label>
+                                    <input placeholder="ghi chú..." name="note" className="form-control"
+                                           value={note} onChange={changeNoteHandler}/>
                                 </div>
-                                <div className = "form-group">
-                                    <label>Mã môn: </label>
-                                    <input placeholder="Mã môn..." name="course" className="form-control"
-                                           value={courseId} onChange={changeCourseHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Mã giảng viên: </label>
-                                    <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
-                                           value={lectureId} onChange={changeLectureHandler}/>
-                                </div>
-                                <button className="btn btn-primary m-1" onClick={updateCourseData}>Lưu</button>
+                                <button className="btn btn-primary m-1" onClick={updateSemester}>Lưu</button>
                                 <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
                             </form>
                         </div>

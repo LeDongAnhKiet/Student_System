@@ -1,56 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CourseDataService from "../../../services/Admin/CourseDataService";
+import ScheduleService from "../../../services/Admin/ScheduleService";
 
 function UpdateSchedule(props) {
     const [id, setId] = useState(props.match.params.id);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [courseId, setCourseId] = useState(1970);
-    const [lectureId, setLectureId] = useState('');
+    const [weekdays, setWeekdays] = useState('');
+    const [startAt, setStartAt] = useState(0);
+    const [endAt, setEndAt] = useState(0);
+    const [studyRoom, setStudyRoom] = useState(0);
     const nav = useNavigate();
 
     useEffect(() => {
         if (id !== '_add')
-            CourseDataService.getCourse(id).then((res) => {
-                let courseData = res.data;
-                setStartDate(courseData.startDate);
-                setEndDate(courseData.endDate);
-                setCourseId(courseData.courseId);
-                setLectureId(courseData.lectureId);
+            ScheduleService.getSchedule().then((res) => {
+                let schedule = res.data;
+                setWeekdays(schedule.weekdays);
+                setStartAt(schedule.startAt);
+                setEndAt(schedule.endAt);
+                setStudyRoom(schedule.studyRoom);
             })
     }, [id]);
 
-    const updateCourseData = (e) => {
+    const updateSchedule = (e) => {
         e.preventDefault();
         // tao doi tuong tu cac gia tri
-        const courseData = {
-            startDate,
-            endDate,
-            courseId,
-            lectureId,
+        const schedule = {
+            weekdays,
+            startAt,
+            endAt,
+            studyRoom,
         };
 
-        CourseDataService.updateCourse(courseData, id).then(() => {
-            nav(`/admin/course-data/update/${id}`);
+        ScheduleService.updateSchedule(schedule, id).then(() => {
+            nav(`/admin/schedule-info/update/${id}`);
         });
     };
 
-    const changeStartDateHandler = (e) => { setStartDate(e.target.value); }
+    const changeWeekdaysHandler = (e) => { setWeekdays(e.target.value); }
 
-    const changeEndDateHandler = (e) => { setEndDate(e.target.value); }
+    const changeStartAtHandler = (e) => { setStartAt(e.target.value); }
 
-    const changeCourseHandler = (e) => { setCourseId(e.target.value); }
+    const changeScheduleHandler = (e) => { setEndAt(e.target.value); }
 
-    const changeLectureHandler = (e) => { setLectureId(e.target.value); }
+    const changeStudyRoomHandler = (e) => { setStudyRoom(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/course-data/getall`); }
+    const cancel = () => { nav(`/user/service/schedule-info/getall`); }
 
     const getTitle = () => {
         if (id === '_add')
-            return <h3 className="App">Thêm môn học</h3>
+            return <h3 className="App">Thêm thời khóa biểu</h3>
         else
-            return <h3 className="App">Chỉnh sửa môn học</h3>
+            return <h3 className="App">Chỉnh sửa thời biểu</h3>
     };
 
     return (
@@ -63,26 +63,26 @@ function UpdateSchedule(props) {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Ngày bắt đầu: </label>
-                                    <input name="startDate" className="form-control" min="2023-01-01" max="2023-12-31"
-                                           type="date" value={startDate} onChange={changeStartDateHandler}/>
+                                    <label>Thứ ngày: </label>
+                                    <input placeholder="thứ..." name="weekdays" className="form-control"
+                                           value={weekdays} onChange={changeWeekdaysHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Ngày kết thúc: </label>
-                                    <input name="endDate" className="form-control" min="2023-01-01" max="2023-12-31"
-                                           type="date" value={endDate} onChange={changeEndDateHandler}/>
+                                    <label>Bắt đầu: </label>
+                                    <input placeholder="từ 1 đến 7" name="startAt" className="form-control"
+                                           value={startAt} onChange={changeStartAtHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Mã môn: </label>
-                                    <input placeholder="Mã môn..." name="course" className="form-control"
-                                           value={courseId} onChange={changeCourseHandler}/>
+                                    <label>Kết thúc: </label>
+                                    <input placeholder="từ 1 đến 7" name="endAt" className="form-control"
+                                           value={endAt} onChange={changeScheduleHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Mã giảng viên: </label>
-                                    <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
-                                           value={lectureId} onChange={changeLectureHandler}/>
+                                    <label>Mã phòng: </label>
+                                    <input placeholder="phòng học số..." name="studyRoom" className="form-control"
+                                           value={studyRoom} onChange={changeStudyRoomHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={updateCourseData}>Lưu</button>
+                                <button className="btn btn-primary m-1" onClick={updateSchedule}>Lưu</button>
                                 <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
                             </form>
                         </div>

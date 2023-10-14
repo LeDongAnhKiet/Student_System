@@ -1,42 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import StudentService from "../../../services/Admin/StudentService";
 import {useNavigate, useParams} from "react-router-dom";
+import ScheduleService from "../../../services/Admin/ScheduleService";
 
 function ScheduleList() {
-    const [students, setStudents] = useState([]);
+    const [schedules, setSchedules] = useState([]);
     const nav = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
-        if (id)
-        StudentService.getStudentByCourseId().then((res) => {
-            setStudents(res.data);
-        });
-        else StudentService.getStudent().then((res) => {
-            setStudents(res.data);
+        ScheduleService.getSchedule().then((res) => {
+            setSchedules(res.data);
         })
     }, [id]);
+
+    const addSchedule = () => { nav('/admin/schedule-info/add'); }
+
+    const deleteSchedule = (id) => {
+        ScheduleService.deleteSchedule(id).then(() => {
+            setSchedules(schedules.filter(schedule => schedule.id !== id));
+        })
+    }
+
+    const updateSchedule = (id) => { nav(`/admin/schedule-info/update/${id}`); }
+
 
     return (
         <div>
             <Container fluid>
-                <h3 className ="App">Thông tin sinh viên</h3>
+                <h3 className ="App">Thời khóa biểu</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center align-middle"><tr>
-                            <th>Họ và tên</th>
-                            <th>Email</th>
-                            <th>Khoa</th>
-                            <th>Ngành</th>
+                            <th>Thứ</th>
+                            <th>Bắt đầu</th>
+                            <th>Kết thúc</th>
+                            <th>Phòng học</th>
                         </tr></thead>
                         <tbody>
-                        { students.map( student => (
-                            <tr key={student.id}>
-                                <td>{student.fullName}</td>
-                                <td>{student.email}</td>
-                                <td>{student.department_name}</td>
-                                <td>{student.major_name}</td>
+                        { schedules.map( schedule => (
+                            <tr key={schedule.id}>
+                                <td>{schedule.weekdays}</td>
+                                <td>{schedule.startAt}</td>
+                                <td>{schedule.endAt}</td>
+                                <td>{schedule.studyRoom.studyRoomName}</td>
                             </tr>
                         ))}
                         </tbody>

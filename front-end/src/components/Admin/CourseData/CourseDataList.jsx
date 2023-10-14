@@ -31,7 +31,6 @@ function CourseDataList() {
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center align-middle"><tr>
                             <th>Tên</th>
-                            <th>Số tín chỉ</th>
                             <th>Email</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
@@ -42,7 +41,6 @@ function CourseDataList() {
                         { courseDatas.map( courseData => (
                             <tr key={courseData.id}>
                                 <td>{courseData.course.courseName}</td>
-                                <td>{courseData.course.creditsNum}</td>
                                 <td>{courseData.startDate}</td>
                                 <td>{courseData.endDate}</td>
                                 <td>{courseData.lecture.lectureName}</td>

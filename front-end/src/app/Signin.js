@@ -25,9 +25,9 @@ function Signin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email === '' || password === '') {
+        if (email === '' || password === '')
             setError('Vui lòng nhập đầy đủ thông tin.');
-        } else {
+        else {
             try {
                 const res = await AuthService.post(endpoints['signin'], {
                     'email': email,
@@ -40,20 +40,18 @@ function Signin() {
                     'type': 'signin',
                     'payload': data
                 });
-                localStorage.setItem('user', res.data);
-                setError('Đăng nhập thành công.');
-                nav('/home');
+
+                if (user !== null) {
+                    setError('Đăng nhập thành công.');
+                    return nav('/');
+                }
+                else setError('Sai tài khoản hoặc mật khẩu.');
             } catch (error) {
-                setError('Sai tài khoản hoặc mật khẩu.');
-                console.error('Error:', error);
+                setError('Lỗi đăng nhập.');
+                console.error('Lỗi xác thực:', error);
             }
         }
-        if (user !== null) {
-            setError('Đăng nhập thành công.');
-            return nav('/');
-        }
-        else setError('Sai tài khoản hoặc mật khẩu.');
-        }
+    }
 
     return (
         <div className="mt-3 ms-5 me-5 d-flex justify-content-center align-items-center border-primary border-3 border rounded-5">

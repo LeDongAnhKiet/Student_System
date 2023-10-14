@@ -12,7 +12,7 @@ function UpdateCourseData(props) {
 
     useEffect(() => {
         if (id !== '_add')
-            CourseDataService.getCourse(id).then((res) => {
+            CourseDataService.getCourse().then((res) => {
                 let courseData = res.data;
                 setStartDate(courseData.startDate);
                 setEndDate(courseData.endDate);

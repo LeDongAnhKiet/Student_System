@@ -1,52 +1,50 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import CourseService from "../../../services/Admin/CourseService";
+import SemesterService from "../../../services/Admin/SemesterService";
 import {useNavigate} from "react-router-dom";
 
-function CourseList() {
-    const [courses, setCourses] = useState([]);
+function SemesterList() {
+    const [semesters, setSemesters] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        CourseService.getCourse().then((res) => {
-            setCourses(res.data);
+        SemesterService.getAvailableSemester().then((res) => {
+            setSemesters(res.data);
         });
     }, []);
 
-    const addCourse = () => { nav('/admin/course/add'); }
+    const addSemester = () => { nav('/admin/semester/add'); }
 
-    const deleteCourse = (id) => {
-        CourseService.deleteCourse(id).then(() => {
-            setCourses(courses.filter(course => course.id !== id));
+    const deleteSemester = (id) => {
+        SemesterService.deleteSemester(id).then(() => {
+            setSemesters(semesters.filter(semester => semester.id !== id));
         })
     }
 
-    const updateCourse = (id) => { nav(`/admin/course/update/${id}`); }
+    const updateSemester = (id) => { nav(`/admin/semester/update/${id}`); }
 
     return (
         <div>
             <Container fluid>
-                <h3 className ="App">Danh sách môn học</h3>
+                <h3 className ="App">Danh sách các học kỳ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center align-middle"><tr>
-                            <th>Tên</th>
-                            <th>Số tín chỉ</th>
+                            <th>Học kỳ</th>
                             <th>Ghi chú</th>
                             <th>Thao tác</th>
                         </tr></thead>
                         <tbody>
-                        { courses.map( course => (
-                            <tr key={course.id}>
-                                <td>{course.courseName}</td>
-                                <td>{course.creditsNum}</td>
-                                <td>{course.startDate}</td>
+                        { semesters.map( semester => (
+                            <tr key={semester.id}>
+                                <td>{semester.semesterName}</td>
+                                <td>{semester.note}</td>
                                 <td className="btn-group">
                                     <button className="btn-success btn m-1"
-                                            onClick={() => {updateCourse(course.id)}}>Chỉnh sửa
+                                            onClick={() => {updateSemester(semester.id)}}>Chỉnh sửa
                                     </button>
                                     <button className="btn-success btn m-1"
-                                            onClick={() => {deleteCourse(course.id)}}>Xóa
+                                            onClick={() => {deleteSemester(semester.id)}}>Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -56,11 +54,11 @@ function CourseList() {
                 </div>
                 <div className="col-3 float-end row">
                     <button className="btn-primary btn m-1"
-                            onClick={addCourse}>Thêm
+                            onClick={addSemester}>Thêm
                     </button>
                 </div>
             </Container>
         </div>
     );
 }
-export default CourseList;
+export default SemesterList;
