@@ -2,6 +2,7 @@ import {Button, Container} from "reactstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import UserService from "../services/UserService";
+import cookie from "react-cookies";
 
 const Home = () => {
     const [loading, setLoading] = useState(false);
@@ -21,11 +22,30 @@ const Home = () => {
         const getUser = async () => {
             try {
                 setLoading(true);
-                const res = await UserService.getUser()
-                setUser(res.data)
-            } catch(error) { console.error('Lỗi lấy data: ', error); }
-            finally { setLoading(false); }
-        }
+
+                // Đọc token từ cookie
+                const token = cookie.load("user");
+
+                if (!token) {
+                    throw new Error("Token not found");
+                }
+
+                // Thiết lập header Authorization
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+
+                const res = await UserService.getUser(config); // Gửi yêu cầu với header Authorization
+                setUser(res.data);
+            } catch (error) {
+                console.error('Lỗi lấy dữ liệu: ', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
         getUser().then();
     }, []);
 
