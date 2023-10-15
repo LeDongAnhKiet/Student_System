@@ -18,7 +18,6 @@ const App = () => {
     useEffect(() => {
         setIsSign(loc.pathname === '/guest/auth/signin');
     }, [loc.pathname]);
-    localStorage.getItem('user');
 
     return (
         <UserContext.Provider value={[user, setUser]}>
