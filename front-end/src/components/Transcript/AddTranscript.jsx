@@ -104,12 +104,8 @@ function AddTranscript() {
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-<<<<<<< Updated upstream
                                            checked={isSealed} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
-=======
-                                           checked={isSealed} onChange={changeSealedHandler}/>                                    <label className="form-check-label">Đánh dấu</label>
->>>>>>> Stashed changes
                                 </div>
                                 <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
                                 <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>

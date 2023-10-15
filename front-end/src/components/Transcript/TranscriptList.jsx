@@ -42,12 +42,8 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
-<<<<<<< Updated upstream
                                 <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
                                 <td>
-=======
-                                <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>                                <td>
->>>>>>> Stashed changes
                                     <button className="btn-success btn m-1"
                                             onClick={updateTranscript}>Sửa bảng điểm
                                     </button>

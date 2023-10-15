@@ -40,8 +40,4 @@ export { default as SemesterList } from './Admin/Semester/SemesterList';
 
 export { default as AddRoom } from './Admin/StudyRoom/AddRoom';
 export { default as UpdateRoom } from './Admin/StudyRoom/UpdateRoom';
-<<<<<<< Updated upstream
 export { default as RoomList } from './Admin/StudyRoom/RoomList';
-=======
-export { default as RoomList } from './Admin/StudyRoom/RoomList';
->>>>>>> Stashed changes

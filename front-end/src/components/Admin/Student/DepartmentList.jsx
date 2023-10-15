@@ -2,10 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import DepartmentService from "../../../services/Admin/StudentService";
 import {useNavigate, useParams} from "react-router-dom";
-<<<<<<< Updated upstream
-import StudentService from "../../../services/Admin/StudentService";
-=======
->>>>>>> Stashed changes
 
 function DepartmentList() {
     const [departments, setDepartments] = useState([]);
@@ -17,12 +13,8 @@ function DepartmentList() {
             DepartmentService.getDepartmentById().then((res) => {
                 setDepartments(res.data);
             });
-<<<<<<< Updated upstream
         else DepartmentService.getDepartment().then((res) => {
             setDepartments(res.data);
-=======
-        else DepartmentService.getDepartment().then((res) => {            setDepartments(res.data);
->>>>>>> Stashed changes
         });
     }, []);
 

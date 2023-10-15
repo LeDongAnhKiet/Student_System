@@ -13,12 +13,8 @@ function CourseList() {
             CourseService.getCourseById().then((res) => {
                 setCourses(res.data);
             });
-<<<<<<< Updated upstream
         else CourseService.getCourse().then((res) => {
             setCourses(res.data);
-=======
-        else CourseService.getCourse().then((res) => {            setCourses(res.data);
->>>>>>> Stashed changes
         });
     }, []);
 

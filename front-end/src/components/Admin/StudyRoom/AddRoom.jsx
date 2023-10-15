@@ -1,24 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import ScheduleService from "../../../services/Admin/ScheduleService";
-<<<<<<< Updated upstream
-import {useNavigate} from "react-router-dom";
-import '../../../styles/App.css';
-
-function AddRoom(props) {
-    const [id, setId] = useState(props.match.params.id);
-=======
 import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 
 function AddRoom() {
     const { id } = useParams();
->>>>>>> Stashed changes
     const [studyRoomName, setStudyRoomName] = useState('');
     const [isAvailable, setIsAvailable] = useState(false);
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             ScheduleService.getRoom().then((res) => {
                 let room = res.data;
                 setStudyRoomName(room.studyRoomName);
@@ -33,7 +25,7 @@ function AddRoom() {
             isAvailable,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             ScheduleService.addRoom(room).then(() => {
                 nav('/admin/room/add');
             });
@@ -51,7 +43,7 @@ function AddRoom() {
     const cancel = () => { nav(`/user/service/room/get`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm phòng học</h3>
         else
             return <h3 className="App">Chỉnh sửa phòng học</h3>
