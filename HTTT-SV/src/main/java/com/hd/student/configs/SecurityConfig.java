@@ -61,7 +61,7 @@ public class SecurityConfig {
 
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").permitAll()
 //                        .requestMatchers("/api/guest/**").permitAll()
