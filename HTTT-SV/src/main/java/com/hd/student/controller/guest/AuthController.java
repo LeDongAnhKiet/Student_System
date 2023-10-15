@@ -64,13 +64,9 @@ public class AuthController {
 
         UserPrincipal u = (UserPrincipal) authentication.getPrincipal();
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(u);
+        String jwtCookie = jwtUtils.generateJwtToken(authentication);
 
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("email", u.getUsername());
-        responseBody.put("role", u.getAuthorities().toString());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(responseBody);
+        return ResponseEntity.ok(jwtCookie);
     }
 }

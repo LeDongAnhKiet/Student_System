@@ -18,11 +18,7 @@ export const auth = () => {
     return axios.create({
         baseURL: 'http://localhost:8080',
         headers: {
-            'Authorization': cookie.load('token'),
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Headers': 'X-Requested-With, content-type',
-            'Access-Control-Allow-Methods': 'PUT, POST, GET, DELETE, PATCH, OPTIONS'
+            Authorization: 'Bearer ' + cookie.load('token')
         }
     })
 }
