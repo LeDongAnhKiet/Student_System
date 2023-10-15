@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from "react-router-dom";
 import SemesterService from "../../../services/Admin/SemesterService";
 
-function UpdateSemester(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateSemester() {
+    const { id } = useParams();
     const [semesterName, setSemesterName] = useState('');
     const [note, setNote] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             SemesterService.getSemesterById(id).then((res) => {
                 let semester = res.data;
                 setSemesterName(semester.semesterName);
@@ -37,7 +37,7 @@ function UpdateSemester(props) {
     const cancel = () => { nav(`/user/service/semester/getavailable`); }
 
     const getTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm học kỳ</h3>
         else
             return <h3 className="App">Chỉnh sửa học kỳ</h3>

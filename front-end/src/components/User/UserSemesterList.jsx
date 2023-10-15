@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import UserService from "../../services/UserService";
+import UserService from "../../services/User/UserService";
 
 function SemesterList() {
     const [semesters, setSemesters] = useState([]);

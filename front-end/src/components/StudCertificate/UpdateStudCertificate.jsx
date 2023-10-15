@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import StudCertificateService from "../../services/StudCertificateService";
+import {useNavigate, useParams} from "react-router-dom";
+import StudCertificateService from "../../services/User/StudCertificateService";
 
-function UpdateStudCertificate(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateStudCertificate() {
+    const { id } = useParams();
     const [vietCopy, setVietCopy] = useState(0);
     const [phoneContact, setPhoneContact] = useState('');
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ function UpdateStudCertificate(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             StudCertificateService.getStudCertificate(id).then((res) => {
                 let studCertificate = res.data;
                 setVietCopy(studCertificate.vietCopy);
@@ -51,7 +51,7 @@ function UpdateStudCertificate(props) {
     const cancel = () => { nav(`/user/service/studCertificate/${id}`); }
 
     const getTitle = () => {
-        if (id === '_add') return <h3 className="text-center">Thêm chứng nhận</h3>;
+        if (id === 'add') return <h3 className="text-center">Thêm chứng nhận</h3>;
         else return <h3 className="text-center">Chỉnh sửa chứng nhận</h3>;
     };
     return (

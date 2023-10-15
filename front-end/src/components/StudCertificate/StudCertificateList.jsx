@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import StudCertificateService from "../../services/StudCertificateService";
+import StudCertificateService from "../../services/User/StudCertificateService";
 import {useNavigate} from "react-router-dom";
 
 function StudCertificateList() {

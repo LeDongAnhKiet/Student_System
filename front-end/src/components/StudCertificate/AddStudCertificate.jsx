@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import StudCertificateService from "../../services/StudCertificateService";
-import {useNavigate} from "react-router-dom";
+import StudCertificateService from "../../services/User/StudCertificateService";
+import {useNavigate, useParams} from "react-router-dom";
 
-function AddStudCertificate(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddStudCertificate() {
+    const { id } = useParams();
     const [vietCopy, setVietCopy] = useState(0);
     const [phoneContact, setPhoneContact] = useState('');
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ function AddStudCertificate(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             StudCertificateService.getStudCertificate(id).then((res) => {
                 let studCertificate = res.data;
                 setVietCopy(studCertificate.vietCopy);
@@ -33,7 +33,7 @@ function AddStudCertificate(props) {
             content,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             StudCertificateService.addStudCertificate(studCertificate).then((res) => {
                 nav('/user/service/stud-cert/add');
             });
@@ -57,7 +57,7 @@ function AddStudCertificate(props) {
     const cancel = () => { nav(`/user/service/stud-cert/${id}`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="text-center">Thêm chứng nhận</h3>
         else
             return <h3 className="text-center">Chỉnh sửa chứng nhận</h3>

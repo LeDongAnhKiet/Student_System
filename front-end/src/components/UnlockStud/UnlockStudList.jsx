@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import UnlockStudService from "../../services/UnlockStudService";
+import UnlockStudService from "../../services/User/UnlockStudService";
 
 function UnlockStudList() {
     const [unlockStuds, setUnlockStuds] = useState([]);

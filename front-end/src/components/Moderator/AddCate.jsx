@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import DiplomaService from "../../services/DiplomaService";
-import {useNavigate} from "react-router-dom";
+import DiplomaService from "../../services/User/DiplomaService";
+import {useNavigate, useParams} from "react-router-dom";
 
-function AddCate(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddCate() {
+    const { id } = useParams();
     const [copy, setCopy] = useState(0);
     const [phoneContact, setPhoneContact] = useState('');
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ function AddCate(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             DiplomaService.getDiploma(id).then((res) => {
                 let diploma = res.data;
                 // set state cho diploma
@@ -35,7 +35,7 @@ function AddCate(props) {
             diplomaCode,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             DiplomaService.addDiploma(diploma).then((res) => {
                 nav('/user/service/diploma/add');
             });
@@ -59,7 +59,7 @@ function AddCate(props) {
     const cancel = () => { nav(`/user/service/diploma/${id}`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="text-center">Thêm bằng cấp</h3>
         else
             return <h3 className="text-center">Chỉnh sửa bằng cấp</h3>

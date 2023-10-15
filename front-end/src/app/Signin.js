@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import logo from '../styles/ou.png';
+<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../layouts/App';
 import { Form, Input, Label } from 'reactstrap';
 import AuthService, { auth, endpoints } from '../services/AuthService';
 import cookie from 'react-cookies';
+=======
+import {useNavigate} from 'react-router-dom';
+import {UserContext} from "./App";
+import {Form, Input, Label} from "reactstrap";
+import AuthService, {auth, endpoints} from "../services/Guest/AuthService";
+import cookie from "react-cookies";
+>>>>>>> Stashed changes
 
 function Signin() {
     const [user, setUser] = useContext(UserContext);

@@ -1,8 +1,12 @@
 import {Button, Container} from "reactstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+<<<<<<< Updated upstream
 import UserService from "../services/UserService";
 import cookie from "react-cookies";
+=======
+import UserService from "../services/User/UserService";
+>>>>>>> Stashed changes
 
 const Home = () => {
     const [loading, setLoading] = useState(false);

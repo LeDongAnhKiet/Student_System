@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import TranscriptService from "../../services/TranscriptService";
+import TranscriptService from "../../services/User/TranscriptService";
 
 function TranscriptList() {
     const [transcripts, setTranscripts] = useState([]);
@@ -42,8 +42,12 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
+<<<<<<< Updated upstream
                                 <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
                                 <td>
+=======
+                                <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>                                <td>
+>>>>>>> Stashed changes
                                     <button className="btn-success btn m-1"
                                             onClick={updateTranscript}>Sửa bảng điểm
                                     </button>

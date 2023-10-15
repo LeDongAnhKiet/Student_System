@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'reactstrap';
-import CateService from '../../services/HomeService';
+import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function CateList() {
@@ -40,7 +40,7 @@ function CateList() {
                             <tr key={cate.id}>
                                 <td>{cate.serviceCateName}</td>
                                 <td>{cate.price}</td>
-                                <td>{cate.isAvailable}</td>
+                                <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
                                 <td>{cate.description}</td>
                             </tr>
                         ))}

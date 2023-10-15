@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import DiplomaService from "../../services/DiplomaService";
+import DiplomaService from "../../services/User/DiplomaService";
 import {useNavigate} from "react-router-dom";
 
 function SearchCate() {

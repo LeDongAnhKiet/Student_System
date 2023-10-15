@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import CourseService from "../../../services/Admin/CourseService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 
-function AddCourse(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddCourse() {
+    const { id } = useParams();
     const [courseName, setCourseName] = useState('');
     const [creditsNum, setCreditsNum] = useState(0);
     const [note, setNote] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             CourseService.getCourse().then((res) => {
                 let course = res.data;
                 setCourseName(course.courseName);
@@ -28,7 +28,7 @@ function AddCourse(props) {
             note,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             CourseService.addCourse(course).then(() => {
                 nav('/admin/course/add');
             });
@@ -48,7 +48,7 @@ function AddCourse(props) {
     const cancel = () => { nav(`/user/service/course/getall`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm môn học</h3>
         else
             return <h3 className="App">Chỉnh sửa môn học</h3>

@@ -1,12 +1,12 @@
 import React, {createContext, useEffect, useReducer, useState} from 'react';
 import '../styles/App.css';
-import Home from '../app/Home';
+import Home from './Home';
 import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
-import Signin from "../app/Signin";
-import Reducer from "../app/Reducer";
+import Signin from "./Signin";
+import Reducer from "./Reducer";
 import cookie from "react-cookies";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../layouts/Header";
+import Footer from "../layouts/Footer";
 import * as Comp from '../components';
 
 export const UserContext = createContext(null);
@@ -29,8 +29,8 @@ const App = () => {
                         <Route path="/home" element={<Home />} />
 
                         <Route path="/user/info" element={<Comp.UserList />} />
-                        <Route path="/user/service-cate" element={<Comp.CateList />} />
-                        <Route path="/user/service-cate/:id" element={<Comp.CateList />} />
+                        <Route path="/guest/service-cate" element={<Comp.CateList />} />
+                        <Route path="/guest/service-cate/:id" element={<Comp.CateList />} />
                         <Route path="/user/semester" element={<Comp.UserSemesterList />} />
                         <Route path="/user/semester/:id/course" element={<Comp.UserCourseList />} />
 
@@ -55,6 +55,7 @@ const App = () => {
                         <Route path="/admin/department" element={<Comp.DepartmentList />} />
                         <Route path="/admin/department/:id" element={<Comp.DepartmentList />} />
 
+<<<<<<< Updated upstream:front-end/src/layouts/App.js
                         <Route path="/admin/course-data/getall" element={<Comp.CourseDataList />} />
                         <Route path="/admin/course-data/add" element={<Comp.AddCourseData />} />
                         <Route path="/admin/course-data/update/:id" element={<Comp.UpdateCourseData />} />
@@ -77,6 +78,29 @@ const App = () => {
                         <Route path="/admin/course/add" element={<Comp.AddCourse />} />
                         <Route path="/admin/course/update/:id" element={<Comp.UpdateCourse />} />
                     </Routes>
+=======
+                        <Route path="/admin/course-data/all" element={<Comp.CourseDataList />} />
+                        <Route path="/admin/course-data/add" element={<Comp.AddCourseData />} />
+                        <Route path="/admin/course-data/update/:id" element={<Comp.UpdateCourseData />} />
+
+                        <Route path="/admin/semester/available" element={<Comp.SemesterList />} />
+                        <Route path="/admin/semester/:id" element={<Comp.SemesterList />} />
+                        <Route path="/admin/semester/add" element={<Comp.AddSemester />} />
+                        <Route path="/admin/semester/update/:id" element={<Comp.UpdateSemester />} />
+
+                        <Route path="/admin/schedule-info/all" element={<Comp.ScheduleList />} />
+                        <Route path="/admin/schedule-info/add" element={<Comp.AddSchedule />} />
+                        <Route path="/admin/schedule-info/update/:id" element={<Comp.UpdateSchedule />} />
+
+                        <Route path="/admin/room" element={<Comp.RoomList />} />
+                        <Route path="/admin/room/add" element={<Comp.AddRoom />} />
+                        <Route path="/admin/room/update/:id" element={<Comp.UpdateRoom />} />
+
+                        <Route path="/admin/course/all" element={<Comp.CourseList />} />
+                        <Route path="/admin/course/:id" element={<Comp.CourseList />} />
+                        <Route path="/admin/course/add" element={<Comp.AddCourse />} />
+                        <Route path="/admin/course/update/:id" element={<Comp.UpdateCourse />} />                    </Routes>
+>>>>>>> Stashed changes:front-end/src/app/App.js
                     <Footer />
                 </div>
         </UserContext.Provider>

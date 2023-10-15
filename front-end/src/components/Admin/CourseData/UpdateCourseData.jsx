@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from "react-router-dom";
 import CourseDataService from "../../../services/Admin/CourseDataService";
 
-function UpdateCourseData(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateCourseData() {
+    const { id } = useParams();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [courseId, setCourseId] = useState(1970);
@@ -11,7 +11,7 @@ function UpdateCourseData(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             CourseDataService.getCourse().then((res) => {
                 let courseData = res.data;
                 setStartDate(courseData.startDate);
@@ -47,7 +47,7 @@ function UpdateCourseData(props) {
     const cancel = () => { nav(`/user/service/course-data/getall`); }
 
     const getTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm môn học</h3>
         else
             return <h3 className="App">Chỉnh sửa môn học</h3>

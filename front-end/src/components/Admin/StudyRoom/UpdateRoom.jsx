@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
 import ScheduleService from "../../../services/Admin/ScheduleService";
 
 function UpdateRoom(props) {
     const [id, setId] = useState(props.match.params.id);
+=======
+import {useNavigate, useParams} from 'react-router-dom';
+import ScheduleService from "../../../services/Admin/ScheduleService";
+
+function UpdateRoom() {
+    const { id } = useParams();
+>>>>>>> Stashed changes
     const [studyRoomName, setStudyRoomName] = useState('');
     const [isAvailable, setIsAvailable] = useState(false);
     const nav = useNavigate();

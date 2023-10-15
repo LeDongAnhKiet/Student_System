@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import TranscriptService from "../../services/TranscriptService";
-import {useNavigate} from "react-router-dom";
+import TranscriptService from "../../services/User/TranscriptService";
+import {useNavigate, useParams} from "react-router-dom";
 
-function AddTranscript(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddTranscript() {
+    const { id } = useParams();
     const [language, setLanguage] = useState('');
     const [phoneContact, setPhoneContact] = useState('');
     const [fromSemester, setFromSemester] = useState(0);
@@ -13,7 +13,7 @@ function AddTranscript(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             TranscriptService.getTranscript(id).then((res) => {
                 let transcript = res.data;
                 setLanguage(transcript.language);
@@ -36,7 +36,7 @@ function AddTranscript(props) {
             isSealed,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             TranscriptService.addTranscript(transcript).then((res) => {
                 nav('/user/service/transcript/add');
             });
@@ -62,7 +62,7 @@ function AddTranscript(props) {
     const cancel = () => { nav(`/user/service/transcript/${id}`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="text-center">Cấp bảng điểm</h3>
         else
             return <h3 className="text-center">Chỉnh sửa bảng điểm</h3>
@@ -104,8 +104,12 @@ function AddTranscript(props) {
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
+<<<<<<< Updated upstream
                                            checked={isSealed} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
+=======
+                                           checked={isSealed} onChange={changeSealedHandler}/>                                    <label className="form-check-label">Đánh dấu</label>
+>>>>>>> Stashed changes
                                 </div>
                                 <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
                                 <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
