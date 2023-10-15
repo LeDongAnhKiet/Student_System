@@ -43,6 +43,7 @@ public class UserController {
     public ResponseEntity<?> getInfo(Authentication authentication){
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserPrincipal u = (UserPrincipal) authentication.getPrincipal();
+
         UserInfoResponse response = userDetailsService.getCurrentUserInfo(u.getUsername());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

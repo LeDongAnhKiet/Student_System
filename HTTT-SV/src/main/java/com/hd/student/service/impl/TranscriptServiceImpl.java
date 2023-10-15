@@ -4,6 +4,7 @@ import com.hd.student.entity.OnlineService;
 import com.hd.student.entity.ServiceCate;
 import com.hd.student.entity.enums.ServiceStatus;
 import com.hd.student.entity.Transcript;
+import com.hd.student.exception.ResourceExistException;
 import com.hd.student.exception.ResourceNotFoundException;
 import com.hd.student.payload.response.ApiResponse;
 import com.hd.student.payload.request.TranscriptRequest;
@@ -35,7 +36,7 @@ public class TranscriptServiceImpl implements TranscriptService {
 
     @Override
     @Transactional
-    public ApiResponse addNewTranscript(TranscriptRequest rq, int userId) {
+    public TranscriptResponse addNewTranscript(TranscriptRequest rq, int userId) {
         try {
             ServiceCate serviceCate = this.serviceCateRepository.findById(1).orElseThrow(
                     ()->new ResourceNotFoundException("Không tìm thấy loại dịch vụ")
@@ -56,8 +57,7 @@ public class TranscriptServiceImpl implements TranscriptService {
 
 
             tr.setOnlineService(onlineService);
-            this.transcriptRepository.save(tr);
-            return new ApiResponse("Success", true);
+            return modelMapper.map(this.transcriptRepository.save(tr), TranscriptResponse.class);
         }catch (RuntimeException ex){
             throw new RuntimeException("Lỗi server");
         }
@@ -74,7 +74,7 @@ public class TranscriptServiceImpl implements TranscriptService {
     }
 
     @Override
-    public ApiResponse updateMyTranscript(TranscriptRequest rq, int id, int userId){
+    public TranscriptResponse updateMyTranscript(TranscriptRequest rq, int id, int userId){
         Transcript tr = this.transcriptRepository.findById(id).orElseThrow(()
                 ->new ResourceNotFoundException("Không tìm thấy yêu cầu cấp bảng điểm"));
         OnlineService on = tr.getOnlineService();
@@ -96,12 +96,12 @@ public class TranscriptServiceImpl implements TranscriptService {
 
                 this.transcriptRepository.save(tr);
 
-                return new ApiResponse("Thành công", true);
+                return modelMapper.map(this.transcriptRepository.save(tr), TranscriptResponse.class);
             }
             else
                 throw new AccessDeniedException("Bạn không có quyền làm điều này");
         }
-        return new ApiResponse("Yêu cầu đã xác nhận hoặc hủy bỏ", true);
+        else throw new ResourceExistException("Yêu cầu đã xác nhận hoặc hủy bỏ");
 
     }
 

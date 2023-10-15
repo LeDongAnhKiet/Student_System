@@ -6,9 +6,9 @@ import com.hd.student.payload.request.StudCertificationRequest;
 import com.hd.student.payload.response.StudCertificationResponse;
 
 public interface StudCertificationService {
-    public ApiResponse addNewStudCertification(StudCertificationRequest rq, int userId);
+    StudCertificationResponse addNewStudCertification(StudCertificationRequest rq, int userId);
 
     StudCertificationResponse findByOnlineServiceId(int id, int userId);
 
-    ApiResponse updateMyCertification(StudCertificationRequest rq, int id, int userId);
+    StudCertificationResponse updateMyCertification(StudCertificationRequest rq, int id, int userId);
 }

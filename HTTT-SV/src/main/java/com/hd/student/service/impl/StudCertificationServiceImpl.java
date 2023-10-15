@@ -4,6 +4,7 @@ import com.hd.student.entity.OnlineService;
 import com.hd.student.entity.ServiceCate;
 import com.hd.student.entity.StudCertification;
 import com.hd.student.entity.enums.ServiceStatus;
+import com.hd.student.exception.ResourceExistException;
 import com.hd.student.exception.ResourceNotFoundException;
 import com.hd.student.payload.response.ApiResponse;
 import com.hd.student.payload.request.StudCertificationRequest;
@@ -33,21 +34,20 @@ public class StudCertificationServiceImpl implements StudCertificationService {
 
     @Override
     @Transactional
-    public ApiResponse addNewStudCertification(StudCertificationRequest rq, int userId) {
+    public StudCertificationResponse addNewStudCertification(StudCertificationRequest rq, int userId) {
         try {
             ServiceCate serviceCate = this.serviceCateRepository.findById(2).orElseThrow(
                     () -> new ResourceNotFoundException("Không tìm thấy loại dịch vụ")
             );
-            StudCertification tr = modelMapper.map(rq, StudCertification.class);
+            StudCertification sc = modelMapper.map(rq, StudCertification.class);
 
             OnlineService onlineService = this.onlineService.addOnlineService(userId, 2
-                    , serviceCate.getPrice() * tr.getEngCopy());
+                    , serviceCate.getPrice() * sc.getEngCopy());
             //chi tinh tien ban english
 
 
-            tr.setOnlineService(onlineService);
-            this.studCertificationRepository.save(tr);
-            return new ApiResponse("Success", true);
+            sc.setOnlineService(onlineService);
+            return modelMapper.map(this.studCertificationRepository.save(sc), StudCertificationResponse.class);
         } catch (RuntimeException ex) {
             throw new RuntimeException("Lỗi server");
         }
@@ -63,7 +63,7 @@ public class StudCertificationServiceImpl implements StudCertificationService {
     }
 
     @Override
-    public ApiResponse updateMyCertification(StudCertificationRequest rq, int id, int userId) {
+    public StudCertificationResponse updateMyCertification(StudCertificationRequest rq, int id, int userId) {
         StudCertification sc = this.studCertificationRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Không tìm thấy yêu cầu cấp"));
         OnlineService on = sc.getOnlineService();
@@ -75,10 +75,10 @@ public class StudCertificationServiceImpl implements StudCertificationService {
 
                 on.setPrice(on.getServiceCate().getPrice() * sc.getEngCopy());
                 sc.setOnlineService(on);
-                this.studCertificationRepository.save(sc);
-                return new ApiResponse("Success", true);
+
+                return modelMapper.map(this.studCertificationRepository.save(sc), StudCertificationResponse.class);
             } else throw new AccessDeniedException("Bạn không có quyền làm điều này");
         }
-        return new ApiResponse("Yêu cầu đã xác nhận hoặc hủy bỏ", true);
+        else throw new ResourceExistException("Yêu cầu đã xác nhận hoặc hủy bỏ");
     }
 }
