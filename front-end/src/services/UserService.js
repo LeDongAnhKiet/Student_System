@@ -1,11 +1,20 @@
 import axios from "axios";
+import cookie from "react-cookies";
 
 const USER_API_BASE_URL = 'http://localhost:8080/api/user';
 const USER_API_SERVICE_URL = 'http://localhost:8080/api/user/service';
 const USER_API_PAYMENT_URL = 'http://localhost:8080/api/user/payment';
 
 class UserService {
-    getUser() { return axios.get(USER_API_BASE_URL + '/info'); }
+
+    getUser() {
+        const config = {
+            headers: {
+                Authorization: 'Bearer ' + cookie.load('token')
+            }
+        };
+
+        return axios.get(USER_API_BASE_URL + '/info', config); }
     getSemester() { return axios.get(USER_API_BASE_URL + '/semester'); }
     getCourse(id) { return axios.get(USER_API_BASE_URL + '/semester/' + id + '/course'); }
 
