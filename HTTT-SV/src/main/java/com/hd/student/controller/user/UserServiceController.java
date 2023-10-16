@@ -50,10 +50,15 @@ public class UserServiceController {
         return new ResponseEntity<>(onlineServiceResponses,HttpStatus.OK);
     }
 
-    @PutMapping("/cancel/{id}")
-    public ResponseEntity<?> cancelMyServiceRequest(Authentication auth, @PathVariable int id){
+//    @PutMapping("/cancel/{id}")
+//    public ResponseEntity<?> cancelMyServiceRequest(Authentication auth, @PathVariable int id){
+//        UserPrincipal u = (UserPrincipal) auth.getPrincipal();
+//        return ResponseEntity.ok().body(this.onlineService.cancelService(id, u.getId()));
+//    }
+    @PutMapping("/cancel/{onlineServiceId}")
+    public ResponseEntity<?> cancelMyRequest(Authentication auth, @PathVariable int onlineServiceId){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        return ResponseEntity.ok().body(this.onlineService.cancelService(id, u.getId()));
+        return new ResponseEntity<>(this.onlineService.cancelService(onlineServiceId,u.getId()), HttpStatus.OK);
     }
 
     //Gui yeu cau bang sao bang tot nghiep
@@ -143,10 +148,5 @@ public class UserServiceController {
         return new ResponseEntity<>(rp, HttpStatus.OK);
     }
 
-    @PutMapping("/cancel/{onlineServiceId}")
-    public ResponseEntity<?> cancelMyRequest(Authentication auth, @PathVariable int onlineServiceId){
-        UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        return new ResponseEntity<>(this.onlineService.cancelService(onlineServiceId,u.getId()), HttpStatus.OK);
-    }
 
 }

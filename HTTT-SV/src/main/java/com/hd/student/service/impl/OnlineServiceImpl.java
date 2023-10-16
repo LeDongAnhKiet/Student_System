@@ -147,9 +147,11 @@ public class OnlineServiceImpl implements IOnlineService {
         OnlineService on = this.onlineServiceRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException("Không tìm thấy yêu cầu")
         );
+        if(on.getStatus().equals(ServiceStatus.ACCEPT))
+            return modelMapper.map(on, OnlineServiceResponse.class);
         Payment payment = this.paymentRepository.findByServiceOnline_Id(id).orElseThrow(()->
                 new ResourceNotFoundException("Bạn chưa thanh toán"));
-        if(!payment.getPaymentStatus().equals(PaymentStatus.PAID)) {
+        if(payment.getPaymentStatus().equals(PaymentStatus.PAID)) {
             on.setStatus(ServiceStatus.ACCEPT);
             this.onlineServiceRepository.save(on);
             modelMapper.typeMap(OnlineService.class, OnlineServiceResponse.class).addMapping(OnlineService

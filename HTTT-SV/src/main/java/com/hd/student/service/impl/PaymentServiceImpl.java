@@ -48,7 +48,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public PaymentResponse createPayment(int onlineServiceId, int userId, String url){
         OnlineService onlineService = this.onlineServiceRepository.findById(onlineServiceId)
-                .orElseThrow(()-> new ResourceNotFoundException("Không tìm thấy yêu cầu, mã yêu cầu" + onlineServiceId));
+                .orElseThrow(()-> new ResourceNotFoundException("Không tìm thấy yêu cầu, mã yêu cầu"
+                        + onlineServiceId));
         if (!onlineService.getStatus().equals(ServiceStatus.PENDING))
             throw new ResourceExistException("Yêu cầu đang được xử lý");
         Optional<Payment> payment = paymentRepository.findByServiceOnline_Id(onlineServiceId);

@@ -40,7 +40,8 @@ public class DiplomaCopyServiceImpl implements DiplomaCopyService {
 
         try {
             ServiceCate serviceCate = this.serviceCateRepository.findById(3).orElseThrow(
-                    ()->new ResourceNotFoundException("Không tìm thấy loại dịch vụ hoặc dịch vụ tạm thời không hoạt động")
+                    ()->new ResourceNotFoundException("Không tìm thấy loại dịch vụ hoặc dịch vụ tạm " +
+                            "thời không hoạt động")
             );
             DiplomaCopy copy = modelMapper.map(rq, DiplomaCopy.class);
             OnlineService onlineService = this.onlineService.addOnlineService(userId,

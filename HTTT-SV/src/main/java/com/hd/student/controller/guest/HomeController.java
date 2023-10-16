@@ -1,9 +1,9 @@
 package com.hd.student.controller.guest;
 
 import com.hd.student.payload.request.ServiceCateRequest;
+import com.hd.student.service.PaymentService;
 import com.hd.student.service.SemesterService;
 import com.hd.student.service.ServiceCateService;
-import com.hd.student.service.impl.SemesterServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 @RequestMapping("/api/guest/")
 @RestController
@@ -21,10 +24,13 @@ public class HomeController {
 
 
 
+
     @Autowired
     private ServiceCateService serviceCateService;
     @Autowired
     private SemesterService semesterService;
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("/service-cate/get")
     public ResponseEntity<?> getAllServiceCate() {
@@ -39,5 +45,6 @@ public class HomeController {
     public ResponseEntity<?> getSemester() {
         return ResponseEntity.ok().body(this.semesterService.getAll());
     }
+
 
 }

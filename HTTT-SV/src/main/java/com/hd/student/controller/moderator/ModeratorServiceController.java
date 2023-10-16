@@ -65,11 +65,6 @@ public class ModeratorServiceController {
         return new ResponseEntity<>(this.onlineService.searchRequest(fromDate, toDate), HttpStatus.OK);
     }
 
-    @PostMapping("/service-cate/add")
-    public ResponseEntity<?> addService(@Valid @RequestBody ServiceCateRequest rq) {
-        return new ResponseEntity<>(this.serviceCateService.addServiceCate(rq), HttpStatus.OK);
-    }
-
     @PutMapping("/service-cate/update/{id}")
     public ResponseEntity<?> updateService(@PathVariable int id, @Valid @RequestBody ServiceCateRequest rq) {
         return new ResponseEntity<>(this.serviceCateService.updateService(rq, id), HttpStatus.OK);

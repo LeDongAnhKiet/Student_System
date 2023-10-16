@@ -37,10 +37,9 @@ public class PaymentController {
         return ResponseEntity.ok(rp);
 
     }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/payment-status")
     public ResponseEntity<?> getPaymentInfo(
-            Authentication auth,
             @RequestParam(value = "vnp_Amount", required = false) String amount,
             @RequestParam(value = "vnp_OrderInfo", required = false) String title,
             @RequestParam(value = "vnp_TxnRef", required = false) String IdRef,

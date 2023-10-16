@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@Tag(name = "10. Quản lý học kỳ", description = "Quản lý học kỳ của admin")
+@Tag(name = "09. Quản lý học kỳ", description = "Quản lý học kỳ của admin")
 @RequestMapping("/api/admin/")
 public class AdminSemesterController {
 

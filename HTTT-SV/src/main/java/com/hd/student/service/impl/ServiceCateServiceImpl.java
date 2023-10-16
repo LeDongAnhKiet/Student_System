@@ -40,13 +40,6 @@ public class ServiceCateServiceImpl implements ServiceCateService {
     }
 
     @Override
-    public ApiResponse addServiceCate(ServiceCateRequest rq) {
-        ServiceCate sc = modelMapper.map(rq, ServiceCate.class);
-        this.serviceCateRepository.save(sc);
-        return new ApiResponse("success", true);
-    }
-
-    @Override
     public ApiResponse updateService(ServiceCateRequest rq, int id) {
 //        ServiceCate sc = serviceCateRepository.findById(id).orElseThrow(
 //                () -> new ResourceNotFoundException("Không tìm thấy dịch vụ", "id", id)

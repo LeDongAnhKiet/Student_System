@@ -21,6 +21,5 @@ public class CourseDataResponse {
 
     private CourseResponse course;
     private LectureResponse lecture;
-    private Set<ScheduleInfoResponse> scheduleInfos;
 
 }
