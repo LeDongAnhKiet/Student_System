@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import CourseDataService from "../../../services/Admin/CourseDataService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 
-function AddRoom(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddRoom() {
+    const { id } = useParams();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [courseId, setCourseId] = useState(1970);
@@ -12,7 +12,7 @@ function AddRoom(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             CourseDataService.getCourse(id).then((res) => {
                 let courseData = res.data;
                 setStartDate(courseData.startDate);
@@ -31,7 +31,7 @@ function AddRoom(props) {
             lectureId,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             CourseDataService.addCourse(courseData).then(() => {
                 nav('/admin/course-data/add');
             });
@@ -53,7 +53,7 @@ function AddRoom(props) {
     const cancel = () => { nav(`/user/service/course-data/getall`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm môn học</h3>
         else
             return <h3 className="App">Chỉnh sửa môn học</h3>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import DiplomaService from '../../services/DiplomaService';
-import { useNavigate } from 'react-router-dom';
+import DiplomaService from '../../services/User/DiplomaService';
+import {useNavigate, useParams} from 'react-router-dom';
 
-function UpdateDiploma(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateDiploma() {
+    const { id } = useParams();
     const [copy, setCopy] = useState(0);
     const [phoneContact, setPhoneContact] = useState('');
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ function UpdateDiploma(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             DiplomaService.getDiploma(id).then((res) => {
                 let diploma = res.data;
                 // Set cac gia tri cho diploma
@@ -63,7 +63,7 @@ function UpdateDiploma(props) {
     const cancel = () => { nav(`/user/service/diploma/${id}`); }
 
     const getTitle = () => {
-        if (id === '_add') return <h3 className="text-center">Thêm bằng cấp</h3>;
+        if (id === 'add') return <h3 className="text-center">Thêm bằng cấp</h3>;
         else return <h3 className="text-center">Chỉnh sửa bằng cấp</h3>;
     };
 

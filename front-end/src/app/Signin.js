@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import logo from '../styles/ou.png';
 import {useNavigate} from 'react-router-dom';
-import {UserContext} from "../layouts/App";
+import {UserContext} from "./App";
 import {Form, Input, Label} from "reactstrap";
-import AuthService, {auth, endpoints} from "../services/AuthService";
+import AuthService, {auth, endpoints} from "../services/Guest/AuthService";
 import cookie from "react-cookies";
 
 function Signin() {

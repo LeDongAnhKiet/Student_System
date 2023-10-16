@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import UserService from "../../services/UserService";
+import UserService from "../../services/User/UserService";
 
 function SemesterList() {
     const [semesters, setSemesters] = useState([]);
@@ -17,7 +17,7 @@ function SemesterList() {
     const goBack = () => { nav(-1); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Xem thời khóa biểu</h3>
                 <div className="row">
@@ -31,8 +31,8 @@ function SemesterList() {
                         { semesters.map( semester => (
                             <tr key={semester.id}>
                                 <td>{semester.semesterName}</td>
-                                <td>{semester.status}</td>
-                                <td>
+                                <td>{semester.status ? 'Còn hoạt động' : 'Đã kết thúc'}</td>
+                                <td className='text-center'>
                                     <button className="btn-primary btn m-1"
                                             onClick={() => viewSemester(semester.id)}>Xem
                                     </button>

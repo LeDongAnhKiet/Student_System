@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import TranscriptService from "../../services/TranscriptService";
-import {useNavigate} from "react-router-dom";
+import TranscriptService from "../../services/User/TranscriptService";
+import {useNavigate, useParams} from "react-router-dom";
 
-function UpdateTranscript(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateTranscript() {
+    const { id } = useParams();
     const [language, setLanguage] = useState('');
     const [phoneContact, setPhoneContact] = useState('');
     const [fromSemester, setFromSemester] = useState(0);
@@ -13,7 +13,7 @@ function UpdateTranscript(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             TranscriptService.getTranscript(id).then((res) => {
                 let transcript = res.data;
                 setLanguage(transcript.language);
@@ -56,7 +56,7 @@ function UpdateTranscript(props) {
     const cancel = () => { nav(`/user/service/transcript/${id}`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="text-center">Cấp bảng điểm</h3>
         else
             return <h3 className="text-center">Chỉnh sửa bảng điểm</h3>

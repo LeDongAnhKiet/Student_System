@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import CourseService from "../../../services/Admin/CourseService";
 
-function UpdateCourse(props) {
-    const [id, setId] = useState(props.match.params.id);
-    const [courseName, setCourseName] = useState('');
+function UpdateCourse() {
+    const { id } = useParams();    const [courseName, setCourseName] = useState('');
     const [creditsNum, setCreditsNum] = useState(0);
     const [note, setNote] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             CourseService.getCourse().then((res) => {
                 let course = res.data;
                 setCourseName(course.courseName);
@@ -42,7 +41,7 @@ function UpdateCourse(props) {
     const cancel = () => { nav(`/user/service/course/getall`); }
 
     const getTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm môn học</h3>
         else
             return <h3 className="App">Chỉnh sửa môn học</h3>

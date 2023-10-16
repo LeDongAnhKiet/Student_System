@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Container, Table } from 'reactstrap';
-import UserService from "../../services/UserService";
+import UserService from "../../services/User/UserService";
 
 class UserCourseList extends Component {
     constructor(props) {

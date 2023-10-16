@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import SemesterService from "../../../services/Admin/SemesterService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 
-function AddSemester(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddSemester() {
+    const { id } = useParams();
     const [semesterName, setSemesterName] = useState('');
     const [note, setNote] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             SemesterService.getAvailableSemester().then((res) => {
                 let semester = res.data;
                 setSemesterName(semester.semesterName);
@@ -25,7 +25,7 @@ function AddSemester(props) {
             note,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             SemesterService.addSemester(semester).then(() => {
                 nav('/admin/semester/add');
             });
@@ -43,7 +43,7 @@ function AddSemester(props) {
     const cancel = () => { nav(`/user/service/semester/getavailable`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm học kỳ</h3>
         else
             return <h3 className="App">Chỉnh sửa học kỳ</h3>

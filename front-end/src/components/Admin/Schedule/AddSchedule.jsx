@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import ScheduleService from "../../../services/Admin/ScheduleService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 
-function AddSchedule(props) {
-    const [id, setId] = useState(props.match.params.id);
+function AddSchedule() {
+    const { id } = useParams();
     const [weekdays, setWeekdays] = useState('');
     const [startAt, setStartAt] = useState(0);
     const [endAt, setEndAt] = useState(0);
@@ -12,7 +12,7 @@ function AddSchedule(props) {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             ScheduleService.getSchedule().then((res) => {
                 let schedule = res.data;
                 setWeekdays(schedule.weekdays);
@@ -31,7 +31,7 @@ function AddSchedule(props) {
             studyRoom,
         };
 
-        if (id === '_add') {
+        if (id === 'add') {
             ScheduleService.addSchedule(schedule).then(() => {
                 nav('/admin/schedule-info/add');
             });
@@ -53,7 +53,7 @@ function AddSchedule(props) {
     const cancel = () => { nav(`/user/service/schedule-info/getall`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="App">Thêm thời khóa biểu</h3>
         else
             return <h3 className="App">Chỉnh sửa thời biểu</h3>

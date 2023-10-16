@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import TranscriptService from "../../services/TranscriptService";
+import TranscriptService from "../../services/User/TranscriptService";
 
 function TranscriptList() {
     const [transcripts, setTranscripts] = useState([]);
@@ -20,7 +20,7 @@ function TranscriptList() {
     const updateTranscript = (id) => { nav(`/user/service/transcript/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Bảng điểm sinh viên</h3>
                 <div className="row">
@@ -42,8 +42,8 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
-                                <td>{transcript.isSealed}</td>
-                                <td>
+                                <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                             onClick={updateTranscript}>Sửa bảng điểm
                                     </button>

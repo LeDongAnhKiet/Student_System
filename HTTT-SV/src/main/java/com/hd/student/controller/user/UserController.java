@@ -48,7 +48,7 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //Lay thogn tin hoc ky theo user dang nhap
+    //Lay thong tin hoc ky theo user dang nhap
     //Cho biet thong tin hoc ky: bi khoa, khong bi khoa
     @GetMapping("/semester")
     public ResponseEntity<?> getSemester(Authentication auth){

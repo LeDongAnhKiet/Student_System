@@ -24,7 +24,7 @@ function SemesterList() {
     const updateSemester = (id) => { nav(`/admin/semester/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách các học kỳ</h3>
                 <div className="row">
@@ -39,11 +39,11 @@ function SemesterList() {
                             <tr key={semester.id}>
                                 <td>{semester.semesterName}</td>
                                 <td>{semester.note}</td>
-                                <td className="btn-group">
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                             onClick={() => {updateSemester(semester.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-danger btn m-1"
                                             onClick={() => {deleteSemester(semester.id)}}>Xóa
                                     </button>
                                 </td>

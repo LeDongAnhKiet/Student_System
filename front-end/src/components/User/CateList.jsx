@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'reactstrap';
-import CateService from '../../services/HomeService';
+import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function CateList() {
@@ -21,8 +21,12 @@ function CateList() {
             });
     }, [id]);
 
+    const addCate = () => { nav('/user/service/add'); }
+    const getCate = () => { nav('/user/service/add'); }
+    const getRequest = () => { nav('/user/service/my-request'); }
+
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className="App">Đăng ký dịch vụ</h3>
                 <div className="row">
@@ -33,6 +37,7 @@ function CateList() {
                             <th>Đơn giá</th>
                             <th>Trạng thái</th>
                             <th>Nội dung</th>
+                            <th>Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,12 +45,25 @@ function CateList() {
                             <tr key={cate.id}>
                                 <td>{cate.serviceCateName}</td>
                                 <td>{cate.price}</td>
-                                <td>{cate.isAvailable}</td>
+                                <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
                                 <td>{cate.description}</td>
+                                <td className="text-center">
+                                    <button className="btn-info btn m-1"
+                                            onClick={() => {getCate(cate.id)}}>Xem
+                                    </button>
+                                    <button className="btn-primary btn m-1"
+                                            onClick={() => {addCate(cate.id)}}>Đăng ký
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                         </tbody>
                     </Table>
+                </div>
+                <div className="col-3 float-end row">
+                    <button className="btn-info btn m-1"
+                            onClick={getRequest}>Lịch sử đăng ký
+                    </button>
                 </div>
             </Container>
         </div>

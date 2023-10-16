@@ -1,7 +1,7 @@
 import {Button, Container} from "reactstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import UserService from "../services/UserService";
+import UserService from "../services/User/UserService";
 
 const Home = () => {
     const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 {loading ? (
                     <p className="display-6 m-2">Loading...</p>

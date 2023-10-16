@@ -26,7 +26,7 @@ function ScheduleList() {
 
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Thời khóa biểu</h3>
                 <div className="row">

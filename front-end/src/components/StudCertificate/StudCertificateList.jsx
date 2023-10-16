@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import StudCertificateService from "../../services/StudCertificateService";
+import StudCertificateService from "../../services/User/StudCertificateService";
 import {useNavigate} from "react-router-dom";
 
 function StudCertificateList() {
@@ -20,7 +20,7 @@ function StudCertificateList() {
     const updateStudCertificate = (id) => { nav(`/user/service/stud-cert/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Chứng nhận sinh viên</h3>
                 <div className="row">

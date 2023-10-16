@@ -14,7 +14,7 @@ function RoomList() {
     }, []);
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách các khoa</h3>
                 <div className="row">

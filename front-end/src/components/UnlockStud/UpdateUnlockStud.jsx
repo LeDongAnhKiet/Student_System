@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import UnlockStudService from "../../services/UnlockStudService";
-import {useNavigate} from "react-router-dom";
+import UnlockStudService from "../../services/User/UnlockStudService";
+import {useNavigate, useParams} from "react-router-dom";
 
-function UpdateUnlockStud(props) {
-    const [id, setId] = useState(props.match.params.id);
+function UpdateUnlockStud() {
+    const { id } = useParams();
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== '_add')
+        if (id !== 'add')
             UnlockStudService.getUnlockStud(id).then((res) => {
                 let unlockStud = res.data;
                 setImage(unlockStud.image);
@@ -35,7 +35,7 @@ function UpdateUnlockStud(props) {
     const cancel = () => { nav(`/user/service/unlock-stud/${id}`); }
 
     const setTitle = () => {
-        if (id === '_add')
+        if (id === 'add')
             return <h3 className="text-center">Mở khóa</h3>
         else
             return <h3 className="text-center">Chỉnh sửa khóa</h3>

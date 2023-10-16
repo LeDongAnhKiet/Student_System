@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
 import {useNavigate} from "react-router-dom";
-import UnlockStudService from "../../services/UnlockStudService";
+import UnlockStudService from "../../services/User/UnlockStudService";
 
 function UnlockStudList() {
     const [unlockStuds, setUnlockStuds] = useState([]);
@@ -20,7 +20,7 @@ function UnlockStudList() {
     const updateUnlockStud = (id) => { nav(`/user/service/unlock-stud/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Mở khóa sinh viên</h3>
                 <div className="row">
@@ -35,7 +35,7 @@ function UnlockStudList() {
                             <tr key={unlockStud.id}>
                                 <td>{unlockStud.content}</td>
                                 <td>{unlockStud.image}</td>
-                                <td>
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                             onClick={updateUnlockStud}>Sửa mở khóa
                                     </button>
