@@ -20,7 +20,7 @@ function DiplomaList() {
     const updateDiploma = (id) => { nav(`/user/service/diploma/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Cấp bằng tốt nghiệp</h3>
                 <div className="row">
@@ -43,7 +43,7 @@ function DiplomaList() {
                                 <td>{diploma.diplomaYear}</td>
                                 <td>{diploma.diplomaCode}</td>
                                 <td>{diploma.onlineService.createdDate}</td>
-                                <td>
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                         onClick={updateDiploma}>Sửa bằng cấp
                                     </button>

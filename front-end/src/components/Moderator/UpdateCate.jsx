@@ -1,70 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import DiplomaService from '../../services/User/DiplomaService';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from 'react-router-dom';
+import HomeService from "../../services/Guest/HomeService";
+import ModerateService from "../../services/Mod/ModerateService";
 
 function UpdateCate() {
     const { id } = useParams();
-    const [copy, setCopy] = useState(0);
-    const [phoneContact, setPhoneContact] = useState('');
-    const [email, setEmail] = useState('');
-    const [diplomaYear, setDiplomaYear] = useState(1970);
-    const [diplomaCode, setDiplomaCode] = useState('');
+    const [serviceCateName, setServiceCateName] = useState(0);
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState('');
+    const [isAvailable, setIsAvailable] = useState(false);
+    const [numOfDate, setNumOfDate] = useState(0);
     const nav = useNavigate();
 
     useEffect(() => {
         if (id !== 'add')
-            DiplomaService.getDiploma(id).then((res) => {
-                let diploma = res.data;
-                // Set cac gia tri cho diploma
-                setCopy(diploma.copy);
-                setPhoneContact(diploma.phoneContact);
-                setEmail(diploma.email);
-                setDiplomaYear(diploma.diplomaYear);
-                setDiplomaCode(diploma.diplomaCode);
-            });
+            HomeService.getCate(id).then((res) => {
+                let cate = res.data;
+                // set state cho cate
+                setServiceCateName(cate.serviceCateName);
+                setPrice(cate.price);
+                setDescription(cate.description);
+                setIsAvailable(cate.isAvailable);
+                setNumOfDate(cate.numOfDate);
+            })
     }, [id]);
 
-    const updateDiploma = (e) => {
+    const saveOrUpdateModerate = (e) => {
         e.preventDefault();
-        // tao doi tuong tu cac gia tri
-        const diploma = {
-            copy,
-            phoneContact,
-            email,
-            diplomaYear,
-            diplomaCode,
+        const cate = {
+            serviceCateName,
+            price,
+            description,
+            isAvailable,
+            numOfDate,
         };
 
-        DiplomaService.updateDiploma(diploma, id).then((res) => {
-            nav(`/user/service/diploma/${id}`);
+        ModerateService.updateCate(cate, id).then(() => {
+            nav(`/moderator/service-cate/update/${id}`);
         });
-    };
+    }
+const changeServiceCateNameHandler = (e) => { setServiceCateName(e.target.value); }
 
-    const changeCopyHandler = (event) => {
-        setCopy(event.target.value);
-    };
+const changePriceHandler = (e) => { setPrice(e.target.value); }
 
-    const changePhoneHandler = (event) => {
-        setPhoneContact(event.target.value);
-    };
+const changeDescriptionHandler = (e) => { setDescription(e.target.value); }
 
-    const changeEmailHandler = (event) => {
-        setEmail(event.target.value);
-    };
+const changeIsAvailableHandler = (e) => { setIsAvailable(e.target.value); }
 
-    const changeYearHandler = (event) => {
-        setDiplomaYear(event.target.value);
-    };
+const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
 
-    const changeCodeHandler = (event) => {
-        setDiplomaCode(event.target.value);
-    };
-
-    const cancel = () => { nav(`/user/service/diploma/${id}`); }
+    const cancel = () => { nav(-1); }
 
     const getTitle = () => {
-        if (id === 'add') return <h3 className="text-center">Thêm bằng cấp</h3>;
-        else return <h3 className="text-center">Chỉnh sửa bằng cấp</h3>;
+        if (id === 'add')
+            return <h3 className="text-center">Thêm dịch vụ</h3>
+        else
+            return <h3 className="text-center">Chỉnh sửa dịch vụ</h3>
     };
 
     return (
@@ -74,42 +65,42 @@ function UpdateCate() {
                 <div className="row">
                     <div className="card col-md-6 offset-md-5">
                         { getTitle }
-                        <div className="card-body">
+                        <div className = "card-body">
                             <form>
-                                <div className="form-group">
-                                    <label>Số lượng bản sao: </label>
-                                    <input placeholder="Copy" name="copy" className="form-control"
-                                           value={copy} onChange={changeCopyHandler} />
+                                <div className = "form-group">
+                                    <label>Tên dịch vụ: </label>
+                                    <input placeholder="dịch vụ muốn đăng ký..." name="serviceCateName" className="form-control"
+                                           value={serviceCateName} onChange={changeServiceCateNameHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Số điện thoại: </label>
-                                    <input placeholder="Phone Contact" name="phoneContact" className="form-control"
-                                        value={phoneContact} onChange={changePhoneHandler} />
+                                <div className = "form-group">
+                                    <label>Thành tiền: </label>
+                                    <input placeholder="giá tiền..." name="price" className="form-control"
+                                           value={price} onChange={changePriceHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Email: </label>
-                                    <input placeholder="Email Address" name="email" className="form-control"
-                                        value={email} onChange={changeEmailHandler} />
+                                <div className = "form-group">
+                                    <label>Nội dung: </label>
+                                    <input placeholder="nội dung..." name="description" className="form-control"
+                                           value={description} onChange={changeDescriptionHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Năm tốt nghiệp: </label>
-                                    <input placeholder="Year" name="year" className="form-control"
-                                        value={diplomaYear} onChange={changeYearHandler} />
+                                <div className = "form-group">
+                                    <label>Còn mở </label>
+                                    <input className="form-check-input" type="checkbox"
+                                           checked={isAvailable} onChange={changeIsAvailableHandler}/>
                                 </div>
-                                <div className="form-group">
-                                    <label>Mã bằng: </label>
-                                    <input placeholder="Code" name="code" className="form-control"
-                                        value={diplomaCode} onChange={changeCodeHandler} />
+                                <div className = "form-group">
+                                    <label>Thời gian cấp: </label>
+                                    <input placeholder="số ngày..." name="numDates" className="form-control"
+                                           value={numOfDate} onChange={changeDateHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={updateDiploma} >Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel} >Hủy</button>
+                                <button className="btn btn-primary m-1" onClick={saveOrUpdateModerate}>Lưu</button>
+                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default UpdateCate;

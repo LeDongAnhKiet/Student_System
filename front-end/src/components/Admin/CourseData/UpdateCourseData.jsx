@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from 'react-router-dom';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 
 function UpdateCourseData() {
-    const { id } = useParams();
-    const [startDate, setStartDate] = useState('');
+    const { id } = useParams();    const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [courseId, setCourseId] = useState(1970);
     const [lectureId, setLectureId] = useState('');

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from 'react-router-dom';
 import CourseService from "../../../services/Admin/CourseService";
 
 function UpdateCourse() {
-    const { id } = useParams();
-    const [courseName, setCourseName] = useState('');
+    const { id } = useParams();    const [courseName, setCourseName] = useState('');
     const [creditsNum, setCreditsNum] = useState(0);
     const [note, setNote] = useState('');
     const nav = useNavigate();

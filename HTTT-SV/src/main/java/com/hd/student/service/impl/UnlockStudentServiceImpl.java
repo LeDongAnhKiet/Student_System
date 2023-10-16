@@ -4,6 +4,7 @@ import com.hd.student.entity.OnlineService;
 import com.hd.student.entity.ServiceCate;
 import com.hd.student.entity.UnlockStudent;
 import com.hd.student.entity.enums.ServiceStatus;
+import com.hd.student.exception.ResourceExistException;
 import com.hd.student.exception.ResourceNotFoundException;
 import com.hd.student.payload.request.UnlockStudentRequest;
 import com.hd.student.payload.response.ApiResponse;
@@ -38,19 +39,18 @@ public class UnlockStudentServiceImpl implements UnlockStudentService {
 
     @Override
     @Transactional
-    public ApiResponse addNewUnlockStudent(UnlockStudentRequest rq, int userId) {
+    public UnlockStudentResponse addNewUnlockStudent(UnlockStudentRequest rq, int userId) {
         try {
             ServiceCate serviceCate = this.serviceCateRepository.findById(5).orElseThrow(
                     ()->new ResourceNotFoundException("Không tìm thấy loại dịch vụ")
             );
-        UnlockStudent us = modelMapper.map(rq, UnlockStudent.class);
+            UnlockStudent us = modelMapper.map(rq, UnlockStudent.class);
 
-        OnlineService onlineService = this.onlineService.addOnlineService(userId,5, serviceCate.getPrice());
-        us.setOnlineService(onlineService);
+            OnlineService onlineService = this.onlineService.addOnlineService(userId,5, serviceCate.getPrice());
+            us.setOnlineService(onlineService);
 
-        this.unlockStudentRepository.save(us);
 
-        return new ApiResponse("Success", true);
+            return modelMapper.map(this.unlockStudentRepository.save(us), UnlockStudentResponse.class);
         }catch (RuntimeException ex){
             throw new RuntimeException("Lỗi server");
         }
@@ -66,7 +66,7 @@ public class UnlockStudentServiceImpl implements UnlockStudentService {
     }
 
     @Override
-    public ApiResponse updateUnlockStudent(UnlockStudentRequest rq, int id, int userId) {
+    public UnlockStudentResponse updateUnlockStudent(UnlockStudentRequest rq, int id, int userId) {
         UnlockStudent us = this.unlockStudentRepository.findById(id).orElseThrow(()
                 ->new ResourceNotFoundException("Không tìm thấy yêu cầu cấp"));
 
@@ -79,11 +79,11 @@ public class UnlockStudentServiceImpl implements UnlockStudentService {
                 this.onlineServiceRepository.save(on);
                 us.setId(id);
                 us.setOnlineService(on);
-                this.unlockStudentRepository.save(us);
-                return new ApiResponse("Success", true);
+
+                return modelMapper.map(this.unlockStudentRepository.save(us), UnlockStudentResponse.class);
             }
             else throw new AccessDeniedException("Bạn không có quyền làm điều này");
         }
-        return new ApiResponse("Yêu cầu đã xác nhận hoặc hủy bỏ", true);
+        else throw new ResourceExistException("Yêu cầu đã xác nhận hoặc hủy bỏ");
     }
 }

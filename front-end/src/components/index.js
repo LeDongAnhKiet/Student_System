@@ -41,3 +41,7 @@ export { default as SemesterList } from './Admin/Semester/SemesterList';
 export { default as AddRoom } from './Admin/StudyRoom/AddRoom';
 export { default as UpdateRoom } from './Admin/StudyRoom/UpdateRoom';
 export { default as RoomList } from './Admin/StudyRoom/RoomList';
+
+export { default as AddCate } from './Moderator/AddCate';
+export { default as UpdateCate } from './Moderator/UpdateCate';
+export { default as ChangeCate } from './Moderator/ChangeCate';

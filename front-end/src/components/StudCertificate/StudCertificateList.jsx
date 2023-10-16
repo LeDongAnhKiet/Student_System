@@ -20,7 +20,7 @@ function StudCertificateList() {
     const updateStudCertificate = (id) => { nav(`/user/service/stud-cert/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Chứng nhận sinh viên</h3>
                 <div className="row">

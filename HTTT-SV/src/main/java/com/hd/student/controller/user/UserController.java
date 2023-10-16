@@ -18,10 +18,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -40,15 +38,18 @@ public class UserController {
     @Autowired
     private SemesterDetailService semesterDetailService;
 
-    @CrossOrigin
+
     @GetMapping("/info")
-    public ResponseEntity<?> getInfo(Principal user){
-        UserDetails u = this.userDetailsService.loadUserByUsername(user.getName());
+    public ResponseEntity<?> getInfo(Authentication authentication){
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserPrincipal u = (UserPrincipal) authentication.getPrincipal();
+
         UserInfoResponse response = userDetailsService.getCurrentUserInfo(u.getUsername());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
+    //Lay thong tin hoc ky theo user dang nhap
+    //Cho biet thong tin hoc ky: bi khoa, khong bi khoa
     @GetMapping("/semester")
     public ResponseEntity<?> getSemester(Authentication auth){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();

@@ -38,7 +38,7 @@ function RoomList() {
                         { rooms.map( room => (
                             <tr key={room.id}>
                                 <td>{room.studyRoomName}</td>
-                                <td>{room.isAvailable ? 'Trống' : 'Đầy'}</td>
+                                <td>{room.isAvailable ? 'Còn trống' : 'Đã đầy'}</td>
                                 <td className="btn-group">
                                     <button className="btn-success btn m-1"
                                             onClick={() => {updateRoom(room.id)}}>Chỉnh sửa

@@ -18,7 +18,7 @@ export const auth = () => {
     return axios.create({
         baseURL: 'http://localhost:8080',
         headers: {
-            'Authorization': cookie.load('token'),
+            Authorization: 'Bearer ' + cookie.load('token')
         }
     })
 }

@@ -64,10 +64,10 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/**").permitAll()
-//                        .requestMatchers("/api/guest/**").permitAll()
-//                        .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
-//                        .requestMatchers("/api/moderator/**").hasAuthority(Role.MODERATOR.name())
-//                        .requestMatchers("/api/user/**").hasAuthority(Role.USER.name())
+                        .requestMatchers("/api/guest/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasAuthority(Role.ADMIN.name())
+                        .requestMatchers("/api/moderator/**").hasAuthority(Role.MODERATOR.name())
+                        .requestMatchers("/api/user/**").hasAuthority(Role.USER.name())
 
                 );
 

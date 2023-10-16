@@ -1,19 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import CourseService from "../../../services/Admin/CourseService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function CourseList() {
     const [courses, setCourses] = useState([]);
     const nav = useNavigate();
-    const { id } = useParams();
 
     useEffect(() => {
-        if (id)
-            CourseService.getCourseById().then((res) => {
-                setCourses(res.data);
-            });
-        else CourseService.getCourse().then((res) => {
+        CourseService.getCourse().then((res) => {
             setCourses(res.data);
         });
     }, []);
@@ -29,7 +24,7 @@ function CourseList() {
     const updateCourse = (id) => { nav(`/admin/course/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách môn học</h3>
                 <div className="row">
@@ -46,11 +41,11 @@ function CourseList() {
                                 <td>{course.courseName}</td>
                                 <td>{course.creditsNum}</td>
                                 <td>{course.startDate}</td>
-                                <td className="btn-group">
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                             onClick={() => {updateCourse(course.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-danger btn m-1"
                                             onClick={() => {deleteCourse(course.id)}}>Xóa
                                     </button>
                                 </td>

@@ -98,7 +98,7 @@ function UpdateTranscript() {
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-                                           checked={isSealed} onChange={changeSealedHandler}/>
+                                           value={isSealed.toString()} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
                                 </div>
                                 <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>

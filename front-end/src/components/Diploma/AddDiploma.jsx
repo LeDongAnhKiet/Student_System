@@ -12,7 +12,7 @@ function AddDiploma() {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== 'add')
+        if (id !== '_add')
             DiplomaService.getDiploma(id).then((res) => {
                 let diploma = res.data;
                 // set state cho diploma
@@ -35,7 +35,7 @@ function AddDiploma() {
             diplomaCode,
         };
 
-        if (id === 'add') {
+        if (id === '_add') {
             DiplomaService.addDiploma(diploma).then((res) => {
                 nav('/user/service/diploma/add');
             });
@@ -59,7 +59,7 @@ function AddDiploma() {
     const cancel = () => { nav(`/user/service/diploma/${id}`); }
 
     const setTitle = () => {
-        if (id === 'add')
+        if (id === '_add')
             return <h3 className="text-center">Thêm bằng cấp</h3>
         else
             return <h3 className="text-center">Chỉnh sửa bằng cấp</h3>

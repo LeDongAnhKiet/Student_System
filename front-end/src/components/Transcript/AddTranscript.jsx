@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
 import {useNavigate, useParams} from "react-router-dom";
 
-function AddTranscript() {
+function AddTranscript(props) {
     const { id } = useParams();
     const [language, setLanguage] = useState('');
     const [phoneContact, setPhoneContact] = useState('');
@@ -104,7 +104,7 @@ function AddTranscript() {
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-                                           checked={isSealed} onChange={changeSealedHandler}/>
+                                           value={isSealed.toString()} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
                                 </div>
                                 <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>

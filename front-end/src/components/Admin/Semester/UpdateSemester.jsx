@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from 'react-router-dom';
 import SemesterService from "../../../services/Admin/SemesterService";
 
 function UpdateSemester() {

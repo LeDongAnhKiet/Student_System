@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,6 +46,12 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+    @PostMapping(value = "/signout")
+    public ResponseEntity<?> logoutUser() {
+        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(new MessageResponse("You've been signed out!"));
+    }
 
 
     @PostMapping("/signin")
@@ -58,10 +63,10 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UserPrincipal u = (UserPrincipal) authentication.getPrincipal();
-        if(u.getUsername() != null) {
-            String jwtCookie = jwtUtils.generateTokenLogin(u.getEmail());
-            return new ResponseEntity<>(jwtCookie, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+
+        String jwtCookie = jwtUtils.generateJwtToken(authentication);
+
+
+        return ResponseEntity.ok(jwtCookie);
     }
 }

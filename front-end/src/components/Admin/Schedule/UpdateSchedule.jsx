@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from 'react-router-dom';
 import ScheduleService from "../../../services/Admin/ScheduleService";
 
 function UpdateSchedule() {
-    const { id } = useParams();
-    const [weekdays, setWeekdays] = useState('');
+    const { id } = useParams();    const [weekdays, setWeekdays] = useState('');
     const [startAt, setStartAt] = useState(0);
     const [endAt, setEndAt] = useState(0);
     const [studyRoom, setStudyRoom] = useState(0);

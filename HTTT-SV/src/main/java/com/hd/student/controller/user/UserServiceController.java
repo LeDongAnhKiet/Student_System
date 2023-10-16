@@ -27,7 +27,6 @@ import java.util.List;
 @RequestMapping("/api/user/service")
 public class UserServiceController {
 
-
     @Autowired
     private DiplomaCopyService diplomaCopyService;
     @Autowired
@@ -42,7 +41,6 @@ public class UserServiceController {
 
     @Autowired
     private ModelMapper modelMapper;
-
 
     //Lay danh sach thong tin cua service da dang ky
     @GetMapping("/my-request")
@@ -60,17 +58,17 @@ public class UserServiceController {
 
     //Gui yeu cau bang sao bang tot nghiep
     @PostMapping("/diploma/add")
-    public ResponseEntity<ApiResponse> saveDiplomaCopy(Authentication auth, @Valid @RequestBody DiplomaCopyRequest rq){
+    public ResponseEntity<?> saveDiplomaCopy(Authentication auth, @Valid @RequestBody DiplomaCopyRequest rq){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.diplomaCopyService.addNewDiplomaCopy(rq, u.getId());
-        return new ResponseEntity<>(rs,HttpStatus.OK);
+        return new ResponseEntity<>(this.diplomaCopyService.addNewDiplomaCopy(rq, u.getId()),HttpStatus.OK);
     }
+
     //Update yeu cau bang sao bang tot nghiep
     @PutMapping("diploma/update/{id}")
     public ResponseEntity<?> updateDiplomaCopy(Authentication auth, @Valid @RequestBody DiplomaCopyRequest rq, @PathVariable int id){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.diplomaCopyService.updateMyDiplomaCopy(rq, id, u.getId());
-        return new ResponseEntity<>(rs,HttpStatus.OK);
+        return new ResponseEntity<>(this.diplomaCopyService.updateMyDiplomaCopy(rq, id, u.getId())
+                ,HttpStatus.OK);
     }
 
     //Get thong  tin yeu cau
@@ -82,22 +80,20 @@ public class UserServiceController {
         return new ResponseEntity<>(rp, HttpStatus.OK);
     }
 
-
     //Them yeu cau bang diem
     @PostMapping("/transcript/add")
-    public ResponseEntity<ApiResponse> saveTranscript(Authentication auth, @Valid @RequestBody TranscriptRequest rq){
+    public ResponseEntity<?> saveTranscript(Authentication auth, @Valid @RequestBody TranscriptRequest rq){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.transcriptService.addNewTranscript(rq, u.getId());
-        return new ResponseEntity<>(rs,HttpStatus.OK);
+        return new ResponseEntity<>(this.transcriptService.addNewTranscript(rq, u.getId()),HttpStatus.OK);
     }
 
     //update bang diem
     @PutMapping("/transcript/update/{id}")
     public ResponseEntity<?> updateTranscript(Authentication auth, @Valid @RequestBody TranscriptRequest rq, @PathVariable int id) {
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.transcriptService.updateMyTranscript(rq, id, u.getId());
-        return new ResponseEntity<>(rs, HttpStatus.OK);
+        return new ResponseEntity<>( this.transcriptService.updateMyTranscript(rq, id, u.getId()), HttpStatus.OK);
     }
+
     @GetMapping("/transcript/{serviceId}")
     public ResponseEntity<?> getTranscriptByServiceId(Authentication auth, @PathVariable int serviceId){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
@@ -106,20 +102,19 @@ public class UserServiceController {
         return new ResponseEntity<>(rp, HttpStatus.OK);
     }
 
-
-
     @PostMapping("/stud-certification/add")
-    public ResponseEntity<ApiResponse> saveCertification(Authentication auth, @Valid @RequestBody StudCertificationRequest rq){
+    public ResponseEntity<?> saveCertification(Authentication auth, @Valid @RequestBody StudCertificationRequest rq){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.studCertificationService.addNewStudCertification(rq, u.getId());
-        return new ResponseEntity<>(rs,HttpStatus.OK);
+        return new ResponseEntity<>(this.studCertificationService.addNewStudCertification(rq, u.getId())
+                ,HttpStatus.OK);
     }
+
     @PutMapping("/stud-certification/update/{id}")
     public ResponseEntity<?> updateStudCertification(Authentication auth, @Valid @RequestBody StudCertificationRequest rq, @PathVariable int id) {
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.studCertificationService.updateMyCertification(rq, id, u.getId());
-        return new ResponseEntity<>(rs, HttpStatus.OK);
+        return new ResponseEntity<>(this.studCertificationService.updateMyCertification(rq,id, u.getId()), HttpStatus.OK);
     }
+
     @GetMapping("/stud-certification/{serviceId}")
     public ResponseEntity<?> getStudCertificationByServiceId(Authentication auth, @PathVariable int serviceId){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
@@ -129,18 +124,17 @@ public class UserServiceController {
     }
 
     @PostMapping("/unlock-student/add")
-    public ResponseEntity<ApiResponse> saveUnlockStudent(Authentication auth, @Valid @RequestBody UnlockStudentRequest rq){
+    public ResponseEntity<?> saveUnlockStudent(Authentication auth, @Valid @RequestBody UnlockStudentRequest rq){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.unlockStudentService.addNewUnlockStudent(rq, u.getId());
-        return new ResponseEntity<>(rs, HttpStatus.OK);
+        return new ResponseEntity<>(this.unlockStudentService.addNewUnlockStudent(rq, u.getId()), HttpStatus.OK);
     }
 
     @PutMapping("/unlock/update/{id}")
     public ResponseEntity<?> updateUnlockStudent(Authentication auth,@Valid @RequestBody UnlockStudentRequest rq, @PathVariable int id) {
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        ApiResponse rs = this.unlockStudentService.updateUnlockStudent(rq, id, u.getId());
-        return new ResponseEntity<>(rs, HttpStatus.OK);
+        return new ResponseEntity<>(this.unlockStudentService.updateUnlockStudent(rq, id, u.getId()), HttpStatus.OK);
     }
+
     @GetMapping("/unlock-student/{serviceId}")
     public ResponseEntity<?> getUnlockStudentByServiceId(Authentication auth, @PathVariable int serviceId){
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();

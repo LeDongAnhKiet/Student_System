@@ -5,6 +5,7 @@ import com.hd.student.entity.OnlineService;
 import com.hd.student.entity.ServiceCate;
 import com.hd.student.entity.enums.ServiceStatus;
 import com.hd.student.exception.AccessDeniedException;
+import com.hd.student.exception.ResourceExistException;
 import com.hd.student.exception.ResourceNotFoundException;
 import com.hd.student.payload.response.ApiResponse;
 import com.hd.student.payload.request.DiplomaCopyRequest;
@@ -35,7 +36,7 @@ public class DiplomaCopyServiceImpl implements DiplomaCopyService {
 
     @Override
     @Transactional
-    public ApiResponse addNewDiplomaCopy(DiplomaCopyRequest rq, int userId) {
+    public DiplomaCopyResponse addNewDiplomaCopy(DiplomaCopyRequest rq, int userId) {
 
         try {
             ServiceCate serviceCate = this.serviceCateRepository.findById(3).orElseThrow(
@@ -46,9 +47,8 @@ public class DiplomaCopyServiceImpl implements DiplomaCopyService {
                     3, serviceCate.getPrice()* copy.getCopy());
 
             copy.setOnlineService(onlineService);
-            this.diplomaCopyRepository.save(copy);
 
-            return new ApiResponse("Success", true);
+            return modelMapper.map(this.diplomaCopyRepository.save(copy), DiplomaCopyResponse.class);
         }catch (RuntimeException ex){
             throw new RuntimeException("Lỗi server");
         }
@@ -65,7 +65,7 @@ public class DiplomaCopyServiceImpl implements DiplomaCopyService {
     }
 
     @Override
-    public ApiResponse updateMyDiplomaCopy(DiplomaCopyRequest rq,int id, int userId) {
+    public DiplomaCopyResponse updateMyDiplomaCopy(DiplomaCopyRequest rq,int id, int userId) {
         DiplomaCopy copy = this.diplomaCopyRepository.findById(id).orElseThrow(
                 ()->new ResourceNotFoundException("Không tìm thấy yêu cầu"));
         OnlineService on = copy.getOnlineService();
@@ -76,13 +76,12 @@ public class DiplomaCopyServiceImpl implements DiplomaCopyService {
 
                 copy.setId(id);
                 copy.setOnlineService(on);
-                this.diplomaCopyRepository.save(copy);
-                return new ApiResponse("Success", true);
+                return modelMapper.map(this.diplomaCopyRepository.save(copy), DiplomaCopyResponse.class);
             }
             else
                 throw new AccessDeniedException("Bạn không có quyền truy cập tài nguyên này");
         }
         else
-            return new ApiResponse("Không thể sửa yêu cầu", true);
+            throw new ResourceExistException("Yêu cầu đã xác nhận hoặc hủy bỏ");
     }
 }

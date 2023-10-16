@@ -19,7 +19,7 @@ function StudentList() {
     }, [id]);
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Thông tin sinh viên</h3>
                 <div className="row">

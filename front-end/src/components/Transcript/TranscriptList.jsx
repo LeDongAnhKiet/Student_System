@@ -20,7 +20,7 @@ function TranscriptList() {
     const updateTranscript = (id) => { nav(`/user/service/transcript/update/${id}`); }
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Bảng điểm sinh viên</h3>
                 <div className="row">
@@ -43,7 +43,7 @@ function TranscriptList() {
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
                                 <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
-                                <td>
+                                <td className="text-center">
                                     <button className="btn-success btn m-1"
                                             onClick={updateTranscript}>Sửa bảng điểm
                                     </button>

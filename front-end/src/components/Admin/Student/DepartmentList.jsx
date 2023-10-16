@@ -1,25 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import DepartmentService from "../../../services/Admin/StudentService";
-import {useNavigate, useParams} from "react-router-dom";
+import StudentService from "../../../services/Admin/StudentService";
+import {useNavigate} from "react-router-dom";
 
 function DepartmentList() {
     const [departments, setDepartments] = useState([]);
     const nav = useNavigate();
-    const { id } = useParams();
 
     useEffect(() => {
-        if (id)
-            DepartmentService.getDepartmentById().then((res) => {
-                setDepartments(res.data);
-            });
-        else DepartmentService.getDepartment().then((res) => {
+        StudentService.getDepartment().then((res) => {
             setDepartments(res.data);
         });
     }, []);
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách các khoa</h3>
                 <div className="row">
@@ -30,16 +25,26 @@ function DepartmentList() {
                             <th>Ghi chú</th>
                         </tr></thead>
                         <tbody>
-                        { departments.map( department => (
-                            <tr key={department.id}>
-                                <td>{department.departmentName}</td>
-                                <td>{department.description}</td>
-                                <td>{department.majors.map(major => (
-                                    <tr key={major.id}>
-                                        <td>{major.majorName}</td>
-                                    </tr>
-                                ))}</td>
-                            </tr>
+                        {departments.map((department) => (
+                            <>
+                                <tr key={department.id}>
+                                    <td rowSpan={department.majors ? department.majors.length + 1 : 1}>
+                                        {department.departmentName}
+                                    </td>
+                                    {department.majors && department.majors.length > 0 ? (
+                                        <td>{department.majors[0].majorName}</td>
+                                    ) : (
+                                        <td></td>
+                                    )}
+                                    <td>{department.description}</td>
+                                </tr>
+                                {department.majors &&
+                                    department.majors.slice(1).map((major) => (
+                                        <tr key={major.id}>
+                                            <td>{major.majorName}</td>
+                                        </tr>
+                                    ))}
+                            </>
                         ))}
                         </tbody>
                     </Table>

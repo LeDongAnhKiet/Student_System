@@ -1,7 +1,6 @@
 import {Button, Container} from "reactstrap";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import cookie from "react-cookies";
 import UserService from "../services/User/UserService";
 
 const Home = () => {
@@ -16,41 +15,25 @@ const Home = () => {
         department_name: ''
     });
     const nav = useNavigate();
-    const signout = () => {setUser({'type': 'signout'})}
+    const signout = () => {
+        setUser({'type': 'signout'});
+        nav('/');
+    }
 
     useEffect( () => {
         const getUser = async () => {
             try {
                 setLoading(true);
-
-                // Đọc token từ cookie
-                const token = cookie.load("user");
-
-                if (!token) {
-                    throw new Error("Token not found");
-                }
-
-                // Thiết lập header Authorization
-                const config = {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                };
-
-                const res = await UserService.getUser(config); // Gửi yêu cầu với header Authorization
-                setUser(res.data);
-            } catch (error) {
-                console.error('Lỗi lấy dữ liệu: ', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
+                const res = await UserService.getUser()
+                setUser(res.data)
+            } catch(error) { console.error('Lỗi lấy data: ', error); }
+            finally { setLoading(false); }
+        }
         getUser().then();
     }, []);
 
     return (
-        <div>
+        <div className='mb-5'>
             <Container fluid>
                 {loading ? (
                     <p className="display-6 m-2">Loading...</p>
