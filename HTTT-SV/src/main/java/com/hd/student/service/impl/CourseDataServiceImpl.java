@@ -3,7 +3,6 @@ package com.hd.student.service.impl;
 import com.hd.student.entity.Course;
 import com.hd.student.entity.CourseData;
 import com.hd.student.entity.Lecture;
-import com.hd.student.entity.ScheduleInfo;
 import com.hd.student.exception.ForeignKeyViolationException;
 import com.hd.student.exception.ResourceExistException;
 import com.hd.student.exception.ResourceNotFoundException;
@@ -13,7 +12,6 @@ import com.hd.student.payload.response.CourseDataResponse;
 import com.hd.student.repository.CourseDataRepository;
 import com.hd.student.repository.CourseRepository;
 import com.hd.student.repository.LectureRepository;
-import com.hd.student.repository.ScheduleInfoRepository;
 import com.hd.student.service.CourseDataService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -37,8 +35,6 @@ public class CourseDataServiceImpl implements CourseDataService {
     private CourseRepository courseRepository;
     @Autowired
     private LectureRepository lectureRepository;
-    @Autowired
-    private ScheduleInfoRepository scheduleInfoRepository;
 
 
     @Override
@@ -69,15 +65,7 @@ public class CourseDataServiceImpl implements CourseDataService {
                 () -> new ResourceNotFoundException("Không tìm thấy giảng viên")
         );
 
-        Set<ScheduleInfo> scheduleInfos = new HashSet<>();
-        for(int schedule: rq.getScheduleInfoId()) {
-            ScheduleInfo scheduleInfo = this.scheduleInfoRepository.findById(schedule).orElseThrow(
-                    ()->new ResourceNotFoundException("Không tìm thấy lịch học")
-            );
-            if(scheduleInfo.getCourseData()!= null)
-                throw new ResourceExistException("Môn học đã được xếp lịch");
-            else scheduleInfos.add(scheduleInfo);
-        }
+
         try {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
             // loi modelmapper khi co 2 mapping thuoc tinh id
@@ -86,9 +74,7 @@ public class CourseDataServiceImpl implements CourseDataService {
             CourseData courseData = modelMapper.map(rq, CourseData.class);
             courseData.setCourse(course);
             courseData.setLecture(lecture);
-            for(ScheduleInfo schedule: scheduleInfos) {
-                courseData.addScheduleInfo(schedule);
-            }
+
             courseData.setIsEnded(false);
 //            courseData.setScheduleInfos(scheduleInfos);
             courseData = this.courseDataRepository.save(courseData);
@@ -113,27 +99,14 @@ public class CourseDataServiceImpl implements CourseDataService {
                 () -> new ResourceNotFoundException("Không tìm thấy giảng viên")
         );
 
-        Set<ScheduleInfo> scheduleInfos = new HashSet<>();
-        for(int schedule: rq.getScheduleInfoId()) {
-            ScheduleInfo scheduleInfo = this.scheduleInfoRepository.findById(schedule).orElseThrow(
-                    ()->new ResourceNotFoundException("Không tìm thấy lịch học")
-            );
-            //Nếu lich đã được xếp trước hoặc lịch có id != id
-            if(scheduleInfo.getCourseData()!= null && scheduleInfo.getCourseData().getId() != id)
-                throw new ResourceExistException("Môn học đã được xếp lịch");
-            else scheduleInfos.add(scheduleInfo);
-        }
 
         try {
             modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-            courseData.getScheduleInfos().forEach(scheduleInfo -> scheduleInfo.setCourseData(null));
             courseData = modelMapper.map(rq, CourseData.class);
             courseData.setId(id);
             courseData.setCourse(course);
             courseData.setLecture(lecture);
-            for(ScheduleInfo schedule: scheduleInfos) {
-                courseData.addScheduleInfo(schedule);
-            }
+
             courseData.setIsEnded(false);
 
             courseData = this.courseDataRepository.save(courseData);
@@ -146,14 +119,6 @@ public class CourseDataServiceImpl implements CourseDataService {
         }
     }
 
-    @Override
-    public ApiResponse removeScheduleInfoByCourseDataId(int id){
-        CourseData courseData = this.courseDataRepository.findById(id).orElseThrow(
-                ()-> new ResourceNotFoundException("Dữ liệu môn học không tìm thấy")
-        );
-        courseData.getScheduleInfos().forEach(scheduleInfo -> scheduleInfo.setCourseData(null));
-        return new ApiResponse("Gỡ thành công thông tin lịch học", true);
-    }
 
     @Override
     public ApiResponse deleteCourseData(int id){
@@ -163,7 +128,6 @@ public class CourseDataServiceImpl implements CourseDataService {
         if(courseData.getSemesterDetails() != null)
             throw new ForeignKeyViolationException("Không thể xóa do dữ liệu đã được đăng ký");
         else{
-            courseData.getScheduleInfos().forEach(scheduleInfo -> scheduleInfo.setCourseData(null));
             this.courseDataRepository.delete(courseData);
         }
 

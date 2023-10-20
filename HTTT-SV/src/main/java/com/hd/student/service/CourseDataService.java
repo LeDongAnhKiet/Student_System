@@ -12,7 +12,6 @@ public interface CourseDataService {
 
     CourseDataResponse updateCourseData(CourseDataRequest rq, int id);
 
-    ApiResponse removeScheduleInfoByCourseDataId(int id);
 
     ApiResponse deleteCourseData(int id);
 }

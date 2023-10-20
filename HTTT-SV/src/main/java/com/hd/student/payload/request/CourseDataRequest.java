@@ -24,5 +24,4 @@ public class CourseDataRequest {
     @NotNull
     private Integer lectureId;
 
-    private Set<Integer> scheduleInfoId = new LinkedHashSet<>();
 }

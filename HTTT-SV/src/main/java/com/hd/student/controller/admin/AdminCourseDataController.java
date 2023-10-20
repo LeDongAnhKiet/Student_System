@@ -33,10 +33,6 @@ public class AdminCourseDataController {
         return new ResponseEntity<>(this.courseDataService.updateCourseData(rq, id), HttpStatus.OK);
     }
 
-    @GetMapping("/course-date/remove-schedule/{id}")
-    public ResponseEntity<?> removeSchedule(@PathVariable int id){
-        return new ResponseEntity<>(this.courseDataService.removeScheduleInfoByCourseDataId(id), HttpStatus.OK);
-    }
 
     @DeleteMapping("/course-date/delete/{id}")
     public ResponseEntity<?> deleteCourseData(@PathVariable int id){

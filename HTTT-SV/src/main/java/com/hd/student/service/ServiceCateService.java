@@ -11,9 +11,6 @@ public interface ServiceCateService {
     List<ServiceCateResponse> getAllDV();
 
     ServiceCateResponse getServiceById(int id);
-
-    ApiResponse addServiceCate(ServiceCateRequest rq);
-
     ApiResponse updateService(ServiceCateRequest rq, int id);
     ApiResponse changeAvailableService(int id);
 }

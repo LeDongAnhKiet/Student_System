@@ -40,14 +40,11 @@ public class CourseData {
     private Boolean isEnded;
 
     @OneToMany(mappedBy = "courseData")
-    private Set<ScheduleInfo> scheduleInfos = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "courseData")
     private Set<SemesterDetail> semesterDetails = new LinkedHashSet<>();
 
-    public void addScheduleInfo(ScheduleInfo scheduleInfo) {
-        this.scheduleInfos.add(scheduleInfo);
-        scheduleInfo.setCourseData(this);
-    }
+//    public void addScheduleInfo(ScheduleInfo scheduleInfo) {
+//        this.scheduleInfos.add(scheduleInfo);
+//        scheduleInfo.setCourseData(this);
+//    }
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@Tag(name = "11. Quản lý sinh viên", description = "Quản lý sinh viên của admin ")
+@Tag(name = "10. Quản lý sinh viên", description = "Quản lý sinh viên của admin ")
 @RequestMapping("/api/admin/")
 public class AdminStudentController {
 
