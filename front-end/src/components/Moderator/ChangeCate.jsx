@@ -51,7 +51,7 @@ function ChangeCate() {
                                     <button className="btn-info btn"
                                             onClick={() => {getCate(cate.id)}}>Xem
                                     </button>
-                                    <button className="btn-primary btn"
+                                    <button className="ms-2 btn-primary btn"
                                             onClick={() => {addCate(cate.id)}}>Đăng ký
                                     </button>
                                 </td>

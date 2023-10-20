@@ -45,8 +45,8 @@ function CourseList() {
                                     <button className="btn-success btn"
                                             onClick={() => {updateCourse(course.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-danger btn"
-                                            onClick={() => {deleteCourse(course.id)}}>Xóa
+                                    <button className="ms-2 btn-danger btn"
+                                            onClick={()=> {deleteCourse(course.id)}}>Xóa
                                     </button>
                                 </td>
                             </tr>

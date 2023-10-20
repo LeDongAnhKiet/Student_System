@@ -43,7 +43,7 @@ function SemesterList() {
                                     <button className="btn-success btn"
                                             onClick={() => {updateSemester(semester.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-danger btn"
+                                    <button className="ms-2 btn-danger btn"
                                             onClick={() => {deleteSemester(semester.id)}}>Xóa
                                     </button>
                                 </td>

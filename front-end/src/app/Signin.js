@@ -43,7 +43,7 @@ function Signin() {
 
                 if (data !== null) {
                     setError('Đăng nhập thành công.');
-                    return nav('/home');
+                    nav('/home');
                 }
                 else {
                     setError('Lỗi đăng nhập.');

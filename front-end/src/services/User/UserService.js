@@ -11,8 +11,8 @@ class UserService {
     getSemester() { return axios.get(USER_API_BASE_URL + '/semester', config); }
     getDetails(id) { return axios.get(USER_API_BASE_URL + '/semester/' + id + '/course', config); }
 
-    getServiceRequest() { return axios.get(USER_API_SERVICE_URL + '/my-request', config); }
-    cancelMyRequest(id, request) { return axios.put(USER_API_SERVICE_URL + '/cancel/' + id, request, config); }
+    getRequest() { return axios.get(USER_API_SERVICE_URL + '/my-request', config); }
+    cancelRequest(id, request) { return axios.put(USER_API_SERVICE_URL + '/cancel/' + id, request, config); }
 
     getPaymentStatus() { return axios.get(USER_API_PAYMENT_URL + '/payment-status', config); }
     getPaymentInfo(id) { return axios.get(USER_API_PAYMENT_URL + '/get/' + id, config); }

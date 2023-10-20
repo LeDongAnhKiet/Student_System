@@ -13,17 +13,12 @@ export const UserContext = createContext(null);
 const App = () => {
     const [user, setUser] = useReducer(Reducer,cookie.load('user') || null);
     const loc = useLocation();
-    const [isSignin, setIsSign] = useState(false);
-
-    useEffect(() => {
-        setIsSign(loc.pathname === '/guest/auth/signin');
-    }, [loc.pathname]);
     sessionStorage.getItem('user');
 
     return (
         <UserContext.Provider value={[user, setUser]}>
             <div className="container">
-                {!isSignin && <Header />}
+                <Header/>
                 <Routes>
                     <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
                     <Route path="/guest/auth/signin" element={<Signin />} />
