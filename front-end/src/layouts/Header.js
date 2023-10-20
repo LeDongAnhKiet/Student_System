@@ -1,15 +1,24 @@
-import React, {useState} from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import React, {useContext, useState} from 'react';
+import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar,
+    NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from "../styles/ou_logo.png";
+import {UserContext} from "../app/App";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [user, setUser] = useContext(UserContext);
+    const nav = useNavigate();
+
+    const signout = () => {
+        setUser({'type': 'signout'});
+        if (user === null) nav('/');
+    }
 
     return (
-        <Navbar className="navbar bg-primary navbar-dark">
+        <Navbar className='navbar bg-primary navbar-dark fixed-top p-0'>
             <NavbarBrand className="navbar-brand" tag={Link} to="/home">
-                <img style={{ height: "40px" }} className="me-2 my-auto d-inline rounded-2" src={logo} alt="logo"/>
+                <img style={{ height: "50px" }} className="me-2 my-auto d-inline rounded-2" src={logo} alt="logo"/>
                 Dịch vụ sinh viên</NavbarBrand>
             <NavbarToggler onClick={() => {
                 setIsOpen(!isOpen)
@@ -38,7 +47,7 @@ const Header = () => {
                             </NavItem>
                             <NavItem>
                                 <NavLink className="text-black dropdown-item"
-                                         href="/user/service/#/${id}">Đăng ký xét tốt nghiệp
+                                         href="#">Đăng ký xét tốt nghiệp
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -53,6 +62,9 @@ const Header = () => {
                     </NavItem>
                     <NavItem>
                         <NavLink className='App-link nav-link' href="/user/info">Thông tin tài khoản</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink className='App-link nav-link' href="#" onClick={signout}>Đăng xuất</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>

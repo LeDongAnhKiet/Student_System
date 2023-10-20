@@ -53,7 +53,7 @@ function DiplomaList() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3 float-end row">
+                <div className="float-end row">
                     <button className="btn-primary btn m-1"
                             onClick={addDiploma}>Đăng ký cấp bằng
                     </button>

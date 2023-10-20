@@ -44,4 +44,5 @@ nav + .container, nav + .container-fluid {
 
 .container {
   padding-bottom: 80px;
+  padding-top: 70px;
 }

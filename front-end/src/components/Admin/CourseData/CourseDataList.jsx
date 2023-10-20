@@ -56,7 +56,7 @@ function CourseDataList() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3 float-end row">
+                <div className="float-end row">
                     <button className="btn-primary btn m-1"
                             onClick={addCourseData}>Thêm
                     </button>

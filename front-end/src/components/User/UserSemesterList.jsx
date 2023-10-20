@@ -14,7 +14,7 @@ function SemesterList() {
     }, []);
 
     const viewSemester = (id) => { nav('api/user/semester/' + id + '/course'); }
-    const goBack = () => { nav(-1); }
+    const goBack = () => { nav('/home'); }
 
     return (
         <div className='mb-5'>
@@ -42,7 +42,7 @@ function SemesterList() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3 float-end row">
+                <div className="float-end row">
                     <button className="btn-primary btn m-1"
                             onClick={goBack}>quay lại
                     </button>

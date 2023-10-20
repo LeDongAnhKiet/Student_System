@@ -60,7 +60,7 @@ function ChangeCate() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3 float-end row">
+                <div className="float-end row">
                     <button className="btn-info btn m-1"
                             onClick={getRequest}>Lịch sử đăng ký
                     </button>

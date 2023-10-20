@@ -41,7 +41,7 @@ function CateList() {
                 setError('Dịch vụ đã hết trống.');
         }
     }
-    const getCate = (id) => {
+    const getCate = () => {
         nav('/user/service/transcript/add');
         setError('');
     }
@@ -87,7 +87,7 @@ function CateList() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="col-3 float-end row">
+                <div className="float-end row">
                     <button className="btn-info btn m-1"
                             onClick={getRequest}>Lịch sử đăng ký
                     </button>
