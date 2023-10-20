@@ -75,10 +75,10 @@ function CateList() {
                                 <td>{cate.description}</td>
                                 <td>{cate.numOfDate} ngày</td>
                                 <td className="text-center">
-                                    <button className="btn-info btn m-1"
+                                    <button className="btn-info btn"
                                             onClick={() => {getCate(cate.id)}}>Xem
                                     </button>
-                                    <button className="btn-primary btn m-1"
+                                    <button className="btn-primary btn"
                                             onClick={() => {addCate(cate.id)}}>Đăng ký
                                     </button>
                                 </td>
@@ -88,7 +88,7 @@ function CateList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-info btn m-1"
+                    <button className="btn-info btn"
                             onClick={getRequest}>Lịch sử đăng ký
                     </button>
                 </div>

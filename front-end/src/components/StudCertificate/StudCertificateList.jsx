@@ -41,7 +41,7 @@ function StudCertificateList() {
                                 <td>{studCertificate.engCopy}</td>
                                 <td>{studCertificate.phoneContact}</td>
                                 <td>{studCertificate.content}</td>
-                                <td><button className="btn-success btn m-1"
+                                <td><button className="btn-success btn"
                                             onClick={updateStudCertificate}>Sửa chứng nhận
                                 </button></td>
                             </tr>
@@ -50,7 +50,7 @@ function StudCertificateList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addStudCertificate}>Đăng ký chứng nhận
                     </button>
                 </div>

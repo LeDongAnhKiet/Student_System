@@ -50,7 +50,7 @@ function DepartmentList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={() => {nav(-1)}}>Quay lại
                     </button>
                 </div>

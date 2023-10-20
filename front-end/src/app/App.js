@@ -33,7 +33,7 @@ const App = () => {
 
                     <Route path="/user/info" element={<Comp.UserList />} />
                     <Route path="/user/semester" element={<Comp.UserSemesterList />} />
-                    <Route path="/user/semester/:id/course" element={<Comp.UserCourseList />} />
+                    <Route path="/user/semester/:id/course" element={<Comp.UserDetailsList />} />
 
                     <Route path="/user/service/transcript/:id" element={<Comp.TranscriptList />} />
                     <Route path="/user/service/transcript/add" element={<Comp.AddTranscript />} />

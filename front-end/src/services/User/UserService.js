@@ -9,7 +9,7 @@ class UserService {
 
     getUser() { return axios.get(USER_API_BASE_URL + '/info', config); }
     getSemester() { return axios.get(USER_API_BASE_URL + '/semester', config); }
-    getCourse(id) { return axios.get(USER_API_BASE_URL + '/semester/' + id + '/course', config); }
+    getDetails(id) { return axios.get(USER_API_BASE_URL + '/semester/' + id + '/course', config); }
 
     getServiceRequest() { return axios.get(USER_API_SERVICE_URL + '/my-request', config); }
     cancelMyRequest(id, request) { return axios.put(USER_API_SERVICE_URL + '/cancel/' + id, request, config); }

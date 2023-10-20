@@ -1,7 +1,7 @@
 export { default as UserList } from './User/UserList';
 export { default as UserSemesterList } from './User/UserSemesterList';
 export { default as CateList } from './User/CateList';
-export { default as UserCourseList } from './User/UserCourseList';
+export { default as UserDetailsList } from './User/UserDetailsList';
 
 export { default as AddUnlockStud } from './UnlockStud/AddUnlockStud';
 export { default as UpdateUnlockStud } from './UnlockStud/UpdateUnlockStud';

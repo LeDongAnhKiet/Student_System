@@ -42,10 +42,10 @@ function CourseList() {
                                 <td>{course.creditsNum}</td>
                                 <td>{course.startDate}</td>
                                 <td className="text-center">
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-success btn"
                                             onClick={() => {updateCourse(course.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-danger btn m-1"
+                                    <button className="btn-danger btn"
                                             onClick={() => {deleteCourse(course.id)}}>Xóa
                                     </button>
                                 </td>
@@ -55,7 +55,7 @@ function CourseList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addCourse}>Thêm
                     </button>
                 </div>

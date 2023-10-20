@@ -44,7 +44,7 @@ function DiplomaList() {
                                 <td>{diploma.diplomaCode}</td>
                                 <td>{diploma.onlineService.createdDate}</td>
                                 <td className="text-center">
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-success btn"
                                         onClick={updateDiploma}>Sửa bằng cấp
                                     </button>
                                 </td>
@@ -54,7 +54,7 @@ function DiplomaList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addDiploma}>Đăng ký cấp bằng
                     </button>
                 </div>

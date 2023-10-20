@@ -44,10 +44,10 @@ function CourseDataList() {
                                 <td>{courseData.endDate}</td>
                                 <td>{courseData.lecture.lectureName}</td>
                                 <td className="text-center">
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-success btn"
                                             onClick={() => {updateCourseData(courseData.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-danger btn m-1"
+                                    <button className="btn-danger btn"
                                             onClick={() => {deleteCourseData(courseData.id)}}>Xóa
                                     </button>
                                 </td>
@@ -57,7 +57,7 @@ function CourseDataList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addCourseData}>Thêm
                     </button>
                 </div>

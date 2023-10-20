@@ -44,7 +44,7 @@ function TranscriptList() {
                                 <td>{transcript.contactPhone}</td>
                                 <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
                                 <td className="text-center">
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-success btn"
                                             onClick={updateTranscript}>Sửa bảng điểm
                                     </button>
                                 </td>
@@ -54,7 +54,7 @@ function TranscriptList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addTranscript}>In bảng điểm
                     </button>
                 </div>

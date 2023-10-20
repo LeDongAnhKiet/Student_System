@@ -40,10 +40,10 @@ function SemesterList() {
                                 <td>{semester.semesterName}</td>
                                 <td>{semester.note}</td>
                                 <td className="text-center">
-                                    <button className="btn-success btn m-1"
+                                    <button className="btn-success btn"
                                             onClick={() => {updateSemester(semester.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="btn-danger btn m-1"
+                                    <button className="btn-danger btn"
                                             onClick={() => {deleteSemester(semester.id)}}>Xóa
                                     </button>
                                 </td>
@@ -53,7 +53,7 @@ function SemesterList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={addSemester}>Thêm
                     </button>
                 </div>

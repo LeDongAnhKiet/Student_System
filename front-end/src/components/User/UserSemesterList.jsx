@@ -14,7 +14,7 @@ function SemesterList() {
     }, []);
 
     const viewSemester = (id) => { nav('/user/semester/' + id + '/course'); }
-    const goBack = () => { nav('/home'); }
+    const goBack = () => { nav(-1); }
 
     return (
         <div className='mb-5'>
@@ -33,7 +33,7 @@ function SemesterList() {
                                 <td>{semester.semesterName}</td>
                                 <td>{semester.status}{/* ? 'Còn hoạt động' : 'Đã kết thúc'*/}</td>
                                 <td className='text-center'>
-                                    <button className="btn-primary btn m-1"
+                                    <button className="btn-primary btn"
                                             onClick={() => viewSemester(semester.id)}>Xem
                                     </button>
                                 </td>
@@ -43,7 +43,7 @@ function SemesterList() {
                     </Table>
                 </div>
                 <div className="float-end row">
-                    <button className="btn-primary btn m-1"
+                    <button className="btn-primary btn"
                             onClick={goBack}>quay lại
                     </button>
                 </div>
