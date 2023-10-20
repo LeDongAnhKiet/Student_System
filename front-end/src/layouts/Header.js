@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar,
-    NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import {Link, useNavigate} from 'react-router-dom';
 import logo from "../styles/ou_logo.png";
 import {UserContext} from "../app/App";
@@ -12,7 +11,7 @@ const Header = () => {
 
     const signout = () => {
         setUser({'type': 'signout'});
-        if (user === null) nav('/');
+        nav('/');
     }
 
     return (

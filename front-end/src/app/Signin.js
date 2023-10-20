@@ -54,25 +54,31 @@ function Signin() {
     }
 
     return (
-        <div className="bg-primary-subtle shadow-lg py-5 rounded-5">
-            <div className="mx-5 bg-white d-flex justify-content-center border-5 border-primary border rounded-5">
-                <Form onSubmit={handleSubmit}>
-                <img className="my-auto d-block  rounded-pill" src={logo} alt="logo"/>
-                <h3 className="mb-5 text-center">Đăng nhập</h3>
-                <div className="mb-3">
-                    <Label className="form-Form.Label">Email</Label>
-                    <Input type="text" className="form-control"
-                        value={email} onChange={handleEmailChange} />
+        <div className="bg-primary-subtle shadow-lg py-5 rounded-5"
+             style={{marginLeft: "18%", marginRight: "18%"}}>
+            <div className="px-5 rounded-5">
+                <div className="bg-white d-flex justify-content-center rounded-5">
+                    <Form onSubmit={handleSubmit}>
+                    <img className="mx-auto d-block rounded-pill" src={logo} alt="logo"/>
+                    <h2 className="mb-5">Đăng nhập vào hệ thống</h2>
+                    <div className="mb-3">
+                        <Label className="form-Form.Label">Email</Label>
+                        <Input type="text" className="form-control"
+                            value={email} onChange={handleEmailChange} />
+                    </div>
+                    <div className="mb-3">
+                        <Label className="form-Label">Mật khẩu</Label>
+                        <Input type="password" className="form-control"
+                            value={password} onChange={handlePasswordChange} />
+                    </div>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <div className="text-end">
+                        <button type="submit" className="mb-5 btn btn-primary">Đăng nhập</button>
+                    </div>
+                </Form>
                 </div>
-                <div className="mb-3">
-                    <Label className="form-Label">Mật khẩu</Label>
-                    <Input type="password" className="form-control"
-                        value={password} onChange={handlePasswordChange} />
-                </div>
-                {error && <div className="alert alert-danger">{error}</div>}
-                <div className="text-end"><button type="submit" className="mb-5 btn btn-primary">Đăng nhập</button></div>
-            </Form>
-            </div></div>
+            </div>
+        </div>
     );
 }
 

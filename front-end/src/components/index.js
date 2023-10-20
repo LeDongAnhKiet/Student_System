@@ -30,18 +30,9 @@ export { default as AddCourse } from './Admin/Course/AddCourse';
 export { default as UpdateCourse } from './Admin/Course/UpdateCourse';
 export { default as CourseList } from './Admin/Course/CourseList';
 
-export { default as AddSchedule } from './Admin/Schedule/AddSchedule';
-export { default as UpdateSchedule } from './Admin/Schedule/UpdateSchedule';
-export { default as ScheduleList } from './Admin/Schedule/ScheduleList';
-
 export { default as AddSemester } from './Admin/Semester/AddSemester';
 export { default as UpdateSemester } from './Admin/Semester/UpdateSemester';
 export { default as SemesterList } from './Admin/Semester/SemesterList';
 
-export { default as AddRoom } from './Admin/StudyRoom/AddRoom';
-export { default as UpdateRoom } from './Admin/StudyRoom/UpdateRoom';
-export { default as RoomList } from './Admin/StudyRoom/RoomList';
-
-export { default as AddCate } from './Moderator/AddCate';
 export { default as UpdateCate } from './Moderator/UpdateCate';
 export { default as ChangeCate } from './Moderator/ChangeCate';

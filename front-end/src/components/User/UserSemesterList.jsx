@@ -13,7 +13,7 @@ function SemesterList() {
         });
     }, []);
 
-    const viewSemester = (id) => { nav('api/user/semester/' + id + '/course'); }
+    const viewSemester = (id) => { nav('/user/semester/' + id + '/course'); }
     const goBack = () => { nav('/home'); }
 
     return (
@@ -31,7 +31,7 @@ function SemesterList() {
                         { semesters.map( semester => (
                             <tr key={semester.id}>
                                 <td>{semester.semesterName}</td>
-                                <td>{semester.status ? 'Còn hoạt động' : 'Đã kết thúc'}</td>
+                                <td>{semester.status}{/* ? 'Còn hoạt động' : 'Đã kết thúc'*/}</td>
                                 <td className='text-center'>
                                     <button className="btn-primary btn m-1"
                                             onClick={() => viewSemester(semester.id)}>Xem

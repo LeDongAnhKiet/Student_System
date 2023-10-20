@@ -45,6 +45,7 @@ const Home = () => {
                         { user && user.fullName ? (
                             <>
                                 <h2 >Xin chào, {user.fullName}</h2>
+
                             </>
                         ) : (
                             <>

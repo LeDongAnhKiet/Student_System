@@ -13,7 +13,6 @@ class UserService {
 
     getServiceRequest() { return axios.get(USER_API_SERVICE_URL + '/my-request', config); }
     cancelMyRequest(id, request) { return axios.put(USER_API_SERVICE_URL + '/cancel/' + id, request, config); }
-    cancelServiceRequest(serviceId, service) { return axios.put(USER_API_SERVICE_URL + '/cancel/' + serviceId, service, config); }
 
     getPaymentStatus() { return axios.get(USER_API_PAYMENT_URL + '/payment-status', config); }
     getPaymentInfo(id) { return axios.get(USER_API_PAYMENT_URL + '/get/' + id, config); }

@@ -65,20 +65,11 @@ const App = () => {
                     <Route path="/admin/semester/add" element={<Comp.AddSemester />} />
                     <Route path="/admin/semester/update/:id" element={<Comp.UpdateSemester />} />
 
-                    <Route path="/admin/schedule-info/all" element={<Comp.ScheduleList />} />
-                    <Route path="/admin/schedule-info/add" element={<Comp.AddSchedule />} />
-                    <Route path="/admin/schedule-info/update/:id" element={<Comp.UpdateSchedule />} />
-
-                    <Route path="/admin/room" element={<Comp.RoomList />} />
-                    <Route path="/admin/room/add" element={<Comp.AddRoom />} />
-                    <Route path="/admin/room/update/:id" element={<Comp.UpdateRoom />} />
-
                     <Route path="/admin/course/all" element={<Comp.CourseList />} />
                     <Route path="/admin/course/:id" element={<Comp.CourseList />} />
                     <Route path="/admin/course/add" element={<Comp.AddCourse />} />
                     <Route path="/admin/course/update/:id" element={<Comp.UpdateCourse />} />
 
-                    <Route path="/moderator/service-cate/add" element={<Comp.AddCate />} />
                     <Route path="/moderator/service-cate/update/:id" element={<Comp.UpdateCate />} />
                     <Route path="/moderator/service-cate/change/:id" element={<Comp.ChangeCate />} />
                 </Routes>
