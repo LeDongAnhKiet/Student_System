@@ -1,11 +1,10 @@
 import {Button, Container} from "reactstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import UserService from "../services/User/UserService";
 
 const Home = () => {
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState({
+    const initState = {
         id: 0,
         email: '',
         fullName: '',
@@ -13,11 +12,14 @@ const Home = () => {
         role: '',
         major_name: '',
         department_name: ''
-    });
+    }
+    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState({initState});
     const nav = useNavigate();
-    const signout = () => {
-        setUser({'type': 'signout'});
-        nav('/');
+
+    const signin = () => {
+        setUser({'type': 'signin', initState});
+        if (user !== null) nav('/guest/auth/signin');
     }
 
     useEffect( () => {
@@ -30,10 +32,11 @@ const Home = () => {
             finally { setLoading(false); }
         }
         getUser().then();
+        //window.location.reload();
     }, []);
 
     return (
-        <div className='mb-5'>
+        <div>
             <Container fluid>
                 {loading ? (
                     <p className="display-6 m-2">Loading...</p>
@@ -41,16 +44,12 @@ const Home = () => {
                     <div className='App'>
                         { user && user.fullName ? (
                             <>
-                                <h2 className='m-3'>Xin chào, {user.fullName}</h2>
-                                <br />
-                                <Button className="btn btn-success" onClick={() => signout()}>
-                                    Đăng xuất
-                                </Button>
+                                <h2 >Xin chào, {user.fullName}</h2>
                             </>
                         ) : (
                             <>
-                                <h3>Vui lòng đăng nhập!</h3>
-                                <Button className="my-2 bg-primary" onClick={() => nav(-1)}>
+                                <h2>Vui lòng đăng nhập!</h2>
+                                <Button className="my-3 bg-primary" onClick={signin}>
                                     Đăng nhập
                                 </Button>
                             </>

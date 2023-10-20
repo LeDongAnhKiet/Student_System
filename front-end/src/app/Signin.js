@@ -45,18 +45,19 @@ function Signin() {
                     setError('Đăng nhập thành công.');
                     return nav('/home');
                 }
-                else setError('Sai tài khoản hoặc mật khẩu.');
-            } catch (error) {
-                setError('Lỗi đăng nhập.');
-                console.error('Lỗi xác thực:', error);
-            }
+                else {
+                    setError('Lỗi đăng nhập.');
+                    console.error('Lỗi xác thực:', error);
+                }
+            } catch (error) { setError('Sai tài khoản hoặc mật khẩu.'); }
         }
     }
 
     return (
-        <div className="mt-3 ms-5 me-5 d-flex justify-content-center align-items-center border-primary border-3 border rounded-5">
-            <Form onSubmit={handleSubmit}>
-                <img className="my-auto d-block App-logo rounded-pill" src={logo} alt="logo"/>
+        <div className="bg-primary-subtle shadow-lg py-5 rounded-5">
+            <div className="mx-5 bg-white d-flex justify-content-center border-5 border-primary border rounded-5">
+                <Form onSubmit={handleSubmit}>
+                <img className="my-auto d-block  rounded-pill" src={logo} alt="logo"/>
                 <h3 className="mb-5 text-center">Đăng nhập</h3>
                 <div className="mb-3">
                     <Label className="form-Form.Label">Email</Label>
@@ -69,9 +70,9 @@ function Signin() {
                         value={password} onChange={handlePasswordChange} />
                 </div>
                 {error && <div className="alert alert-danger">{error}</div>}
-                <div className="text-end"><button type="submit" className="mb-3 btn btn-primary">Đăng nhập</button></div>
+                <div className="text-end"><button type="submit" className="mb-5 btn btn-primary">Đăng nhập</button></div>
             </Form>
-        </div>
+            </div></div>
     );
 }
 
