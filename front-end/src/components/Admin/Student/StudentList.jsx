@@ -24,7 +24,7 @@ function StudentList() {
                 <h3 className ="App">Thông tin sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle"><tr>
+                        <thead className="text-center"><tr>
                             <th>Họ và tên</th>
                             <th>Email</th>
                             <th>Khoa</th>
@@ -42,6 +42,7 @@ function StudentList() {
                         </tbody>
                     </Table>
                 </div>
+                <button className="btn btn-primary m-1" onClick={() => nav('/home')} >Lưu</button>
             </Container>
         </div>
     );

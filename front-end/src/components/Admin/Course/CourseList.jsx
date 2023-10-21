@@ -29,7 +29,7 @@ function CourseList() {
                 <h3 className ="App">Danh sách môn học</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle"><tr>
+                        <thead className="text-center"><tr>
                             <th>Tên</th>
                             <th>Số tín chỉ</th>
                             <th>Ghi chú</th>

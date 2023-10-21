@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Table } from 'reactstrap';
 import UserService from "../../services/User/UserService";
+import {useNavigate} from "react-router-dom";
 
 class UserInfoList extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class UserInfoList extends Component {
             }
         }
     }
+    nav = useNavigate();
 
     componentDidMount() {
         UserService.getUser().then(res => {
@@ -51,6 +53,11 @@ class UserInfoList extends Component {
                                 <td>{user.major_name}</td>
                             </tr>
                         </Table>
+                    </div>
+                    <div className="float-end row">
+                        <button className="btn-primary btn"
+                                onClick={() => user.nav('/home')}>Quay lại
+                        </button>
                     </div>
                 </Container>
             </div>

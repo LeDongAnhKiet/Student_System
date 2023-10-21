@@ -13,7 +13,7 @@ function UserDetailsList() {
             setDetails(res.data);
             //console.log(res.data)
         });
-    }, []);
+    }, [id]);
 
     const goBack = () => { nav(-1); }
 
@@ -26,7 +26,7 @@ function UserDetailsList() {
                 </>) : (<>
                     <div className="row">
                         <Table className="mt-3 table table-striped table-bordered">
-                            <thead  className="text-center align-middle"><tr>
+                            <thead  className="text-center"><tr>
                                 <th>Tên môn học</th>
                                 <th>Số tín chỉ</th>
                                 <th>Điểm</th>
@@ -35,18 +35,17 @@ function UserDetailsList() {
                             <tbody>
                             { details.map( detail => (
                                 <tr key={detail.id}>
-                                    {detail.courseData.map((data, id) => (
-                                        <React.Fragment key={id}>
-                                            <td>{data.course.courseName}</td>
-                                            <td>{data.course.creditsNum}</td>
-                                            <td>{detail.score}</td>
-                                            <td className='text-center fw-bold'>{detail.isPassed ? (
-                                                <span className='text-success' dangerouslySetInnerHTML={{ __html: '&check;' }}></span>
-                                            ) : (
-                                                <span className='text-danger' dangerouslySetInnerHTML={{ __html: '&cross;' }}></span>
-                                            )}</td>
-                                        </React.Fragment>
-                                    ))}
+                                    <td>{detail.courseData.course.courseName}</td>
+                                    <td>{detail.courseData.course.creditsNum}</td>
+                                    <td>{detail.score}</td>
+                                    <td className='text-center fw-bold'>{detail.isPassed ? (
+                                        <span className='text-success'
+                                              dangerouslySetInnerHTML={{ __html: '&check;' }}></span>
+                                    ) : (
+                                        <span className='text-danger'
+                                              dangerouslySetInnerHTML={{ __html: '&cross;' }}></span>
+                                    )}
+                                    </td>
                                 </tr>
                             ))}
                             </tbody>
@@ -55,7 +54,7 @@ function UserDetailsList() {
                 </>)}
                 <div className="float-end row">
                     <button className="btn-primary btn"
-                            onClick={goBack}>quay lại
+                            onClick={goBack}>Quay lại
                     </button>
                 </div>
             </Container>

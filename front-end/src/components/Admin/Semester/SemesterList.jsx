@@ -29,7 +29,7 @@ function SemesterList() {
                 <h3 className ="App">Danh sách các học kỳ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle"><tr>
+                        <thead className="text-center"><tr>
                             <th>Học kỳ</th>
                             <th>Ghi chú</th>
                             <th>Thao tác</th>

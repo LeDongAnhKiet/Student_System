@@ -13,7 +13,7 @@ function CateList() {
         if (id)
             // Trường hợp có id - Lấy dịch vụ cụ thể
             CateService.getCateById(id).then((res) => {
-                setCates([res.data]);
+                setCates(res.data);
             });
         else
             // Trường hợp không có id - Lấy tất cả các dịch vụ
@@ -48,7 +48,7 @@ function CateList() {
                 <h3 className="App">Đăng ký dịch vụ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle">
+                        <thead className="text-center">
                         <tr>
                             <th>Dịch vụ</th>
                             <th>Đơn giá</th>

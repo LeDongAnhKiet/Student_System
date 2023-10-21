@@ -15,8 +15,6 @@ function UnlockStudList() {
 
     const addUnlockStud = () => { nav('/user/service/unlock-stud/add'); };
 
-    const getUnlockStud = (id) => { nav(`/user/service/unlock-stud/${id}`); }
-
     const updateUnlockStud = (id) => { nav(`/user/service/unlock-stud/update/${id}`); }
 
     return (
@@ -25,7 +23,7 @@ function UnlockStudList() {
                 <h3 className ="App">Mở khóa sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead  className="text-center align-middle"><tr>
+                        <thead  className="text-center"><tr>
                             <th className="w-75">Nội dung</th>
                             <th>Hình ảnh</th>
                             <th>Thao tác</th>

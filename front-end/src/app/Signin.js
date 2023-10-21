@@ -59,15 +59,15 @@ function Signin() {
             <div className="px-5 rounded-5">
                 <div className="bg-white d-flex justify-content-center rounded-5">
                     <Form onSubmit={handleSubmit}>
-                    <img className="mx-auto d-block rounded-pill" src={logo} alt="logo"/>
-                    <h2 className="mb-5">Đăng nhập vào hệ thống</h2>
+                    <img className="App-logo mx-auto my-3 d-block rounded-5" src={logo} alt="logo"/>
+                    <h2 className="mb-4">Đăng nhập vào hệ thống</h2>
                     <div className="mb-3">
-                        <Label className="form-Form.Label">Email</Label>
+                        <Label className="form-label">Tài khoản</Label>
                         <Input type="text" className="form-control"
                             value={email} onChange={handleEmailChange} />
                     </div>
                     <div className="mb-3">
-                        <Label className="form-Label">Mật khẩu</Label>
+                        <Label className="form-label">Mật khẩu</Label>
                         <Input type="password" className="form-control"
                             value={password} onChange={handlePasswordChange} />
                     </div>

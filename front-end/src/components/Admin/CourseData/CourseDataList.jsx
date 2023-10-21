@@ -29,7 +29,7 @@ function CourseDataList() {
                 <h3 className ="App">Chi tiết môn học</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle"><tr>
+                        <thead className="text-center"><tr>
                             <th>Tên</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>

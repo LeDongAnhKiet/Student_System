@@ -15,8 +15,6 @@ function DiplomaList() {
 
     const addDiploma = () => { nav('/user/service/diploma/add'); };
 
-    const getDiploma = (id) => { nav(`/user/service/diploma/${id}`); }
-
     const updateDiploma = (id) => { nav(`/user/service/diploma/update/${id}`); }
 
     return (
@@ -25,7 +23,7 @@ function DiplomaList() {
                 <h3 className ="App">Cấp bằng tốt nghiệp</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center align-middle"><tr>
+                        <thead className="text-center"><tr>
                             <th>Số lượng bản sao</th>
                             <th>Số điện thoại</th>
                             <th>Email</th>

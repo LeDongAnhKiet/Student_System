@@ -19,7 +19,7 @@ const Header = () => {
             {!user ? <></> : <>
                 <Navbar className='navbar bg-primary navbar-dark fixed-top p-0'>
                     <NavbarBrand className="navbar-brand" tag={Link} to="/home">
-                        <img style={{ height: "50px" }} className="me-2 my-auto d-inline rounded-2" src={logo} alt="logo"/>
+                        <img style={{ height: "50px" }} className="me-2 my-auto p-1 rounded-pill bg-white" src={logo} alt="logo"/>
                         Dịch vụ sinh viên</NavbarBrand>
                     <NavbarToggler onClick={() => {
                         setIsOpen(!isOpen)

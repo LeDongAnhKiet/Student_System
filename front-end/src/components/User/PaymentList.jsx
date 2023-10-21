@@ -1,26 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import UserService from "../../services/User/UserService";
+import CateService from "../../services/Guest/HomeService";
 
-function SemesterList() {
-    const [semesters, setSemesters] = useState([]);
+function PaymentList() {
+    const [payments, setPayments] = useState([]);
     const nav = useNavigate();
+    const { id } = useParams();
 
     useEffect(() => {
-        UserService.getSemester().then((res) => {
-            setSemesters(res.data);
+        if (id)
+            UserService.getPaymentInfo(id).then((res) => {
+                setPayments(res.data);
+            });
+        else
+            UserService.getPaymentStatus().then((res) => {
+            setPayments(res.data);
         });
     }, []);
 
-    const viewSemester = (id) => { nav('/user/semester/' + id + '/course'); }
+    const viewPayment = (id) => { nav('/user/payment/' + id + '/course'); }
     const goBack = () => { nav(-1); }
 
     return (
         <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Xem thời khóa biểu học kỳ</h3>
-                {!semesters ? <>
+                {!payments ? <>
                     <h3 className='display-6 m-3'>Không có học kỳ nào!</h3>
                 </> : <>
                     <div className="row">
@@ -31,13 +38,13 @@ function SemesterList() {
                                 <th>Thao tác</th>
                             </tr></thead>
                             <tbody>
-                            { semesters.map( semester => (
-                                <tr key={semester.id}>
-                                    <td>{semester.semesterName}</td>
-                                    <td>{semester.status}{/* ? 'Còn hoạt động' : 'Đã kết thúc'*/}</td>
+                            { payments.map( payment => (
+                                <tr key={payment.id}>
+                                    <td>{payment.paymentName}</td>
+                                    <td>{payment.status}{/* ? 'Còn hoạt động' : 'Đã kết thúc'*/}</td>
                                     <td className='text-center'>
                                         <button className="btn-primary btn"
-                                                onClick={() => viewSemester(semester.id)}>Xem
+                                                onClick={() => viewPayment(payment.id)}>Xem
                                         </button>
                                     </td>
                                 </tr>
@@ -55,4 +62,4 @@ function SemesterList() {
         </div>
     );
 }
-export default SemesterList;
+export default PaymentList;

@@ -15,8 +15,6 @@ function TranscriptList() {
 
     const addTranscript = () => { nav('/user/service/transcript/add'); };
 
-    const getTranscript = (id) => { nav(`/user/service/transcript/${id}`); }
-
     const updateTranscript = (id) => { nav(`/user/service/transcript/update/${id}`); }
 
     return (
@@ -25,7 +23,7 @@ function TranscriptList() {
                 <h3 className ="App">Bảng điểm sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead  className="text-center align-middle"><tr>
+                        <thead  className="text-center"><tr>
                             <th>Ngôn ngữ</th>
                             <th>Số bản sao</th>
                             <th>Học kỳ bắt đầu</th>
