@@ -17,5 +17,5 @@ public class SemesterDetailsResponse {
 
     private Boolean isPassed;
 
-    private Set<CourseDataResponse> courseData;
+    private CourseDataResponse courseData;
 }

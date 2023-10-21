@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Table } from 'reactstrap';
 import UserService from "../../services/User/UserService";
 
-class UserList extends Component {
+class UserInfoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,26 +29,27 @@ class UserList extends Component {
 
         return (
             <div>
+
                 <Container fluid>
                     <h3 className="App">Thông tin sinh viên</h3>
                     <div className="row">
-                        <Table className="mt-3 table table-striped table-bordered">
-                            <thead className="text-center align-middle">
-                            <tr>
+                        <Table className="mt-5">
+                            <tr className="border-bottom">
                                 <th>Họ và tên</th>
-                                <th>Email</th>
-                                <th>Khoa</th>
-                                <th>Ngành</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
                                 <td>{user.fullName}</td>
+                            </tr>
+                            <tr className="border-bottom">
+                                <th>Email</th>
                                 <td>{user.email}</td>
+                            </tr>
+                            <tr className="border-bottom">
+                                <th>Khoa</th>
                                 <td>{user.department_name}</td>
+                            </tr>
+                            <tr className="border-bottom">
+                                <th>Ngành</th>
                                 <td>{user.major_name}</td>
                             </tr>
-                            </tbody>
                         </Table>
                     </div>
                 </Container>
@@ -57,4 +58,4 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
+export default UserInfoList;

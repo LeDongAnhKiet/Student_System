@@ -18,12 +18,15 @@ const Home = () => {
     const nav = useNavigate();
     const [semesters, setSemesters] = useState([]);
     const [requests, setRequests] = useState([]);
+    const [textColor, setTextColor] = useState('');
 
     const signin = () => {
         setUser({'type': 'signin', initState});
         if (user !== null) nav('/guest/auth/signin');
     }
     const viewSemester = (id) => { nav('/user/semester/' + id + '/course'); }
+    const viewServices = () => { nav('/guest/service-cate'); }
+    const viewInfo = () => { nav('/user/info/'); }
 
     useEffect( () => {
         const getUser = async () => {
@@ -64,16 +67,21 @@ const Home = () => {
                     <p className="display-6 m-2">Loading...</p>
                 ) : (
                     <div>
-                        { user && user.fullName ? (
+                        { user.fullName ? (
                             <>
-                                <h2 className='App'>Xin chào, {user.fullName}</h2>
+                                <h2 className='App'>
+                                    Xin chào, {user.fullName}
+                                    {user.avatar !== '' ? <> {user.avatar}</> :
+                                        <span className='ms-2' dangerouslySetInnerHTML={{
+                                            __html: '&#x1F464;' }}></span>}
+                                </h2>
                                 <h5 className="my-3 pb-2 border-bottom">Xem học kỳ</h5>
                                     { semesters === [] ? <>
                                         { semesters.map(semester => (
                                         <span className="list-group-horizontal row-cols-4" key={semester.id}>
                                             <div className="list-inline-item m-1">
-                                                <a className="btn" onClick={() => viewSemester(semester.id)}>
-                                                    {semester.semesterName}</a>
+                                                <div className="btn" onClick={() => viewSemester(semester.id)}>
+                                                    {semester.semesterName}</div>
                                             </div>
                                         </span>
                                         ))}
@@ -82,7 +90,14 @@ const Home = () => {
                                             <span className="bg-warning fw-bold text-black p-2">Chưa mở học kỳ</span>
                                         </div>
                                     </>}
-                                <h5 className="my-3 pb-2 border-bottom">Dịch vụ đã đăng ký</h5>
+                                <h5 className="my-3 pb-2 border-bottom text-start">
+                                    Lịch sử đăng ký dịch vụ
+                                    <button className="float-end h5 border-0 bg-white"
+                                            onMouseEnter={() => setTextColor('cyan')}
+                                            onMouseLeave={() => setTextColor('')}
+                                            data-toggle="tooltip" title="Xem danh sách dịch vụ trực tuyến"
+                                            onClick={viewServices} style={{color: textColor}}>Các dịch vụ</button>
+                                </h5>
                                 { requests === [] ? <>
                                     { requests.map(request => (
                                         <span className="list-group-horizontal row-cols-4" key={request.id}>
@@ -115,6 +130,21 @@ const Home = () => {
                                         <span className="bg-warning fw-bold text-black p-2">Chưa đăng ký dịch vụ nào</span>
                                     </div>
                                 </>}
+                                <button className="border-0 bg-white h5 my-3 pb-2 border-bottom"
+                                        data-toggle="tooltip" title="Nhấn vào để xem chi tiết"
+                                        onClick={viewInfo}>
+                                    Xem thông tin sinh viên { user.avatar !== '' ? <> {user.avatar}</> :                                        <span className='ms-2' dangerouslySetInnerHTML={{
+                                    __html: '&#x1F464;' }}></span>}
+                                </button>
+                                <div>
+                                    <span className="fw-bold ps-4">Khoa: </span>
+                                    <span>{user.department_name}</span>
+                                </div>
+                                <div>
+                                    <span className="fw-bold ps-4">Ngành: </span>
+                                    <span>{user.major_name}</span>
+                                </div>
+
                             </>
                         ) : (
                             <>

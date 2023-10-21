@@ -54,7 +54,7 @@ function Signin() {
     }
 
     return (
-        <div className="bg-primary-subtle shadow-lg py-5 rounded-5"
+        <div className="mt-5 bg-primary shadow-lg py-5 rounded-5"
              style={{marginLeft: "18%", marginRight: "18%"}}>
             <div className="px-5 rounded-5">
                 <div className="bg-white d-flex justify-content-center rounded-5">

@@ -29,7 +29,7 @@ function CateList() {
                 nav('/user/service/transcript/add');
                 break;
             case 2:
-                nav('/user/service/stud-certificate/add');
+                nav('/user/service/stud-cert/add');
                 break;
             case 3:
                 nav('/user/service/diploma/add');
@@ -38,16 +38,8 @@ function CateList() {
                 nav('/user/service/unlock-stud/add');
                 break;
             default:
-                setError('Dịch vụ đã hết trống.');
+                setError('Dịch vụ đã không còn.');
         }
-    }
-    const getCate = () => {
-        nav('/user/service/transcript/add');
-        setError('');
-    }
-    const getRequest = () => {
-        nav('/user/service/my-request');
-        setError('');
     }
 
     return (
@@ -75,10 +67,7 @@ function CateList() {
                                 <td>{cate.description}</td>
                                 <td>{cate.numOfDate} ngày</td>
                                 <td className="text-center">
-                                    <button className="btn-info btn"
-                                            onClick={() => {getCate(cate.id)}}>Xem
-                                    </button>
-                                    <button className="ms-2 btn-primary btn"
+                                    <button className="btn-primary btn"
                                             onClick={() => {addCate(cate.id)}}>Đăng ký
                                     </button>
                                 </td>
@@ -87,12 +76,13 @@ function CateList() {
                         </tbody>
                     </Table>
                 </div>
-                <div className="float-end row">
-                    <button className="btn-info btn"
-                            onClick={getRequest}>Lịch sử đăng ký
+                <div className="float-end row" style={{paddingBottom: '15%'}}>
+                    <button className="btn-info btn text-black-50"
+                            onClick={() => nav('/home')}>Lịch sử đăng ký
                     </button>
                 </div>
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && <div className="alert alert-danger"
+                    onMouseEnter={() => setError('')}>{error}</div>}
             </Container>
         </div>
     );

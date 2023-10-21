@@ -1,4 +1,4 @@
-export { default as UserList } from './User/UserList';
+export { default as UserInfoList } from './User/UserInfoList';
 export { default as UserSemesterList } from './User/UserSemesterList';
 export { default as CateList } from './User/CateList';
 export { default as UserDetailsList } from './User/UserDetailsList';

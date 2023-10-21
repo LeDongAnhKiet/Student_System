@@ -1,7 +1,7 @@
-import React, {createContext, useEffect, useReducer, useState} from 'react';
+import React, {createContext, useReducer} from 'react';
 import '../styles/App.css';
 import Home from './Home';
-import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import Signin from "./Signin";
 import Reducer from "./Reducer";
 import cookie from "react-cookies";
@@ -12,21 +12,22 @@ import * as Comp from '../components';
 export const UserContext = createContext(null);
 const App = () => {
     const [user, setUser] = useReducer(Reducer,cookie.load('user') || null);
-    const loc = useLocation();
     sessionStorage.getItem('user');
 
     return (
         <UserContext.Provider value={[user, setUser]}>
+            <Header/>
+            <Routes>
+                <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
+                <Route path="/guest/auth/signin" element={<Signin />} />
+            </Routes>
             <div className="container">
-                <Header/>
                 <Routes>
-                    <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
-                    <Route path="/guest/auth/signin" element={<Signin />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/guest/service-cate" element={<Comp.CateList />} />
                     <Route path="/guest/service-cate/:id" element={<Comp.CateList />} />
 
-                    <Route path="/user/info" element={<Comp.UserList />} />
+                    <Route path="/user/info" element={<Comp.UserInfoList />} />
                     <Route path="/user/semester" element={<Comp.UserSemesterList />} />
                     <Route path="/user/semester/:id/course" element={<Comp.UserDetailsList />} />
 
@@ -68,8 +69,8 @@ const App = () => {
                     <Route path="/moderator/service-cate/update/:id" element={<Comp.UpdateCate />} />
                     <Route path="/moderator/service-cate/change/:id" element={<Comp.ChangeCate />} />
                 </Routes>
-                <Footer />
             </div>
+            <Footer />
         </UserContext.Provider>
     );
 }
