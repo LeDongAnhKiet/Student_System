@@ -42,7 +42,7 @@ function StudentList() {
                         </tbody>
                     </Table>
                 </div>
-                <button className="btn btn-primary m-1" onClick={() => nav('/home')} >Lưu</button>
+                <button className="btn btn-primary m-1" onClick={() => nav('/home')} >Quay lại</button>
             </Container>
         </div>
     );

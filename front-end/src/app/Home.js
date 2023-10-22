@@ -18,8 +18,11 @@ const Home = () => {
 
     const viewDetails = (id) => { nav('/user/semester/' + id + '/course'); }
     const viewCates = () => { nav('/guest/service-cate'); }
-
-    const viewInfo = () => { nav('/user/info/'); }
+    const viewInfo = () => { nav('/user/info'); }
+    const viewServices = () => { nav('/moderator/get-request'); }
+    const viewCourses = () => { nav('/admin/course/all'); }
+    const viewSemesters = () => { nav('/admin/semester/available'); }
+    const viewStuds = () => { nav('/admin/student'); }
 
     useEffect(() => {
         const getUser = async () => {
@@ -68,17 +71,20 @@ const Home = () => {
                     <p className="display-6 m-2">Loading...</p>
                 ) : (
                     <div>
-                        {user.role === "MODERATOR" ? <>
+                        {user.role === "MODERATOR" || user.role === "ADMIN" ? <>
                             <span className="btn-group">
-                                <button className="mx-2 btn btn-warning rounded-pill">Chỉnh sửa dịch vụ</button>
-                                <button className="mx-2 btn btn-success rounded-pill">Kiểm duyệt dịch vụ</button>
+                                <button className="mx-2 btn btn-primary rounded-pill"
+                                    onClick={viewServices}>Quản lý dịch vụ</button>
                             </span>
                         </> : <></>}
                         {user.role === "ADMIN" ? <>
                             <span className="btn-group">
-                                <button className="mx-2 btn btn-success rounded-pill">Quản lý đào tạo</button>
-                                <button className="mx-2 btn btn-warning rounded-pill">Quản lý học kỳ</button>
-                                <button className="mx-2 btn btn-warning rounded-pill">Quản lý môn học</button>
+                                <button className="mx-2 btn btn-primary rounded-pill"
+                                        onClick={viewStuds}>Quản lý đào tạo</button>
+                                <button className="mx-2 btn btn-primary rounded-pill"
+                                        onClick={viewSemesters}>Quản lý học kỳ</button>
+                                <button className="mx-2 btn btn-primary rounded-pill"
+                                        onClick={viewCourses}>Quản lý môn học</button>
                             </span>
                         </> : <></>}
                         {user.fullName ? (<>

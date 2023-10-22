@@ -51,7 +51,7 @@ function DepartmentList() {
                 </div>
                 <div className="float-end row">
                     <button className="btn-primary btn"
-                            onClick={() => {nav(-1)}}>Quay lại
+                            onClick={() => {nav('/home')}}>Quay lại
                     </button>
                 </div>
             </Container>
