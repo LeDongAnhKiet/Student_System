@@ -37,3 +37,4 @@ export { default as SemesterList } from './Admin/Semester/SemesterList';
 
 export { default as UpdateCate } from './Moderator/UpdateCate';
 export { default as ChangeCate } from './Moderator/ChangeCate';
+export { default as GetRequest } from './Moderator/GetRequest';

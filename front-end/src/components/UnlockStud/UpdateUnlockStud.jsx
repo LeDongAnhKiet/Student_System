@@ -32,7 +32,7 @@ function UpdateUnlockStud() {
 
     const changeContentHandler = (e) => { setContent(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/unlock-stud/${id}`); }
+    const cancel = () => { nav(`/user/service/unlock-stud`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -58,8 +58,10 @@ function UpdateUnlockStud() {
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={content} onChange={changeContentHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateUnlockStud}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateUnlockStud}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

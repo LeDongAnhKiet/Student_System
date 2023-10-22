@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
 import {useNavigate, useParams} from "react-router-dom";
 
-function AddTranscript(props) {
+function AddTranscript() {
     const { id } = useParams();
     const [language, setLanguage] = useState('');
     const [phoneContact, setPhoneContact] = useState('');
@@ -59,13 +59,10 @@ function AddTranscript(props) {
 
     const changeSealedHandler = (e) => { setIsSealed(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/transcript/${id}`); }
+    const cancel = () => { nav(`/user/service/transcript`); }
 
     const setTitle = () => {
-        if (id === 'add')
             return <h3 className="text-center">Cấp bảng điểm</h3>
-        else
-            return <h3 className="text-center">Chỉnh sửa bảng điểm</h3>
     }
 
     return (
@@ -74,8 +71,7 @@ function AddTranscript(props) {
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">
-                        { setTitle }
-                        <div className = "card-body">
+                        <h3 className="mt-2 text-center">Cấp bảng điểm</h3>                        <div className = "card-body">
                             <form>
                                 <div className = "form-group">
                                     <label>Ngôn ngữ: </label>
@@ -107,8 +103,10 @@ function AddTranscript(props) {
                                            value={isSealed.toString()} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

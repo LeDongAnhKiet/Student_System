@@ -56,7 +56,7 @@ function AddDiploma() {
 
     const changeCodeHandler = (e) => { setDiplomaCode(e.target.value); }
     
-    const cancel = () => { nav(`/user/service/diploma/${id}`); }
+    const cancel = () => { nav(`/user/service/diploma`); }
 
     const setTitle = () => {
         if (id === '_add')
@@ -99,8 +99,10 @@ function AddDiploma() {
                                     <input placeholder="Code" name="code" className="form-control"
                                            value={diplomaCode} onChange={changeCodeHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateDiploma}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateDiploma}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

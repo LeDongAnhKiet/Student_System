@@ -53,7 +53,7 @@ function UpdateTranscript() {
 
     const changeSealedHandler = (e) => { setIsSealed(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/transcript/${id}`); }
+    const cancel = () => { nav(`/user/service/transcript`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -101,8 +101,10 @@ function UpdateTranscript() {
                                            value={isSealed.toString()} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

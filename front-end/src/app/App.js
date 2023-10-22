@@ -17,12 +17,10 @@ const App = () => {
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header/>
-            <Routes>
-                <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
-                <Route path="/guest/auth/signin" element={<Signin />} />
-            </Routes>
             <div className="container">
                 <Routes>
+                    <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
+                    <Route path="/guest/auth/signin" element={<Signin />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/guest/service-cate" element={<Comp.CateList />} />
                     <Route path="/guest/service-cate/:id" element={<Comp.CateList />} />
@@ -34,10 +32,10 @@ const App = () => {
                     <Route path="/user/payment/" element={<Comp.PaymentList />} />
                     <Route path="/user/payment/:id" element={<Comp.PaymentList />} />
 
-                    <Route path="/user/service/transcript/:id" element={<Comp.TranscriptList />} />
-                    <Route path="/user/service/diploma/:id" element={<Comp.DiplomaList />} />
-                    <Route path="/user/service/stud-cert/:id" element={<Comp.StudCertificateList />} />
-                    <Route path="/user/service/unlock-stud/:id" element={<Comp.UnlockStudList />} />
+                    <Route path="/user/service/transcript/" element={<Comp.TranscriptList />} />
+                    <Route path="/user/service/diploma/" element={<Comp.DiplomaList />} />
+                    <Route path="/user/service/stud-cert/" element={<Comp.StudCertificateList />} />
+                    <Route path="/user/service/unlock-stud/" element={<Comp.UnlockStudList />} />
 
                     <Route path="/user/service/transcript/add" element={<Comp.AddTranscript />} />
                     <Route path="/user/service/diploma/add" element={<Comp.AddDiploma />} />
@@ -70,6 +68,7 @@ const App = () => {
 
                     <Route path="/moderator/service-cate/update/:id" element={<Comp.UpdateCate />} />
                     <Route path="/moderator/service-cate/change/:id" element={<Comp.ChangeCate />} />
+                    <Route path="/moderator/get-request" element={<Comp.GetRequest />} />
                 </Routes>
             </div>
             <Footer />

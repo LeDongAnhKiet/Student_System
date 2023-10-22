@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import logo from '../styles/ou.png';
+import logo from '../styles/image/ou.png';
 import {useNavigate} from 'react-router-dom';
 import {UserContext} from "./App";
 import {Form, Input, Label} from "reactstrap";
@@ -54,7 +54,7 @@ function Signin() {
     }
 
     return (
-        <div className="mt-5 bg-primary shadow-lg py-5 rounded-5"
+        <div className="pt-5 bg-primary shadow-lg py-5 rounded-5"
              style={{marginLeft: "18%", marginRight: "18%"}}>
             <div className="px-5 rounded-5">
                 <div className="bg-white d-flex justify-content-center rounded-5">

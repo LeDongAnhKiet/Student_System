@@ -40,7 +40,7 @@ function AddSemester() {
 
     const changeNoteHandler = (e) => { setNote(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/semester/getavailable`); }
+    const cancel = () => { nav(`/admin/semester/available`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -68,8 +68,10 @@ function AddSemester() {
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={note} onChange={changeNoteHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateSemester}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateSemester}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -54,7 +54,7 @@ function AddStudCertificate() {
 
     const changeContentHandler = (e) => { setContent(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/stud-cert/${id}`); }
+    const cancel = () => { nav(`/user/service/stud-cert`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -97,8 +97,10 @@ function AddStudCertificate() {
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={content} onChange={changeContentHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateStudCertificate}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateStudCertificate}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

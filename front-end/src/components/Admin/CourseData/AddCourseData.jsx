@@ -50,7 +50,7 @@ function AddCourseData() {
 
     const changeLectureHandler = (e) => { setLectureId(e.target.value); }
     
-    const cancel = () => { nav(`/user/service/course-data/getall`); }
+    const cancel = () => { nav(`/admin/course-data/add`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -88,8 +88,10 @@ function AddCourseData() {
                                     <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
                                            value={lectureId} onChange={changeLectureHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateCourseData}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateCourseData}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

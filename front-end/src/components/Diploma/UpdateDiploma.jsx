@@ -60,7 +60,7 @@ function UpdateDiploma() {
         setDiplomaCode(event.target.value);
     };
 
-    const cancel = () => { nav(`/user/service/diploma/${id}`); }
+    const cancel = () => { nav(`/user/service/diploma`); }
 
     const getTitle = () => {
         if (id === 'add') return <h3 className="text-center">Thêm bằng cấp</h3>;

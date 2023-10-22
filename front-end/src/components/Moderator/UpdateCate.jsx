@@ -92,8 +92,10 @@ const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
                                     <input placeholder="số ngày..." name="numDates" className="form-control"
                                            value={numOfDate} onChange={changeDateHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateModerate}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateModerate}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -45,7 +45,7 @@ function AddCourse() {
 
     const changeNoteHandler = (e) => { setNote(e.target.value); }
 
-    const cancel = () => { nav(`/user/service/course/getall`); }
+    const cancel = () => { nav(`/admin/course/all`); }
 
     const setTitle = () => {
         if (id === 'add')
@@ -78,8 +78,10 @@ function AddCourse() {
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={note} onChange={changeNoteHandler}/>
                                 </div>
-                                <button className="btn btn-primary m-1" onClick={saveOrUpdateCourse}>Lưu</button>
-                                <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end">
+                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateCourse}>Lưu</button>
+                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                </div>
                             </form>
                         </div>
                     </div>

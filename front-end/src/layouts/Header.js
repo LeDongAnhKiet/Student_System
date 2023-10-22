@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import {Link, useNavigate} from 'react-router-dom';
-import logo from "../styles/ou_logo.png";
+import logo from "../styles/image/ou_logo.png";
 import {UserContext} from "../app/App";
 
 const Header = () => {

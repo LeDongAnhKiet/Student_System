@@ -14,7 +14,7 @@ function DepartmentList() {
     }, []);
 
     return (
-        <div className='mb-5'>
+        <div className='mb-5 pd-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách các khoa</h3>
                 <div className="row">
