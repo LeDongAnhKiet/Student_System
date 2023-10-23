@@ -2,7 +2,7 @@ export { default as UserInfoList } from './User/UserInfoList';
 export { default as UserSemesterList } from './User/UserSemesterList';
 export { default as CateList } from './User/CateList';
 export { default as UserDetailsList } from './User/UserDetailsList';
-export { default as PaymentList } from './User/PaymentList';
+export { default as CreatePayment } from './User/CreatePayment';
 
 export { default as AddUnlockStud } from './UnlockStud/AddUnlockStud';
 export { default as UpdateUnlockStud } from './UnlockStud/UpdateUnlockStud';

@@ -17,7 +17,7 @@ function UpdateUnlockStud() {
             })
     }, [id]);
 
-    const saveOrUpdateUnlockStud = (e) => {
+    const saveUnlockStud = (e) => {
         e.preventDefault();
         const unlockStud = {
             image,
@@ -36,15 +36,15 @@ function UpdateUnlockStud() {
 
     const setTitle = () => {
         if (id === 'add')
-            return <h3 className="text-center">Mở khóa</h3>
+            return <h3 className="text-center mt-2">Mở khóa</h3>
         else
-            return <h3 className="text-center">Chỉnh sửa khóa</h3>
+            return <h3 className="text-center mt-2">Chỉnh sửa khóa</h3>
     }
     return (
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
+                    <div className = "card col-md-6 offset-md-3">
                         { setTitle }
                         <div className = "card-body">
                             <form>
@@ -57,9 +57,9 @@ function UpdateUnlockStud() {
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={content} onChange={changeContentHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateUnlockStud}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

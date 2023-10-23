@@ -1,26 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import DiplomaService from "../../services/User/DiplomaService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function DiplomaList() {
+    const { id } = useParams();
     const [diplomas, setDiplomas] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        DiplomaService.getDiploma().then((res) => {
+        DiplomaService.getDiploma(id).then((res) => {
             setDiplomas(res.data);
         });
     }, []);
 
     const addDiploma = () => { nav('/user/service/diploma/add'); };
 
-    const updateDiploma = (id) => { nav(`/user/service/diploma/update/${id}`); }
+    const updateDiploma = (diploma) => {
+        nav(`/user/service/diploma/update/${diploma.id}`, {
+            state: {
+                copy: diploma.copy,
+                phoneContact: diploma.phoneContact,
+                email: diploma.email,
+                diplomaYear: diploma.diplomaYear,
+                diplomaCode: diploma.diplomaCode,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
             <Container fluid>
-                <h3 className ="App">Cấp bằng tốt nghiệp</h3>
+                <h3 className ="App">Cấp bản sao bằng tốt nghiệp</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center"><tr>
@@ -43,7 +54,7 @@ function DiplomaList() {
                                 <td>{diploma.onlineService.createdDate}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                        onClick={updateDiploma}>Sửa bằng cấp
+                                        onClick={() => updateDiploma(diploma)}>Sửa bằng cấp
                                     </button>
                                 </td>
                             </tr>

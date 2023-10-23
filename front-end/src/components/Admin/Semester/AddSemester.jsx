@@ -18,7 +18,7 @@ function AddSemester() {
         })
     }, [id]);
 
-    const saveOrUpdateSemester = (e) => {
+    const saveSemester = (e) => {
         e.preventDefault();
         if (semesterName === '') setErr('Vui lòng nhập đầy đủ thông tin');
         else {
@@ -49,8 +49,8 @@ function AddSemester() {
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
-                        <h3 className="App">Thêm học kỳ</h3>
+                    <div className = "card col-md-6 offset-md-3">
+                        <h3 className="App mt-2">Thêm học kỳ</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -63,9 +63,9 @@ function AddSemester() {
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={note} onChange={changeNoteHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateSemester}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={saveSemester}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

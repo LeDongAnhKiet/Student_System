@@ -72,7 +72,7 @@ function UpdateCourseData() {
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
+                    <div className = "card col-md-6 offset-md-3">
                         <h3 className="App mt-2">Chỉnh sửa lớp học</h3>
                         <div className = "card-body">
                             <form>
@@ -96,9 +96,9 @@ function UpdateCourseData() {
                                     <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
                                            value={lectureIdInput} onChange={changeLectureHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={updateCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={updateCourseData}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

@@ -41,7 +41,7 @@ function Signin() {
                     'payload': data
                 });
 
-                if (data !== null) {
+                if (data !== null || user !== null) {
                     setError('Đăng nhập thành công.');
                     nav('/home');
                 }

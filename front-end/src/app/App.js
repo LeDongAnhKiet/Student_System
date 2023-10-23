@@ -31,14 +31,12 @@ const App = () => {
                     <Route path="/user/info" element={<Comp.UserInfoList />} />
                     <Route path="/user/semester" element={<Comp.UserSemesterList />} />
                     <Route path="/user/semester/:id/course" element={<Comp.UserDetailsList />} />
+                    <Route path="/user/payment/create" element={<Comp.CreatePayment />} />
 
-                    <Route path="/user/payment/" element={<Comp.PaymentList />} />
-                    <Route path="/user/payment/:id" element={<Comp.PaymentList />} />
-
-                    <Route path="/user/service/transcript/" element={<Comp.TranscriptList />} />
-                    <Route path="/user/service/diploma/" element={<Comp.DiplomaList />} />
-                    <Route path="/user/service/stud-cert/" element={<Comp.StudCertificateList />} />
-                    <Route path="/user/service/unlock-stud/" element={<Comp.UnlockStudList />} />
+                    <Route path="/user/service/transcript/:id" element={<Comp.TranscriptList />} />
+                    <Route path="/user/service/diploma/:id" element={<Comp.DiplomaList />} />
+                    <Route path="/user/service/stud-cert/:id" element={<Comp.StudCertificateList />} />
+                    <Route path="/user/service/unlock-stud/:id" element={<Comp.UnlockStudList />} />
 
                     <Route path="/user/service/transcript/add" element={<Comp.AddTranscript />} />
                     <Route path="/user/service/diploma/add" element={<Comp.AddDiploma />} />

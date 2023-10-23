@@ -25,7 +25,7 @@ function UpdateCate() {
             })
     }, [id]);
 
-    const saveOrUpdateModerate = (e) => {
+    const saveModerate = (e) => {
         e.preventDefault();
         const cate = {
             serviceCateName,
@@ -53,16 +53,16 @@ const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
 
     const getTitle = () => {
         if (id === 'add')
-            return <h3 className="text-center">Thêm dịch vụ</h3>
+            return <h3 className="text-center mt-2">Thêm dịch vụ</h3>
         else
-            return <h3 className="text-center">Chỉnh sửa dịch vụ</h3>
+            return <h3 className="text-center mt-2">Chỉnh sửa dịch vụ</h3>
     };
 
     return (
         <div>
             <div className="container">
                 <div className="row">
-                    <div className="card col-md-6 offset-md-5">
+                    <div className="card col-md-6 offset-md-3">
                         { getTitle }
                         <div className = "card-body">
                             <form>
@@ -91,9 +91,9 @@ const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
                                     <input placeholder="số ngày..." name="numDates" className="form-control"
                                            value={numOfDate} onChange={changeDateHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateModerate}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={saveModerate}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

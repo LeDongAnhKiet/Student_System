@@ -1,21 +1,32 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
 import StudCertificateService from "../../services/User/StudCertificateService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function StudCertificateList() {
+    const { id } = useParams();
     const [studCertificates, setStudCertificates] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        StudCertificateService.getStudCertificate().then((res) => {
+        StudCertificateService.getStudCertificate(id).then((res) => {
             setStudCertificates(res.data);
         });
     }, []);
 
     const addStudCertificate = () => { nav('/user/service/stud-cert/add'); };
 
-    const updateStudCertificate = (id) => { nav(`/user/service/stud-cert/update/${id}`); }
+    const updateStudCertificate = (studCertificate) => {
+        nav(`/user/service/stud-cert/update/${studCertificate.id}`, {
+            state: {
+                vietCopy: studCertificate.vietCopy,
+                engCopy: studCertificate.engCopy,
+                email: studCertificate.email,
+                phoneContact: studCertificate.phoneContact,
+                content: studCertificate.content,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
@@ -40,7 +51,7 @@ function StudCertificateList() {
                                 <td>{studCertificate.phoneContact}</td>
                                 <td>{studCertificate.content}</td>
                                 <td><button className="btn-success btn"
-                                            onClick={updateStudCertificate}>Sửa chứng nhận
+                                            onClick={() => updateStudCertificate(studCertificate)}>Sửa chứng nhận
                                 </button></td>
                             </tr>
                         ))}

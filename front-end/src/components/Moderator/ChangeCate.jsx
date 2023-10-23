@@ -28,7 +28,7 @@ function ChangeCate() {
     return (
         <div className='mb-5'>
             <Container fluid>
-                <h3 className="App">Đăng ký dịch vụ</h3>
+                <h3 className="App mt-2">Đăng ký dịch vụ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center">

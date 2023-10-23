@@ -25,7 +25,7 @@ function AddTranscript() {
             })
     }, [id]);
 
-    const saveOrUpdateTranscript = (e) => {
+    const saveTranscript = (e) => {
         e.preventDefault();
         const transcript = {
             language,
@@ -62,14 +62,14 @@ function AddTranscript() {
     const cancel = () => { nav(`/user/service/transcript`); }
 
     const setTitle = () => {
-            return <h3 className="text-center">Cấp bảng điểm</h3>
+            return <h3 className="text-center mt-2">Cấp bảng điểm</h3>
     }
 
     return (
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
+                    <div className = "card col-md-6 offset-md-3">
                         <h3 className="mt-2 text-center">Cấp bảng điểm</h3>                        <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -102,9 +102,9 @@ function AddTranscript() {
                                            value={isSealed.toString()} onChange={changeSealedHandler}/>
                                     <label className="form-check-label">Đánh dấu</label>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateTranscript}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={saveTranscript}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

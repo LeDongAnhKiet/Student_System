@@ -26,7 +26,16 @@ const Home = () => {
     const viewSemesters = () => { nav('/admin/semester/available'); }
     const viewStuds = () => { nav('/admin/student'); }
     const viewDepts = () => { nav('/admin/department'); }
-    const updateRequest = (id) => { nav(`user/service/${id}/update/${id}`); }
+    const updateRequest = (request) => {
+        if ((request.serviceCateName).includes('bảng điểm'))
+            nav(`/user/service/transcript/update/${request.id}`);
+        else if ((request.serviceCateName).includes('CNSV'))
+            nav(`/user/service/stud-cert/update/${request.id}`);
+        else if ((request.serviceCateName).includes('BTN'))
+            nav(`/user/service/diploma/update/${request.id}`);
+        else if ((request.serviceCateName).includes('Mở khóa'))
+            nav(`/user/service/unlock-stud/update/${request.id}`);
+    }
 
     useEffect(() => {
         const getUser = async () => {
@@ -62,20 +71,9 @@ const Home = () => {
             finally { setLoading(false); }
         }
 
-        const getPayment = async () => {
-            try {
-                setLoading(true);
-                const res = await UserService.getPaymentStatus();
-                setPayments(res.data);
-
-            } catch (error) { console.error('Lỗi lấy data: ', error); }
-
-            finally { setLoading(false); }
-        }
         getUser().then();
         getUserSemester().then();
         getRequest().then();
-        getPayment().then();
         //window.location.reload();
     }, []);
 
@@ -166,7 +164,7 @@ const Home = () => {
                                                 <td className="text-center">
                                                     <button className="btn-success btn"
                                                             onClick={() => {
-                                                                updateRequest(request.id)}}>
+                                                                updateRequest(request)}}>
                                                         Chỉnh sửa</button>
                                                     <button className="ms-2 btn-danger btn" onClick={() => {
                                                                 UserService.cancelRequest(request.id)}}>Hủy
@@ -180,37 +178,6 @@ const Home = () => {
                             ) : (
                                 <div className="App row">
                                     <span className="bg-warning fw-bold text-black p-2">Chưa đăng ký dịch vụ nào</span>
-                                </div>
-                            )}
-                            <h5 className="my-3 pb-2 border-bottom">Lịch sử thanh toán</h5>
-                            {payments.length ? (
-                                <div className="row">
-                                    <Table className="mt-3 table table-striped table-bordered">
-                                        <thead className="text-center">
-                                        <tr>
-                                            <th>VNPay</th>
-                                            <th>Ngày lập</th>
-                                            <th>Trạng thái</th>
-                                            <th>Thành tiền</th>
-                                            <th>URL</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {payments.map((payment) => (
-                                            <tr key={payment.id}>
-                                                <td>{payment.vnpayTxnred}</td>
-                                                <td>{payment.createdDate}</td>
-                                                <td>{payment.status}</td>
-                                                <td>{payment.price}</td>
-                                                <td>{payment.url}</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </Table>
-                                </div>
-                            ) : (
-                                <div className="App row">
-                                    <span className="bg-warning fw-bold text-black p-2">Chưa thanh toán dịch vụ nào</span>
                                 </div>
                             )}
                             <button className="border-0 bg-white h5 my-3 pb-2 border-bottom"

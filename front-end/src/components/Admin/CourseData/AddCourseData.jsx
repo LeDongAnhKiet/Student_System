@@ -23,7 +23,7 @@ function AddCourseData() {
         })
     }, [id]);
 
-    const saveOrUpdateCourseData = (e) => {
+    const saveCourseData = (e) => {
         e.preventDefault();
         if (startDate === '' || endDate === '' || courseId === null || lectureId === null)
             setErr('Vui lòng nhập đầy đủ thông tin');
@@ -71,7 +71,7 @@ function AddCourseData() {
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
+                    <div className = "card col-md-6 offset-md-3">
                         <h3 className="App mt-2">Thêm môn học</h3>
                         <div className = "card-body">
                             <form>
@@ -95,9 +95,9 @@ function AddCourseData() {
                                     <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
                                            value={lectureId} onChange={changeLectureHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={saveOrUpdateCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={saveCourseData}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>

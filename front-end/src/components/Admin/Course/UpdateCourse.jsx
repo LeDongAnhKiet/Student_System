@@ -27,7 +27,7 @@ function UpdateCourse() {
         if (courseNameInput === '' || creditsNumInput === null)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNumInput <= 0 || creditsNumInput > 5)
-            setErr('Vượt quá tín chỉ cho phép');
+            setErr('Số tín chỉ không hợp lệ');
         else {
             const course = {
             courseName: courseNameInput,
@@ -62,8 +62,8 @@ function UpdateCourse() {
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-5">
-                        <h3 className="App">Chỉnh sửa môn học</h3>
+                    <div className = "card col-md-6 offset-md-3">
+                        <h3 className="App mt-2">Chỉnh sửa môn học</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -81,9 +81,9 @@ function UpdateCourse() {
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={noteInput} onChange={changeNoteHandler}/>
                                 </div>
-                                <div className="text-end">
-                                    <button className="btn btn-primary m-1" onClick={updateCourse}>Lưu</button>
-                                    <button className="btn btn-secondary m-1" onClick={cancel.bind(this)}>Hủy</button>
+                                <div className="text-end mt-2">
+                                    <button className="btn btn-primary me-1" onClick={updateCourse}>Lưu</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>
