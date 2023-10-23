@@ -64,12 +64,10 @@ function UpdateTranscript() {
 
     return (
         <div>
-            <br></br>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">
-                        { setTitle }
-                        <div className = "card-body">
+                        <h3 className="mt-2 text-center">Chỉnh sửa bảng điểm</h3>                        <div className = "card-body">
                             <form>
                                 <div className = "form-group">
                                     <label>Ngôn ngữ: </label>

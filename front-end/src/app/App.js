@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, useEffect, useReducer} from 'react';
 import '../styles/App.css';
 import Home from './Home';
 import {Navigate, Route, Routes} from 'react-router-dom';
@@ -12,7 +12,10 @@ import * as Comp from '../components';
 export const UserContext = createContext(null);
 const App = () => {
     const [user, setUser] = useReducer(Reducer,cookie.load('user') || null);
-    sessionStorage.getItem('user');
+
+    useEffect(() => {
+        sessionStorage.getItem('user');
+    })
 
     return (
         <UserContext.Provider value={[user, setUser]}>

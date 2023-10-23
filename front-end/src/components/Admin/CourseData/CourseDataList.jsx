@@ -21,16 +21,25 @@ function CourseDataList() {
         })
     }
 
-    const updateCourseData = (id) => { nav(`/admin/course-data/update/${id}`); }
+    const updateCourseData = (courseData) => {
+        nav(`/admin/course-data/update/${courseData.id}`, {
+            state: {
+                startDate: (courseData.startDate).split('-').reverse().join('-'),
+                endDate: (courseData.endDate).split('-').reverse().join('-'),
+                courseId: courseData.course.id,
+                lectureId: courseData.lecture.id,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
             <Container fluid>
-                <h3 className ="App">Chi tiết môn học</h3>
+                <h3 className ="App">Thông tin lớp học</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center"><tr>
-                            <th>Tên</th>
+                            <th>Tên môn học</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
                             <th>Giảng viên</th>
@@ -45,7 +54,7 @@ function CourseDataList() {
                                 <td>{courseData.lecture.lectureName}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={() => {updateCourseData(courseData.id)}}>Chỉnh sửa
+                                            onClick={() => {updateCourseData(courseData)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
                                             onClick={() => {deleteCourseData(courseData.id)}}>Xóa

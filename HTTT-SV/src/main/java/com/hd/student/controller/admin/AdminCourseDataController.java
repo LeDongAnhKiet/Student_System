@@ -34,7 +34,7 @@ public class AdminCourseDataController {
     }
 
 
-    @DeleteMapping("/course-date/delete/{id}")
+    @DeleteMapping("/course-data/delete/{id}")
     public ResponseEntity<?> deleteCourseData(@PathVariable int id){
         return new ResponseEntity<>(this.courseDataService.deleteCourseData(id), HttpStatus.OK);
     }

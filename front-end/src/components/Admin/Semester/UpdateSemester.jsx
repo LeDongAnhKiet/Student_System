@@ -1,66 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import SemesterService from "../../../services/Admin/SemesterService";
 
 function UpdateSemester() {
     const { id } = useParams();
-    const [semesterName, setSemesterName] = useState('');
-    const [note, setNote] = useState('');
+    const loc = useLocation();
     const nav = useNavigate();
+    const [err, setErr] = useState('');
+
+    const { semesterName, note } = loc.state || {};
+    const [semesterNameInput, setSemesterNameInput] = useState(semesterName || '');
+    const [noteInput, setNoteInput] = useState(note || '');
 
     useEffect(() => {
-        if (id !== 'add')
-            SemesterService.getSemesterById(id).then((res) => {
-                let semester = res.data;
-                setSemesterName(semester.semesterName);
-                setNote(semester.note);
-            })
+        SemesterService.getSemesterById(id).then((res) => {
+            let semester = res.data;
+            setSemesterNameInput(semester.semesterName);
+            setNoteInput(semester.note);
+        })
     }, [id]);
 
     const updateSemester = (e) => {
         e.preventDefault();
-        // tao doi tuong tu cac gia tri
-        const semester = {
-            semesterName,
-            note,
-        };
+        if (semesterNameInput === '') setErr('Vui lòng nhập đầy đủ thông tin');
+        else {
+            const semester = {
+                semesterName: semesterNameInput,
+                note: noteInput,
+            };
 
-        SemesterService.updateSemester(semester, id).then(() => {
-            nav(`/admin/semester/update/${id}`);
-        });
+            SemesterService.updateSemester(semester, id).then(() => {
+                nav(`/admin/semester/available`);
+            })
+        }
     };
 
-    const changeSemesterNameHandler = (e) => { setSemesterName(e.target.value); }
+    const changeSemesterNameHandler = (e) => {
+        setSemesterNameInput(e.target.value);
+        setErr('');
+    }
 
-    const changeNoteHandler = (e) => { setNote(e.target.value); }
+    const changeNoteHandler = (e) => {
+        setNoteInput(e.target.value);
+        setErr('');
+    }
 
     const cancel = () => { nav(`/admin/semester/available`); }
 
-    const getTitle = () => {
-        if (id === 'add')
-            return <h3 className="App">Thêm học kỳ</h3>
-        else
-            return <h3 className="App">Chỉnh sửa học kỳ</h3>
-    };
-
     return (
         <div>
-            <br></br>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">
-                        { getTitle }
+                        <h3 className="App">Chỉnh sửa học kỳ</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
                                     <label>Tên học kỳ: </label>
                                     <input placeholder="học kỳ... khóa..." name="name" className="form-control"
-                                           value={semesterName} onChange={changeSemesterNameHandler}/>
+                                           value={semesterNameInput} onChange={changeSemesterNameHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Ghi chú: </label>
                                     <input placeholder="ghi chú..." name="note" className="form-control"
-                                           value={note} onChange={changeNoteHandler}/>
+                                           value={noteInput} onChange={changeNoteHandler}/>
                                 </div>
                                 <div className="text-end">
                                     <button className="btn btn-primary m-1" onClick={updateSemester}>Lưu</button>
@@ -68,6 +71,7 @@ function UpdateSemester() {
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>

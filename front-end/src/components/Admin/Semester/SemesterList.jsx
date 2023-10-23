@@ -21,12 +21,19 @@ function SemesterList() {
         })
     }
 
-    const updateSemester = (id) => { nav(`/admin/semester/update/${id}`); }
+    const updateSemester = (semester) => {
+        nav(`/admin/semester/update/${semester.id}`, {
+            state: {
+                semesterName: semester.semesterName,
+                note: semester.note,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
             <Container fluid>
-                <h3 className ="App">Danh sách các học kỳ</h3>
+                <h3 className ="App">Danh sách các học kỳ đang hoạt động</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center"><tr>
@@ -41,7 +48,7 @@ function SemesterList() {
                                 <td>{semester.note}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={() => {updateSemester(semester.id)}}>Chỉnh sửa
+                                            onClick={() => {updateSemester(semester)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
                                             onClick={() => {deleteSemester(semester.id)}}>Xóa

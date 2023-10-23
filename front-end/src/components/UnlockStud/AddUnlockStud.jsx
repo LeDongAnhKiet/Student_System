@@ -50,7 +50,6 @@ function AddUnlockStud() {
 
     return (
         <div>
-            <br></br>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">

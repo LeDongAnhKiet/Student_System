@@ -26,6 +26,7 @@ const Home = () => {
     const viewSemesters = () => { nav('/admin/semester/available'); }
     const viewStuds = () => { nav('/admin/student'); }
     const viewDepts = () => { nav('/admin/department'); }
+    const updateRequest = (id) => { nav(`user/service/${id}/update/${id}`); }
 
     useEffect(() => {
         const getUser = async () => {
@@ -151,6 +152,7 @@ const Home = () => {
                                             <th>Ngày yêu cầu</th>
                                             <th>Trạng thái</th>
                                             <th>Thành tiền</th>
+                                            <th>Thao tác</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -160,6 +162,16 @@ const Home = () => {
                                                 <td>{request.createdDate}</td>
                                                 <td>{request.status}</td>
                                                 <td>{request.price}</td>
+                                                {request.status === 'PENDING' ?
+                                                <td className="text-center">
+                                                    <button className="btn-success btn"
+                                                            onClick={() => {
+                                                                updateRequest(request.id)}}>
+                                                        Chỉnh sửa</button>
+                                                    <button className="ms-2 btn-danger btn" onClick={() => {
+                                                                UserService.cancelRequest(request.id)}}>Hủy
+                                                    </button>
+                                                </td> : <td className="text-center fw-bold">Đã được duyệt</td>}
                                             </tr>
                                         ))}
                                         </tbody>

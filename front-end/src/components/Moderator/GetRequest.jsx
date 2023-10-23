@@ -28,7 +28,7 @@ function ChangeCate() {
     return (
         <div className='mb-5'>
             <Container fluid>
-                <h3 className="App">Đăng ký dịch vụ</h3>
+                <h3 className="App">Quản lý dịch vụ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center">
@@ -48,11 +48,11 @@ function ChangeCate() {
                                 <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
                                 <td>{cate.description}</td>
                                 <td className="text-center">
-                                    <button className="btn-info btn"
-                                            onClick={() => {getCate(cate.id)}}>Xem
+                                    <button className="btn-success btn"
+                                            onClick={() => {getCate(cate.id)}}>Chỉnh sửa
                                     </button>
-                                    <button className="ms-2 btn-primary btn"
-                                            onClick={() => {addCate(cate.id)}}>Đăng ký
+                                    <button className="ms-2 btn-warning btn"
+                                            onClick={() => {addCate(cate.id)}}>Kiểm duyệt
                                     </button>
                                 </td>
                             </tr>
@@ -62,7 +62,7 @@ function ChangeCate() {
                 </div>
                 <div className="float-end row">
                     <button className="btn-info btn"
-                            onClick={getRequest}>Lịch sử đăng ký
+                            onClick={getRequest}>Tìm kiếm
                     </button>
                 </div>
             </Container>

@@ -21,7 +21,15 @@ function CourseList() {
         })
     }
 
-    const updateCourse = (id) => { nav(`/admin/course/update/${id}`); }
+    const updateCourse = (course) => {
+        nav(`/admin/course/update/${course.id}`, {
+            state: {
+                courseName: course.courseName,
+                creditsNum: course.creditsNum,
+                note: course.note,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
@@ -30,7 +38,7 @@ function CourseList() {
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
                         <thead className="text-center"><tr>
-                            <th>Tên</th>
+                            <th>Tên môn học</th>
                             <th>Số tín chỉ</th>
                             <th>Ghi chú</th>
                             <th>Thao tác</th>
@@ -43,7 +51,7 @@ function CourseList() {
                                 <td>{course.startDate}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={() => {updateCourse(course.id)}}>Chỉnh sửa
+                                            onClick={() => {updateCourse(course)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
                                             onClick={()=> {deleteCourse(course.id)}}>Xóa

@@ -5,57 +5,52 @@ import '../../../styles/App.css';
 
 function AddSemester() {
     const { id } = useParams();
+    const nav = useNavigate();
+    const [err, setErr] = useState('');
     const [semesterName, setSemesterName] = useState('');
     const [note, setNote] = useState('');
-    const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== 'add')
-            SemesterService.getAvailableSemester().then((res) => {
-                let semester = res.data;
-                setSemesterName(semester.semesterName);
-                setNote(semester.note);
-            })
+        SemesterService.getAvailableSemester().then((res) => {
+            let semester = res.data;
+            setSemesterName(semester.semesterName);
+            setNote(semester.note);
+        })
     }, [id]);
 
     const saveOrUpdateSemester = (e) => {
         e.preventDefault();
-        const semester = {
+        if (semesterName === '') setErr('Vui lòng nhập đầy đủ thông tin');
+        else {
+            const semester = {
             semesterName,
             note,
-        };
+            };
 
-        if (id === 'add') {
             SemesterService.addSemester(semester).then(() => {
                 nav('/admin/semester/add');
-            });
-        } else {
-            SemesterService.updateSemester(semester, id).then(() => {
-                nav(`/admin/semester/update/${id}`);
             });
         }
     };
 
-    const changeSemesterNameHandler = (e) => { setSemesterName(e.target.value); }
+    const changeSemesterNameHandler = (e) => {
+        setSemesterName(e.target.value);
+        setErr('');
+    }
 
-    const changeNoteHandler = (e) => { setNote(e.target.value); }
+    const changeNoteHandler = (e) => {
+        setNote(e.target.value);
+        setErr('');
+    }
 
     const cancel = () => { nav(`/admin/semester/available`); }
 
-    const setTitle = () => {
-        if (id === 'add')
-            return <h3 className="App">Thêm học kỳ</h3>
-        else
-            return <h3 className="App">Chỉnh sửa học kỳ</h3>
-    }
-
     return (
         <div>
-            <br></br>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">
-                        { setTitle }
+                        <h3 className="App">Thêm học kỳ</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -74,6 +69,7 @@ function AddSemester() {
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>

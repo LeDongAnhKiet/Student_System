@@ -5,62 +5,63 @@ import '../../../styles/App.css';
 
 function AddCourse() {
     const { id } = useParams();
+    const nav = useNavigate();
+    const [err, setErr] = useState('');
+
     const [courseName, setCourseName] = useState('');
     const [creditsNum, setCreditsNum] = useState(0);
     const [note, setNote] = useState('');
-    const nav = useNavigate();
 
     useEffect(() => {
-        if (id !== 'add')
-            CourseService.getCourse().then((res) => {
-                let course = res.data;
-                setCourseName(course.courseName);
-                setCreditsNum(course.creditsNum);
-                setNote(course.note);
-            })
+        CourseService.getCourse().then((res) => {
+            let course = res.data;
+            setCourseName(course.courseName);
+            setCreditsNum(course.creditsNum);
+            setNote(course.note);
+        })
     }, [id]);
 
     const saveOrUpdateCourse = (e) => {
         e.preventDefault();
-        const course = {
-            courseName,
-            creditsNum,
-            note,
-        };
-
-        if (id === 'add') {
+        if (courseName === '' || note === '' || creditsNum === null)
+            setErr('Vui lòng nhập đầy đủ thông tin');
+        else if (creditsNum <= 0 || creditsNum > 5)
+            setErr('Vượt quá tín chỉ cho phép');
+        else {
+            const course = {
+                courseName,
+                creditsNum,
+                note,
+            };
             CourseService.addCourse(course).then(() => {
                 nav('/admin/course/add');
-            });
-        } else {
-            CourseService.updateCourse(course, id).then(() => {
-                nav(`/admin/course/update/${id}`);
             });
         }
     };
 
-    const changeCourseNameHandler = (e) => { setCourseName(e.target.value); }
+    const changeCourseNameHandler = (e) => {
+        setCourseName(e.target.value);
+        setErr('');
+    }
 
-    const changeCreditsNumHandler = (e) => { setCreditsNum(e.target.value); }
+    const changeCreditsNumHandler = (e) => {
+        setCreditsNum(e.target.value);
+        setErr('');
+    }
 
-    const changeNoteHandler = (e) => { setNote(e.target.value); }
+    const changeNoteHandler = (e) => {
+        setNote(e.target.value);
+        setErr('');
+    }
 
     const cancel = () => { nav(`/admin/course/all`); }
 
-    const setTitle = () => {
-        if (id === 'add')
-            return <h3 className="App">Thêm môn học</h3>
-        else
-            return <h3 className="App">Chỉnh sửa môn học</h3>
-    }
-
     return (
         <div>
-            <br></br>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-5">
-                        { setTitle }
+                        <h3 className="App">Thêm môn học</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -84,6 +85,7 @@ function AddCourse() {
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>
