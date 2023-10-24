@@ -1,61 +1,70 @@
 import React, {useEffect, useState} from 'react'
 import UnlockStudService from "../../services/User/UnlockStudService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 function UpdateUnlockStud() {
     const { id } = useParams();
-    const [image, setImage] = useState('');
-    const [content, setContent] = useState('');
+    const loc = useLocation();
     const nav = useNavigate();
+    const [err, setErr] = useState('');
+
+    const {image, content} = loc.state || {};
+    const [imageInput, setImageInput] = useState(image || '');
+    const [contentInput, setContentInput] = useState(content || '');
 
     useEffect(() => {
-        if (id !== 'add')
             UnlockStudService.getUnlockStud(id).then((res) => {
                 let unlockStud = res.data;
-                setImage(unlockStud.image);
-                setContent(unlockStud.content);
+                setImageInput(unlockStud.image);
+                setContentInput(unlockStud.content);
             })
     }, [id]);
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        const unlockStud = {
-            image,
-            content,
-        };
-            UnlockStudService.updateUnlockStud(unlockStud, id).then((res) => {
+        if (image === '' || content === '')
+            setErr('Vui lòng nhập đầy đủ thông tin');
+        else {
+            const unlockStud = {
+                image: setImageInput,
+                content: setContentInput,
+            };
+            UnlockStudService.updateUnlockStud(unlockStud, id).then(() => {
                 nav(`/user/service/unlock-stud/${id}`);
-        })
+            })
+        }
     };
 
-    const changeImageHandler = (e) => { setImage(e.target.value); }
-
-    const changeContentHandler = (e) => { setContent(e.target.value); }
-
-    const cancel = () => { nav(`/user/service/unlock-stud`); }
-
-    const setTitle = () => {
-        if (id === 'add')
-            return <h3 className="text-center mt-2">Mở khóa</h3>
-        else
-            return <h3 className="text-center mt-2">Chỉnh sửa khóa</h3>
+    const changeImageHandler = (e) => {
+        setImageInput(e.target.value);
+        setErr('');
     }
+
+    const changeContentHandler = (e) => {
+        setContentInput(e.target.value);
+        setErr('');
+    }
+
+    const cancel = () => { nav(`/guest/service-cate`); }
+
     return (
         <div>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        { setTitle }
+                        <h3 className="text-center mt-2">Chỉnh sửa mở khóa</h3>
                         <div className = "card-body">
                             <form>
                                 <div className="form-group">
                                     <label>Ảnh đại diện</label>
-                                    <input type="file" className="form-control-file" onChange={changeImageHandler} />
+                                    <br/>
+                                    <input type="file" className="form-control-file"
+                                           value={imageInput} onChange={changeImageHandler} />
                                 </div>
                                 <div className = "form-group">
                                     <label>Nội dung: </label>
                                     <input placeholder="Nội dung" name="content" className="form-control"
-                                           value={content} onChange={changeContentHandler}/>
+                                           value={contentInput} onChange={changeContentHandler}/>
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
@@ -63,6 +72,7 @@ function UpdateUnlockStud() {
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>

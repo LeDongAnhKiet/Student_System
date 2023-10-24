@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Table} from 'reactstrap';
+import {Alert, Container, Table} from 'reactstrap';
 import SemesterService from "../../../services/Admin/SemesterService";
 import {useNavigate} from "react-router-dom";
 
 function SemesterList() {
     const [semesters, setSemesters] = useState([]);
     const nav = useNavigate();
+    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         SemesterService.getAvailableSemester().then((res) => {
@@ -15,10 +16,11 @@ function SemesterList() {
 
     const addSemester = () => { nav('/admin/semester/add'); }
 
-    const deleteSemester = (id) => {
-        SemesterService.deleteSemester(id).then(() => {
-            setSemesters(semesters.filter(semester => semester.id !== id));
+    const deleteSemester = (semester) => {
+        SemesterService.deleteSemester(semester.id).then(() => {
+            setSemesters(semesters.filter(s => s.id !== semester.id));
         })
+        setSuccess(`Xóa ${semester.semesterName} thành công.`)
     }
 
     const updateSemester = (semester) => {
@@ -51,7 +53,7 @@ function SemesterList() {
                                             onClick={() => {updateSemester(semester)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
-                                            onClick={() => {deleteSemester(semester.id)}}>Xóa
+                                            onClick={() => {deleteSemester(semester)}}>Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -64,6 +66,9 @@ function SemesterList() {
                             onClick={addSemester}>Thêm
                     </button>
                 </div>
+                {success && <Alert color="success" className="fixed-bottom"
+                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
+                   onMouseEnter={() => setSuccess('')}>{success}</Alert>}
             </Container>
         </div>
     );

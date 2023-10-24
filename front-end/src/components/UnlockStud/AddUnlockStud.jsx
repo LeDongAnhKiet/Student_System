@@ -3,61 +3,50 @@ import UnlockStudService from "../../services/User/UnlockStudService";
 import {useNavigate, useParams} from "react-router-dom";
 
 function AddUnlockStud() {
-    const { id } = useParams();
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
     const nav = useNavigate();
-
-    useEffect(() => {
-        if (id !== 'add')
-            UnlockStudService.getUnlockStud(id).then((res) => {
-                let unlockStud = res.data;
-                setImage(unlockStud.image);
-                setContent(unlockStud.content);
-            })
-    }, [id]);
+    const [err, setErr] = useState('');
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        const unlockStud = {
-            image,
-            content,
-        };
+        if (image === '' || content === '')
+            setErr('Vui lòng nhập đầy đủ thông tin');
+        else {
+            const unlockStud = {
+                image,
+                content,
+            };
 
-        if (id === 'add') {
-            UnlockStudService.addUnlockStud(unlockStud).then((res) => {
+            UnlockStudService.addUnlockStud(unlockStud).then(() => {
                 nav('/user/service/unlock-stud/add');
-            });
-        } else {
-            UnlockStudService.updateUnlockStud(unlockStud, id).then((res) => {
-                nav(`/user/service/unlock-stud/update/${id}`);
             });
         }
     };
 
-    const changeImageHandler = (e) => { setImage(e.target.value); }
-
-    const changeContentHandler = (e) => { setContent(e.target.value); }
-
-    const cancel = () => { nav(`/user/service/unlock-stud`); }
-
-    const setTitle = () => {
-        if (id === 'add')
-            return <h3 className="text-center mt-2">Mở khóa</h3>
-        else
-            return <h3 className="text-center mt-2">Chỉnh sửa khóa</h3>
+    const changeImageHandler = (e) => {
+        setImage(e.target.value);
+        setErr('');
     }
+
+    const changeContentHandler = (e) => {
+        setContent(e.target.value);
+        setErr('');
+    }
+
+    const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
         <div>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        { setTitle }
+                        <h3 className="text-center mt-2">Đăng ký mở khóa sinh viên</h3>
                         <div className = "card-body">
                             <form>
                                 <div className="form-group">
                                     <label>Ảnh đại diện</label>
+                                    <br/>
                                     <input type="file" className="form-control-file" onChange={changeImageHandler} />
                                 </div>
                                 <div className = "form-group">
@@ -71,6 +60,7 @@ function AddUnlockStud() {
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>

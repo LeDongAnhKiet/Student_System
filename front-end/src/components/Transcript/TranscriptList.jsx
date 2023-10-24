@@ -1,21 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import TranscriptService from "../../services/User/TranscriptService";
 
 function TranscriptList() {
+    const { id } = useParams();
     const [transcripts, setTranscripts] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        TranscriptService.getTranscript().then((res) => {
+        TranscriptService.getTranscript(id).then((res) => {
             setTranscripts(res.data);
         });
     }, []);
 
     const addTranscript = () => { nav('/user/service/transcript/add'); };
 
-    const updateTranscript = (id) => { nav(`/user/service/transcript/update/${id}`); }
+    const updateTranscript = (transcript) => {
+        nav(`/user/service/transcript/update/${transcript.id}`, {
+            state: {
+                language: transcript.language,
+                fromSemester: transcript.fromSemester,
+                toSemester: transcript.toSemester,
+                quantity: transcript.quantity,
+                contactPhone: transcript.contactPhone,
+                isSealed: transcript.isSealed,
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
@@ -40,10 +52,10 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
-                                <td>{transcript.isSealed ? 'Đã có' : 'Chưa có'}</td>
+                                <td>{transcript.isSealed ? 'Đã đóng dấu' : 'Chưa đóng dấu'}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={updateTranscript}>Sửa bảng điểm
+                                            onClick={() => updateTranscript(transcript)}>Sửa bảng điểm
                                     </button>
                                 </td>
                             </tr>
@@ -53,7 +65,7 @@ function TranscriptList() {
                 </div>
                 <div className="float-end row">
                     <button className="btn-primary btn"
-                            onClick={addTranscript}>In bảng điểm
+                            onClick={addTranscript}>Đăng ký cấp bảng điểm
                     </button>
                 </div>
             </Container>

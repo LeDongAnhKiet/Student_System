@@ -16,15 +16,14 @@ function UpdateStudCertificate() {
     const [contentInput, setContentInput] = useState(content || '');
 
     useEffect(() => {
-        if (id !== 'add')
-            StudCertificateService.getStudCertificate(id).then((res) => {
-                let studCertificate = res.data;
-                setVietCopyInput(studCertificate.vietCopy);
-                setPhoneContactInput(studCertificate.phoneContact);
-                setEmailInput(studCertificate.email);
-                setEngCopyInput(studCertificate.engCopy);
-                setContentInput(studCertificate.content);
-            })
+        StudCertificateService.getStudCertificate(id).then((res) => {
+            let studCertificate = res.data;
+            setVietCopyInput(studCertificate.vietCopy);
+            setPhoneContactInput(studCertificate.phoneContact);
+            setEmailInput(studCertificate.email);
+            setEngCopyInput(studCertificate.engCopy);
+            setContentInput(studCertificate.content);
+        })
     }, [id]);
 
     const updateStudCertificate = (e) => {

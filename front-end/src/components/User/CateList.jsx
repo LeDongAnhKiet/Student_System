@@ -2,14 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'reactstrap';
 import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
+import UserService from "../../services/User/UserService";
 
 function CateList() {
+    const [user, setUser] = useState({});
     const [cates, setCates] = useState([]);
     const nav = useNavigate();
     const { id } = useParams();
     const [error, setError] = useState('');
 
     useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await UserService.getUser();
+                setUser(res.data);
+            }
+            catch (error) { console.error('Lỗi lấy data: ', error); }
+        }
+        getUser().then();
+
         if (id)
             // Trường hợp có id - Lấy dịch vụ cụ thể
             CateService.getCateById(id).then((res) => {
@@ -42,6 +53,18 @@ function CateList() {
         }
     }
 
+    const updateCate = (cate) => {
+        nav(`/user/service/unlock-stud/update/${cate.id}`, {
+            state: {
+                serviceCateName: cate.serviceCateName,
+                price: cate.price,
+                isAvailable: cate.isAvailable,
+                description: cate.description,
+                numOfDate: cate.numOfDate,
+            }
+        });
+    }
+
     return (
         <div className='mb-5'>
             <Container fluid>
@@ -70,6 +93,11 @@ function CateList() {
                                     <button className="btn-primary btn"
                                             onClick={() => {addCate(cate.id)}}>Đăng ký
                                     </button>
+                                    {user.role !== 'USER' ?
+                                        <button className="ms-2 btn-success btn"
+                                                onClick={() => {updateCate(cate.id)}}>Chỉnh sửa
+                                        </button>
+                                    : <></>}
                                 </td>
                             </tr>
                         ))}

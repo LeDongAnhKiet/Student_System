@@ -1,21 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import { Container, Table } from 'reactstrap';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import UnlockStudService from "../../services/User/UnlockStudService";
 
 function UnlockStudList() {
+    const { id } = useParams();
     const [unlockStuds, setUnlockStuds] = useState([]);
     const nav = useNavigate();
 
     useEffect(() => {
-        UnlockStudService.getUnlockStud().then((res) => {
+        UnlockStudService.getUnlockStud(id).then((res) => {
             setUnlockStuds(res.data);
         });
     }, []);
 
     const addUnlockStud = () => { nav('/user/service/unlock-stud/add'); };
 
-    const updateUnlockStud = (id) => { nav(`/user/service/unlock-stud/update/${id}`); }
+    const updateUnlockStud = (stud) => {
+        nav(`/user/service/unlock-stud/update/${stud.id}`, {
+            state: {
+                image: stud.image,
+                content: stud.content
+            }
+        });
+    }
 
     return (
         <div className='mb-5'>
@@ -35,7 +43,7 @@ function UnlockStudList() {
                                 <td>{unlockStud.image}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={updateUnlockStud}>Sửa mở khóa
+                                            onClick={() => updateUnlockStud(unlockStud)}>Chỉnh sửa
                                     </button>
                                 </td>
                             </tr>
@@ -45,7 +53,7 @@ function UnlockStudList() {
                 </div>
                 <div className="float-end row">
                     <button className="btn-primary btn"
-                            onClick={addUnlockStud}>Xin mở khóa
+                            onClick={addUnlockStud}>Đăng ký mở khóa
                     </button>
                 </div>
             </Container>

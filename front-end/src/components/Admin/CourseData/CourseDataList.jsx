@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Table} from 'reactstrap';
+import {Alert, Container, Table} from 'reactstrap';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 import {useNavigate} from "react-router-dom";
 
 function CourseDataList() {
     const [courseDatas, setCourseDatas] = useState([]);
     const nav = useNavigate();
+    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         CourseDataService.getCourse().then((res) => {
@@ -15,10 +16,11 @@ function CourseDataList() {
 
     const addCourseData = () => { nav('/admin/course-data/add'); }
 
-    const deleteCourseData = (id) => {
-        CourseDataService.deleteCourse(id).then(() => {
-            setCourseDatas(courseDatas.filter(courseData => courseData.id !== id));
+    const deleteCourseData = (data) => {
+        CourseDataService.deleteCourse(data.id).then(() => {
+            setCourseDatas(courseDatas.filter(courseData => courseData.id !== data.id));
         })
+        setSuccess(`Xóa ${data.course.courseName} thành công.`)
     }
 
     const updateCourseData = (courseData) => {
@@ -57,7 +59,7 @@ function CourseDataList() {
                                             onClick={() => {updateCourseData(courseData)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
-                                            onClick={() => {deleteCourseData(courseData.id)}}>Xóa
+                                            onClick={() => {deleteCourseData(courseData)}}>Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -70,6 +72,9 @@ function CourseDataList() {
                             onClick={addCourseData}>Thêm
                     </button>
                 </div>
+                {success && <Alert color="success" className="fixed-bottom"
+                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
+                   onMouseEnter={() => setSuccess('')}>{success}</Alert>}
             </Container>
         </div>
     );

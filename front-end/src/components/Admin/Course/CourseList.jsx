@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Table} from 'reactstrap';
+import {Alert, Container, Table} from 'reactstrap';
 import CourseService from "../../../services/Admin/CourseService";
 import {useNavigate} from "react-router-dom";
 
 function CourseList() {
     const [courses, setCourses] = useState([]);
     const nav = useNavigate();
+    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         CourseService.getCourse().then((res) => {
@@ -15,10 +16,11 @@ function CourseList() {
 
     const addCourse = () => { nav('/admin/course/add'); }
 
-    const deleteCourse = (id) => {
-        CourseService.deleteCourse(id).then(() => {
-            setCourses(courses.filter(course => course.id !== id));
+    const deleteCourse = (course) => {
+        CourseService.deleteCourse(course.id).then(() => {
+            setCourses(courses.filter(c => c.id !== course.id));
         })
+        setSuccess(`Xóa ${course.courseName} thành công.`)
     }
 
     const updateCourse = (course) => {
@@ -54,7 +56,7 @@ function CourseList() {
                                             onClick={() => {updateCourse(course)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-danger btn"
-                                            onClick={()=> {deleteCourse(course.id)}}>Xóa
+                                            onClick={()=> {deleteCourse(course)}}>Xóa
                                     </button>
                                 </td>
                             </tr>
@@ -67,6 +69,9 @@ function CourseList() {
                             onClick={addCourse}>Thêm
                     </button>
                 </div>
+                {success && <Alert color="success" className="fixed-bottom"
+                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
+                   onMouseEnter={() => setSuccess('')}>{success}</Alert>}
             </Container>
         </div>
     );

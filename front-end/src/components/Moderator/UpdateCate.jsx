@@ -1,69 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import HomeService from "../../services/Guest/HomeService";
 import ModerateService from "../../services/Mod/ModerateService";
 
 function UpdateCate() {
     const { id } = useParams();
-    const [serviceCateName, setServiceCateName] = useState(0);
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState('');
-    const [isAvailable, setIsAvailable] = useState(false);
-    const [numOfDate, setNumOfDate] = useState(0);
+    const loc = useLocation();
     const nav = useNavigate();
+    const [err, setErr] = useState('');
+
+    const {serviceCateName, price, description, isAvailable, numOfDate} = loc.state || {};
+    const [serviceCateNameInput, setServiceCateNameInput] = useState(serviceCateName || '');
+    const [priceInput, setPriceInput] = useState(price || 0);
+    const [descriptionInput, setDescriptionInput] = useState(description || '');
+    const [isAvailableInput, setIsAvailableInput] = useState(isAvailable || false);
+    const [numOfDateInput, setNumOfDateInput] = useState(numOfDate || 0);
 
     useEffect(() => {
-        if (id !== 'add')
-            HomeService.getCate(id).then((res) => {
-                let cate = res.data;
-                // set state cho cate
-                setServiceCateName(cate.serviceCateName);
-                setPrice(cate.price);
-                setDescription(cate.description);
-                setIsAvailable(cate.isAvailable);
-                setNumOfDate(cate.numOfDate);
-            })
+        HomeService.getCate(id).then((res) => {
+            let cate = res.data;
+            setServiceCateNameInput(cate.serviceCateName);
+            setPriceInput(cate.price);
+            setDescriptionInput(cate.description);
+            setIsAvailableInput(cate.isAvailable);
+            setNumOfDateInput(cate.numOfDate);
+        })
     }, [id]);
 
-    const saveModerate = (e) => {
+    const saveCate = (e) => {
         e.preventDefault();
-        const cate = {
-            serviceCateName,
-            price,
-            description,
-            isAvailable,
-            numOfDate,
-        };
+        if (serviceCateNameInput === '' || priceInput === null || descriptionInput === '' || numOfDateInput === null)
+            setErr('Vui lòng nhập đầy đủ thông tin');
+        else if (priceInput.toString() <= 0 || numOfDateInput.toString() <= 0)
+            setErr('Số nhập không hợp lệ');
+        else {
+            const cate = {
+                serviceCateName: serviceCateNameInput,
+                price: priceInput,
+                description: descriptionInput,
+                isAvailable: isAvailableInput,
+                numOfDate: numOfDateInput,
+            };
 
-        ModerateService.updateCate(cate, id).then(() => {
-            nav(`/moderator/service-cate/update/${id}`);
-        });
+            ModerateService.updateCate(cate, id).then(() => {
+                nav(`/moderator/service-cate/update/${id}`);
+            })
+        }
     }
-const changeServiceCateNameHandler = (e) => { setServiceCateName(e.target.value); }
+    const changeServiceCateNameHandler = (e) => { setServiceCateNameInput(e.target.value); }
 
-const changePriceHandler = (e) => { setPrice(e.target.value); }
+    const changePriceHandler = (e) => { setPriceInput(e.target.value); }
 
-const changeDescriptionHandler = (e) => { setDescription(e.target.value); }
+    const changeDescriptionHandler = (e) => { setDescriptionInput(e.target.value); }
 
-const changeIsAvailableHandler = (e) => { setIsAvailable(e.target.value); }
+    const changeIsAvailableHandler = (e) => { setIsAvailableInput(e.target.value); }
 
-const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
+    const changeDateHandler = (e) => { setNumOfDateInput(e.target.value); }
 
-    const cancel = () => { nav(-1); }
-
-    const getTitle = () => {
-        if (id === 'add')
-            return <h3 className="text-center mt-2">Thêm dịch vụ</h3>
-        else
-            return <h3 className="text-center mt-2">Chỉnh sửa dịch vụ</h3>
-    };
+    const cancel = () => { nav('/guest/service-cate'); }
 
     return (
         <div>
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3">
-                        { getTitle }
+                        <h3 className="text-center mt-2">Chỉnh sửa dịch vụ</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -92,11 +93,12 @@ const changeDateHandler = (e) => { setNumOfDate(e.target.value); }
                                            value={numOfDate} onChange={changeDateHandler}/>
                                 </div>
                                 <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveModerate}>Lưu</button>
+                                    <button className="btn btn-primary me-1" onClick={saveCate}>Lưu</button>
                                     <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
                                 </div>
                             </form>
                         </div>
+                        {err && <div className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>
