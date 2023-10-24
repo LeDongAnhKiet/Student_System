@@ -7,7 +7,7 @@ const Reducer = (currentState, action) => {
         case 'signout':
             cookie.remove('token');
             cookie.remove('user');
-            sessionStorage.removeItem('user');
+            localStorage.removeItem('user');
             return null;
     }
     return currentState;

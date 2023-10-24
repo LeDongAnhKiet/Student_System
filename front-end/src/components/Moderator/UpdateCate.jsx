@@ -68,29 +68,29 @@ function UpdateCate() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Tên dịch vụ: </label>
-                                    <input placeholder="dịch vụ muốn đăng ký..." name="serviceCateName" className="form-control"
-                                           value={serviceCateName} onChange={changeServiceCateNameHandler}/>
+                                    <label>Tên dịch vụ</label>
+                                    <input placeholder="dịch vụ muốn chỉnh sửa..." name="serviceCateName" className="form-control"
+                                           value={serviceCateNameInput} onChange={changeServiceCateNameHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Thành tiền: </label>
+                                    <label>Thành tiền</label>
                                     <input placeholder="giá tiền..." name="price" className="form-control"
-                                           value={price} onChange={changePriceHandler}/>
+                                           value={priceInput} onChange={changePriceHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Nội dung: </label>
+                                    <label>Nội dung</label>
                                     <input placeholder="nội dung..." name="description" className="form-control"
-                                           value={description} onChange={changeDescriptionHandler}/>
+                                           value={descriptionInput} onChange={changeDescriptionHandler}/>
                                 </div>
-                                <div className = "form-group">
-                                    <label>Còn mở </label>
+                                <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-                                           checked={isAvailable} onChange={changeIsAvailableHandler}/>
+                                           checked={isAvailableInput} onChange={changeIsAvailableHandler}/>
+                                    <label className="form-check-label">Còn mở</label>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Thời gian cấp: </label>
+                                    <label>Thời gian cấp</label>
                                     <input placeholder="số ngày..." name="numDates" className="form-control"
-                                           value={numOfDate} onChange={changeDateHandler}/>
+                                           value={numOfDateInput} onChange={changeDateHandler}/>
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveCate}>Lưu</button>

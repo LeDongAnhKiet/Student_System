@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function AddTranscript() {
     const [language, setLanguage] = useState('');
@@ -17,20 +17,20 @@ function AddTranscript() {
         if (phoneContact === '' || fromSemester === null || language === ''
             || toSemester === null || quantity === null)
             setErr('Vui lòng nhập đầy đủ thông tin');
-        else if (toSemester.toString() <= 0 || fromSemester.toString() <= 0 || quantity.toString() <= 0)
+        else if (toSemester <= 0 || fromSemester <= 0 || quantity <= 0)
             setErr('Số nhập không hợp lệ');
         else {
             const transcript = {
                 language,
-                phoneContact,
                 fromSemester,
                 toSemester,
                 quantity,
+                phoneContact,
                 isSealed,
             };
 
             TranscriptService.addTranscript(transcript).then(() => {
-                nav('/user/service/transcript/add');
+                nav(`/user/payment/create/${transcript.id}`);
             });
         }
     };
@@ -46,22 +46,22 @@ function AddTranscript() {
     }
 
     const changeFromSemesterHandler = (e) => {
-        setFromSemester(e.target.value);
+        setFromSemester(parseInt(e.target.value));
         setErr('');
     }
 
     const changeToSemesterHandler = (e) => {
-        setToSemester(e.target.value);
+        setToSemester(parseInt(e.target.value));
         setErr('');
     }
 
     const changeQuantityHandler = (e) => {
-        setQuantity(e.target.value);
+        setQuantity(parseInt(e.target.value));
         setErr('');
     }
 
     const changeSealedHandler = (e) => {
-        setIsSealed(e.target.value);
+        setIsSealed(e.target.checked);
         setErr('');
     }
 
@@ -82,13 +82,13 @@ function AddTranscript() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Học kỳ bắt đầu: </label>
-                                    <input placeholder="1" name="fromSemester" className="form-control"
-                                           value={fromSemester} onChange={changeFromSemesterHandler}/>
+                                    <input placeholder="..." name="fromSemester" className="form-control"
+                                           type="number" value={fromSemester} onChange={changeFromSemesterHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Học kỳ kết thúc: </label>
-                                    <input placeholder="2" name="toSemester" className="form-control"
-                                           value={toSemester} onChange={changeToSemesterHandler}/>
+                                    <input placeholder="..." name="toSemester" className="form-control"
+                                           type="number" value={toSemester} onChange={changeToSemesterHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Số điện thoại: </label>
@@ -98,12 +98,12 @@ function AddTranscript() {
                                 <div className = "form-group">
                                     <label>Số bản sao: </label>
                                     <input placeholder="Số bản" name="quantity" className="form-control"
-                                           value={quantity} onChange={changeQuantityHandler}/>
+                                           type="number" value={quantity} onChange={changeQuantityHandler}/>
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-                                           value={isSealed.toString()} onChange={changeSealedHandler}/>
-                                    <label className="form-check-label">Có đánh dấu</label>
+                                           checked={isSealed} onChange={changeSealedHandler} />
+                                    <label className="form-check-label">Niêm phong (trường hợp gửi qua nước ngoài)</label>
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveTranscript}>Lưu</button>

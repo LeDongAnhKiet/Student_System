@@ -14,7 +14,7 @@ function SemesterList() {
     }, []);
 
     const viewSemester = (id) => { nav('/user/semester/' + id + '/course'); }
-    const goBack = () => { nav(-1); }
+    const goBack = () => { nav('/home'); }
 
     return (
         <div className='mb-5'>

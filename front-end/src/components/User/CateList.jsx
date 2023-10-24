@@ -54,7 +54,7 @@ function CateList() {
     }
 
     const updateCate = (cate) => {
-        nav(`/user/service/unlock-stud/update/${cate.id}`, {
+        nav(`/moderator/service-cate/update/${cate.id}`, {
             state: {
                 serviceCateName: cate.serviceCateName,
                 price: cate.price,
@@ -95,7 +95,7 @@ function CateList() {
                                     </button>
                                     {user.role !== 'USER' ?
                                         <button className="ms-2 btn-success btn"
-                                                onClick={() => {updateCate(cate.id)}}>Chỉnh sửa
+                                                onClick={() => {updateCate(cate)}}>Chỉnh sửa
                                         </button>
                                     : <></>}
                                 </td>
@@ -105,7 +105,7 @@ function CateList() {
                     </Table>
                 </div>
                 <div className="float-end row" style={{paddingBottom: '15%'}}>
-                    <button className="btn-info btn text-black-50"
+                    <button className="btn-info btn"
                             onClick={() => nav('/home')}>Lịch sử đăng ký
                     </button>
                 </div>

@@ -21,8 +21,8 @@ function UpdateTranscript() {
             let transcript = res.data;
             setLanguageInput(transcript.language);
             setPhoneContactInput(transcript.phoneContact);
-            setFromSemesterInput(transcript.fromSemester);
-            setToSemesterInput(transcript.toSemester);
+            setFromSemesterInput(transcript.fromSemester.id);
+            setToSemesterInput(transcript.toSemester.id);
             setQuantityInput(transcript.quantity);
             setIsSealedInput(transcript.isSealed);
         })
@@ -118,8 +118,8 @@ function UpdateTranscript() {
                                 </div>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="checkbox"
-                                           value={isSealedInput.toString()} onChange={changeSealedHandler}/>
-                                    <label className="form-check-label">Có đánh dấu</label>
+                                           checked={isSealedInput} onChange={changeSealedHandler}/>
+                                    <label className="form-check-label">Niêm phong (trường hợp gửi qua nước ngoài)</label>
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveTranscript}>Lưu</button>

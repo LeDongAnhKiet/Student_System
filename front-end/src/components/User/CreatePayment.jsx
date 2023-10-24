@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import UserService from "../../services/User/UserService";
 import {useParams} from "react-router-dom";
+import {Container, Table} from "reactstrap";
+import { format } from 'date-fns';
 
-const CreatePayment = () => {
+function CreatePayment() {
     const { id } = useParams();
-    //const [price, setPrice] = useState('');
-    //const [createdDate, setCreatedDate] = useState('');
-    //const [status, setStatus] = useState('');
-    //const [vnpayTxnred, setVnpayTxnred] = useState('');
-    //const [url, setUrl] = useState('');
     const [payment, setPayment] = useState({});
+    const[color, setColor] = useState('');
 
     useEffect(() => {
         UserService.createPayment(payment, id).then((res) => {
@@ -18,25 +16,52 @@ const CreatePayment = () => {
             .catch((error) => {
                 console.error('Lỗi thanh toán:', error);
             });
-    }, [id]);
+    }, [payment, id]);
+
+    const formatDate = (date) => {
+        let d = new Date(date);
+        return format(d, "HH:mm:ss - dd/MM/yyyy");
+    }
 
     return (
         <div>
             {payment ? (
-                <div>
+                <Container fluid>
                     <h3 className="App">Thanh toán</h3>
-                    {/*<p>ID: {payment.id}</p>*/}
-                    <p>Thành tiền: {payment.price}</p>
-                    <p>Ngày lập: {payment.createdDate}</p>
-                    <p>Trạng thái: {payment.status}</p>
-                    <p>Mã giao dịch: {payment.vnpayTxnred}</p>
-                    <p>Link xác nhận: <a>{payment.url}</a></p>
-                </div>
+                    <div className="row">
+                        <Table className="mt-5">
+                            <tr className="border-bottom" style={{height:'50px'}}>
+                                <th>Thành tiền</th>
+                                <td>{payment.price}</td>
+                            </tr>
+                            <tr className="border-bottom" style={{height:'50px'}}>
+                                <th>Ngày lập</th>
+                                <td>{payment.createdDate ? formatDate(payment.createdDate) : ''}</td>
+                            </tr>
+                            <tr className="border-bottom" style={{height:'50px'}}>
+                                <th>Trạng thái</th>
+                                <td>{payment.status}</td>
+                            </tr>
+                            <tr className="border-bottom" style={{height:'50px'}}>
+                                <th>Mã giao dịch</th>
+                                <td>{payment.vnpayTxnred}</td>
+                            </tr>
+                            <tr className="border-bottom" style={{height:'50px'}}>
+                                <th>Link</th>
+                                <td><a onMouseEnter={() => setColor('blue')}
+                                       onMouseLeave={() => setColor('gray')}
+                                       style={{color: color}} type="button" href={payment.url}>
+                                    Tại đây</a>
+                                </td>
+                            </tr>
+                        </Table>
+                    </div>
+                </Container>
             ) : (
                 <h3>Loading...</h3>
             )}
         </div>
     );
-};
+}
 
-export default CreatePayment;
+export default CreatePayment

@@ -12,7 +12,7 @@ function UnlockStudList() {
         UnlockStudService.getUnlockStud(id).then((res) => {
             setUnlockStuds(res.data);
         });
-    }, []);
+    }, [id]);
 
     const addUnlockStud = () => { nav('/user/service/unlock-stud/add'); };
 

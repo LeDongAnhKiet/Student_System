@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import UnlockStudService from "../../services/User/UnlockStudService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function AddUnlockStud() {
     const [image, setImage] = useState('');
@@ -19,7 +19,7 @@ function AddUnlockStud() {
             };
 
             UnlockStudService.addUnlockStud(unlockStud).then(() => {
-                nav('/user/service/unlock-stud/add');
+                nav(`/user/payment/create/${unlockStud.id}`);
             });
         }
     };

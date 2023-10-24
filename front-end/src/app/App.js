@@ -14,7 +14,7 @@ const App = () => {
     const [user, setUser] = useReducer(Reducer,cookie.load('user') || null);
 
     useEffect(() => {
-        sessionStorage.getItem('user');
+        localStorage.getItem('user');
     })
 
     return (

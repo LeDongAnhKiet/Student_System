@@ -29,7 +29,7 @@ function AddStudCertificate() {
             };
 
             StudCertificateService.addStudCertificate(studCertificate).then(() => {
-                nav('/user/service/stud-cert/add');
+                nav(`/user/payment/create/${studCertificate.id}`);
             });
         }
     }

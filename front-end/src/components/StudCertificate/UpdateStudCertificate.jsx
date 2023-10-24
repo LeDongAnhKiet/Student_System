@@ -79,7 +79,7 @@ function UpdateStudCertificate() {
         <div>
             <div className = "container">
                 <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
+                    <div className = "card col-md-6 offset-md-4">
                         <h3 className="text-center mt-2">Chỉnh sửa chứng nhận sinh viên</h3>
                         <div className = "card-body">
                             <form>

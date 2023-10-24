@@ -25,7 +25,6 @@ const Home = () => {
     const viewSemesters = () => { nav('/admin/semester/available'); }
     const viewStuds = () => { nav('/admin/student'); }
     const viewDepts = () => { nav('/admin/department'); }
-    const createPayment = (id) => { nav(`/user/payment/create/${id}`); }
     const updateRequest = (request) => {
         if ((request.serviceCateName).includes('bảng điểm'))
             nav(`/user/service/transcript/update/${request.id}`);
@@ -164,9 +163,6 @@ const Home = () => {
                                                 <td className="text-center">
                                                     <button className="btn-success btn" onClick={() => {
                                                         updateRequest(request)}}>Chỉnh sửa
-                                                    </button>
-                                                    <button className="ms-2 btn-primary btn" onClick={() => {
-                                                        createPayment(request.id)}}>Thanh toán
                                                     </button>
                                                     <button className="ms-2 btn-danger btn" onClick={() => {
                                                         UserService.cancelRequest(request.id)}}>Hủy

@@ -26,8 +26,10 @@ function AddDiploma() {
                 diplomaCode,
             };
 
-            DiplomaService.addDiploma(diploma).then(() => {
-                nav('/user/service/diploma/add');
+            DiplomaService.addDiploma(diploma).then((res) => {
+                let data = res.data;
+                nav(`/user/payment/create/${data.onlineService.id}`);
+                setErr('Đăng ký thành công.');
             });
         }
     }
@@ -98,7 +100,8 @@ function AddDiploma() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {err && <div className="alert alert-danger"
+                                     onMouseEnter={() => setErr('')}>{err}</div>}
                     </div>
                 </div>
             </div>

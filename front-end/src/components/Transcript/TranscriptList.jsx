@@ -12,7 +12,7 @@ function TranscriptList() {
         TranscriptService.getTranscript(id).then((res) => {
             setTranscripts(res.data);
         });
-    }, []);
+    }, [id]);
 
     const addTranscript = () => { nav('/user/service/transcript/add'); };
 
@@ -52,7 +52,7 @@ function TranscriptList() {
                                 <td>{transcript.toSemester.semesterName}</td>
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
-                                <td>{transcript.isSealed ? 'Đã đóng dấu' : 'Chưa đóng dấu'}</td>
+                                <td>{transcript.isSealed ? 'Đã niêm phong' : 'Chưa niêm phong'}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
                                             onClick={() => updateTranscript(transcript)}>Sửa bảng điểm
