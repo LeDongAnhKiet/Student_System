@@ -15,7 +15,7 @@ import java.util.*;
 
 
 @Service
-public class VNPayUtil {
+public class VNPayUtil extends HttpServlet{
     public String CreatePayment(Payment payment, String url) throws UnsupportedEncodingException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
@@ -110,6 +110,7 @@ public class VNPayUtil {
         vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", VNPayConfig.vnp_TmnCode);
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
+
         vnp_Params.put("vnp_OrderInfo", vnp_OrderInfo);
         // vnp_Params.put("vnp_TransactionNo", vnp_TransactionNo);
         vnp_Params.put("vnp_TransactionDate", vnp_TransDate);
@@ -123,7 +124,7 @@ public class VNPayUtil {
 
         vnp_Params.put("vnp_SecureHash", vnp_SecureHash);
 
-        //Gửi yêu cầu post tới server
+        //Gửi yêu cầu post tới vnpay
         URL url = new URL(VNPayConfig.vnp_apiUrl);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
