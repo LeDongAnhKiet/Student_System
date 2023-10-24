@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 function CreatePayment() {
     const { id } = useParams();
     const [payment, setPayment] = useState({});
+    const [status, setStatus] = useState({});
     const[color, setColor] = useState('');
 
     useEffect(() => {
@@ -17,6 +18,15 @@ function CreatePayment() {
                 console.error('Lỗi thanh toán:', error);
             });
     }, [payment, id]);
+    const verify = () => {
+        UserService.verifyPayment(id).then((res) => {
+            setStatus(res.data);
+        })
+            .catch((error) => {
+                console.error('Lỗi thanh toán:', error);
+            });
+        console.log(status)
+    }
 
     const formatDate = (date) => {
         let d = new Date(date);
@@ -47,15 +57,18 @@ function CreatePayment() {
                                 <td>{payment.vnpayTxnred}</td>
                             </tr>
                             <tr className="border-bottom" style={{height:'50px'}}>
-                                <th>Link</th>
+                                <th>Link VNPay</th>
                                 <td><a onMouseEnter={() => setColor('blue')}
                                        onMouseLeave={() => setColor('gray')}
-                                       style={{color: color}} type="button" href={payment.url}>
+                                       target="_blank" style={{color: color}} type="button" href={payment.url}>
                                     Tại đây</a>
                                 </td>
                             </tr>
                         </Table>
                     </div>
+                    {/*<h5 className="bg-warning ps-3 py-1 me-2 rounded-5">
+                        Vui lòng thanh toán xong bằng link trên mới được nhấn xác nhận, không thì sẽ hủy.</h5>*/}
+                    <button className="btn btn-primary" onClick={verify}>Xác nhận</button>
                 </Container>
             ) : (
                 <h3>Loading...</h3>
