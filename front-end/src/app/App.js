@@ -32,6 +32,7 @@ const App = () => {
                     <Route path="/user/semester" element={<Comp.UserSemesterList />} />
                     <Route path="/user/semester/:id/course" element={<Comp.UserDetailsList />} />
                     <Route path="/user/payment/create/:id" element={<Comp.CreatePayment />} />
+                    <Route path="/user/payment/status/" element={<Comp.PaymentStatus />} />
 
                     <Route path="/user/service/transcript/:id" element={<Comp.TranscriptList />} />
                     <Route path="/user/service/diploma/:id" element={<Comp.DiplomaList />} />

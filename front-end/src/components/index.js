@@ -3,6 +3,7 @@ export { default as UserSemesterList } from './User/UserSemesterList';
 export { default as CateList } from './User/CateList';
 export { default as UserDetailsList } from './User/UserDetailsList';
 export { default as CreatePayment } from './User/CreatePayment';
+export { default as PaymentStatus } from './User/PaymentStatus';
 
 export { default as AddUnlockStud } from './UnlockStud/AddUnlockStud';
 export { default as UpdateUnlockStud } from './UnlockStud/UpdateUnlockStud';
