@@ -145,30 +145,14 @@ public class VNPayUtil extends HttpServlet{
 
         JSONObject json = new JSONObject(response.toString());
 
-        String res_ResponseCode = (String) json.get("vnp_ResponseCode");
-        String res_TxnRef = (String) json.get("vnp_TxnRef");
-        String res_Message = (String) json.get("vnp_Message");
-        Double res_Amount = Double.valueOf((String) json.get("vnp_Amount")) / 100;
-        String res_TransactionType = (String) json.get("vnp_TransactionType");
         String res_TransactionStatus = (String) json.get("vnp_TransactionStatus");
 
 
-        if (!res_ResponseCode.equals("00")) // Response Code == 0
+
+        if (res_TransactionStatus.equals("01")) // Giao dịch chưa hoàn tất
             return 1;
 
-        if (!res_TxnRef.equals(payment.getVnpayTxnred()))
-            return 1;
-
-        if (res_Amount != payment.getPrice()) // Amount payment not equal
-            return 2;
-
-        if (!res_TransactionType.equals("01")) // Transaction Type invaild
-            return 2;
-
-        if (res_TransactionStatus.equals("01")) // Transaction is pending
-            return 1;
-
-        if (!res_TransactionStatus.equals("00")) // Transaction Status invaild
+        if (!res_TransactionStatus.equals("00")) // Giao dịch bị lỗi
             return 2;
 
         return 0;
