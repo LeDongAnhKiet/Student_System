@@ -70,27 +70,27 @@ function AddDiploma() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Số lượng bản sao: </label>
+                                    <label>Số lượng bản sao</label>
                                     <input placeholder="Copy" name="copy" type="number" className="form-control"
                                            value={copy} onChange={changeCopyHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Số điện thoại: </label>
+                                    <label>Số điện thoại</label>
                                     <input placeholder="Phone Contact" name="phoneContact" className="form-control"
                                            value={phoneContact} onChange={changePhoneHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Email: </label>
+                                    <label>Email</label>
                                     <input placeholder="Email Address" name="email" className="form-control"
                                            value={email} onChange={changeEmailHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Năm tốt nghiệp: </label>
+                                    <label>Năm tốt nghiệp</label>
                                     <input placeholder="Year" name="year" min="1970" type="number" className="form-control"
                                            value={diplomaYear} onChange={changeYearHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Mã bằng: </label>
+                                    <label>Mã bằng</label>
                                     <input placeholder="Code" name="code" className="form-control"
                                            value={diplomaCode} onChange={changeCodeHandler}/>
                                 </div>

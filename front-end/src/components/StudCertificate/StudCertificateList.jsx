@@ -17,7 +17,7 @@ function StudCertificateList() {
     const addStudCertificate = () => { nav('/user/service/stud-cert/add'); };
 
     const updateStudCertificate = (studCertificate) => {
-        nav(`/user/service/stud-cert/update/${studCertificate.id}`, {
+        nav(`/user/service/stud-cert/update/${studCertificate.onlineService.id}`, {
             state: {
                 vietCopy: studCertificate.vietCopy,
                 engCopy: studCertificate.engCopy,

@@ -44,7 +44,7 @@ function UpdateDiploma() {
             };
 
             DiplomaService.updateDiploma(diploma, id).then(() => {
-                nav(`/user/service/diploma/${id}`);
+                nav(`/user/service/diploma/${diploma.onlineService.id}`);
             });
         }
     }
@@ -85,27 +85,27 @@ function UpdateDiploma() {
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
-                                    <label>Số lượng bản sao: </label>
+                                    <label>Số lượng bản sao</label>
                                     <input placeholder="Copy" name="copy" type="number" className="form-control"
                                            value={copyInput} onChange={changeCopyHandler} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Số điện thoại: </label>
+                                    <label>Số điện thoại</label>
                                     <input placeholder="0123456789" name="phoneContact" className="form-control"
                                         value={phoneContactInput} onChange={changePhoneHandler} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Email: </label>
+                                    <label>Email</label>
                                     <input placeholder="Địa chỉ email" name="email" className="form-control"
                                         value={emailInput} onChange={changeEmailHandler} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Năm tốt nghiệp: </label>
+                                    <label>Năm tốt nghiệp</label>
                                     <input placeholder="20xx" name="year" type="number" min="1970" className="form-control"
                                         value={diplomaYearInput} onChange={changeYearHandler} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Mã bằng: </label>
+                                    <label>Mã bằng</label>
                                     <input placeholder="123..." name="code" className="form-control"
                                         value={diplomaCodeInput} onChange={changeCodeHandler} />
                                 </div>

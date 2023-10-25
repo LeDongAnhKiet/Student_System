@@ -30,7 +30,7 @@ function UpdateUnlockStud() {
                 content: setContentInput,
             };
             UnlockStudService.updateUnlockStud(unlockStud, id).then(() => {
-                nav(`/user/service/unlock-stud/${id}`);
+                nav(`/user/service/unlock-stud/${unlockStud.onlineService.id}`);
             })
         }
     };
@@ -62,7 +62,7 @@ function UpdateUnlockStud() {
                                            value={imageInput} onChange={changeImageHandler} />
                                 </div>
                                 <div className = "form-group">
-                                    <label>Nội dung: </label>
+                                    <label>Nội dung</label>
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={contentInput} onChange={changeContentHandler}/>
                                 </div>

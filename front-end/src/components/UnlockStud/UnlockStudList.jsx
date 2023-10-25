@@ -17,7 +17,7 @@ function UnlockStudList() {
     const addUnlockStud = () => { nav('/user/service/unlock-stud/add'); };
 
     const updateUnlockStud = (stud) => {
-        nav(`/user/service/unlock-stud/update/${stud.id}`, {
+        nav(`/user/service/unlock-stud/update/${stud.onlineService.id}`, {
             state: {
                 image: stud.image,
                 content: stud.content

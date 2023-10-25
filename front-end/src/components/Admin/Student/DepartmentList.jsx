@@ -49,7 +49,8 @@ function DepartmentList() {
                                         <tr key={major.id}>
                                             <td>{major.majorName}</td>
                                         </tr>
-                                    ))}
+                                    ))
+                                }
                             </>
                         ))}
                         </tbody>

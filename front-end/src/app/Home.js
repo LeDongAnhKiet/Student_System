@@ -186,11 +186,11 @@ const Home = () => {
                             )}
                             </button>
                             <div>
-                                <span className="fw-bold ps-4">Khoa: </span>
+                                <span className="fw-bold ps-4">Khoa </span>
                                 <span>{user.department_name}</span>
                             </div>
                             <div>
-                                <span className="fw-bold ps-4">Ngành: </span>
+                                <span className="fw-bold ps-4">Ngành </span>
                                 <span>{user.major_name}</span>
                             </div>
                         </>

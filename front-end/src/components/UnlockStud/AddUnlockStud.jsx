@@ -18,8 +18,9 @@ function AddUnlockStud() {
                 content,
             };
 
-            UnlockStudService.addUnlockStud(unlockStud).then(() => {
-                nav(`/user/payment/create/${unlockStud.id}`);
+            UnlockStudService.addUnlockStud(unlockStud).then((res) => {
+                let data = res.data;
+                nav(`/user/payment/create/${data.onlineService.id}`);
             });
         }
     };
@@ -50,7 +51,7 @@ function AddUnlockStud() {
                                     <input type="file" className="form-control-file" onChange={changeImageHandler} />
                                 </div>
                                 <div className = "form-group">
-                                    <label>Nội dung: </label>
+                                    <label>Nội dung</label>
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={content} onChange={changeContentHandler}/>
                                 </div>

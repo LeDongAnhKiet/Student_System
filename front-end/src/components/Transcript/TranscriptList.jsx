@@ -17,7 +17,7 @@ function TranscriptList() {
     const addTranscript = () => { nav('/user/service/transcript/add'); };
 
     const updateTranscript = (transcript) => {
-        nav(`/user/service/transcript/update/${transcript.id}`, {
+        nav(`/user/service/transcript/update/${transcript.onlineService.id}`, {
             state: {
                 language: transcript.language,
                 fromSemester: transcript.fromSemester,

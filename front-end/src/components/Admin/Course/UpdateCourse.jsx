@@ -67,17 +67,17 @@ function UpdateCourse() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Tên môn học: </label>
+                                    <label>Tên môn học</label>
                                     <input placeholder="tên môn..." name="name" className="form-control"
                                            value={courseNameInput} onChange={changeCourseNameHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Số tín chỉ: </label>
+                                    <label>Số tín chỉ</label>
                                     <input placeholder="tín chỉ..." name="credits" type="number" className="form-control"
                                            value={creditsNumInput} onChange={changeCreditsNumHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Ghi chú: </label>
+                                    <label>Ghi chú</label>
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={noteInput} onChange={changeNoteHandler}/>
                                 </div>

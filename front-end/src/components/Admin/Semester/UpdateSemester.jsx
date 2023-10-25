@@ -56,12 +56,12 @@ function UpdateSemester() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Tên học kỳ: </label>
+                                    <label>Tên học kỳ</label>
                                     <input placeholder="học kỳ... khóa..." name="name" className="form-control"
                                            value={semesterNameInput} onChange={changeSemesterNameHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Ghi chú: </label>
+                                    <label>Ghi chú</label>
                                     <input placeholder="ghi chú..." name="note" className="form-control"
                                            value={noteInput} onChange={changeNoteHandler}/>
                                 </div>

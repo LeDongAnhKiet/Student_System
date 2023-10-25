@@ -42,8 +42,6 @@ function PaymentStatus() {
             });
     }
 
-
-
     return (
         <div>
             {status ? (

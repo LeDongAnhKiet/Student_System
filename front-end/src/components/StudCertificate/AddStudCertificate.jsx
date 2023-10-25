@@ -28,8 +28,9 @@ function AddStudCertificate() {
                 content,
             };
 
-            StudCertificateService.addStudCertificate(studCertificate).then(() => {
-                nav(`/user/payment/create/${studCertificate.id}`);
+            StudCertificateService.addStudCertificate(studCertificate).then((res) => {
+                let data = res.data;
+                nav(`/user/payment/create/${data.onlineService.id}`);
             });
         }
     }
@@ -70,27 +71,27 @@ function AddStudCertificate() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Bản sao tiếng Việt: </label>
+                                    <label>Bản sao tiếng Việt</label>
                                     <input placeholder="Bản Việt" name="vietCopy" type="number" className="form-control"
                                            value={vietCopy} onChange={changeVietCopyHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Bản sao tiếng Anh: </label>
+                                    <label>Bản sao tiếng Anh</label>
                                     <input placeholder="Bản Anh" name="engCopy" type="number" className="form-control"
                                            value={engCopy} onChange={changeEngCopyHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Số điện thoại: </label>
+                                    <label>Số điện thoại</label>
                                     <input placeholder="Số điện thoại" name="phoneContact" className="form-control"
                                            value={phoneContact} onChange={changePhoneHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Email: </label>
+                                    <label>Email</label>
                                     <input placeholder="Địa chỉ email" name="email" className="form-control"
                                            value={email} onChange={changeEmailHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Nội dung: </label>
+                                    <label>Nội dung</label>
                                     <input placeholder="Nội dung" name="content" className="form-control"
                                            value={content} onChange={changeContentHandler}/>
                                 </div>

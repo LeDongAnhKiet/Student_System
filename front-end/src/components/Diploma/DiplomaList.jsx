@@ -17,7 +17,7 @@ function DiplomaList() {
     const addDiploma = () => { nav('/user/service/diploma/add'); };
 
     const updateDiploma = (diploma) => {
-        nav(`/user/service/diploma/update/${diploma.id}`, {
+        nav(`/user/service/diploma/update/${diploma.onlineService.id}`, {
             state: {
                 copy: diploma.copy,
                 phoneContact: diploma.phoneContact,

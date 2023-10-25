@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
 import {useNavigate} from "react-router-dom";
+import UserService from "../../services/User/UserService";
 
 function AddTranscript() {
     const [language, setLanguage] = useState('');
@@ -9,6 +10,7 @@ function AddTranscript() {
     const [toSemester, setToSemester] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [isSealed, setIsSealed] = useState(false);
+    const [semesters, setSemesters] = useState([]);
     const nav = useNavigate();
     const [err, setErr] = useState('');
 
@@ -17,8 +19,10 @@ function AddTranscript() {
         if (phoneContact === '' || fromSemester === null || language === ''
             || toSemester === null || quantity === null)
             setErr('Vui lòng nhập đầy đủ thông tin');
-        else if (toSemester <= 0 || fromSemester <= 0 || quantity <= 0)
-            setErr('Số nhập không hợp lệ');
+        else if (quantity <= 0)
+            setErr('Số bản nhập không hợp lệ');
+        else if (toSemester < fromSemester)
+            setErr('Học kỳ chọn không hợp lệ');
         else {
             const transcript = {
                 language,
@@ -29,8 +33,9 @@ function AddTranscript() {
                 isSealed,
             };
 
-            TranscriptService.addTranscript(transcript).then(() => {
-                nav(`/user/service/transcript/${transcript.onlineService.id}`);
+            TranscriptService.addTranscript(transcript).then((res) => {
+                let data = res.data;
+                nav(`/user/service/transcript/${data.onlineService.id}`);
             });
         }
     };
@@ -67,6 +72,19 @@ function AddTranscript() {
 
     const cancel = () => { nav(`/guest/service-cate`); }
 
+    const getSemesters = async () => {
+        try {
+            const res = await UserService.getSemester();
+            setSemesters(res.data);
+        } catch (error) {
+            console.error('Lỗi khi lấy danh sách học kỳ:', error);
+        }
+    };
+
+    useEffect(() => {
+        getSemesters().then();
+    })
+
     return (
         <div>
             <div className = "container">
@@ -76,28 +94,38 @@ function AddTranscript() {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
-                                    <label>Ngôn ngữ: </label>
+                                    <label>Ngôn ngữ</label>
                                     <input placeholder="Tiếng Việt, Anh ..." name="language" className="form-control"
                                            value={language} onChange={changeLanguageHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Học kỳ bắt đầu: </label>
-                                    <input placeholder="..." name="fromSemester" className="form-control"
-                                           type="number" value={fromSemester} onChange={changeFromSemesterHandler}/>
+                                    <label>Học kỳ bắt đầu</label>
+                                    <select name="from semester" className="form-control"
+                                            value={fromSemester} onChange={changeFromSemesterHandler}>
+                                        <option value="">Chọn học kỳ</option>
+                                        {semesters.map((semester) => (
+                                            <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
+                                        ))}
+                                    </select>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Học kỳ kết thúc: </label>
-                                    <input placeholder="..." name="toSemester" className="form-control"
-                                           type="number" value={toSemester} onChange={changeToSemesterHandler}/>
+                                    <label>Học kỳ kết thúc</label>
+                                    <select name="to semester" className="form-control custom-select"
+                                            value={toSemester} onChange={changeToSemesterHandler}>
+                                        <option value="">Chọn học kỳ</option>
+                                        {semesters.map((semester) => (
+                                            <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
+                                        ))}
+                                    </select>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Số điện thoại: </label>
+                                    <label>Số điện thoại</label>
                                     <input placeholder="Số điện thoại" name="phoneContact" className="form-control"
                                            value={phoneContact} onChange={changePhoneHandler}/>
                                 </div>
                                 <div className = "form-group">
-                                    <label>Số bản sao: </label>
-                                    <input placeholder="Số bản" name="quantity" className="form-control"
+                                    <label>Số bản sao</label>
+                                    <input placeholder="Số bản" name="quantity" className="form-control" min="1"
                                            type="number" value={quantity} onChange={changeQuantityHandler}/>
                                 </div>
                                 <div className="form-check form-check-inline">

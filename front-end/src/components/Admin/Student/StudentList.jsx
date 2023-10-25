@@ -10,7 +10,7 @@ function StudentList() {
 
     useEffect(() => {
         if (id)
-        StudentService.getStudentByCourseId().then((res) => {
+        StudentService.getStudentByMajorId().then((res) => {
             setStudents(res.data);
         });
         else StudentService.getStudent().then((res) => {
