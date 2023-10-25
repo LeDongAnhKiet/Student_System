@@ -142,7 +142,7 @@ public class PaymentServiceImpl implements PaymentService {
                     return new ApiResponse("Yêu cầu đã bị hủy", true);
                 }
 
-                return new ApiResponse("Ticket is pending", true);
+                return new ApiResponse("Yêu cầu đang thực hiên", true);
             } catch (RuntimeException | ServletException | IOException e) {
                 e.printStackTrace();
             }
