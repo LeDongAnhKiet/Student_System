@@ -4,7 +4,7 @@ import config from "../config";
 const COURSE_API_ADMIN_URL = 'http://localhost:8080/api/admin/course-data';
 
 class CourseService {
-    getCourse() { return axios.get(COURSE_API_ADMIN_URL + '/getAll'); }
+    getCourse() { return axios.get(COURSE_API_ADMIN_URL + '/getAll', config); }
 
     addCourse(course) { return axios.post(COURSE_API_ADMIN_URL + '/add', course, config); }
 

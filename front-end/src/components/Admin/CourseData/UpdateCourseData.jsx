@@ -88,12 +88,12 @@ function UpdateCourseData() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Mã môn: </label>
-                                    <input placeholder="Mã môn..." name="course" className="form-control"
+                                    <input placeholder="Mã môn..." name="course" type="number" className="form-control"
                                            value={courseIdInput} onChange={changeCourseHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Mã giảng viên: </label>
-                                    <input placeholder="Mã giảng viên..." name="lecture" className="form-control"
+                                    <input placeholder="Mã giảng viên..." name="lecture" type="number" className="form-control"
                                            value={lectureIdInput} onChange={changeLectureHandler}/>
                                 </div>
                                 <div className="text-end mt-2">

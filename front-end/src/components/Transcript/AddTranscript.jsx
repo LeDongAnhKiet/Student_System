@@ -30,7 +30,7 @@ function AddTranscript() {
             };
 
             TranscriptService.addTranscript(transcript).then(() => {
-                nav(`/user/payment/create/${transcript.id}`);
+                nav(`/user/service/transcript/${transcript.onlineService.id}`);
             });
         }
     };

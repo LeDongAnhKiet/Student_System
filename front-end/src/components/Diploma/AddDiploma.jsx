@@ -71,7 +71,7 @@ function AddDiploma() {
                             <form>
                                 <div className = "form-group">
                                     <label>Số lượng bản sao: </label>
-                                    <input placeholder="Copy" name="copy" className="form-control"
+                                    <input placeholder="Copy" name="copy" type="number" className="form-control"
                                            value={copy} onChange={changeCopyHandler}/>
                                 </div>
                                 <div className = "form-group">
@@ -86,7 +86,7 @@ function AddDiploma() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Năm tốt nghiệp: </label>
-                                    <input placeholder="Year" name="year" className="form-control"
+                                    <input placeholder="Year" name="year" min="1970" type="number" className="form-control"
                                            value={diplomaYear} onChange={changeYearHandler}/>
                                 </div>
                                 <div className = "form-group">

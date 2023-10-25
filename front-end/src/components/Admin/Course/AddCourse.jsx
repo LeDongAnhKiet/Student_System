@@ -34,7 +34,7 @@ function AddCourse() {
                 note,
             };
             CourseService.addCourse(course).then(() => {
-                nav('/admin/course/add');
+                nav('/admin/course/all');
             });
         }
     };
@@ -71,7 +71,7 @@ function AddCourse() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số tín chỉ: </label>
-                                    <input placeholder="tín chỉ..." name="credits" className="form-control"
+                                    <input placeholder="tín chỉ..." name="credits" type="number" className="form-control"
                                            value={creditsNum} onChange={changeCreditsNumHandler}/>
                                 </div>
                                 <div className = "form-group">

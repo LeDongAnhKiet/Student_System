@@ -74,7 +74,7 @@ function UpdateCate() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Thành tiền</label>
-                                    <input placeholder="giá tiền..." name="price" className="form-control"
+                                    <input placeholder="giá tiền..." name="price" type="number" min="1000" className="form-control"
                                            value={priceInput} onChange={changePriceHandler}/>
                                 </div>
                                 <div className = "form-group">

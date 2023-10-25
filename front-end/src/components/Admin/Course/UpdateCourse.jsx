@@ -73,7 +73,7 @@ function UpdateCourse() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số tín chỉ: </label>
-                                    <input placeholder="tín chỉ..." name="credits" className="form-control"
+                                    <input placeholder="tín chỉ..." name="credits" type="number" className="form-control"
                                            value={creditsNumInput} onChange={changeCreditsNumHandler}/>
                                 </div>
                                 <div className = "form-group">

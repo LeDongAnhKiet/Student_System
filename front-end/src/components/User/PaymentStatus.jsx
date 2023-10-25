@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserService from "../../services/User/UserService";
 import {Container, Table} from "reactstrap";
 import { format } from 'date-fns';
+import axios from "axios";
 
 function PaymentStatus() {
     const [status, setStatus] = useState({});
@@ -9,6 +10,7 @@ function PaymentStatus() {
     useEffect(() => {
         UserService.getPaymentStatus().then((res) => {
             setStatus(res.data);
+            console.log(res.data.vnp_ReturnUrl);
         })
             .catch((error) => {
                 console.error('Lỗi thanh toán:', error);
@@ -23,6 +25,24 @@ function PaymentStatus() {
     const verify = () => {
 
     }
+
+    const getStatus = () => {
+        axios.get('/api/user/payment/payment-status', {
+            params: {
+                status: status,
+            },
+        })
+            .then(res => {
+                const url = res.data.vnp_ReturnUrl;// Xử lý kết quả thành công (response) từ server sau khi gọi API.
+                console.log('Kết quả:', url);
+            })
+            .catch(error => {
+                // Xử lý lỗi nếu có.
+                console.error('Lỗi:', error);
+            });
+    }
+
+
 
     return (
         <div>

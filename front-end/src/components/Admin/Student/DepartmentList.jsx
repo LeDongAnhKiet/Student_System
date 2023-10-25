@@ -1,14 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Table} from 'reactstrap';
 import StudentService from "../../../services/Admin/StudentService";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 function DepartmentList() {
     const [departments, setDepartments] = useState([]);
     const nav = useNavigate();
+    const { id } = useParams();
 
     useEffect(() => {
-        StudentService.getDepartment().then((res) => {
+        if (id)
+            StudentService.getDepartmentById(id).then((res) => {
+                setDepartments(res.data);
+            });
+        else
+                StudentService.getDepartment().then((res) => {
             setDepartments(res.data);
         });
     }, []);

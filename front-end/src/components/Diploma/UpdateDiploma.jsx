@@ -86,7 +86,7 @@ function UpdateDiploma() {
                             <form>
                                 <div className="form-group">
                                     <label>Số lượng bản sao: </label>
-                                    <input placeholder="Copy" name="copy" className="form-control"
+                                    <input placeholder="Copy" name="copy" type="number" className="form-control"
                                            value={copyInput} onChange={changeCopyHandler} />
                                 </div>
                                 <div className="form-group">
@@ -101,7 +101,7 @@ function UpdateDiploma() {
                                 </div>
                                 <div className="form-group">
                                     <label>Năm tốt nghiệp: </label>
-                                    <input placeholder="20xx" name="year" className="form-control"
+                                    <input placeholder="20xx" name="year" type="number" min="1970" className="form-control"
                                         value={diplomaYearInput} onChange={changeYearHandler} />
                                 </div>
                                 <div className="form-group">

@@ -3,6 +3,7 @@ import UserService from "../../services/User/UserService";
 import {useParams} from "react-router-dom";
 import {Container, Table} from "reactstrap";
 import { format } from 'date-fns';
+import axios from "axios";
 
 function CreatePayment() {
     const { id } = useParams();
@@ -50,6 +51,7 @@ function CreatePayment() {
                                 <th>Link VNPay</th>
                                 <td><a onMouseEnter={() => setColor('blue')}
                                        onMouseLeave={() => setColor('gray')}
+                                       onClick={getStatus}
                                        style={{color: color}} type="button" href={payment.url}>
                                     Tại đây</a>
                                 </td>

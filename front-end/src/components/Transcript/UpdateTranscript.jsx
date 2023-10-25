@@ -98,12 +98,12 @@ function UpdateTranscript() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Học kỳ bắt đầu: </label>
-                                    <input placeholder="1" name="fromSemester" className="form-control"
+                                    <input placeholder="1" name="fromSemester" type="number" className="form-control"
                                            value={fromSemesterInput} onChange={changeFromSemesterHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Học kỳ kết thúc: </label>
-                                    <input placeholder="2" name="toSemester" className="form-control"
+                                    <input placeholder="2" name="toSemester" type="number" className="form-control"
                                            value={toSemesterInput} onChange={changeToSemesterHandler}/>
                                 </div>
                                 <div className = "form-group">
@@ -113,7 +113,7 @@ function UpdateTranscript() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số bản sao: </label>
-                                    <input placeholder="Số bản" name="quantity" className="form-control"
+                                    <input placeholder="Số bản" name="quantity" type="number" className="form-control"
                                            value={quantityInput} onChange={changeQuantityHandler}/>
                                 </div>
                                 <div className="form-check form-check-inline">
