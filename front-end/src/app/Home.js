@@ -83,14 +83,14 @@ const Home = () => {
                     <p className="display-6 m-2">Loading...</p>
                 ) : (
                     <div>
-                        {user.role === "MODERATOR" || user.role === "ADMIN" ? <>
-                            <span className="me-5 btn-group border border-secondary rounded-pill p-1">
+                        {user.role === "MODERATOR" ? <>
+                            <div className="text-center justify-content-center me-5 btn-group border border-secondary rounded-pill p-1">
                                 <button className="btn btn-success rounded-pill"
                                         onClick={viewServices}>Quản lý dịch vụ</button>
-                            </span>
+                            </div>
                         </> : <></>}
                         {user.role === "ADMIN" ? <>
-                            <span className="btn-group border border-secondary rounded-pill p-1">
+                            <div className="text-center btn-group border border-secondary rounded-pill p-1">
                                 <button className="me-1 btn btn-success rounded-pill rounded-end-0"
                                         onClick={viewStuds}>Quản lý sinh viên</button>
                                 <button className="me-1 btn btn-success rounded-start-0 rounded-end-0"
@@ -101,7 +101,7 @@ const Home = () => {
                                         onClick={viewCourses}>Quản lý môn học</button>
                                 <button className="btn btn-success rounded-pill rounded-start-0"
                                         onClick={viewCourseDatas}>Quản lý lớp học</button>
-                            </span>
+                            </div>
                         </> : <></>}
                         {user.fullName ? (<>
                             <h2 className='App'>

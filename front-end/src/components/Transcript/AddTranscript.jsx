@@ -83,7 +83,7 @@ function AddTranscript() {
 
     useEffect(() => {
         getSemesters().then();
-    })
+    }, [])
 
     return (
         <div>

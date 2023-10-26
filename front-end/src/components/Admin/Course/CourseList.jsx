@@ -6,8 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 function CourseList() {
     const [courses, setCourses] = useState([]);
     const nav = useNavigate();
-    const [success, setSuccess] = useState('');
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
     const { id } = useParams();
 
     useEffect(() => {
@@ -24,14 +23,19 @@ function CourseList() {
     const addCourse = () => { nav('/admin/course/add'); }
 
     const deleteCourse = (course) => {
-        try {
-            CourseService.deleteCourse(course.id).then(() => {
+        CourseService.deleteCourse(course.id)
+            .then(() => {
                 setCourses(courses.filter(c => c.id !== course.id));
+                setResp(`Xóa ${course.courseName} thành công.`);
             })
-            setSuccess(`Xóa ${course.courseName} thành công.`)
-        } catch {
-            setErr('Đã có lớp dạy môn này. Không thể xóa được.')
-        }
+            .catch((error) => {
+                if (error.response && error.response.status === 409)
+                    setResp('Đã có lớp dạy môn này. Không thể xóa được.');
+                else {
+                    console.error("Lỗi không xác định: ", error);
+                    setResp('Lỗi xảy ra. Không thể xóa.');
+                }
+            });
     }
 
     const updateCourse = (course) => {
@@ -42,6 +46,23 @@ function CourseList() {
                 note: course.note,
             }
         });
+    }
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
     }
 
     return (
@@ -61,7 +82,7 @@ function CourseList() {
                             <tr key={course.id}>
                                 <td>{course.courseName}</td>
                                 <td>{course.creditsNum}</td>
-                                <td>{course.startDate}</td>
+                                <td>{course.note}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
                                             onClick={() => {updateCourse(course)}}>Chỉnh sửa
@@ -80,12 +101,7 @@ function CourseList() {
                             onClick={addCourse}>Thêm
                     </button>
                 </div>
-                {success && <Alert color="success" className="fixed-bottom"
-                                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
-                                   onMouseEnter={() => setSuccess('')}>{success}</Alert>}
-                {err && <Alert color="success" className="fixed-bottom"
-                                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
-                                   onMouseEnter={() => setErr('')}>{err}</Alert>}
+                {alert()}
             </Container>
         </div>
     );

@@ -15,7 +15,7 @@ const App = () => {
 
     useEffect(() => {
         localStorage.getItem('user');
-    })
+    }, [])
 
     return (
         <UserContext.Provider value={[user, setUser]}>

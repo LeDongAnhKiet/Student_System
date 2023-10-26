@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react'
 import CourseService from "../../../services/Admin/CourseService";
 import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
+import {Alert} from "reactstrap";
 
 function AddCourse() {
-    const { id } = useParams();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const [courseName, setCourseName] = useState('');
     const [creditsNum, setCreditsNum] = useState(0);
@@ -19,39 +19,57 @@ function AddCourse() {
             setCreditsNum(course.creditsNum);
             setNote(course.note);
         })
-    }, [id]);
+    }, []);
 
     const saveCourse = (e) => {
         e.preventDefault();
         if (courseName === '' || note === '' || creditsNum === null)
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNum <= 0 || creditsNum > 5)
-            setErr('Vượt quá tín chỉ cho phép');
+            setResp('Vượt quá tín chỉ cho phép');
         else {
             const course = {
-                courseName,
-                creditsNum,
-                note,
+                courseName: courseName,
+                creditsNum: creditsNum,
+                note: note,
             };
+
             CourseService.addCourse(course).then(() => {
-                nav('/admin/course/all');
+                setResp('Thêm môn học thành công.');
             });
         }
     };
 
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
+
     const changeCourseNameHandler = (e) => {
         setCourseName(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeCreditsNumHandler = (e) => {
         setCreditsNum(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeNoteHandler = (e) => {
         setNote(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const cancel = () => { nav(`/admin/course/all`); }
@@ -71,8 +89,8 @@ function AddCourse() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số tín chỉ</label>
-                                    <input placeholder="tín chỉ..." name="credits" type="number" className="form-control"
-                                           value={creditsNum} onChange={changeCreditsNumHandler}/>
+                                    <input placeholder="tín chỉ..." name="credits" className="form-control"
+                                           type="number" min="1" value={creditsNum} onChange={changeCreditsNumHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Ghi chú</label>
@@ -85,7 +103,7 @@ function AddCourse() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {alert()}
                     </div>
                 </div>
             </div>

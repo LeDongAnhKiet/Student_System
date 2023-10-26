@@ -86,7 +86,7 @@ function UpdateDiploma() {
                             <form>
                                 <div className="form-group">
                                     <label>Số lượng bản sao</label>
-                                    <input placeholder="Copy" name="copy" type="number" className="form-control"
+                                    <input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
                                            value={copyInput} onChange={changeCopyHandler} />
                                 </div>
                                 <div className="form-group">

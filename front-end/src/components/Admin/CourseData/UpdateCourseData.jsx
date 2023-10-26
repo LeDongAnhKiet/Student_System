@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 import CourseService from "../../../services/Admin/CourseService";
+import {Alert} from "reactstrap";
 
 function UpdateCourseData() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
     const [courses, setCourses] = useState([]);
     const [lectures, setLectures] = useState([]);
 
@@ -27,7 +28,7 @@ function UpdateCourseData() {
         })
         getCourses().then();
         getLectures().then();
-    })
+    }, [])
 
     const getCourses = async () => {
         try {
@@ -50,11 +51,11 @@ function UpdateCourseData() {
     const updateCourseData = (e) => {
         e.preventDefault();
         if (startDateInput === '' || endDateInput === '' || courseIdInput === '' || lectureIdInput === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseIdInput <= 0)
-            setErr('Không có mã môn học này trong dữ liệu');
+            setResp('Không có mã môn học này trong dữ liệu');
         else if (lectureIdInput <= 0)
-            setErr('Không có mã giảng viên này trong dữ liệu');
+            setResp('Không có mã giảng viên này trong dữ liệu');
         else {
             const courseData = {
                 startDate: startDateInput,
@@ -64,29 +65,46 @@ function UpdateCourseData() {
             };
 
             CourseDataService.updateCourse(courseData, id).then(() => {
-                nav(`/admin/course-data/all`);
+                setResp('Chỉnh sửa lớp học thành công.');
             })
         }
     };
 
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
+
     const changeStartDateHandler = (e) => {
         setStartDateInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeEndDateHandler = (e) => {
         setEndDateInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeCourseHandler = (e) => {
         setCourseIdInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeLectureHandler = (e) => {
         setLectureIdInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const cancel = () => { nav(`/admin/course-data/all`); }
@@ -135,7 +153,7 @@ function UpdateCourseData() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {alert()}
                     </div>
                 </div>
             </div>

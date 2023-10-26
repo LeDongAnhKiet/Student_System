@@ -85,12 +85,12 @@ function UpdateStudCertificate() {
                             <form>
                                 <div className = "form-group">
                                     <label>Bản sao tiếng Việt</label>
-                                    <input placeholder="Bản Việt" name="vietCopy" type="number" className="form-control"
+                                    <input placeholder="Bản Việt" name="vietCopy" type="number" min="0" className="form-control"
                                            value={vietCopyInput} onChange={changeVietCopyHandler}/>
                                 </div>
                                 <div className = "form-group">
                                     <label>Bản sao tiếng Anh</label>
-                                    <input placeholder="Bản Anh" name="engCopy" type="number" className="form-control"
+                                    <input placeholder="Bản Anh" name="engCopy" type="number" min="0" className="form-control"
                                            value={engCopyInput} onChange={changeEngCopyHandler}/>
                                 </div>
                                 <div className = "form-group">

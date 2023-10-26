@@ -28,6 +28,7 @@ function UpdateTranscript() {
             setQuantityInput(transcript.quantity);
             setIsSealedInput(transcript.isSealed);
         })
+        getSemesters().then();
     }, [id]);
 
     const saveTranscript = (e) => {
@@ -86,6 +87,7 @@ function UpdateTranscript() {
     }
 
     const cancel = () => { nav(`/guest/service-cate`); }
+
     const getSemesters = async () => {
         try {
             const res = await UserService.getSemester();
@@ -94,11 +96,6 @@ function UpdateTranscript() {
             console.error('Lỗi khi lấy danh sách học kỳ:', error);
         }
     };
-
-    useEffect(() => {
-        getSemesters().then();
-    })
-
 
     return (
         <div>
@@ -140,7 +137,7 @@ function UpdateTranscript() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số bản sao</label>
-                                    <input placeholder="Số bản" name="quantity" type="number" className="form-control"
+                                    <input placeholder="Số bản" name="quantity" type="number" min="1" className="form-control"
                                            value={quantityInput} onChange={changeQuantityHandler}/>
                                 </div>
                                 <div className="form-check form-check-inline">

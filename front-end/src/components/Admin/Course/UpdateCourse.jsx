@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import CourseService from "../../../services/Admin/CourseService";
+import {Alert} from "reactstrap";
 
 function UpdateCourse() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const { courseName, creditsNum, note } = loc.state || {};
     const [courseNameInput, setCourseNameInput] = useState(courseName || '');
@@ -25,9 +26,9 @@ function UpdateCourse() {
     const updateCourse = (e) => {
         e.preventDefault();
         if (courseNameInput === '' || creditsNumInput === null)
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNumInput <= 0 || creditsNumInput > 5)
-            setErr('Số tín chỉ không hợp lệ');
+            setResp('Số tín chỉ không hợp lệ');
         else {
             const course = {
             courseName: courseNameInput,
@@ -36,27 +37,44 @@ function UpdateCourse() {
         };
 
         CourseService.updateCourse(course, id).then(() => {
-            nav(`/admin/course/all`);
+            setResp('Chỉnh sửa môn học thành công.');
         });
         }
     };
 
     const changeCourseNameHandler = (e) => {
         setCourseNameInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeCreditsNumHandler = (e) => {
         setCreditsNumInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeNoteHandler = (e) => {
         setNoteInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const cancel = () => { nav(`/admin/course/all`); }
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
 
     return (
         <div>
@@ -73,7 +91,7 @@ function UpdateCourse() {
                                 </div>
                                 <div className = "form-group">
                                     <label>Số tín chỉ</label>
-                                    <input placeholder="tín chỉ..." name="credits" type="number" className="form-control"
+                                    <input placeholder="tín chỉ..." name="credits" type="number" min="1" className="form-control"
                                            value={creditsNumInput} onChange={changeCreditsNumHandler}/>
                                 </div>
                                 <div className = "form-group">
@@ -87,7 +105,7 @@ function UpdateCourse() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {alert()}
                     </div>
                 </div>
             </div>

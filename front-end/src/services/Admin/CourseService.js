@@ -11,7 +11,7 @@ class CourseService {
     updateCourse(course, id) { return axios.put(COURSE_API_ADMIN_URL + '/update/' + id, course, config); }
     deleteCourse(id) { return axios.delete(COURSE_API_ADMIN_URL + '/delete/' + id, config); }
 
-    getLecture(id) { return axios.get(LECTURE_API_ADMIN_URL + '/getall', config); }
+    getLecture() { return axios.get(LECTURE_API_ADMIN_URL + '/getAll', config); }
     addLecture(lecture) { return axios.post(LECTURE_API_ADMIN_URL + '/add', lecture, config); }
     updateLecture(lecture, id) { return axios.put(LECTURE_API_ADMIN_URL + '/update/' + id, lecture, config); }
     deleteLecture(id) { return axios.delete(LECTURE_API_ADMIN_URL + '/delete/' + id, config); }

@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'reactstrap';
-import CateService from '../../services/Guest/HomeService';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ModerateService from "../../services/Mod/ModerateService";
 
-function ChangeCate() {
-    const [cates, setCates] = useState([]);
+function GetRequest() {
+    const [services, setServices] = useState([]);
     const nav = useNavigate();
-    const { id } = useParams();
 
     useEffect(() => {
-        if (id)
-            // Trường hợp có id - Lấy dịch vụ cụ thể
-            CateService.getCateById(id).then((res) => {
-                setCates(res.data);
-            });
-        else
-            // Trường hợp không có id - Lấy tất cả các dịch vụ
-            CateService.getCate().then((res) => {
-                setCates(res.data);
-            });
-    }, [id]);
+        ModerateService.getRequest().then((res) => {
+            setServices(res.data);
+        });
+    }, []);
 
     const addCate = () => { nav('/user/service/add'); }
-    const getCate = () => { nav('/user/service/add'); }
-    const getRequest = () => { nav('/user/service/my-request'); }
+    const updateCate = () => { nav('/user/service/add'); }
+    const searchRequest = () => { nav('/user/service/my-request'); }
 
     return (
         <div className='mb-5'>
@@ -34,25 +26,27 @@ function ChangeCate() {
                         <thead className="text-center">
                         <tr>
                             <th>Dịch vụ</th>
-                            <th>Đơn giá</th>
+                            <th>Ngày yêu cầu</th>
                             <th>Trạng thái</th>
-                            <th>Nội dung</th>
+                            <th>Thành tiền</th>
+                            <th>Giao hàng</th>
                             <th>Thao tác</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {cates.map((cate) => (
-                            <tr key={cate.id}>
-                                <td>{cate.serviceCateName}</td>
-                                <td>{cate.price}</td>
-                                <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
-                                <td>{cate.description}</td>
+                        {services.map((service) => (
+                            <tr key={service.id}>
+                                <td>{service.serviceCateName}</td>
+                                <td>{service.createdDate}</td>
+                                <td>{service.status}</td>
+                                <td>{service.price}</td>
+                                <td>{service.isShipped}</td>
                                 <td className="text-center">
                                     <button className="btn-success btn"
-                                            onClick={() => {getCate(cate.id)}}>Chỉnh sửa
+                                            onClick={() => {updateCate(service.id)}}>Chỉnh sửa
                                     </button>
                                     <button className="ms-2 btn-warning btn"
-                                            onClick={() => {addCate(cate.id)}}>Kiểm duyệt
+                                            onClick={() => {addCate(service.id)}}>Kiểm duyệt
                                     </button>
                                 </td>
                             </tr>
@@ -62,7 +56,7 @@ function ChangeCate() {
                 </div>
                 <div className="float-end row">
                     <button className="btn-info btn"
-                            onClick={getRequest}>Tìm kiếm
+                            onClick={searchRequest}>Tìm kiếm
                     </button>
                 </div>
             </Container>
@@ -70,4 +64,4 @@ function ChangeCate() {
     );
 }
 
-export default ChangeCate;
+export default GetRequest;

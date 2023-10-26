@@ -3,11 +3,11 @@ import CourseDataService from "../../../services/Admin/CourseDataService";
 import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 import CourseService from "../../../services/Admin/CourseService";
+import {Alert} from "reactstrap";
 
 function AddCourseData() {
-    const { id } = useParams();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
     const [courses, setCourses] = useState([]);
     const [lectures, setLectures] = useState([]);
 
@@ -19,14 +19,14 @@ function AddCourseData() {
     useEffect(() => {
         getCourses().then();
         getLectures().then();
-    })
+    }, [])
 
     const getCourses = async () => {
         try {
             const res = await CourseService.getCourse();
             setCourses(res.data);
-        } catch (error) {
-            console.error('Lỗi khi lấy danh sách môn học: ', error);
+        } catch (respor) {
+            console.respor('Lỗi khi lấy danh sách môn học: ', respor);
         }
     };
 
@@ -34,19 +34,19 @@ function AddCourseData() {
         try {
             const res = await CourseService.getLecture();
             setLectures(res.data);
-        } catch (error) {
-            console.error('Lỗi khi lấy danh sách giảng viên: ', error);
+        } catch (resp) {
+            console.error('Lỗi khi lấy danh sách giảng viên: ', resp);
         }
     };
 
     const saveCourseData = (e) => {
         e.preventDefault();
         if (startDate === '' || endDate === '' || courseId === null || lectureId === null)
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseId <= 0)
-            setErr('Không có mã môn học này trong dữ liệu');
+            setResp('Không có mã môn học này trong dữ liệu');
         else if (lectureId <= 0)
-            setErr('Không có mã giảng viên này trong dữ liệu');
+            setResp('Không có mã giảng viên này trong dữ liệu');
         else {
             const courseData = {
                 startDate,
@@ -54,41 +54,58 @@ function AddCourseData() {
                 courseId,
                 lectureId,
             }
-    
+
             CourseDataService.addCourse(courseData).then(() => {
-                nav('/admin/course-data/all');
+                setResp('Thêm lớp học thành công.');
             })
         }
     };
 
     const changeStartDateHandler = (e) => {
         setStartDate(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeEndDateHandler = (e) => {
         setEndDate(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeCourseHandler = (e) => {
         setCourseId(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeLectureHandler = (e) => {
         setLectureId(e.target.value);
-        setErr('');
+        setResp('');
     }
     
     const cancel = () => { nav(`/admin/course-data/all`); }
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+    )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
 
     return (
         <div>
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Thêm môn học</h3>
+                        <h3 className="App mt-2">Thêm lớp học</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">
@@ -127,7 +144,7 @@ function AddCourseData() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {alert}
                     </div>
                 </div>
             </div>

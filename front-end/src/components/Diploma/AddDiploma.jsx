@@ -27,9 +27,9 @@ function AddDiploma() {
             };
 
             DiplomaService.addDiploma(diploma).then((res) => {
+                setErr('Đăng ký thành công.');
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
-                setErr('Đăng ký thành công.');
             });
         }
     }
@@ -71,7 +71,7 @@ function AddDiploma() {
                             <form>
                                 <div className = "form-group">
                                     <label>Số lượng bản sao</label>
-                                    <input placeholder="Copy" name="copy" type="number" className="form-control"
+                                    <input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
                                            value={copy} onChange={changeCopyHandler}/>
                                 </div>
                                 <div className = "form-group">

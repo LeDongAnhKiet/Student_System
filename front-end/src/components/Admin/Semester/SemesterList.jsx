@@ -67,7 +67,7 @@ function SemesterList() {
                     </button>
                 </div>
                 {success && <Alert color="success" className="fixed-bottom"
-                   style={{marginBottom:'100px', marginLeft:'200px', marginRight:'200px'}}
+                   style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
                    onMouseEnter={() => setSuccess('')}>{success}</Alert>}
             </Container>
         </div>
