@@ -16,7 +16,7 @@ function UpdateDiploma() {
     const [diplomaCodeInput, setDiplomaCodeInput] = useState(diplomaCode || '');
 
     useEffect(() => {
-        DiplomaService.getDiploma(id).then((res) => {
+        DiplomaService.getDiploma(id).then(res => {
             let diploma = res.data;
             // Set cac gia tri cho diploma
             setCopyInput(diploma.copy);
@@ -50,7 +50,7 @@ function UpdateDiploma() {
     }
 
     const changeCopyHandler = (e) => {
-        setCopyInput(e.target.value);
+        setCopyInput(parseInt(e.target.value));
         setErr('');
     };
 
@@ -65,7 +65,7 @@ function UpdateDiploma() {
     };
 
     const changeYearHandler = (e) => {
-        setDiplomaYearInput(e.target.value);
+        setDiplomaYearInput(parseInt(e.target.value));
         setErr('');
     };
 

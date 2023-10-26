@@ -9,7 +9,7 @@ function StudCertificateList() {
     const nav = useNavigate();
 
     useEffect(() => {
-        StudCertificateService.getStudCertificate(id).then((res) => {
+        StudCertificateService.getStudCertificate(id).then(res => {
             setStudCertificates(res.data);
         });
     }, []);

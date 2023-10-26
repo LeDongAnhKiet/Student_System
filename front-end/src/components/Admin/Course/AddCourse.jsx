@@ -13,7 +13,7 @@ function AddCourse() {
     const [note, setNote] = useState('');
 
     useEffect(() => {
-        CourseService.getCourse().then((res) => {
+        CourseService.getCourse().then(res => {
             let course = res.data;
             setCourseName(course.courseName);
             setCreditsNum(course.creditsNum);
@@ -63,7 +63,7 @@ function AddCourse() {
     }
 
     const changeCreditsNumHandler = (e) => {
-        setCreditsNum(e.target.value);
+        setCreditsNum(parseInt(e.target.value));
         setResp('');
     }
 
@@ -99,7 +99,7 @@ function AddCourse() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveCourse}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

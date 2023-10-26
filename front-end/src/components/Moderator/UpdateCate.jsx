@@ -17,7 +17,7 @@ function UpdateCate() {
     const [numOfDateInput, setNumOfDateInput] = useState(numOfDate || 0);
 
     useEffect(() => {
-        HomeService.getCate(id).then((res) => {
+        HomeService.getCate(id).then(res => {
             let cate = res.data;
             setServiceCateNameInput(cate.serviceCateName);
             setPriceInput(cate.price);
@@ -49,13 +49,13 @@ function UpdateCate() {
     }
     const changeServiceCateNameHandler = (e) => { setServiceCateNameInput(e.target.value); }
 
-    const changePriceHandler = (e) => { setPriceInput(e.target.value); }
+    const changePriceHandler = (e) => { setPriceInput(parseFloat(e.target.value)); }
 
     const changeDescriptionHandler = (e) => { setDescriptionInput(e.target.value); }
 
     const changeIsAvailableHandler = (e) => { setIsAvailableInput(e.target.value); }
 
-    const changeDateHandler = (e) => { setNumOfDateInput(e.target.value); }
+    const changeDateHandler = (e) => { setNumOfDateInput(parseInt(e.target.value)); }
 
     const cancel = () => { nav('/guest/service-cate'); }
 
@@ -94,7 +94,7 @@ function UpdateCate() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveCate}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

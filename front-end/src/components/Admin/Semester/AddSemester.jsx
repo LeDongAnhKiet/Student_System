@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import SemesterService from "../../../services/Admin/SemesterService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import '../../../styles/App.css';
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 
@@ -11,7 +11,7 @@ function AddSemester() {
     const [note, setNote] = useState('');
 
     useEffect(() => {
-        SemesterService.getAvailableSemester().then((res) => {
+        SemesterService.getAvailableSemester().then(res => {
             let semester = res.data;
             setSemesterName(semester.semesterName);
             setNote(semester.note);
@@ -82,7 +82,7 @@ function AddSemester() {
                                 </FormGroup>
                                 <div className="text-end mt-2">
                                     <Button color="primary" className="me-1" onClick={saveSemester}>Lưu</Button>
-                                    <Button color="secondary" className="ms-1" onClick={cancel.bind(this)}>Hủy</Button>
+                                    <Button color="secondary" className="ms-1" onClick={cancel}>Hủy</Button>
                                 </div>
                             </Form>
                         </div>

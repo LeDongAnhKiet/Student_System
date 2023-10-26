@@ -26,7 +26,7 @@ function AddDiploma() {
                 diplomaCode,
             };
 
-            DiplomaService.addDiploma(diploma).then((res) => {
+            DiplomaService.addDiploma(diploma).then(res => {
                 setErr('Đăng ký thành công.');
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
@@ -35,7 +35,7 @@ function AddDiploma() {
     }
 
     const changeCopyHandler = (e) => {
-        setCopy(e.target.value);
+        setCopy(parseInt(e.target.value));
         setErr('');
     }
 
@@ -50,7 +50,7 @@ function AddDiploma() {
     }
 
     const changeYearHandler = (e) => {
-        setDiplomaYear(e.target.value);
+        setDiplomaYear(parseInt(e.target.value));
         setErr('');
     }
 
@@ -96,7 +96,7 @@ function AddDiploma() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveDiploma}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

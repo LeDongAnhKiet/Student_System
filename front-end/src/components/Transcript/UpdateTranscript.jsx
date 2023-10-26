@@ -19,7 +19,7 @@ function UpdateTranscript() {
     const [isSealedInput, setIsSealedInput] = useState(isSealed || false);
 
     useEffect(() => {
-        TranscriptService.getTranscript(id).then((res) => {
+        TranscriptService.getTranscript(id).then(res => {
             let transcript = res.data;
             setLanguageInput(transcript.language);
             setPhoneContactInput(transcript.phoneContact);
@@ -67,17 +67,17 @@ function UpdateTranscript() {
     }
 
     const changeFromSemesterHandler = (e) => {
-        setFromSemesterInput(e.target.value);
+        setFromSemesterInput(parseInt(e.target.value));
         setErr('');
     }
 
     const changeToSemesterHandler = (e) => {
-        setToSemesterInput(e.target.value);
+        setToSemesterInput(parseInt(e.target.value));
         setErr('');
     }
 
     const changeQuantityHandler = (e) => {
-        setQuantityInput(e.target.value);
+        setQuantityInput(parseInt(e.target.value));
         setErr('');
     }
 
@@ -147,7 +147,7 @@ function UpdateTranscript() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveTranscript}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

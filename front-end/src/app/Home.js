@@ -83,15 +83,15 @@ const Home = () => {
                     <p className="display-6 m-2">Loading...</p>
                 ) : (
                     <div>
-                        {user.role === "MODERATOR" ? <>
-                            <div className="text-center justify-content-center me-5 btn-group border border-secondary rounded-pill p-1">
+                        {user.role === "MODERATOR" ? <div className="text-center">
+                            <div className="btn-group border border-secondary rounded-pill p-1">
                                 <button className="btn btn-success rounded-pill"
                                         onClick={viewServices}>Quản lý dịch vụ</button>
                             </div>
-                        </> : <></>}
-                        {user.role === "ADMIN" ? <>
-                            <div className="text-center btn-group border border-secondary rounded-pill p-1">
-                                <button className="me-1 btn btn-success rounded-pill rounded-end-0"
+                        </div> : <></>}
+                        {user.role === "ADMIN" ? <div className="text-center">
+                            <div className=" btn-group border border-secondary rounded-pill p-1">
+                                <button className="btn btn-success rounded-pill rounded-end-0"
                                         onClick={viewStuds}>Quản lý sinh viên</button>
                                 <button className="me-1 btn btn-success rounded-start-0 rounded-end-0"
                                         onClick={viewDepts}>Quản lý khoa</button>
@@ -102,7 +102,7 @@ const Home = () => {
                                 <button className="btn btn-success rounded-pill rounded-start-0"
                                         onClick={viewCourseDatas}>Quản lý lớp học</button>
                             </div>
-                        </> : <></>}
+                        </div> : <></>}
                         {user.fullName ? (<>
                             <h2 className='App'>
                                 Xin chào, {user.fullName}
@@ -161,12 +161,9 @@ const Home = () => {
                                                 <td>{request.price}</td>
                                                 {request.status === 'PENDING' ?
                                                 <td className="text-center">
-                                                    <button className="btn-success btn" onClick={() => {
+                                                    <Button color="success" onClick={() => {
                                                         updateRequest(request)}}>Chỉnh sửa
-                                                    </button>
-                                                    <button className="ms-2 btn-danger btn" onClick={() => {
-                                                        UserService.cancelRequest(request.id)}}>Hủy
-                                                    </button>
+                                                    </Button>
                                                 </td> : <td className="text-center fw-bold">Đã được duyệt</td>}
                                             </tr>
                                         ))}

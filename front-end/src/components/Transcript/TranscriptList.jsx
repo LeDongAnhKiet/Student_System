@@ -9,7 +9,7 @@ function TranscriptList() {
     const nav = useNavigate();
 
     useEffect(() => {
-        TranscriptService.getTranscript(id).then((res) => {
+        TranscriptService.getTranscript(id).then(res => {
             setTranscripts(res.data);
         });
     }, [id]);

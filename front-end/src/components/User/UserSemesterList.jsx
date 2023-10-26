@@ -8,7 +8,7 @@ function SemesterList() {
     const nav = useNavigate();
 
     useEffect(() => {
-        UserService.getSemester().then((res) => {
+        UserService.getSemester().then(res => {
             setSemesters(res.data);
         });
     }, []);

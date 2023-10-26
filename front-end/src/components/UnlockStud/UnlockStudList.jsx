@@ -9,7 +9,7 @@ function UnlockStudList() {
     const nav = useNavigate();
 
     useEffect(() => {
-        UnlockStudService.getUnlockStud(id).then((res) => {
+        UnlockStudService.getUnlockStud(id).then(res => {
             setUnlockStuds(res.data);
         });
     }, [id]);

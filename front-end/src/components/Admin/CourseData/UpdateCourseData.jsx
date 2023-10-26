@@ -3,6 +3,7 @@ import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 import CourseService from "../../../services/Admin/CourseService";
 import {Alert} from "reactstrap";
+import {format, parse} from "date-fns";
 
 function UpdateCourseData() {
     const { id } = useParams();
@@ -19,7 +20,7 @@ function UpdateCourseData() {
     const [lectureIdInput, setLectureIdInput] = useState(lectureId || 0);
 
     useEffect(() => {
-        CourseDataService.getCourse().then((res) => {
+        CourseDataService.getCourse().then(res => {
             let courseData = res.data;
             setStartDateInput(courseData.startDate);
             setEndDateInput(courseData.endDate);
@@ -88,22 +89,26 @@ function UpdateCourseData() {
     }
 
     const changeStartDateHandler = (e) => {
-        setStartDateInput(e.target.value);
+        const parsedDate = parse(e.target.value, 'yyyy-MM-dd', new Date());
+        const formattedDate = format(parsedDate, 'dd-MM-yyyy');
+        setStartDateInput(formattedDate);
         setResp('');
     }
 
     const changeEndDateHandler = (e) => {
-        setEndDateInput(e.target.value);
+        const parsedDate = parse(e.target.value, 'yyyy-MM-dd', new Date());
+        const formattedDate = format(parsedDate, 'dd-MM-yyyy');
+        setEndDateInput(formattedDate);
         setResp('');
     }
 
     const changeCourseHandler = (e) => {
-        setCourseIdInput(e.target.value);
+        setCourseIdInput(parseInt(e.target.value));
         setResp('');
     }
 
     const changeLectureHandler = (e) => {
-        setLectureIdInput(e.target.value);
+        setLectureIdInput(parseInt(e.target.value));
         setResp('');
     }
 
@@ -149,7 +154,7 @@ function UpdateCourseData() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={updateCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

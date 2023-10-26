@@ -28,7 +28,7 @@ function AddStudCertificate() {
                 content,
             };
 
-            StudCertificateService.addStudCertificate(studCertificate).then((res) => {
+            StudCertificateService.addStudCertificate(studCertificate).then(res => {
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
             });
@@ -36,7 +36,7 @@ function AddStudCertificate() {
     }
 
     const changeVietCopyHandler = (e) => {
-        setVietCopy(e.target.value);
+        setVietCopy(parseInt(e.target.value));
         setErr('');
     }
 
@@ -51,7 +51,7 @@ function AddStudCertificate() {
     }
 
     const changeEngCopyHandler = (e) => {
-        setEngCopy(e.target.value);
+        setEngCopy(parseInt(e.target.value));
         setErr('');
     }
 
@@ -97,7 +97,7 @@ function AddStudCertificate() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveStudCertificate}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

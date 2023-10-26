@@ -9,7 +9,7 @@ function SemesterList() {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        SemesterService.getAvailableSemester().then((res) => {
+        SemesterService.getAvailableSemester().then(res => {
             setSemesters(res.data);
         });
     }, []);

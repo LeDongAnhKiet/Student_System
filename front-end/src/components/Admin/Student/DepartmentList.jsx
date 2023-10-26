@@ -10,14 +10,14 @@ function DepartmentList() {
 
     useEffect(() => {
         if (id)
-            StudentService.getDepartmentById(id).then((res) => {
+            StudentService.getDepartmentById(id).then(res => {
                 setDepartments(res.data);
             });
         else
-                StudentService.getDepartment().then((res) => {
+                StudentService.getDepartment().then(res => {
             setDepartments(res.data);
         });
-    }, []);
+    }, [id]);
 
     return (
         <div className='mb-5 pd-5'>

@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 import CourseService from "../../../services/Admin/CourseService";
 import {Alert} from "reactstrap";
+import {format, parse} from "date-fns";
 
 function AddCourseData() {
     const nav = useNavigate();
@@ -25,8 +26,8 @@ function AddCourseData() {
         try {
             const res = await CourseService.getCourse();
             setCourses(res.data);
-        } catch (respor) {
-            console.respor('Lỗi khi lấy danh sách môn học: ', respor);
+        } catch (err) {
+            console.error('Lỗi khi lấy danh sách môn học: ', err);
         }
     };
 
@@ -49,10 +50,10 @@ function AddCourseData() {
             setResp('Không có mã giảng viên này trong dữ liệu');
         else {
             const courseData = {
-                startDate,
-                endDate,
-                courseId,
-                lectureId,
+                startDate,//: format(parse(startDate, 'yyyyMMdd', new Date()), 'dd-MM-yyyy'),
+                endDate,//: format(parse(endDate, 'yyyyMMdd', new Date()), 'dd-MM-yyyy'),
+                courseId: courseId,
+                lectureId: lectureId,
             }
 
             CourseDataService.addCourse(courseData).then(() => {
@@ -72,12 +73,12 @@ function AddCourseData() {
     }
 
     const changeCourseHandler = (e) => {
-        setCourseId(e.target.value);
+        setCourseId(parseInt(e.target.value));
         setResp('');
     }
 
     const changeLectureHandler = (e) => {
-        setLectureId(e.target.value);
+        setLectureId(parseInt(e.target.value));
         setResp('');
     }
     
@@ -140,7 +141,7 @@ function AddCourseData() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

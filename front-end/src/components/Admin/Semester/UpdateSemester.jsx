@@ -15,7 +15,7 @@ function UpdateSemester() {
 
     useEffect(() => {
         SemesterService.getSemesterById(id)
-            .then((res) => {
+            .then(res => {
                 let semester = res.data;
                 setSemesterNameInput(semester.semesterName);
                 setNoteInput(semester.note);
@@ -94,7 +94,7 @@ function UpdateSemester() {
                                 </FormGroup>
                                 <div className="text-end mt-2">
                                     <Button color="primary" className="me-1" onClick={updateSemester}>Lưu</Button>
-                                    <Button color="secondary" className="ms-1" onClick={cancel.bind(this)}>Hủy</Button>
+                                    <Button color="secondary" className="ms-1" onClick={cancel}>Hủy</Button>
                                 </div>
                             </Form>
                         </div>

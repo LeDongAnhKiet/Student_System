@@ -13,7 +13,7 @@ function UpdateUnlockStud() {
     const [contentInput, setContentInput] = useState(content || '');
 
     useEffect(() => {
-            UnlockStudService.getUnlockStud(id).then((res) => {
+            UnlockStudService.getUnlockStud(id).then(res => {
                 let unlockStud = res.data;
                 setImageInput(unlockStud.image);
                 setContentInput(unlockStud.content);
@@ -68,7 +68,7 @@ function UpdateUnlockStud() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

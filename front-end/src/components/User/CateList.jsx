@@ -3,6 +3,7 @@ import { Container, Table } from 'reactstrap';
 import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserService from "../../services/User/UserService";
+import ModerateService from "../../services/Mod/ModerateService";
 
 function CateList() {
     const [user, setUser] = useState({});
@@ -23,12 +24,12 @@ function CateList() {
 
         if (id)
             // Trường hợp có id - Lấy dịch vụ cụ thể
-            CateService.getCateById(id).then((res) => {
+            CateService.getCateById(id).then(res => {
                 setCates(res.data);
             });
         else
             // Trường hợp không có id - Lấy tất cả các dịch vụ
-            CateService.getCate().then((res) => {
+            CateService.getCate().then(res => {
                 setCates(res.data);
             });
     }, [id]);
@@ -93,11 +94,15 @@ function CateList() {
                                     <button className="btn-primary btn"
                                             onClick={() => {addCate(cate.id)}}>Đăng ký
                                     </button>
-                                    {user.role !== 'USER' ?
+                                    {user.role === 'MODERATOR' ? <>
                                         <button className="ms-2 btn-success btn"
                                                 onClick={() => {updateCate(cate)}}>Chỉnh sửa
                                         </button>
-                                    : <></>}
+                                        <button className="ms-2 btn-warning btn"
+                                                onClick={() => {ModerateService.changeCate(cate.id)}}>
+                                            { cate.isAvailable ? 'Đóng lại' : 'Mở lại' }
+                                        </button>
+                                    </> : <></>}
                                 </td>
                             </tr>
                         ))}

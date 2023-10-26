@@ -15,7 +15,7 @@ function UpdateCourse() {
     const [noteInput, setNoteInput] = useState(note || '');
 
     useEffect(() => {
-        CourseService.getCourse().then((res) => {
+        CourseService.getCourse().then(res => {
             let course = res.data;
             setCourseNameInput(course.courseName);
             setCreditsNumInput(course.creditsNum);
@@ -48,7 +48,7 @@ function UpdateCourse() {
     }
 
     const changeCreditsNumHandler = (e) => {
-        setCreditsNumInput(e.target.value);
+        setCreditsNumInput(parseInt(e.target.value));
         setResp('');
     }
 
@@ -101,7 +101,7 @@ function UpdateCourse() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={updateCourse}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

@@ -11,12 +11,12 @@ function ChangeCate() {
     useEffect(() => {
         if (id)
             // Trường hợp có id - Lấy dịch vụ cụ thể
-            CateService.getCateById(id).then((res) => {
+            CateService.getCateById(id).then(res => {
                 setCates(res.data);
             });
         else
             // Trường hợp không có id - Lấy tất cả các dịch vụ
-            CateService.getCate().then((res) => {
+            CateService.getCate().then(res => {
                 setCates(res.data);
             });
     }, [id]);

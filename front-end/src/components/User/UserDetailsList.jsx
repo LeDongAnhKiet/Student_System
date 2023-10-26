@@ -9,7 +9,7 @@ function UserDetailsList() {
     const { id } = useParams();
 
     useEffect(() => {
-        UserService.getDetails(id).then((res) => {
+        UserService.getDetails(id).then(res => {
             setDetails(res.data);
             //console.log(res.data)
         });

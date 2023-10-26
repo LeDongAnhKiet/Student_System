@@ -18,7 +18,7 @@ function AddUnlockStud() {
                 content,
             };
 
-            UnlockStudService.addUnlockStud(unlockStud).then((res) => {
+            UnlockStudService.addUnlockStud(unlockStud).then(res => {
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
             });
@@ -57,7 +57,7 @@ function AddUnlockStud() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

@@ -16,7 +16,7 @@ function UpdateStudCertificate() {
     const [contentInput, setContentInput] = useState(content || '');
 
     useEffect(() => {
-        StudCertificateService.getStudCertificate(id).then((res) => {
+        StudCertificateService.getStudCertificate(id).then(res => {
             let studCertificate = res.data;
             setVietCopyInput(studCertificate.vietCopy);
             setPhoneContactInput(studCertificate.phoneContact);
@@ -49,7 +49,7 @@ function UpdateStudCertificate() {
     }
 
     const changeVietCopyHandler = (e) => {
-        setVietCopyInput(e.target.value);
+        setVietCopyInput(parseInt(e.target.value));
         setErr('');
     }
 
@@ -64,7 +64,7 @@ function UpdateStudCertificate() {
     }
 
     const changeEngCopyHandler = (e) => {
-        setEngCopyInput(e.target.value);
+        setEngCopyInput(parseInt(e.target.value));
         setErr('');
     }
 
@@ -110,7 +110,7 @@ function UpdateStudCertificate() {
                                 </div>
                                 <div className="text-end mt-2">
                                     <button className="btn btn-primary me-1" onClick={updateStudCertificate}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel.bind(this)}>Hủy</button>
+                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
                                 </div>
                             </form>
                         </div>

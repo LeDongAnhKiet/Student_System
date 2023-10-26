@@ -11,14 +11,14 @@ function CourseList() {
 
     useEffect(() => {
         if (id)
-            CourseService.getCourseById(id).then((res) => {
+            CourseService.getCourseById(id).then(res => {
                 setCourses(res.data);
             });
         else
-            CourseService.getCourse().then((res) => {
+            CourseService.getCourse().then(res => {
                 setCourses(res.data);
             });
-    }, []);
+    }, [id]);
 
     const addCourse = () => { nav('/admin/course/add'); }
 

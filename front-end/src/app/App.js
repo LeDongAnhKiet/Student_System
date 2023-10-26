@@ -71,6 +71,7 @@ const App = () => {
                     <Route path="/moderator/service-cate/update/:id" element={<Comp.UpdateCate />} />
                     <Route path="/moderator/service-cate/change/:id" element={<Comp.ChangeCate />} />
                     <Route path="/moderator/get-request" element={<Comp.GetRequest />} />
+                    <Route path="/moderator/get-request/:id" element={<Comp.GetRequest />} />
                 </Routes>
             </div>
             <Footer />

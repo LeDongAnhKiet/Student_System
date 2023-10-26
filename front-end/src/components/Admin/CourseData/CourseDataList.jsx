@@ -9,7 +9,7 @@ function CourseDataList() {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        CourseDataService.getCourse().then((res) => {
+        CourseDataService.getCourse().then(res => {
             setCourseDatas(res.data);
         });
     }, []);

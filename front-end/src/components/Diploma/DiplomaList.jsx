@@ -9,7 +9,7 @@ function DiplomaList() {
     const nav = useNavigate();
 
     useEffect(() => {
-        DiplomaService.getDiploma(id).then((res) => {
+        DiplomaService.getDiploma(id).then(res => {
             setDiplomas(res.data);
         });
     }, []);

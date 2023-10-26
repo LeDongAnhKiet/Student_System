@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import UserService from "../../services/User/UserService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Container, Table} from "reactstrap";
 import { format } from 'date-fns';
 
 function CreatePayment() {
     const { id } = useParams();
+    const nav = useNavigate();
     const [payment, setPayment] = useState({});
     const[color, setColor] = useState('');
 
     useEffect(() => {
-        UserService.createPayment(payment, id).then((res) => {
+        UserService.createPayment(payment, id).then(res => {
                 setPayment(res.data);
             })
             .catch((error) => {
@@ -48,9 +49,10 @@ function CreatePayment() {
                             </tr>
                             <tr className="border-bottom" style={{height:'50px'}}>
                                 <th>Link VNPay</th>
-                                <td><a onMouseEnter={() => setColor('blue')}
+                                <td onClick={() => nav('/user/payment/status', { state: { id: id } })}>
+                                    <a onMouseEnter={() => setColor('blue')}
                                        onMouseLeave={() => setColor('gray')}
-                                       style={{color: color}} type="button" href={payment.url}>
+                                       target="_blank" style={{color: color}} type="button" href={payment.url}>
                                     Tại đây</a>
                                 </td>
                             </tr>
