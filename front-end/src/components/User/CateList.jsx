@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Table } from 'reactstrap';
+import {Alert, Button, Container, Table} from 'reactstrap';
 import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserService from "../../services/User/UserService";
@@ -34,24 +34,26 @@ function CateList() {
             });
     }, [id]);
 
-    const addCate = (id) => {
+    const addService = (id, available) => {
         setError('');
-        switch(id) {
-            case 1:
-                nav('/user/service/transcript/add');
-                break;
-            case 2:
-                nav('/user/service/stud-cert/add');
-                break;
-            case 3:
-                nav('/user/service/diploma/add');
-                break;
-            case 5:
-                nav('/user/service/unlock-stud/add');
-                break;
-            default:
-                setError('Dịch vụ đã không còn.');
-        }
+        if (available)
+            switch(id) {
+                case 1:
+                    nav('/user/service/transcript/add');
+                    break;
+                case 2:
+                    nav('/user/service/stud-cert/add');
+                    break;
+                case 3:
+                    nav('/user/service/diploma/add');
+                    break;
+                case 5:
+                    nav('/user/service/unlock-stud/add');
+                    break;
+                default:
+                    setError('Dịch vụ còn trong quá trình phát triển.');
+            }
+        else setError('Dịch vụ đã đóng.');
     }
 
     const updateCate = (cate) => {
@@ -91,17 +93,17 @@ function CateList() {
                                 <td>{cate.description}</td>
                                 <td>{cate.numOfDate} ngày</td>
                                 <td className="text-center">
-                                    <button className="btn-primary btn"
-                                            onClick={() => {addCate(cate.id)}}>Đăng ký
-                                    </button>
+                                    <Button color="primary" className="m-1"
+                                            onClick={() => {addService(cate.id, cate.isAvailable)}}>Đăng ký
+                                    </Button>
                                     {user.role === 'MODERATOR' ? <>
-                                        <button className="ms-2 btn-success btn"
+                                        <Button color="success" className="m-1"
                                                 onClick={() => {updateCate(cate)}}>Chỉnh sửa
-                                        </button>
-                                        <button className="ms-2 btn-warning btn"
+                                        </Button>
+                                        <Button color="warning" className="m-1"
                                                 onClick={() => {ModerateService.changeCate(cate.id)}}>
-                                            { cate.isAvailable ? 'Đóng lại' : 'Mở lại' }
-                                        </button>
+                                            { cate.isAvailable ? 'Đóng dịch vụ' : 'Mở dịch vụ' }
+                                        </Button>
                                     </> : <></>}
                                 </td>
                             </tr>
@@ -110,12 +112,12 @@ function CateList() {
                     </Table>
                 </div>
                 <div className="float-end row" style={{paddingBottom: '15%'}}>
-                    <button className="btn-info btn"
-                            onClick={() => nav('/home')}>Lịch sử đăng ký
-                    </button>
+                    <Button color="info" onClick={() => nav('/home')}>Lịch sử đăng ký</Button>
                 </div>
-                {error && <div className="alert alert-danger"
-                    onMouseEnter={() => setError('')}>{error}</div>}
+                { error ? <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setError('')}>{error}
+                </Alert> : <></> }
             </Container>
         </div>
     );

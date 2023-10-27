@@ -51,7 +51,7 @@ function UpdateCourseData() {
 
     const updateCourseData = (e) => {
         e.preventDefault();
-        if (startDateInput === '' || endDateInput === '' || courseIdInput === '' || lectureIdInput === '')
+        if (startDateInput === undefined || endDateInput === undefined || courseIdInput === undefined || lectureIdInput === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseIdInput <= 0)
             setResp('Không có mã môn học này trong dữ liệu');

@@ -20,7 +20,7 @@ function AddSemester() {
 
     const saveSemester = (e) => {
         e.preventDefault();
-        if (semesterName === '') setResp('Vui lòng nhập đầy đủ thông tin');
+        if (semesterName === undefined) setResp('Vui lòng nhập đầy đủ thông tin');
         else {
             const semester = {
             semesterName,
@@ -81,8 +81,8 @@ function AddSemester() {
                                            value={note} onChange={changeNoteHandler}/>
                                 </FormGroup>
                                 <div className="text-end mt-2">
-                                    <Button color="primary" className="me-1" onClick={saveSemester}>Lưu</Button>
-                                    <Button color="secondary" className="ms-1" onClick={cancel}>Hủy</Button>
+                                    <Button color="primary" className="m-1" onClick={saveSemester}>Lưu</Button>
+                                    <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
                                 </div>
                             </Form>
                         </div>

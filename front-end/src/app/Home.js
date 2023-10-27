@@ -73,7 +73,6 @@ const Home = () => {
         getUser().then();
         getUserSemester().then();
         getRequest().then();
-        //window.location.reload();
     }, []);
 
     return (
@@ -85,60 +84,60 @@ const Home = () => {
                     <div>
                         {user.role === "MODERATOR" ? <div className="text-center">
                             <div className="btn-group border border-secondary rounded-pill p-1">
-                                <button className="btn btn-success rounded-pill"
-                                        onClick={viewServices}>Quản lý dịch vụ</button>
+                                <Button color="success" className="rounded-pill"
+                                        onClick={viewServices}>Quản lý dịch vụ</Button>
                             </div>
                         </div> : <></>}
                         {user.role === "ADMIN" ? <div className="text-center">
                             <div className=" btn-group border border-secondary rounded-pill p-1">
-                                <button className="btn btn-success rounded-pill rounded-end-0"
-                                        onClick={viewStuds}>Quản lý sinh viên</button>
-                                <button className="me-1 btn btn-success rounded-start-0 rounded-end-0"
-                                        onClick={viewDepts}>Quản lý khoa</button>
-                                <button className="me-1 btn btn-success rounded-start-0 rounded-end-0"
-                                        onClick={viewSemesters}>Quản lý học kỳ</button>
-                                <button className="me-1 btn btn-success rounded-pill rounded-start-0 rounded-end-0"
-                                        onClick={viewCourses}>Quản lý môn học</button>
-                                <button className="btn btn-success rounded-pill rounded-start-0"
-                                        onClick={viewCourseDatas}>Quản lý lớp học</button>
+                                <Button color="success" className="rounded-pill rounded-end-0"
+                                        onClick={viewStuds}>Quản lý sinh viên</Button>
+                                <Button color="success" className="me-1 rounded-start-0 rounded-end-0"
+                                        onClick={viewDepts}>Quản lý khoa</Button>
+                                <Button color="success" className="me-1 rounded-start-0 rounded-end-0"
+                                        onClick={viewSemesters}>Quản lý học kỳ</Button>
+                                <Button color="success" className="me-1 rounded-pill rounded-start-0 rounded-end-0"
+                                        onClick={viewCourses}>Quản lý môn học</Button>
+                                <Button color="success" className="rounded-pill rounded-start-0"
+                                        onClick={viewCourseDatas}>Quản lý lớp học</Button>
                             </div>
                         </div> : <></>}
                         {user.fullName ? (<>
                             <h2 className='App'>
                                 Xin chào, {user.fullName}
-                                {user.avatar !== '' ? (<span> {user.avatar}</span>) : (
+                                {user.avatar !== '' && user.avatar !== null ? (<span> {user.avatar}</span>) : (
                                     <span className='ms-2' dangerouslySetInnerHTML={{ __html: '&#x1F464;' }}></span>
                                 )}
                             </h2>
-                                <h5 className="my-3 pb-2 border-bottom">Các học kỳ</h5>
-                                {semesters.length ? (<>
-                                    {semesters.map((semester) => (
-                                        <span className="list-group-horizontal row-cols-4" key={semester.id}>
-                                            <div className="list-inline-item mx-1">
-                                                <div className="btn fw-bold"
-                                                     style={{ color: hoveredText === semester.semesterName ? 'cyan' : ''}}
-                                                     data-toggle="tooltip" title="Nhấn vào để xem chi tiết"
-                                                     onMouseEnter={() => setHoveredText(semester.semesterName)}
-                                                     onMouseLeave={() => setHoveredText('')}
-                                                     onClick={() => viewDetails(semester.id)}>
-                                                    {semester.semesterName}
-                                                </div>
+                            <h5 className="my-3 pb-2 border-bottom">Các học kỳ</h5>
+                            {semesters.length ? (<>
+                                {semesters.map((semester) => (
+                                    <span className="list-group-horizontal row-cols-4" key={semester.id}>
+                                        <div className="list-inline-item mx-1">
+                                            <div className="btn fw-bold"
+                                                 style={{ color: hoveredText === semester.semesterName ? 'cyan' : ''}}
+                                                 data-toggle="tooltip" title="Nhấn vào để xem chi tiết"
+                                                 onMouseEnter={() => setHoveredText(semester.semesterName)}
+                                                 onMouseLeave={() => setHoveredText('')}
+                                                 onClick={() => viewDetails(semester.id)}>
+                                                {semester.semesterName}
                                             </div>
-                                        </span>
-                                    ))}
-                                </>
-                                ) : (
-                                    <div className="App row">
-                                        <span className="bg-warning fw-bold text-black p-2">Chưa mở học kỳ</span>
-                                    </div>
-                                )}
+                                        </div>
+                                    </span>
+                                ))}
+                            </>
+                            ) : (
+                                <div className="App row">
+                                    <span className="bg-warning fw-bold text-black p-2">Chưa mở học kỳ</span>
+                                </div>
+                            )}
                             <h5 className="my-3 pb-2 border-bottom">Lịch sử đăng ký dịch vụ
-                            <button className="float-end h5 border-0 bg-white"
-                                    onMouseEnter={() => setHoveredText('cyan')}
-                                    onMouseLeave={() => setHoveredText('')}
-                                    data-toggle="tooltip" title="Xem danh sách dịch vụ trực tuyến"
-                                    onClick={viewCates} style={{ color: hoveredText }}>Các dịch vụ
-                            </button>
+                                <button className="float-end h5 border-0 bg-white"
+                                        onMouseEnter={() => setHoveredText('cyan')}
+                                        onMouseLeave={() => setHoveredText('')}
+                                        data-toggle="tooltip" title="Xem danh sách dịch vụ trực tuyến"
+                                        onClick={viewCates} style={{ color: hoveredText }}>Các dịch vụ
+                                </button>
                             </h5>
                             {requests.length ? (
                                 <div className="row">
@@ -161,7 +160,7 @@ const Home = () => {
                                                 <td>{request.price}</td>
                                                 {request.status === 'PENDING' ?
                                                 <td className="text-center">
-                                                    <Button color="success" onClick={() => {
+                                                    <Button color="success" className="m-1" onClick={() => {
                                                         updateRequest(request)}}>Chỉnh sửa
                                                     </Button>
                                                 </td> : <td className="text-center fw-bold">Đã được duyệt</td>}
@@ -175,13 +174,15 @@ const Home = () => {
                                     <span className="bg-warning fw-bold text-black p-2">Chưa đăng ký dịch vụ nào</span>
                                 </div>
                             )}
-                            <button className="border-0 bg-white h5 my-3 pb-2 border-bottom"
-                                data-toggle="tooltip" title="Nhấn vào để xem chi tiết"
-                                onClick={viewInfo}>Thông tin sinh viên
-                            {user.avatar !== '' ? (<span> {user.avatar}</span>) : (
-                                <span className="ms-2" dangerouslySetInnerHTML={{ __html: '&#x1F464;' }}></span>
-                            )}
-                            </button>
+                            <div className="border-bottom my-3">
+                                <button className="border-0 bg-white h5"
+                                    data-toggle="tooltip" title="Nhấn vào để xem chi tiết"
+                                    onClick={viewInfo}>Thông tin sinh viên
+                                    {user.avatar !== '' && user.avatar !== null ? (<span> {user.avatar}</span>) : (
+                                        <span className="ms-2" dangerouslySetInnerHTML={{ __html: '&#x1F464;' }}></span>
+                                    )}
+                                </button>
+                            </div>
                             <div>
                                 <span className="fw-bold ps-4">Khoa </span>
                                 <span>{user.department_name}</span>
@@ -193,7 +194,7 @@ const Home = () => {
                         </>
                         ) : (<>
                             <h2>Vui lòng đăng nhập!</h2>
-                            <Button className="my-3 bg-primary" onClick={signin}>Đăng nhập</Button>
+                            <Button color="primary" className="my-3" onClick={signin}>Đăng nhập</Button>
                         </>
                         )}
                     </div>

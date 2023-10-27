@@ -3,17 +3,8 @@ import { Container, Table } from 'reactstrap';
 import UserService from "../../services/User/UserService";
 import { useNavigate } from "react-router-dom";
 
-function UserInfoList() {
-    const [user, setUser] = useState({
-        id: 0,
-        email: '',
-        fullName: '',
-        avatar: '',
-        role: '',
-        major_name: '',
-        department_name: ''
-    });
-
+function UserInfo() {
+    const [user, setUser] = useState({});
     const nav = useNavigate();
 
     useEffect(() => {
@@ -34,7 +25,7 @@ function UserInfoList() {
                         </tr>
                         <tr className="border-bottom" style={{height:'50px'}}>
                             <th>Ảnh đại diện</th>
-                            {user.avatar !== '' ? (<> {user.avatar}</>) : (
+                            {user.avatar !== '' && user.avatar !== null ? (<> {user.avatar}</>) : (
                                 <td dangerouslySetInnerHTML={{ __html: '&#x1F464;' }}></td>
                             )}
                         </tr>
@@ -60,4 +51,4 @@ function UserInfoList() {
     );
 }
 
-export default UserInfoList;
+export default UserInfo;

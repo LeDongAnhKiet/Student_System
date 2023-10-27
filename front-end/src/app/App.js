@@ -8,6 +8,7 @@ import cookie from "react-cookies";
 import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 import * as Comp from '../components';
+import {Container} from "reactstrap";
 
 export const UserContext = createContext(null);
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
     return (
         <UserContext.Provider value={[user, setUser]}>
             <Header/>
-            <div className="container">
+            <Container>
                 <Routes>
                     <Route path="/" element={<Navigate to="/guest/auth/signin" />} />
                     <Route path="/guest/auth/signin" element={<Signin />} />
@@ -28,7 +29,7 @@ const App = () => {
                     <Route path="/guest/service-cate" element={<Comp.CateList />} />
                     <Route path="/guest/service-cate/:id" element={<Comp.CateList />} />
 
-                    <Route path="/user/info" element={<Comp.UserInfoList />} />
+                    <Route path="/user/info" element={<Comp.UserInfo />} />
                     <Route path="/user/semester" element={<Comp.UserSemesterList />} />
                     <Route path="/user/semester/:id/course" element={<Comp.UserDetailsList />} />
                     <Route path="/user/payment/create/:id" element={<Comp.CreatePayment />} />
@@ -73,7 +74,7 @@ const App = () => {
                     <Route path="/moderator/get-request" element={<Comp.GetRequest />} />
                     <Route path="/moderator/get-request/:id" element={<Comp.GetRequest />} />
                 </Routes>
-            </div>
+            </Container>
             <Footer />
         </UserContext.Provider>
     );

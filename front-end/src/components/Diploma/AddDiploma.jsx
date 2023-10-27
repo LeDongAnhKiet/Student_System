@@ -13,7 +13,7 @@ function AddDiploma() {
 
     const saveDiploma = (e) => {
         e.preventDefault();
-        if (copy === null || phoneContact === '' || email === '' || diplomaYear === null || diplomaCode === '')
+        if (copy === undefined || phoneContact === undefined || email === undefined || diplomaYear === undefined || diplomaCode === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (copy <= 0 || diplomaYear <= 1970)
             setErr('Số nhập không hợp lệ');

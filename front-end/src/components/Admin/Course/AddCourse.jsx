@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import CourseService from "../../../services/Admin/CourseService";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import '../../../styles/App.css';
 import {Alert} from "reactstrap";
 
@@ -23,7 +23,7 @@ function AddCourse() {
 
     const saveCourse = (e) => {
         e.preventDefault();
-        if (courseName === '' || note === '' || creditsNum === null)
+        if (courseName === undefined || note === undefined || creditsNum === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNum <= 0 || creditsNum > 5)
             setResp('Vượt quá tín chỉ cho phép');

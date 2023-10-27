@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import UserService from "../../services/User/UserService";
+import HomeService from "../../services/Guest/HomeService";
 
 function UpdateTranscript() {
     const { id } = useParams();
@@ -10,6 +10,7 @@ function UpdateTranscript() {
     const [err, setErr] = useState('');
 
     const {language, phoneContact, fromSemester, toSemester, quantity, isSealed} = loc.state || {};
+    const [transcriptId, setTranscriptId] = useState(0);
     const [semesters, setSemesters] = useState([]);
     const [languageInput, setLanguageInput] = useState(language || '');
     const [phoneContactInput, setPhoneContactInput] = useState(phoneContact || '');
@@ -21,6 +22,7 @@ function UpdateTranscript() {
     useEffect(() => {
         TranscriptService.getTranscript(id).then(res => {
             let transcript = res.data;
+            setTranscriptId(transcript.id);
             setLanguageInput(transcript.language);
             setPhoneContactInput(transcript.phoneContact);
             setFromSemesterInput(transcript.fromSemester.id);
@@ -28,13 +30,23 @@ function UpdateTranscript() {
             setQuantityInput(transcript.quantity);
             setIsSealedInput(transcript.isSealed);
         })
+
+        const getSemesters = async () => {
+            try {
+                const res = await HomeService.getSemester();
+                setSemesters(res.data);
+            } catch (error) {
+                console.error('Lỗi khi lấy danh sách học kỳ:', error);
+            }
+        };
+
         getSemesters().then();
     }, [id]);
 
     const saveTranscript = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || fromSemesterInput === null || languageInput === ''
-            || toSemesterInput === null || quantityInput === null)
+        if (phoneContactInput === undefined || fromSemesterInput === undefined || languageInput === undefined
+            || toSemesterInput === undefined || quantityInput === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (quantityInput <= 0)
             setErr('Số bản nhập không hợp lệ');
@@ -42,15 +54,15 @@ function UpdateTranscript() {
             setErr('Học kỳ chọn không hợp lệ');
         else {
             const transcript = {
-                language: setLanguageInput,
-                phoneContact: setPhoneContactInput,
-                fromSemester: setFromSemesterInput,
-                toSemester: setToSemesterInput,
-                quantity: setQuantityInput,
-                isSealed: setIsSealedInput,
+                language: languageInput,
+                fromSemester: fromSemesterInput,
+                toSemester: toSemesterInput,
+                quantity: quantityInput,
+                phoneContact: phoneContactInput,
+                isSealed: isSealedInput,
             };
-
-            TranscriptService.updateTranscript(transcript, id).then(() => {
+console.log(transcriptId)
+            TranscriptService.updateTranscript(transcript, transcriptId).then(() => {
                 nav(`/user/service/transcript/${transcript.onlineService.id}`);
             })
         }
@@ -87,15 +99,6 @@ function UpdateTranscript() {
     }
 
     const cancel = () => { nav(`/guest/service-cate`); }
-
-    const getSemesters = async () => {
-        try {
-            const res = await UserService.getSemester();
-            setSemesters(res.data);
-        } catch (error) {
-            console.error('Lỗi khi lấy danh sách học kỳ:', error);
-        }
-    };
 
     return (
         <div>
@@ -151,7 +154,7 @@ function UpdateTranscript() {
                                 </div>
                             </form>
                         </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+                        {err && <div onMouseEnter={() => setErr('')} className="alert alert-danger">{err}</div>}
                     </div>
                 </div>
             </div>

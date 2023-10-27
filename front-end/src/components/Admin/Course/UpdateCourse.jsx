@@ -25,7 +25,7 @@ function UpdateCourse() {
 
     const updateCourse = (e) => {
         e.preventDefault();
-        if (courseNameInput === '' || creditsNumInput === null)
+        if (courseNameInput === undefined || creditsNumInput === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNumInput <= 0 || creditsNumInput > 5)
             setResp('Số tín chỉ không hợp lệ');

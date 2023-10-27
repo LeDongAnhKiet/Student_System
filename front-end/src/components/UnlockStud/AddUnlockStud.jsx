@@ -10,7 +10,7 @@ function AddUnlockStud() {
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        if (image === '' || content === '')
+        if (image === undefined || content === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else {
             const unlockStud = {

@@ -25,7 +25,7 @@ function Signin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email === '' || password === '')
+        if (email === undefined || password === undefined)
             setError('Vui lòng nhập đầy đủ thông tin.');
         else {
             try {

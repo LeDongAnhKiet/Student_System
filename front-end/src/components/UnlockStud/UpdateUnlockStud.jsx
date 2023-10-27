@@ -22,12 +22,12 @@ function UpdateUnlockStud() {
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        if (image === '' || content === '')
+        if (image === undefined || content === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else {
             const unlockStud = {
-                image: setImageInput,
-                content: setContentInput,
+                image: imageInput,
+                content: contentInput,
             };
             UnlockStudService.updateUnlockStud(unlockStud, id).then(() => {
                 nav(`/user/service/unlock-stud/${unlockStud.onlineService.id}`);

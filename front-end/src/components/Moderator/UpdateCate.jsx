@@ -29,7 +29,7 @@ function UpdateCate() {
 
     const saveCate = (e) => {
         e.preventDefault();
-        if (serviceCateNameInput === '' || priceInput === null || descriptionInput === '' || numOfDateInput === null)
+        if (serviceCateNameInput === undefined || priceInput === undefined || descriptionInput === undefined || numOfDateInput === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (priceInput.toString() <= 0 || numOfDateInput.toString() <= 0)
             setErr('Số nhập không hợp lệ');

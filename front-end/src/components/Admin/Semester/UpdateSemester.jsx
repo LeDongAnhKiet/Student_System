@@ -28,7 +28,7 @@ function UpdateSemester() {
     }, [id]);
     const updateSemester = (e) => {
         e.preventDefault();
-        if (semesterNameInput === '') setResp('Vui lòng nhập đầy đủ thông tin');
+        if (semesterNameInput === undefined) setResp('Vui lòng nhập đầy đủ thông tin');
         else {
             const semester = {
                 semesterName: semesterNameInput,
@@ -93,8 +93,8 @@ function UpdateSemester() {
                                            value={noteInput} onChange={changeNoteHandler}/>
                                 </FormGroup>
                                 <div className="text-end mt-2">
-                                    <Button color="primary" className="me-1" onClick={updateSemester}>Lưu</Button>
-                                    <Button color="secondary" className="ms-1" onClick={cancel}>Hủy</Button>
+                                    <Button color="primary" className="m-1" onClick={updateSemester}>Lưu</Button>
+                                    <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
                                 </div>
                             </Form>
                         </div>

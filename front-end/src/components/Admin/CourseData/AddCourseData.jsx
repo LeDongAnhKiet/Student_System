@@ -4,7 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 import CourseService from "../../../services/Admin/CourseService";
 import {Alert} from "reactstrap";
-import {format, parse} from "date-fns";
+//import {format, parse} from "date-fns";
 
 function AddCourseData() {
     const nav = useNavigate();
@@ -42,7 +42,7 @@ function AddCourseData() {
 
     const saveCourseData = (e) => {
         e.preventDefault();
-        if (startDate === '' || endDate === '' || courseId === null || lectureId === null)
+        if (startDate === undefined || endDate === undefined || courseId === undefined || lectureId === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseId <= 0)
             setResp('Không có mã môn học này trong dữ liệu');

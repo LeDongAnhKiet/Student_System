@@ -9,6 +9,7 @@ function UpdateDiploma() {
     const [err, setErr] = useState('');
     
     const { copy, phoneContact, email, diplomaYear, diplomaCode } = loc.state || {};
+    const [diplomaId, setDiplomaId] = useState(0);
     const [copyInput, setCopyInput] = useState(copy || 0);
     const [phoneContactInput, setPhoneContactInput] = useState(phoneContact || '');
     const [emailInput, setEmailInput] = useState(email || '');
@@ -19,6 +20,7 @@ function UpdateDiploma() {
         DiplomaService.getDiploma(id).then(res => {
             let diploma = res.data;
             // Set cac gia tri cho diploma
+            setDiplomaId(diploma.id);
             setCopyInput(diploma.copy);
             setPhoneContactInput(diploma.phoneContact);
             setEmailInput(diploma.email);
@@ -29,8 +31,8 @@ function UpdateDiploma() {
 
     const updateDiploma = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || copyInput === null || emailInput === ''
-                || diplomaYearInput === null || diplomaCodeInput === '')
+        if (phoneContactInput === undefined || copyInput === undefined || emailInput === undefined
+                || diplomaYearInput === undefined || diplomaCodeInput === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (copyInput <= 0 || diplomaYearInput < 1970)
             setErr('Số không hợp lệ');
@@ -43,7 +45,7 @@ function UpdateDiploma() {
                 diplomaCode: diplomaCodeInput,
             };
 
-            DiplomaService.updateDiploma(diploma, id).then(() => {
+            DiplomaService.updateDiploma(diploma, diplomaId).then(() => {
                 nav(`/user/service/diploma/${diploma.onlineService.id}`);
             });
         }

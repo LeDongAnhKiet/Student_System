@@ -28,19 +28,18 @@ function UpdateStudCertificate() {
 
     const updateStudCertificate = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || vietCopyInput === null || emailInput === ''
-                || engCopyInput === null || contentInput === '')
+        if (phoneContactInput === undefined || vietCopyInput === undefined || emailInput === undefined
+                || engCopyInput === undefined || contentInput === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
-        else if (vietCopyInput.toString() < 0 || engCopyInput.toString() < 0
-                || (vietCopyInput.toString() === '0' && engCopyInput.toString() === '0'))
+        else if (vietCopyInput < 0 || engCopyInput < 0 || (vietCopyInput === 0 && engCopyInput === 0))
             setErr('Số nhập không hợp lệ');
         else {
             const studCertificate = {
-            vietCopy: setVietCopyInput,
-            engCopy: setEngCopyInput,
-            email: setEngCopyInput,
-            phoneContact: setPhoneContactInput,
-            content: setContentInput,
+            vietCopy: vietCopyInput,
+            engCopy: engCopyInput,
+            email: emailInput,
+            phoneContact: phoneContactInput,
+            content: contentInput,
         };
         StudCertificateService.updateStudCertificate(studCertificate, id).then(() => {
             nav(`/user/service/stud-cert/${studCertificate.onlineService.id}`);

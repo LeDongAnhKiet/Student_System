@@ -13,11 +13,11 @@ function AddStudCertificate() {
 
     const saveStudCertificate = (e) => {
         e.preventDefault();
-        if (phoneContact === '' || vietCopy === null || email === ''
-            || engCopy === null || content === '')
+        if (phoneContact === undefined || vietCopy === undefined || email === undefined
+            || engCopy === undefined || content === undefined)
             setErr('Vui lòng nhập đầy đủ thông tin');
-        else if (vietCopy.toString() < 0 || engCopy.toString() < 0
-            || (vietCopy.toString() === '0' && engCopy.toString() === '0'))
+        else if (vietCopy < 0 || engCopy < 0
+            || (vietCopy === 0 && engCopy === 0))
             setErr('Số nhập không hợp lệ');
         else {
             const studCertificate = {
