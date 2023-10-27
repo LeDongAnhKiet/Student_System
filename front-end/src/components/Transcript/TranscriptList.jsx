@@ -35,7 +35,7 @@ function TranscriptList() {
                 <h3 className ="App">Bảng điểm sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead  className="text-center"><tr>
+                        <thead  className="App"><tr>
                             <th>Ngôn ngữ</th>
                             <th>Số bản sao</th>
                             <th>Học kỳ bắt đầu</th>
@@ -53,7 +53,7 @@ function TranscriptList() {
                                 <td>{transcript.quantity}</td>
                                 <td>{transcript.contactPhone}</td>
                                 <td>{transcript.isSealed ? 'Đã niêm phong' : 'Chưa niêm phong'}</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <button className="btn-success btn"
                                             onClick={() => updateTranscript(transcript)}>Sửa bảng điểm
                                     </button>

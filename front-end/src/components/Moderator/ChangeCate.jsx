@@ -31,7 +31,7 @@ function ChangeCate() {
                 <h3 className="App mt-2">Đăng ký dịch vụ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center">
+                        <thead className="App">
                         <tr>
                             <th>Dịch vụ</th>
                             <th>Đơn giá</th>
@@ -47,7 +47,7 @@ function ChangeCate() {
                                 <td>{cate.price}</td>
                                 <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
                                 <td>{cate.description}</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <button className="btn-info btn"
                                             onClick={() => {getCate(cate.id)}}>Xem
                                     </button>

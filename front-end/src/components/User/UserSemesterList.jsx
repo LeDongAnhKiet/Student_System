@@ -25,7 +25,7 @@ function SemesterList() {
                 </> : <>
                     <div className="row">
                         <Table className="mt-3 table table-striped table-bordered">
-                            <thead className="text-center"><tr>
+                            <thead className="App"><tr>
                                 <th>Học kỳ</th>
                                 <th>Trạng thái</th>
                                 <th>Thao tác</th>
@@ -35,7 +35,7 @@ function SemesterList() {
                                 <tr key={semester.id}>
                                     <td>{semester.semesterName}</td>
                                     <td>{semester.status}{/* ? 'Còn hoạt động' : 'Đã kết thúc'*/}</td>
-                                    <td className='text-center'>
+                                    <td className='App'>
                                         <button className="btn-primary btn"
                                                 onClick={() => viewSemester(semester.id)}>Xem
                                         </button>

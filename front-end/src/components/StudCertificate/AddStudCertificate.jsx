@@ -13,8 +13,8 @@ function AddStudCertificate() {
 
     const saveStudCertificate = (e) => {
         e.preventDefault();
-        if (phoneContact === undefined || vietCopy === undefined || email === undefined
-            || engCopy === undefined || content === undefined)
+        if (phoneContact === '' || vietCopy === '' || email === ''
+            || engCopy === '' || content === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (vietCopy < 0 || engCopy < 0
             || (vietCopy === 0 && engCopy === 0))
@@ -67,7 +67,7 @@ function AddStudCertificate() {
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Cấp chứng nhận sinh viên</h3>
+                        <h3 className="App mt-2">Cấp chứng nhận sinh viên</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">

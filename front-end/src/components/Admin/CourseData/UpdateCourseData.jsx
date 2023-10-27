@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 import CourseService from "../../../services/Admin/CourseService";
-import {Alert} from "reactstrap";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import {format, parse} from "date-fns";
 
 function UpdateCourseData() {
@@ -51,7 +51,7 @@ function UpdateCourseData() {
 
     const updateCourseData = (e) => {
         e.preventDefault();
-        if (startDateInput === undefined || endDateInput === undefined || courseIdInput === undefined || lectureIdInput === undefined)
+        if (startDateInput === '' || endDateInput === '' || courseIdInput === '' || lectureIdInput === '')
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseIdInput <= 0)
             setResp('Không có mã môn học này trong dữ liệu');
@@ -115,54 +115,50 @@ function UpdateCourseData() {
     const cancel = () => { nav(`/admin/course-data/all`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa lớp học</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Ngày bắt đầu</label>
-                                    <input name="startDate" className="form-control" min="2023-01-01" max="2024-12-31"
-                                           type="date" value={startDateInput} onChange={changeStartDateHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Ngày kết thúc</label>
-                                    <input name="endDate" className="form-control" min="2023-01-01" max="2024-12-31"
-                                           type="date" value={endDateInput} onChange={changeEndDateHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Môn học</label>
-                                    <select name="course" className="form-control custom-select"
-                                            value={courseIdInput} onChange={changeCourseHandler}>
-                                        <option value="">Chọn môn học</option>
-                                        {courses.map((course) => (
-                                            <option key={course.id} value={course.id}>{course.courseName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Giảng viên</label>
-                                    <select name="lecture" className="form-control custom-select"
-                                            value={lectureIdInput} onChange={changeLectureHandler}>
-                                        <option value="">Chọn giảng viên</option>
-                                        {lectures.map((lecture) => (
-                                            <option key={lecture.id} value={lecture.id}>{lecture.lectureName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={updateCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {alert()}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="App mt-2">Chỉnh sửa lớp học</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Ngày bắt đầu</Label>
+                                <Input name="startDate" className="form-control" min="2023-01-01" max="2024-12-31"
+                                       type="date" value={startDateInput} onChange={changeStartDateHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Ngày kết thúc</Label>
+                                <Input name="endDate" className="form-control" min="2023-01-01" max="2024-12-31"
+                                       type="date" value={endDateInput} onChange={changeEndDateHandler}/>
+                            </FormGroup>
+                            <Label>Môn học</Label>
+                            <Input type="select" name="course" value={courseId} onChange={changeCourseHandler}>
+                                <option value="">Chọn môn học</option>
+                                {courses.map((course) => (
+                                    <option key={course.id} value={course.id}>
+                                        {course.courseName}
+                                    </option>
+                                ))}
+                            </Input>
+                            <FormGroup>
+                                <Label>Giảng viên</Label>
+                                <Input type="select" name="lecture" value={lectureId} onChange={changeLectureHandler}>
+                                    <option value="">Chọn giảng viên</option>
+                                    {lectures.map((lecture) => (
+                                        <option key={lecture.id} value={lecture.id}>{lecture.lectureName}</option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={updateCourseData}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

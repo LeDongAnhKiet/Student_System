@@ -3,7 +3,7 @@ import CourseDataService from "../../../services/Admin/CourseDataService";
 import {useNavigate, useParams} from "react-router-dom";
 import '../../../styles/App.css';
 import CourseService from "../../../services/Admin/CourseService";
-import {Alert} from "reactstrap";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 //import {format, parse} from "date-fns";
 
 function AddCourseData() {
@@ -42,7 +42,7 @@ function AddCourseData() {
 
     const saveCourseData = (e) => {
         e.preventDefault();
-        if (startDate === undefined || endDate === undefined || courseId === undefined || lectureId === undefined)
+        if (startDate === '' || endDate === '' || courseId === undefined || lectureId === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (courseId <= 0)
             setResp('Không có mã môn học này trong dữ liệu');
@@ -102,54 +102,52 @@ function AddCourseData() {
     }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Thêm lớp học</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Ngày bắt đầu</label>
-                                    <input name="startDate" className="form-control" min="2023-01-01" max="2024-12-31"
-                                           type="date" value={startDate} onChange={changeStartDateHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Ngày kết thúc</label>
-                                    <input name="endDate" className="form-control" min="2023-01-01" max="2024-12-31"
-                                           type="date" value={endDate} onChange={changeEndDateHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Môn học</label>
-                                    <select name="course" className="form-control custom-select"
-                                            value={courseId} onChange={changeCourseHandler}>
-                                        <option value="">Chọn môn học</option>
-                                        {courses.map((course) => (
-                                            <option key={course.id} value={course.id}>{course.courseName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Giảng viên</label>
-                                    <select name="lecture" className="form-control custom-select"
-                                            value={lectureId} onChange={changeLectureHandler}>
-                                        <option value="">Chọn giảng viên</option>
-                                        {lectures.map((lecture) => (
-                                            <option key={lecture.id} value={lecture.id}>{lecture.lectureName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveCourseData}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {alert}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="App mt-2">Thêm lớp học</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Ngày bắt đầu</Label>
+                                <Input name="startDate" className="form-control" min="2023-01-01" max="2024-12-31"
+                                       type="date" value={startDate} onChange={changeStartDateHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Ngày kết thúc</Label>
+                                <Input name="endDate" className="form-control" min="2023-01-01" max="2024-12-31"
+                                       type="date" value={endDate} onChange={changeEndDateHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Môn học</Label>
+                                <Input type="select" name="course" value={courseId} onChange={changeCourseHandler}>
+                                    <option value="">Chọn môn học</option>
+                                    {courses.map((course) => (
+                                        <option key={course.id} value={course.id}>
+                                            {course.courseName}
+                                        </option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Giảng viên</Label>
+                                <Input type="select" name="lecture" value={lectureId} onChange={changeLectureHandler}>
+                                    <option value="">Chọn giảng viên</option>
+                                    {lectures.map((lecture) => (
+                                        <option key={lecture.id} value={lecture.id}>{lecture.lectureName}</option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveCourseData}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

@@ -28,7 +28,7 @@ function UpdateSemester() {
     }, [id]);
     const updateSemester = (e) => {
         e.preventDefault();
-        if (semesterNameInput === undefined) setResp('Vui lòng nhập đầy đủ thông tin');
+        if (semesterNameInput === '') setResp('Vui lòng nhập đầy đủ thông tin');
         else {
             const semester = {
                 semesterName: semesterNameInput,

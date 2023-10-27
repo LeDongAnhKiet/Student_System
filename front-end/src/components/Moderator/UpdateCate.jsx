@@ -29,7 +29,7 @@ function UpdateCate() {
 
     const saveCate = (e) => {
         e.preventDefault();
-        if (serviceCateNameInput === undefined || priceInput === undefined || descriptionInput === undefined || numOfDateInput === undefined)
+        if (serviceCateNameInput === '' || priceInput === '' || descriptionInput === '' || numOfDateInput === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (priceInput.toString() <= 0 || numOfDateInput.toString() <= 0)
             setErr('Số nhập không hợp lệ');
@@ -64,7 +64,7 @@ function UpdateCate() {
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Chỉnh sửa dịch vụ</h3>
+                        <h3 className="App mt-2">Chỉnh sửa dịch vụ</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">

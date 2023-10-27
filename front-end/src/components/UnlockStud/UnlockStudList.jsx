@@ -31,7 +31,7 @@ function UnlockStudList() {
                 <h3 className ="App">Mở khóa sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead  className="text-center"><tr>
+                        <thead  className="App"><tr>
                             <th className="w-75">Nội dung</th>
                             <th>Hình ảnh</th>
                             <th>Thao tác</th>
@@ -41,7 +41,7 @@ function UnlockStudList() {
                             <tr key={unlockStud.id}>
                                 <td>{unlockStud.content}</td>
                                 <td>{unlockStud.image}</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <button className="btn-success btn"
                                             onClick={() => updateUnlockStud(unlockStud)}>Chỉnh sửa
                                     </button>

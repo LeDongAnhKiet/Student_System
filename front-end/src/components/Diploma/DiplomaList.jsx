@@ -41,7 +41,7 @@ function DiplomaList() {
                 <h3 className="App">Cấp bản sao bằng tốt nghiệp</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center">
+                        <thead className="App">
                             <tr>
                                 <th>Số lượng bản sao</th>
                                 <th>Số điện thoại</th>
@@ -60,7 +60,7 @@ function DiplomaList() {
                                 <td>{diploma.diplomaYear}</td>
                                 <td>{diploma.diplomaCode}</td>
                                 <td>{diploma.onlineService.createdDate}</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <Button color="success"
                                             onClick={() => updateDiploma(diploma)}>Chỉnh sửa
                                     </Button>

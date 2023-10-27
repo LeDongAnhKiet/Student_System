@@ -25,7 +25,7 @@ function DepartmentList() {
                 <h3 className ="App">Danh sách các khoa</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
+                        <thead className="App"><tr>
                             <th>Tên khoa</th>
                             <th>Các ngành</th>
                             <th>Ghi chú</th>

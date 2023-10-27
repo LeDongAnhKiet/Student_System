@@ -46,7 +46,7 @@ function GetRequest() {
                 </div>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center">
+                        <thead className="App">
                         <tr>
                             <th>Dịch vụ</th>
                             <th>Ngày yêu cầu</th>
@@ -65,7 +65,7 @@ function GetRequest() {
                                     <td>{service.status}</td>
                                     <td>{service.price}</td>
                                     <td>{service.isShipped ? "Đã giao" : "Chưa giao"}</td>
-                                    <td className="text-center">
+                                    <td className="App">
                                         <button className="btn-success btn"
                                                 onClick={() => { ModerateService.acceptRequest(service.id) }}>Duyệt
                                         </button>

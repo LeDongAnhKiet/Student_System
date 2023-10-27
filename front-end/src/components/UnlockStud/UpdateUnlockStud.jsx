@@ -22,7 +22,7 @@ function UpdateUnlockStud() {
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        if (image === undefined || content === undefined)
+        if (image === '' || content === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else {
             const unlockStud = {
@@ -52,7 +52,7 @@ function UpdateUnlockStud() {
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Chỉnh sửa mở khóa</h3>
+                        <h3 className="App mt-2">Chỉnh sửa mở khóa</h3>
                         <div className = "card-body">
                             <form>
                                 <div className="form-group">

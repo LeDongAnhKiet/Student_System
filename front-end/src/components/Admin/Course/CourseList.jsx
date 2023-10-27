@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Container, Table} from 'reactstrap';
+import {Alert, Button, Container, Row, Table} from 'reactstrap';
 import CourseService from "../../../services/Admin/CourseService";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -69,38 +69,38 @@ function CourseList() {
         <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Danh sách môn học</h3>
-                <div className="row">
-                    <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
-                            <th>Tên môn học</th>
-                            <th>Số tín chỉ</th>
-                            <th>Ghi chú</th>
-                            <th>Thao tác</th>
-                        </tr></thead>
+                <Row>
+                    <Table className="mt-3 table-striped table-bordered">
+                        <thead className="App">
+                            <tr>
+                                <th>Tên môn học</th>
+                                <th>Số tín chỉ</th>
+                                <th>Ghi chú</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
                         <tbody>
                         { courses.map( course => (
                             <tr key={course.id}>
                                 <td>{course.courseName}</td>
                                 <td>{course.creditsNum}</td>
                                 <td>{course.note}</td>
-                                <td className="text-center">
-                                    <button className="btn-success btn"
+                                <td className="App">
+                                    <Button color="success" className="m-1"
                                             onClick={() => {updateCourse(course)}}>Chỉnh sửa
-                                    </button>
-                                    <button className="ms-2 btn-danger btn"
+                                    </Button>
+                                    <Button color="danger " className="m-1"
                                             onClick={()=> {deleteCourse(course)}}>Xóa
-                                    </button>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </Table>
-                </div>
-                <div className="float-end row">
-                    <button className="btn-primary btn"
-                            onClick={addCourse}>Thêm
-                    </button>
-                </div>
+                </Row>
+                <Row className="float-end">
+                    <Button color="primary" onClick={addCourse}>Thêm môn học</Button>
+                </Row>
                 {alert()}
             </Container>
         </div>

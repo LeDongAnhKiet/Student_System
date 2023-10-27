@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Container, Table} from 'reactstrap';
+import {Alert, Button, Container, Row, Table} from 'reactstrap';
 import CourseDataService from "../../../services/Admin/CourseDataService";
 import {useNavigate} from "react-router-dom";
 
@@ -38,9 +38,9 @@ function CourseDataList() {
         <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Thông tin lớp học</h3>
-                <div className="row">
+                <Row>
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
+                        <thead className="App"><tr>
                             <th>Tên môn học</th>
                             <th>Ngày bắt đầu</th>
                             <th>Ngày kết thúc</th>
@@ -54,24 +54,22 @@ function CourseDataList() {
                                 <td>{courseData.startDate}</td>
                                 <td>{courseData.endDate}</td>
                                 <td>{courseData.lecture.lectureName}</td>
-                                <td className="text-center">
-                                    <button className="btn-success btn"
+                                <td className="App">
+                                    <Button color="success" className="m-1"
                                             onClick={() => {updateCourseData(courseData)}}>Chỉnh sửa
-                                    </button>
-                                    <button className="ms-2 btn-danger btn"
+                                    </Button>
+                                    <Button color="danger" className="m-1"
                                             onClick={() => {deleteCourseData(courseData)}}>Xóa
-                                    </button>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}
                         </tbody>
                     </Table>
-                </div>
-                <div className="float-end row">
-                    <button className="btn-primary btn"
-                            onClick={addCourseData}>Thêm
-                    </button>
-                </div>
+                </Row>
+                <Row className="float-end">
+                    <Button color="primary" className="m-1" onClick={addCourseData}>Thêm lớp học</Button>
+                </Row>
                 {success && <Alert color="success" className="fixed-bottom"
                    style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
                    onMouseEnter={() => setSuccess('')}>{success}</Alert>}

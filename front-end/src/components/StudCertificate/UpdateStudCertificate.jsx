@@ -28,8 +28,8 @@ function UpdateStudCertificate() {
 
     const updateStudCertificate = (e) => {
         e.preventDefault();
-        if (phoneContactInput === undefined || vietCopyInput === undefined || emailInput === undefined
-                || engCopyInput === undefined || contentInput === undefined)
+        if (phoneContactInput === '' || vietCopyInput === '' || emailInput === ''
+                || engCopyInput === '' || contentInput === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (vietCopyInput < 0 || engCopyInput < 0 || (vietCopyInput === 0 && engCopyInput === 0))
             setErr('Số nhập không hợp lệ');
@@ -79,7 +79,7 @@ function UpdateStudCertificate() {
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-4">
-                        <h3 className="text-center mt-2">Chỉnh sửa chứng nhận sinh viên</h3>
+                        <h3 className="App mt-2">Chỉnh sửa chứng nhận sinh viên</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">

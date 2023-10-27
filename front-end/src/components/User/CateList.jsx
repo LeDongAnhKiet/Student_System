@@ -74,7 +74,7 @@ function CateList() {
                 <h3 className="App">Đăng ký dịch vụ</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center">
+                        <thead className="App">
                         <tr>
                             <th>Dịch vụ</th>
                             <th>Đơn giá</th>
@@ -92,7 +92,7 @@ function CateList() {
                                 <td>{cate.isAvailable ? 'Còn mở' : 'Đã đóng'}</td>
                                 <td>{cate.description}</td>
                                 <td>{cate.numOfDate} ngày</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <Button color="primary" className="m-1"
                                             onClick={() => {addService(cate.id, cate.isAvailable)}}>Đăng ký
                                     </Button>

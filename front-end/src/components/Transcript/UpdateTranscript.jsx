@@ -45,8 +45,8 @@ function UpdateTranscript() {
 
     const saveTranscript = (e) => {
         e.preventDefault();
-        if (phoneContactInput === undefined || fromSemesterInput === undefined || languageInput === undefined
-            || toSemesterInput === undefined || quantityInput === undefined)
+        if (phoneContactInput === '' || fromSemesterInput === '' || languageInput === ''
+            || toSemesterInput === '' || quantityInput === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (quantityInput <= 0)
             setErr('Số bản nhập không hợp lệ');
@@ -105,7 +105,7 @@ console.log(transcriptId)
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        <h3 className="mt-2 text-center">Chỉnh sửa bảng điểm</h3>
+                        <h3 className="mt-2 App">Chỉnh sửa bảng điểm</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">

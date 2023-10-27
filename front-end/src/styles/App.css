@@ -46,3 +46,7 @@ nav + .container, nav + .container-fluid {
   padding-bottom: 80px;
   padding-top: 70px;
 }
+
+.bt-white {
+  background-color: white;
+}

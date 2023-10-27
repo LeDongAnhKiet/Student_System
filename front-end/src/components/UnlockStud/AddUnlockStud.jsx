@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import UnlockStudService from "../../services/User/UnlockStudService";
 import {useNavigate} from "react-router-dom";
+import {Button, Container, Form, FormGroup, Input, Label} from "reactstrap";
 
 function AddUnlockStud() {
     const [image, setImage] = useState('');
@@ -10,7 +11,7 @@ function AddUnlockStud() {
 
     const saveUnlockStud = (e) => {
         e.preventDefault();
-        if (image === undefined || content === undefined)
+        if (image === '' || content === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else {
             const unlockStud = {
@@ -38,34 +39,32 @@ function AddUnlockStud() {
     const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Đăng ký mở khóa sinh viên</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className="form-group">
-                                    <label>Ảnh đại diện</label>
-                                    <br/>
-                                    <input type="file" className="form-control-file" onChange={changeImageHandler} />
-                                </div>
-                                <div className = "form-group">
-                                    <label>Nội dung</label>
-                                    <input placeholder="Nội dung" name="content" className="form-control"
-                                           value={content} onChange={changeContentHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
+        <Container>
+            <div className = "row">
+                <div className = "card col-md-6 offset-md-3">
+                    <h3 className="App mt-2">Đăng ký mở khóa sinh viên</h3>
+                    <div className = "card-body">
+                        <Form>
+                            <FormGroup className="form-group">
+                                <Label>Ảnh đại diện</Label>
+                                <br/>
+                                <Input type="file" className="form-control-file" onChange={changeImageHandler} />
+                            </FormGroup>
+                            <FormGroup className = "form-group">
+                                <Label>Nội dung</Label>
+                                <Input placeholder="Nội dung" name="content" className="form-control"
+                                       value={content} onChange={changeContentHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveUnlockStud}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
                     </div>
+                    {err && <div className="alert alert-danger">{err}</div>}
                 </div>
             </div>
-        </div>
+        </Container>
     )
 }
 

@@ -31,8 +31,8 @@ function UpdateDiploma() {
 
     const updateDiploma = (e) => {
         e.preventDefault();
-        if (phoneContactInput === undefined || copyInput === undefined || emailInput === undefined
-                || diplomaYearInput === undefined || diplomaCodeInput === undefined)
+        if (phoneContactInput === '' || copyInput === '' || emailInput === ''
+                || diplomaYearInput === '' || diplomaCodeInput === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (copyInput <= 0 || diplomaYearInput < 1970)
             setErr('Số không hợp lệ');
@@ -83,7 +83,7 @@ function UpdateDiploma() {
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Chỉnh sửa bản sao bằng tốt nghiệp</h3>
+                        <h3 className="App mt-2">Chỉnh sửa bản sao bằng tốt nghiệp</h3>
                         <div className="card-body">
                             <form>
                                 <div className="form-group">

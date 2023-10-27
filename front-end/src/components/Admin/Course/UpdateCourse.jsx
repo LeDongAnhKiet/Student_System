@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import CourseService from "../../../services/Admin/CourseService";
-import {Alert} from "reactstrap";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateCourse() {
     const { id } = useParams();
@@ -25,7 +25,7 @@ function UpdateCourse() {
 
     const updateCourse = (e) => {
         e.preventDefault();
-        if (courseNameInput === undefined || creditsNumInput === undefined)
+        if (courseNameInput === '' || creditsNumInput === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNumInput <= 0 || creditsNumInput > 5)
             setResp('Số tín chỉ không hợp lệ');
@@ -35,7 +35,7 @@ function UpdateCourse() {
             creditsNum: creditsNumInput,
             note: noteInput,
         };
-
+console.log(course)
         CourseService.updateCourse(course, id).then(() => {
             setResp('Chỉnh sửa môn học thành công.');
         });
@@ -77,39 +77,37 @@ function UpdateCourse() {
     }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa môn học</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Tên môn học</label>
-                                    <input placeholder="tên môn..." name="name" className="form-control"
-                                           value={courseNameInput} onChange={changeCourseNameHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số tín chỉ</label>
-                                    <input placeholder="tín chỉ..." name="credits" type="number" min="1" className="form-control"
-                                           value={creditsNumInput} onChange={changeCreditsNumHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Ghi chú</label>
-                                    <input placeholder="ghi chú..." name="note" className="form-control"
-                                           value={noteInput} onChange={changeNoteHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={updateCourse}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {alert()}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa môn học</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Tên môn học</Label>
+                                <Input placeholder="tên môn..." name="name" className="form-control"
+                                       value={courseNameInput} onChange={changeCourseNameHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số tín chỉ</Label>
+                                <Input placeholder="tín chỉ..." name="credits" type="number" min="1" className="form-control"
+                                       value={creditsNumInput} onChange={changeCreditsNumHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Ghi chú</Label>
+                                <Input placeholder="ghi chú..." name="note" className="form-control"
+                                       value={noteInput} onChange={changeNoteHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={updateCourse}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

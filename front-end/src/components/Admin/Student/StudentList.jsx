@@ -24,7 +24,7 @@ function StudentList() {
                 <h3 className ="App">Danh sách sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
+                        <thead className="App"><tr>
                             <th>Họ và tên</th>
                             <th>Email</th>
                             <th>Khoa</th>

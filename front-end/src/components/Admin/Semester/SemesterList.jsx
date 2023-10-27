@@ -38,7 +38,7 @@ function SemesterList() {
                 <h3 className ="App">Danh sách các học kỳ đang hoạt động</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
+                        <thead className="App"><tr>
                             <th>Học kỳ</th>
                             <th>Ghi chú</th>
                             <th>Thao tác</th>
@@ -48,7 +48,7 @@ function SemesterList() {
                             <tr key={semester.id}>
                                 <td>{semester.semesterName}</td>
                                 <td>{semester.note}</td>
-                                <td className="text-center">
+                                <td className="App">
                                     <button className="btn-success btn"
                                             onClick={() => {updateSemester(semester)}}>Chỉnh sửa
                                     </button>

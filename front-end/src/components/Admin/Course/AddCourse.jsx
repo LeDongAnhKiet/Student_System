@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import CourseService from "../../../services/Admin/CourseService";
 import {useNavigate} from "react-router-dom";
 import '../../../styles/App.css';
-import {Alert} from "reactstrap";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function AddCourse() {
     const nav = useNavigate();
@@ -23,7 +23,7 @@ function AddCourse() {
 
     const saveCourse = (e) => {
         e.preventDefault();
-        if (courseName === undefined || note === undefined || creditsNum === undefined)
+        if (courseName === '' || note === '' || creditsNum === undefined)
             setResp('Vui lòng nhập đầy đủ thông tin');
         else if (creditsNum <= 0 || creditsNum > 5)
             setResp('Vượt quá tín chỉ cho phép');
@@ -75,39 +75,37 @@ function AddCourse() {
     const cancel = () => { nav(`/admin/course/all`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Thêm môn học</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Tên môn học</label>
-                                    <input placeholder="tên môn..." name="name" className="form-control"
-                                           value={courseName} onChange={changeCourseNameHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số tín chỉ</label>
-                                    <input placeholder="tín chỉ..." name="credits" className="form-control"
-                                           type="number" min="1" value={creditsNum} onChange={changeCreditsNumHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Ghi chú</label>
-                                    <input placeholder="ghi chú..." name="note" className="form-control"
-                                           value={note} onChange={changeNoteHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveCourse}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {alert()}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Thêm môn học</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Tên môn học</Label>
+                                <Input placeholder="tên môn..." name="name" className="form-control"
+                                       value={courseName} onChange={changeCourseNameHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số tín chỉ</Label>
+                                <Input placeholder="tín chỉ..." name="credits" className="form-control"
+                                       type="number" min="1" value={creditsNum} onChange={changeCreditsNumHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Ghi chú</Label>
+                                <Input placeholder="ghi chú..." name="note" className="form-control"
+                                       value={note} onChange={changeNoteHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveCourse}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

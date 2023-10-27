@@ -13,7 +13,7 @@ function AddDiploma() {
 
     const saveDiploma = (e) => {
         e.preventDefault();
-        if (copy === undefined || phoneContact === undefined || email === undefined || diplomaYear === undefined || diplomaCode === undefined)
+        if (copy === '' || phoneContact === '' || email === '' || diplomaYear === '' || diplomaCode === '')
             setErr('Vui lòng nhập đầy đủ thông tin');
         else if (copy <= 0 || diplomaYear <= 1970)
             setErr('Số nhập không hợp lệ');
@@ -66,7 +66,7 @@ function AddDiploma() {
             <div className = "container">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3">
-                        <h3 className="text-center mt-2">Cấp bản sao bằng tốt nghiệp</h3>
+                        <h3 className="App mt-2">Cấp bản sao bằng tốt nghiệp</h3>
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group">

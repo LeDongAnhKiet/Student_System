@@ -34,7 +34,7 @@ function StudCertificateList() {
                 <h3 className ="App">Chứng nhận sinh viên</h3>
                 <div className="row">
                     <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="text-center"><tr>
+                        <thead className="App"><tr>
                             <th>Email</th>
                             <th>Bản sao tiếng Việt</th>
                             <th>Bản sao tiếng Anh</th>

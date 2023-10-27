@@ -20,7 +20,7 @@ function AddSemester() {
 
     const saveSemester = (e) => {
         e.preventDefault();
-        if (semesterName === undefined) setResp('Vui lòng nhập đầy đủ thông tin');
+        if (semesterName === '') setResp('Vui lòng nhập đầy đủ thông tin');
         else {
             const semester = {
             semesterName,

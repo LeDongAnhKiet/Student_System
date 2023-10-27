@@ -26,7 +26,7 @@ function UserDetailsList() {
                 </>) : (<>
                     <div className="row">
                         <Table className="mt-3 table table-striped table-bordered">
-                            <thead  className="text-center"><tr>
+                            <thead  className="App"><tr>
                                 <th>Tên môn học</th>
                                 <th>Số tín chỉ</th>
                                 <th>Điểm</th>
@@ -38,7 +38,7 @@ function UserDetailsList() {
                                     <td>{detail.courseData.course.courseName}</td>
                                     <td>{detail.courseData.course.creditsNum}</td>
                                     <td>{detail.score}</td>
-                                    <td className='text-center fw-bold'>{detail.isPassed ? (
+                                    <td className='App fw-bold'>{detail.isPassed ? (
                                         <span className='text-success'
                                               dangerouslySetInnerHTML={{ __html: '&check;' }}></span>
                                     ) : (
