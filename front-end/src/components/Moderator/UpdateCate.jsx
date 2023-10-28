@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import HomeService from "../../services/Guest/HomeService";
 import ModerateService from "../../services/Mod/ModerateService";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateCate() {
     const { id } = useParams();
@@ -26,6 +27,23 @@ function UpdateCate() {
             setNumOfDateInput(cate.numOfDate);
         })
     }, [id]);
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
 
     const saveCate = (e) => {
         e.preventDefault();
@@ -60,49 +78,48 @@ function UpdateCate() {
     const cancel = () => { nav('/guest/service-cate'); }
 
     return (
-        <div>
-            <div className="container">
-                <div className="row">
-                    <div className="card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa dịch vụ</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Tên dịch vụ</label>
-                                    <input placeholder="dịch vụ muốn chỉnh sửa..." name="serviceCateName" className="form-control"
-                                           value={serviceCateNameInput} onChange={changeServiceCateNameHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Thành tiền</label>
-                                    <input placeholder="giá tiền..." name="price" type="number" min="1000" className="form-control"
-                                           value={priceInput} onChange={changePriceHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Nội dung</label>
-                                    <input placeholder="nội dung..." name="description" className="form-control"
-                                           value={descriptionInput} onChange={changeDescriptionHandler}/>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox"
-                                           checked={isAvailableInput} onChange={changeIsAvailableHandler}/>
-                                    <label className="form-check-label">Còn mở</label>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Thời gian cấp</label>
-                                    <input placeholder="số ngày..." name="numDates" className="form-control"
-                                           value={numOfDateInput} onChange={changeDateHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveCate}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className="col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa dịch vụ</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Tên dịch vụ</Label>
+                                <Input placeholder="dịch vụ muốn chỉnh sửa..." name="serviceCateName" className="form-control"
+                                       value={serviceCateNameInput} onChange={changeServiceCateNameHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Thành tiền</Label>
+                                <Input placeholder="giá tiền..." name="price" type="number" min="1000" className="form-control"
+                                       value={priceInput} onChange={changePriceHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Nội dung</Label>
+                                <Input placeholder="nội dung..." name="description" className="form-control"
+                                       value={descriptionInput} onChange={changeDescriptionHandler}/>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" checked={isAvailableInput}
+                                           onChange={changeIsAvailableHandler} />Còn mở
+                                </Label>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Thời gian cấp</Label>
+                                <Input placeholder="số ngày..." name="numDates" className="form-control"
+                                       value={numOfDateInput} onChange={changeDateHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveCate}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

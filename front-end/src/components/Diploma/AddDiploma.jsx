@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import DiplomaService from "../../services/User/DiplomaService";
 import {useNavigate} from "react-router-dom";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function AddDiploma() {
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
     const [copy, setCopy] = useState(0);
     const [phoneContact, setPhoneContact] = useState('');
     const [email, setEmail] = useState('');
@@ -13,10 +14,10 @@ function AddDiploma() {
 
     const saveDiploma = (e) => {
         e.preventDefault();
-        if (copy === '' || phoneContact === '' || email === '' || diplomaYear === '' || diplomaCode === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+        if (copy === undefined || phoneContact === '' || email === '' || diplomaYear === undefined || diplomaCode === '')
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (copy <= 0 || diplomaYear <= 1970)
-            setErr('Số nhập không hợp lệ');
+            setResp('Số nhập không hợp lệ');
         else {
             const diploma = {
                 copy,
@@ -27,85 +28,99 @@ function AddDiploma() {
             };
 
             DiplomaService.addDiploma(diploma).then(res => {
-                setErr('Đăng ký thành công.');
+                setResp('Đăng ký thành công.');
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
             });
         }
     }
+    
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
 
     const changeCopyHandler = (e) => {
         setCopy(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changePhoneHandler = (e) => {
         setPhoneContact(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeYearHandler = (e) => {
         setDiplomaYear(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changeCodeHandler = (e) => {
-        setErr('');
+        setResp('');
         setDiplomaCode(e.target.value);
     }
     
     const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Cấp bản sao bằng tốt nghiệp</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Số lượng bản sao</label>
-                                    <input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
-                                           value={copy} onChange={changeCopyHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số điện thoại</label>
-                                    <input placeholder="Phone Contact" name="phoneContact" className="form-control"
-                                           value={phoneContact} onChange={changePhoneHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Email</label>
-                                    <input placeholder="Email Address" name="email" className="form-control"
-                                           value={email} onChange={changeEmailHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Năm tốt nghiệp</label>
-                                    <input placeholder="Year" name="year" min="1970" type="number" className="form-control"
-                                           value={diplomaYear} onChange={changeYearHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Mã bằng</label>
-                                    <input placeholder="Code" name="code" className="form-control"
-                                           value={diplomaCode} onChange={changeCodeHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveDiploma}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger"
-                                     onMouseEnter={() => setErr('')}>{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Cấp bản sao bằng tốt nghiệp</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Số lượng bản sao</Label>
+                                <Input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
+                                       value={copy} onChange={changeCopyHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số điện thoại</Label>
+                                <Input placeholder="Phone Contact" name="phoneContact" className="form-control"
+                                       value={phoneContact} onChange={changePhoneHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Email</Label>
+                                <Input placeholder="Email Address" name="email" className="form-control"
+                                       value={email} onChange={changeEmailHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Năm tốt nghiệp</Label>
+                                <Input placeholder="Year" name="year" min="1970" type="number" className="form-control"
+                                       value={diplomaYear} onChange={changeYearHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Mã bằng</Label>
+                                <Input placeholder="Code" name="code" className="form-control"
+                                       value={diplomaCode} onChange={changeCodeHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveDiploma}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import StudCertificateService from "../../services/User/StudCertificateService";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateStudCertificate() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const { vietCopy, engCopy, email, phoneContact, content } = loc.state || {};
     const [vietCopyInput, setVietCopyInput] = useState(vietCopy || 0);
@@ -28,11 +29,11 @@ function UpdateStudCertificate() {
 
     const updateStudCertificate = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || vietCopyInput === '' || emailInput === ''
-                || engCopyInput === '' || contentInput === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+        if (phoneContactInput === '' || vietCopyInput === undefined || emailInput === ''
+                || engCopyInput === undefined || contentInput === '')
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (vietCopyInput < 0 || engCopyInput < 0 || (vietCopyInput === 0 && engCopyInput === 0))
-            setErr('Số nhập không hợp lệ');
+            setResp('Số nhập không hợp lệ');
         else {
             const studCertificate = {
             vietCopy: vietCopyInput,
@@ -49,75 +50,72 @@ function UpdateStudCertificate() {
 
     const changeVietCopyHandler = (e) => {
         setVietCopyInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changePhoneHandler = (e) => {
         setPhoneContactInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeEmailHandler = (e) => {
         setEmailInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeEngCopyHandler = (e) => {
         setEngCopyInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changeContentHandler = (e) => {
         setContentInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-4">
-                        <h3 className="App mt-2">Chỉnh sửa chứng nhận sinh viên</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Bản sao tiếng Việt</label>
-                                    <input placeholder="Bản Việt" name="vietCopy" type="number" min="0" className="form-control"
-                                           value={vietCopyInput} onChange={changeVietCopyHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Bản sao tiếng Anh</label>
-                                    <input placeholder="Bản Anh" name="engCopy" type="number" min="0" className="form-control"
-                                           value={engCopyInput} onChange={changeEngCopyHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số điện thoại</label>
-                                    <input placeholder="Số điện thoại" name="phoneContact" className="form-control"
-                                           value={phoneContactInput} onChange={changePhoneHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Email</label>
-                                    <input placeholder="Địa chỉ email" name="email" className="form-control"
-                                           value={emailInput} onChange={changeEmailHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Nội dung</label>
-                                    <input placeholder="Nội dung" name="content" className="form-control"
-                                           value={contentInput} onChange={changeContentHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={updateStudCertificate}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa chứng nhận sinh viên</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Bản sao tiếng Việt</Label>
+                                <Input placeholder="Bản Việt" name="vietCopy" type="number" min="0" className="form-control"
+                                       value={vietCopyInput} onChange={changeVietCopyHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Bản sao tiếng Anh</Label>
+                                <Input placeholder="Bản Anh" name="engCopy" type="number" min="0" className="form-control"
+                                       value={engCopyInput} onChange={changeEngCopyHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số điện thoại</Label>
+                                <Input placeholder="Số điện thoại" name="phoneContact" className="form-control"
+                                       value={phoneContactInput} onChange={changePhoneHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Email</Label>
+                                <Input placeholder="Địa chỉ email" name="email" className="form-control"
+                                       value={emailInput} onChange={changeEmailHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Nội dung</Label>
+                                <Input placeholder="Nội dung" name="content" className="form-control"
+                                       value={contentInput} onChange={changeContentHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={updateStudCertificate}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

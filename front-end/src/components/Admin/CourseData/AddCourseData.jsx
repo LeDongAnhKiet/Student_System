@@ -105,7 +105,7 @@ function AddCourseData() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="App mt-2">Thêm lớp học</h3>
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Thêm lớp học</h3>
                     <CardBody>
                         <Form>
                             <FormGroup>

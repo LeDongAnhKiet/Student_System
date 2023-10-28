@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import SemesterService from "../../../services/Admin/SemesterService";
-import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateSemester() {
     const { id } = useParams();
@@ -76,11 +76,11 @@ function UpdateSemester() {
                 <Button color="primary" onClick={cancel}>Quay lại</Button>
             </>
         ) : (
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa học kỳ</h3>
-                        <div className = "card-body">
+            <Container fluid>
+                <Row className="mt-3">
+                    <Card className = "col-md-6 offset-md-3">
+                        <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Thêm học kỳ</h3>
+                        <CardBody>
                             <Form>
                                 <FormGroup>
                                     <Label>Tên học kỳ</Label>
@@ -97,11 +97,11 @@ function UpdateSemester() {
                                     <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
                                 </div>
                             </Form>
-                        </div>
+                        </CardBody>
                         {alert()}
-                    </div>
-                </div>
-            </div>
+                    </Card>
+                </Row>
+            </Container>
         )}
         </>
     )

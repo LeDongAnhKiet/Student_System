@@ -26,47 +26,45 @@ function ChangeCate() {
     const getRequest = () => { nav('/user/service/my-request'); }
 
     return (
-        <div className='mb-5'>
-            <Container fluid>
-                <h3 className="App mt-2">Đăng ký dịch vụ</h3>
-                <div className="row">
-                    <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="App">
-                        <tr>
-                            <th>Dịch vụ</th>
-                            <th>Đơn giá</th>
-                            <th>Trạng thái</th>
-                            <th>Nội dung</th>
-                            <th>Thao tác</th>
+        <Container fluid className='mb-5'>
+            <h3 className="App mt-2">Đăng ký dịch vụ</h3>
+            <div className="row">
+                <Table className="mt-3 table table-striped table-bordered">
+                    <thead className="App">
+                    <tr>
+                        <th>Dịch vụ</th>
+                        <th>Đơn giá</th>
+                        <th>Trạng thái</th>
+                        <th>Nội dung</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {cates.map((cate) => (
+                        <tr key={cate.id}>
+                            <td>{cate.serviceCateName}</td>
+                            <td>{cate.price}</td>
+                            <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
+                            <td>{cate.description}</td>
+                            <td className="App">
+                                <button className="btn-info btn"
+                                        onClick={() => {getCate(cate.id)}}>Xem
+                                </button>
+                                <button className="ms-2 btn-primary btn"
+                                        onClick={() => {addCate(cate.id)}}>Đăng ký
+                                </button>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {cates.map((cate) => (
-                            <tr key={cate.id}>
-                                <td>{cate.serviceCateName}</td>
-                                <td>{cate.price}</td>
-                                <td>{cate.isAvailable ? 'Còn trống' : 'Hết trống'}</td>
-                                <td>{cate.description}</td>
-                                <td className="App">
-                                    <button className="btn-info btn"
-                                            onClick={() => {getCate(cate.id)}}>Xem
-                                    </button>
-                                    <button className="ms-2 btn-primary btn"
-                                            onClick={() => {addCate(cate.id)}}>Đăng ký
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                </div>
-                <div className="float-end row">
-                    <button className="btn-info btn"
-                            onClick={getRequest}>Lịch sử đăng ký
-                    </button>
-                </div>
-            </Container>
-        </div>
+                    ))}
+                    </tbody>
+                </Table>
+            </div>
+            <div className="float-end row">
+                <button className="btn-info btn"
+                        onClick={getRequest}>Lịch sử đăng ký
+                </button>
+            </div>
+        </Container>
     );
 }
 

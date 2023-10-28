@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Container, Table} from 'reactstrap';
+import {Alert, Button, Container, Row, Table} from 'reactstrap';
 import SemesterService from "../../../services/Admin/SemesterService";
 import {useNavigate} from "react-router-dom";
 
@@ -33,44 +33,40 @@ function SemesterList() {
     }
 
     return (
-        <div className='mb-5'>
-            <Container fluid>
-                <h3 className ="App">Danh sách các học kỳ đang hoạt động</h3>
-                <div className="row">
-                    <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="App"><tr>
-                            <th>Học kỳ</th>
-                            <th>Ghi chú</th>
-                            <th>Thao tác</th>
-                        </tr></thead>
-                        <tbody>
-                        { semesters.map( semester => (
-                            <tr key={semester.id}>
-                                <td>{semester.semesterName}</td>
-                                <td>{semester.note}</td>
-                                <td className="App">
-                                    <button className="btn-success btn"
-                                            onClick={() => {updateSemester(semester)}}>Chỉnh sửa
-                                    </button>
-                                    <button className="ms-2 btn-danger btn"
-                                            onClick={() => {deleteSemester(semester)}}>Xóa
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                </div>
-                <div className="float-end row">
-                    <button className="btn-primary btn"
-                            onClick={addSemester}>Thêm
-                    </button>
-                </div>
-                {success && <Alert color="success" className="fixed-bottom"
-                   style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
-                   onMouseEnter={() => setSuccess('')}>{success}</Alert>}
-            </Container>
-        </div>
+        <Container fluid className='mb-5'>
+            <h3 className ="App">Danh sách các học kỳ đang hoạt động</h3>
+            <Row>
+                <Table className="mt-3 table-striped table-bordered">
+                    <thead className="App"><tr>
+                        <th>Học kỳ</th>
+                        <th>Ghi chú</th>
+                        <th>Thao tác</th>
+                    </tr></thead>
+                    <tbody>
+                    { semesters.map( semester => (
+                        <tr key={semester.id}>
+                            <td>{semester.semesterName}</td>
+                            <td>{semester.note}</td>
+                            <td className="App">
+                                <Button className="m-1" color="success"
+                                        onClick={() => {updateSemester(semester)}}>Chỉnh sửa
+                                </Button>
+                                <Button className="m-1" color="danger"
+                                        onClick={() => {deleteSemester(semester)}}>Xóa
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+            </Row>
+            <Row className="float-end">
+                <button color="primary" onClick={addSemester}>Thêm</button>
+            </Row>
+            {success && <Alert color="success" className="fixed-bottom"
+               style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+               onMouseEnter={() => setSuccess('')}>{success}</Alert>}
+        </Container>
     );
 }
 export default SemesterList;

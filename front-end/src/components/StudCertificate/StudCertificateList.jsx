@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Table } from 'reactstrap';
+import {Alert, Button, Container, Row, Table} from 'reactstrap';
 import StudCertificateService from "../../services/User/StudCertificateService";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -32,8 +32,8 @@ function StudCertificateList() {
         <div className='mb-5'>
             <Container fluid>
                 <h3 className ="App">Chứng nhận sinh viên</h3>
-                <div className="row">
-                    <Table className="mt-3 table table-striped table-bordered">
+                <Row>
+                    <Table className="mt-3 table-striped table-bordered">
                         <thead className="App"><tr>
                             <th>Email</th>
                             <th>Bản sao tiếng Việt</th>
@@ -57,12 +57,10 @@ function StudCertificateList() {
                         ))}
                         </tbody>
                     </Table>
-                </div>
-                <div className="float-end row">
-                    <button className="btn-primary btn"
-                            onClick={addStudCertificate}>Đăng ký chứng nhận
-                    </button>
-                </div>
+                </Row>
+                <Row className="float-end">
+                    <Button color="primary" onClick={addStudCertificate}>Đăng ký chứng nhận</Button>
+                </Row>
             </Container>
         </div>
     );

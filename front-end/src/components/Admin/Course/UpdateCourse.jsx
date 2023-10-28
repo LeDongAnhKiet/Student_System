@@ -35,7 +35,7 @@ function UpdateCourse() {
             creditsNum: creditsNumInput,
             note: noteInput,
         };
-console.log(course)
+
         CourseService.updateCourse(course, id).then(() => {
             setResp('Chỉnh sửa môn học thành công.');
         });

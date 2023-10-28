@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import DiplomaService from '../../services/User/DiplomaService';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateDiploma() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
     
     const { copy, phoneContact, email, diplomaYear, diplomaCode } = loc.state || {};
     const [diplomaId, setDiplomaId] = useState(0);
@@ -31,11 +32,11 @@ function UpdateDiploma() {
 
     const updateDiploma = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || copyInput === '' || emailInput === ''
-                || diplomaYearInput === '' || diplomaCodeInput === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+        if (phoneContactInput === undefined || copyInput === '' || emailInput === ''
+                || diplomaYearInput === undefined || diplomaCodeInput === '')
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (copyInput <= 0 || diplomaYearInput < 1970)
-            setErr('Số không hợp lệ');
+            setResp('Số không hợp lệ');
         else {
             const diploma = {
                 copy: copyInput,
@@ -46,82 +47,97 @@ function UpdateDiploma() {
             };
 
             DiplomaService.updateDiploma(diploma, diplomaId).then(() => {
-                nav(`/user/service/diploma/${diploma.onlineService.id}`);
+                setResp('Chỉnh sửa môn học thành công.');
             });
         }
     }
 
     const changeCopyHandler = (e) => {
         setCopyInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     };
 
     const changePhoneHandler = (e) => {
         setPhoneContactInput(e.target.value);
-        setErr('');
+        setResp('');
     };
 
     const changeEmailHandler = (e) => {
         setEmailInput(e.target.value);
-        setErr('');
+        setResp('');
     };
 
     const changeYearHandler = (e) => {
         setDiplomaYearInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     };
 
     const changeCodeHandler = (e) => {
         setDiplomaCodeInput(e.target.value);
-        setErr('');
+        setResp('');
     };
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
 
     const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
-        <div>
-            <div className="container">
-                <div className="row">
-                    <div className="card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa bản sao bằng tốt nghiệp</h3>
-                        <div className="card-body">
-                            <form>
-                                <div className="form-group">
-                                    <label>Số lượng bản sao</label>
-                                    <input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
-                                           value={copyInput} onChange={changeCopyHandler} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input placeholder="0123456789" name="phoneContact" className="form-control"
-                                        value={phoneContactInput} onChange={changePhoneHandler} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Email</label>
-                                    <input placeholder="Địa chỉ email" name="email" className="form-control"
-                                        value={emailInput} onChange={changeEmailHandler} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Năm tốt nghiệp</label>
-                                    <input placeholder="20xx" name="year" type="number" min="1970" className="form-control"
-                                        value={diplomaYearInput} onChange={changeYearHandler} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Mã bằng</label>
-                                    <input placeholder="123..." name="code" className="form-control"
-                                        value={diplomaCodeInput} onChange={changeCodeHandler} />
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={updateDiploma} >Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel} >Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className="col-md-6 offset-md-3">
+                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa bản sao bằng tốt nghiệp</h3>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Số lượng bản sao</Label>
+                                <Input placeholder="Copy" name="copy" type="number" min="1" className="form-control"
+                                       value={copyInput} onChange={changeCopyHandler} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số điện thoại</Label>
+                                <Input placeholder="0123456789" name="phoneContact" className="form-control"
+                                    value={phoneContactInput} onChange={changePhoneHandler} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Email</Label>
+                                <Input placeholder="Địa chỉ email" name="email" className="form-control"
+                                    value={emailInput} onChange={changeEmailHandler} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Năm tốt nghiệp</Label>
+                                <Input placeholder="20xx" name="year" type="number" min="1970" className="form-control"
+                                    value={diplomaYearInput} onChange={changeYearHandler} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Mã bằng</Label>
+                                <Input placeholder="123..." name="code" className="form-control"
+                                    value={diplomaCodeInput} onChange={changeCodeHandler} />
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={updateDiploma} >Lưu</Button>
+                                <uBtton color="secondary" className="m-1" onClick={cancel} >Hủy</uBtton>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     );
 }
 
