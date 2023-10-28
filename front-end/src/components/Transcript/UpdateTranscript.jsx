@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react'
 import TranscriptService from "../../services/User/TranscriptService";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import HomeService from "../../services/Guest/HomeService";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateTranscript() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const {language, phoneContact, fromSemester, toSemester, quantity, isSealed} = loc.state || {};
     const [transcriptId, setTranscriptId] = useState(0);
@@ -35,8 +36,8 @@ function UpdateTranscript() {
             try {
                 const res = await HomeService.getSemester();
                 setSemesters(res.data);
-            } catch (error) {
-                console.error('Lỗi khi lấy danh sách học kỳ:', error);
+            } catch (err) {
+                console.error('Lỗi khi lấy danh sách học kỳ:', err);
             }
         };
 
@@ -45,13 +46,13 @@ function UpdateTranscript() {
 
     const saveTranscript = (e) => {
         e.preventDefault();
-        if (phoneContactInput === '' || fromSemesterInput === '' || languageInput === ''
-            || toSemesterInput === '' || quantityInput === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+        if (phoneContactInput === '' || fromSemesterInput === undefined || languageInput === ''
+            || toSemesterInput === undefined || quantityInput === undefined)
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (quantityInput <= 0)
-            setErr('Số bản nhập không hợp lệ');
+            setResp('Số bản nhập không hợp lệ');
         else if (toSemesterInput < fromSemesterInput)
-            setErr('Học kỳ chọn không hợp lệ');
+            setResp('Học kỳ chọn không hợp lệ');
         else {
             const transcript = {
                 language: languageInput,
@@ -61,104 +62,120 @@ function UpdateTranscript() {
                 phoneContact: phoneContactInput,
                 isSealed: isSealedInput,
             };
-console.log(transcriptId)
+
             TranscriptService.updateTranscript(transcript, transcriptId).then(() => {
-                nav(`/user/service/transcript/${transcript.onlineService.id}`);
+                setResp('Chỉnh sửa bảng điểm thành công.');
             })
         }
     };
 
     const changeLanguageHandler = (e) => {
         setLanguageInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changePhoneHandler = (e) => {
         setPhoneContactInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const changeFromSemesterHandler = (e) => {
         setFromSemesterInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changeToSemesterHandler = (e) => {
         setToSemesterInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changeQuantityHandler = (e) => {
         setQuantityInput(parseInt(e.target.value));
-        setErr('');
+        setResp('');
     }
 
     const changeSealedHandler = (e) => {
         setIsSealedInput(e.target.value);
-        setErr('');
+        setResp('');
     }
 
     const cancel = () => { nav(`/guest/service-cate`); }
 
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+    }
+
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="mt-2 App">Chỉnh sửa bảng điểm</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className = "form-group">
-                                    <label>Ngôn ngữ</label>
-                                    <input placeholder="Tiếng Việt, Anh ..." name="language" className="form-control"
-                                           value={languageInput} onChange={changeLanguageHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Học kỳ bắt đầu</label>
-                                    <select name="from semester" className="form-control"
-                                            value={fromSemesterInput} onChange={changeFromSemesterHandler}>
-                                        <option value="">Chọn học kỳ</option>
-                                        {semesters.map((semester) => (
-                                            <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Học kỳ kết thúc</label>
-                                    <select name="to semester" className="form-control custom-select"
-                                            value={toSemesterInput} onChange={changeToSemesterHandler}>
-                                        <option value="">Chọn học kỳ</option>
-                                        {semesters.map((semester) => (
-                                            <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số điện thoại</label>
-                                    <input placeholder="Số điện thoại" name="phoneContact" className="form-control"
-                                           value={phoneContactInput} onChange={changePhoneHandler}/>
-                                </div>
-                                <div className = "form-group">
-                                    <label>Số bản sao</label>
-                                    <input placeholder="Số bản" name="quantity" type="number" min="1" className="form-control"
-                                           value={quantityInput} onChange={changeQuantityHandler}/>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox"
-                                           checked={isSealedInput} onChange={changeSealedHandler}/>
-                                    <label className="form-check-label">Niêm phong (trường hợp gửi qua nước ngoài)</label>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveTranscript}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div onMouseEnter={() => setErr('')} className="alert alert-danger">{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Chỉnh sửa bảng điểm</Row>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Ngôn ngữ</Label>
+                                <Input placeholder="Tiếng Việt, Anh ..." name="language" className="form-control"
+                                       value={languageInput} onChange={changeLanguageHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Học kỳ bắt đầu</Label>
+                                <Input type="select" name="from semester" className="form-control"
+                                       value={fromSemesterInput} onChange={changeFromSemesterHandler}>
+                                    <option value="">Chọn học kỳ</option>
+                                    {semesters.map((semester) => (
+                                        <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Học kỳ kết thúc</Label>
+                                <Input type="select" name="to semester" className="form-control custom-select"
+                                       value={toSemesterInput} onChange={changeToSemesterHandler}>
+                                    <option value="">Chọn học kỳ</option>
+                                    {semesters.map((semester) => (
+                                        <option key={semester.id} value={semester.id}>{semester.semesterName}</option>
+                                    ))}
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số điện thoại</Label>
+                                <Input placeholder="Số điện thoại" name="phoneContact" className="form-control"
+                                       value={phoneContactInput} onChange={changePhoneHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Số bản sao</Label>
+                                <Input placeholder="Số bản" name="quantity" className="form-control" min="1"
+                                       type="number" value={quantityInput} onChange={changeQuantityHandler}/>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" checked={isSealed} onChange={changeSealedHandler} />
+                                    Niêm phong (trường hợp gửi qua nước ngoài)
+                                </Label>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveTranscript}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

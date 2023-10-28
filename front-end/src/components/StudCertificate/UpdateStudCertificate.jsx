@@ -36,16 +36,33 @@ function UpdateStudCertificate() {
             setResp('Số nhập không hợp lệ');
         else {
             const studCertificate = {
-            vietCopy: vietCopyInput,
-            engCopy: engCopyInput,
-            email: emailInput,
-            phoneContact: phoneContactInput,
-            content: contentInput,
-        };
-        StudCertificateService.updateStudCertificate(studCertificate, id).then(() => {
-            nav(`/user/service/stud-cert/${studCertificate.onlineService.id}`);
-        });
+                vietCopy: vietCopyInput,
+                engCopy: engCopyInput,
+                email: emailInput,
+                phoneContact: phoneContactInput,
+                content: contentInput,
+            };
+            StudCertificateService.updateStudCertificate(studCertificate, id).then(() => {
+                setResp('Chỉnh sửa chứng nhận thành công.');
+            });
+        }
     }
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
     }
 
     const changeVietCopyHandler = (e) => {
@@ -79,7 +96,7 @@ function UpdateStudCertificate() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa chứng nhận sinh viên</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Chỉnh sửa chứng nhận sinh viên</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>
@@ -114,6 +131,7 @@ function UpdateStudCertificate() {
                         </Form>
                     </CardBody>
                 </Card>
+                {alert()}
             </Row>
         </Container>
     )

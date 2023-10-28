@@ -83,7 +83,7 @@ function AddDiploma() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Cấp bản sao bằng tốt nghiệp</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Cấp bản sao bằng tốt nghiệp</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

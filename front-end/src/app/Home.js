@@ -165,7 +165,7 @@ const Home = () => {
                                                 <td>{request.createdDate}</td>
                                                 <td>{request.status}</td>
                                                 <td>{request.price}</td>
-                                                {request.status === 'PENDING' ?
+                                                {request.status !== 'PENDING' ?
                                                 <td className="App">
                                                     <Button color="success" className="m-1" onClick={() => {
                                                         updateRequest(request)}}>Chỉnh sửa

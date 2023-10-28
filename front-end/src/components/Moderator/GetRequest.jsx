@@ -37,9 +37,9 @@ function GetRequest() {
                 <Label className="m-1">Lọc dịch vụ</Label>
                 <Input type="select" name="cate" className="custom-select rounded-3 p-1"
                         value={selectedCate} onChange={selectChange}>
-                    <Option value="">Chọn loại</Option>
+                    <option value="">Chọn loại</option>
                     {cates.map((cate) => (
-                        <Option key={cate.id} value={cate.id}>{cate.serviceCateName}</Option>
+                        <option key={cate.id} value={cate.id}>{cate.serviceCateName}</option>
                     ))}
                 </Input>
             </FormGroup>

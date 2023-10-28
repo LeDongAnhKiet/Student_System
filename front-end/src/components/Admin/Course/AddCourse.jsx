@@ -78,7 +78,7 @@ function AddCourse() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Thêm môn học</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Thêm môn học</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

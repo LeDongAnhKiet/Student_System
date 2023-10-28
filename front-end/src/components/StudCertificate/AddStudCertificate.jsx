@@ -30,7 +30,7 @@ function AddStudCertificate() {
             };
 
             StudCertificateService.addStudCertificate(studCertificate).then(res => {
-                setResp('Thêm môn học thành công.');
+                setResp('Đăng ký thành công.');
                 let data = res.data;
                 nav(`/user/payment/create/${data.onlineService.id}`);
             });
@@ -85,7 +85,7 @@ function AddStudCertificate() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Cấp chứng nhận sinh viên</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Cấp chứng nhận sinh viên</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

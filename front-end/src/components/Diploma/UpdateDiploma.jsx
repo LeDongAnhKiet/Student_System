@@ -47,7 +47,7 @@ function UpdateDiploma() {
             };
 
             DiplomaService.updateDiploma(diploma, diplomaId).then(() => {
-                setResp('Chỉnh sửa môn học thành công.');
+                setResp('Chỉnh sửa bản sao bằng thành công.');
             });
         }
     }
@@ -100,7 +100,7 @@ function UpdateDiploma() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className="col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa bản sao bằng tốt nghiệp</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Chỉnh sửa bản sao bằng tốt nghiệp</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

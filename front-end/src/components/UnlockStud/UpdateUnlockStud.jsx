@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import UnlockStudService from "../../services/User/UnlockStudService";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {Alert, Button, Card, CardBody, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 function UpdateUnlockStud() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const {image, content} = loc.state || {};
     const [imageInput, setImageInput] = useState(image || '');
@@ -23,60 +24,74 @@ function UpdateUnlockStud() {
     const saveUnlockStud = (e) => {
         e.preventDefault();
         if (image === '' || content === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else {
             const unlockStud = {
                 image: imageInput,
                 content: contentInput,
             };
             UnlockStudService.updateUnlockStud(unlockStud, id).then(() => {
-                nav(`/user/service/unlock-stud/${unlockStud.onlineService.id}`);
+                setResp('Chỉnh sửa yêu cầu thành công.');
             })
         }
     };
 
     const changeImageHandler = (e) => {
-        setImageInput(e.target.value);
-        setErr('');
+        setImageInput(e.target.file);
+        setResp('');
     }
 
     const changeContentHandler = (e) => {
         setContentInput(e.target.value);
-        setErr('');
+        setResp('');
+    }
+
+    const alert = () => {
+        if (resp.includes('thành công'))
+            return (
+                <Alert color="success" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
+        else if (resp)
+            return (
+                <Alert color="danger" className="fixed-bottom"
+                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                       onMouseEnter={() => setResp('')}>{resp}
+                </Alert>
+            )
     }
 
     const cancel = () => { nav(`/guest/service-cate`); }
 
     return (
-        <div>
-            <div className = "container">
-                <div className = "row">
-                    <div className = "card col-md-6 offset-md-3">
-                        <h3 className="App mt-2">Chỉnh sửa mở khóa</h3>
-                        <div className = "card-body">
-                            <form>
-                                <div className="form-group">
-                                    <label>Ảnh đại diện</label>
-                                    <br/>
-                                    <input type="file" className="form-control-file"
-                                           value={imageInput} onChange={changeImageHandler} />
-                                </div>
-                                <div className = "form-group">
-                                    <label>Nội dung</label>
-                                    <input placeholder="Nội dung" name="content" className="form-control"
-                                           value={contentInput} onChange={changeContentHandler}/>
-                                </div>
-                                <div className="text-end mt-2">
-                                    <button className="btn btn-primary me-1" onClick={saveUnlockStud}>Lưu</button>
-                                    <button className="btn btn-secondary ms-1" onClick={cancel}>Hủy</button>
-                                </div>
-                            </form>
-                        </div>
-                        {err && <div className="alert alert-danger">{err}</div>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Container fluid>
+            <Row className="mt-3">
+                <Card className = "col-md-6 offset-md-3">
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Đăng ký mở khóa sinh viên</Row>
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label>Ảnh đại diện</Label>
+                                <Input type="file" className="form-control-file" accept="image/*"
+                                       onChange={changeImageHandler} multiple={false} ref={useRef(null)} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Nội dung</Label>
+                                <Input placeholder="Nội dung" name="content" className="form-control"
+                                       value={content} onChange={changeContentHandler}/>
+                            </FormGroup>
+                            <div className="text-end mt-2">
+                                <Button color="primary" className="m-1" onClick={saveUnlockStud}>Lưu</Button>
+                                <Button color="secondary" className="m-1" onClick={cancel}>Hủy</Button>
+                            </div>
+                        </Form>
+                    </CardBody>
+                    {alert()}
+                </Card>
+            </Row>
+        </Container>
     )
 }
 

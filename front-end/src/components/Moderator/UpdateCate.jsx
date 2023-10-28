@@ -8,7 +8,7 @@ function UpdateCate() {
     const { id } = useParams();
     const loc = useLocation();
     const nav = useNavigate();
-    const [err, setErr] = useState('');
+    const [resp, setResp] = useState('');
 
     const {serviceCateName, price, description, isAvailable, numOfDate} = loc.state || {};
     const [serviceCateNameInput, setServiceCateNameInput] = useState(serviceCateName || '');
@@ -48,9 +48,9 @@ function UpdateCate() {
     const saveCate = (e) => {
         e.preventDefault();
         if (serviceCateNameInput === '' || priceInput === '' || descriptionInput === '' || numOfDateInput === '')
-            setErr('Vui lòng nhập đầy đủ thông tin');
+            setResp('Vui lòng nhập đầy đủ thông tin');
         else if (priceInput.toString() <= 0 || numOfDateInput.toString() <= 0)
-            setErr('Số nhập không hợp lệ');
+            setResp('Số nhập không hợp lệ');
         else {
             const cate = {
                 serviceCateName: serviceCateNameInput,
@@ -61,7 +61,7 @@ function UpdateCate() {
             };
 
             ModerateService.updateCate(cate, id).then(() => {
-                nav(`/moderator/service-cate/update/${id}`);
+                setResp('Chỉnh sửa loại dịch vụ thành công.');
             })
         }
     }
@@ -81,7 +81,7 @@ function UpdateCate() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className="col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa dịch vụ</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Chỉnh sửa dịch vụ</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

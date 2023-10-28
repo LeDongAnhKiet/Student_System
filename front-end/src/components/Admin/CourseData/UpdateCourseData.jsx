@@ -118,7 +118,7 @@ function UpdateCourseData() {
         <Container fluid>
             <Row className="mt-3">
                 <Card className = "col-md-6 offset-md-3">
-                    <h3 className="justify-content-center pb-2 mt-2 border-bottom row">Chỉnh sửa lớp học</h3>
+                    <Row className="justify-content-center pb-2 mt-2 border-bottom h3">Chỉnh sửa lớp học</Row>
                     <CardBody>
                         <Form>
                             <FormGroup>

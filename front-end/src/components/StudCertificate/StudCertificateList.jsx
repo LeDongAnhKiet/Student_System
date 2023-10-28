@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, Container, Row, Table} from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import StudCertificateService from "../../services/User/StudCertificateService";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -29,40 +29,38 @@ function StudCertificateList() {
     }
 
     return (
-        <div className='mb-5'>
-            <Container fluid>
-                <h3 className ="App">Chứng nhận sinh viên</h3>
-                <Row>
-                    <Table className="mt-3 table-striped table-bordered">
-                        <thead className="App"><tr>
-                            <th>Email</th>
-                            <th>Bản sao tiếng Việt</th>
-                            <th>Bản sao tiếng Anh</th>
-                            <th>Số điện thoại</th>
-                            <th>Nội dung</th>                            
-                            <th>Thao tác</th>
-                        </tr></thead>
-                        <tbody>
-                        { studCertificates.map( studCertificate => (
-                            <tr key={studCertificate.id}>
-                                <td>{studCertificate.email}</td>
-                                <td>{studCertificate.vietCopy}</td>
-                                <td>{studCertificate.engCopy}</td>
-                                <td>{studCertificate.phoneContact}</td>
-                                <td>{studCertificate.content}</td>
-                                <td><button className="btn-success btn"
-                                            onClick={() => updateStudCertificate(studCertificate)}>Sửa chứng nhận
-                                </button></td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                </Row>
-                <Row className="float-end">
-                    <Button color="primary" onClick={addStudCertificate}>Đăng ký chứng nhận</Button>
-                </Row>
-            </Container>
-        </div>
+        <Container>
+            <h3 className ="App">Chứng nhận sinh viên</h3>
+            <Row>
+                <Table className="mt-3 table-striped table-bordered">
+                    <thead className="App"><tr>
+                        <th>Email</th>
+                        <th>Bản sao tiếng Việt</th>
+                        <th>Bản sao tiếng Anh</th>
+                        <th>Số điện thoại</th>
+                        <th>Nội dung</th>
+                        <th>Thao tác</th>
+                    </tr></thead>
+                    <tbody>
+                    { studCertificates.map( studCertificate => (
+                        <tr key={studCertificate.id}>
+                            <td>{studCertificate.email}</td>
+                            <td>{studCertificate.vietCopy}</td>
+                            <td>{studCertificate.engCopy}</td>
+                            <td>{studCertificate.phoneContact}</td>
+                            <td>{studCertificate.content}</td>
+                            <td><Button color="success"
+                                        onClick={() => updateStudCertificate(studCertificate)}>Sửa chứng nhận
+                            </Button></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+            </Row>
+            <Row className="float-end">
+                <Button color="primary" onClick={addStudCertificate}>Đăng ký chứng nhận</Button>
+            </Row>
+        </Container>
     );
 }
 export default StudCertificateList;
