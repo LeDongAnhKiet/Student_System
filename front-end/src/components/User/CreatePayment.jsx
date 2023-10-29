@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserService from "../../services/User/UserService";
 import {useNavigate, useParams} from "react-router-dom";
-import {Container, Table} from "reactstrap";
+import {Container, Row, Table} from "reactstrap";
 import { format } from 'date-fns';
 
 function CreatePayment() {
@@ -29,8 +29,8 @@ function CreatePayment() {
             {payment ? (
                 <Container fluid>
                     <h3 className="App">Thanh toán</h3>
-                    <div className="row">
-                        <Table className="mt-5">
+                    <Row>
+                        <Table className="mt-5 table-striped">
                             <tr className="border-bottom" style={{height:'50px'}}>
                                 <th>Thành tiền</th>
                                 <td>{payment.price}</td>
@@ -57,7 +57,7 @@ function CreatePayment() {
                                 </td>
                             </tr>
                         </Table>
-                    </div>
+                    </Row>
                 </Container>
             ) : (
                 <h3>Loading...</h3>

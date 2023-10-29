@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import { format } from 'date-fns';
 import UserService from "../../services/User/UserService";
 import {useLocation} from "react-router-dom";
@@ -32,8 +32,8 @@ function PaymentStatus() {
             {status ? (
                 <Container fluid>
                     <h3 className="App">Thanh toán</h3>
-                    <div className="row">
-                        <Table className="mt-5">
+                    <Row>
+                        <Table className="mt-5 table-striped">
                             <tr className="border-bottom" style={{ height: '50px' }}>
                                 <th>Tên</th>
                                 <td>{status.title}</td>
@@ -55,8 +55,8 @@ function PaymentStatus() {
                                 <td>{status.message}</td>
                             </tr>
                         </Table>
-                    </div>
-                    <button className="btn btn-primary" onClick={() => verify(id)}>Xác nhận</button>
+                    </Row>
+                    <Button color="primary" onClick={() => verify(id)}>Xác nhận</Button>
                 </Container>
             ) : (
                 <h3>Loading...</h3>

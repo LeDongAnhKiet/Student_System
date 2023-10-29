@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Alert, Button, Container, Table} from 'reactstrap';
+import {Alert, Button, Container, Row, Table} from 'reactstrap';
 import CateService from '../../services/Guest/HomeService';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserService from "../../services/User/UserService";
@@ -69,57 +69,55 @@ function CateList() {
     }
 
     return (
-        <div className='mb-5'>
-            <Container fluid>
-                <h3 className="App">Đăng ký dịch vụ</h3>
-                <div className="row">
-                    <Table className="mt-3 table table-striped table-bordered">
-                        <thead className="App">
-                        <tr>
-                            <th>Dịch vụ</th>
-                            <th>Đơn giá</th>
-                            <th>Trạng thái</th>
-                            <th>Nội dung</th>
-                            <th>Thời gian cấp</th>
-                            <th>Thao tác</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {cates.map((cate) => (
-                            <tr key={cate.id}>
-                                <td>{cate.serviceCateName}</td>
-                                <td>{cate.price}</td>
-                                <td>{cate.isAvailable ? 'Còn mở' : 'Đã đóng'}</td>
-                                <td>{cate.description}</td>
-                                <td>{cate.numOfDate} ngày</td>
-                                <td className="App">
-                                    <Button color="primary" className="m-1"
-                                            onClick={() => {addService(cate.id, cate.isAvailable)}}>Đăng ký
+        <Container fluid className='mb-5'>
+            <h3 className="App">Đăng ký dịch vụ</h3>
+            <Row>
+                <Table className="mt-3 table-striped table-bordered">
+                    <thead className="App">
+                    <tr>
+                        <th>Dịch vụ</th>
+                        <th>Đơn giá</th>
+                        <th>Trạng thái</th>
+                        <th>Nội dung</th>
+                        <th>Thời gian cấp</th>
+                        <th>Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {cates.map((cate) => (
+                        <tr key={cate.id}>
+                            <td>{cate.serviceCateName}</td>
+                            <td>{cate.price}</td>
+                            <td>{cate.isAvailable ? 'Còn mở' : 'Đã đóng'}</td>
+                            <td>{cate.description}</td>
+                            <td>{cate.numOfDate} ngày</td>
+                            <td className="App">
+                                <Button color="primary" className="m-1"
+                                        onClick={() => {addService(cate.id, cate.isAvailable)}}>Đăng ký
+                                </Button>
+                                {user.role === 'MODERATOR' ? <>
+                                    <Button color="success" className="m-1"
+                                            onClick={() => {updateCate(cate)}}>Chỉnh sửa
                                     </Button>
-                                    {user.role === 'MODERATOR' ? <>
-                                        <Button color="success" className="m-1"
-                                                onClick={() => {updateCate(cate)}}>Chỉnh sửa
-                                        </Button>
-                                        <Button color="warning" className="m-1"
-                                                onClick={() => {ModerateService.changeCate(cate.id)}}>
-                                            { cate.isAvailable ? 'Đóng dịch vụ' : 'Mở dịch vụ' }
-                                        </Button>
-                                    </> : <></>}
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                </div>
-                <div className="float-end row" style={{paddingBottom: '15%'}}>
-                    <Button color="info" onClick={() => nav('/home')}>Lịch sử đăng ký</Button>
-                </div>
-                { error ? <Alert color="danger" className="fixed-bottom"
-                       style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
-                       onMouseEnter={() => setError('')}>{error}
-                </Alert> : <></> }
-            </Container>
-        </div>
+                                    <Button color="warning" className="m-1"
+                                            onClick={() => {ModerateService.changeCate(cate.id)}}>
+                                        { cate.isAvailable ? 'Đóng dịch vụ' : 'Mở dịch vụ' }
+                                    </Button>
+                                </> : <></>}
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+            </Row>
+            <Row className="float-end" style={{paddingBottom: '15%'}}>
+                <Button color="info" onClick={() => nav('/home')}>Lịch sử đăng ký</Button>
+            </Row>
+            { error ? <Alert color="danger" className="fixed-bottom"
+                   style={{marginBottom:'5rem', marginLeft:'25%', marginRight:'25%'}}
+                   onMouseEnter={() => setError('')}>{error}
+            </Alert> : <></> }
+        </Container>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import UserService from "../../services/User/UserService";
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -11,7 +11,6 @@ function UserDetailsList() {
     useEffect(() => {
         UserService.getDetails(id).then(res => {
             setDetails(res.data);
-            //console.log(res.data)
         });
     }, [id]);
 
@@ -24,8 +23,8 @@ function UserDetailsList() {
                 {details.length === 0 ? (<>
                     <h3 className='display-6 m-3'>Không có môn học nào!</h3>
                 </>) : (<>
-                    <div className="row">
-                        <Table className="mt-3 table table-striped table-bordered">
+                    <Row>
+                        <Table className="mt-3 table-striped table-bordered">
                             <thead  className="App"><tr>
                                 <th>Tên môn học</th>
                                 <th>Số tín chỉ</th>
@@ -50,13 +49,11 @@ function UserDetailsList() {
                             ))}
                             </tbody>
                         </Table>
-                    </div>
+                    </Row>
                 </>)}
-                <div className="float-end row">
-                    <button className="btn-primary btn"
-                            onClick={goBack}>Quay lại
-                    </button>
-                </div>
+                <Row className="float-end">
+                    <Button color="primary" onClick={goBack}>Quay lại</Button>
+                </Row>
             </Container>
         </div>
     );
